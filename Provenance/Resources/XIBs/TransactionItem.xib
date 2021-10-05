@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="19162" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="19162"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="TransactionItem" customModule="Provenance" customModuleProvider="target"/>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <customView id="Hz6-mo-xeY">
+            <rect key="frame" x="0.0" y="0.0" width="390" height="166"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <subviews>
+                <stackView distribution="fill" orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QQs-Wv-qSy">
+                    <rect key="frame" x="16" y="13" width="358" height="140"/>
+                    <subviews>
+                        <stackView distribution="fill" orientation="vertical" alignment="leading" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9lF-sm-YoI">
+                            <rect key="frame" x="0.0" y="50" width="315" height="41"/>
+                            <subviews>
+                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="rUW-gy-5Ez">
+                                    <rect key="frame" x="-2" y="23" width="40" height="18"/>
+                                    <textFieldCell key="cell" lineBreakMode="clipping" alignment="left" title="Label" id="RD2-p9-tf2">
+                                        <font key="font" size="14" name="CircularStd-Medium"/>
+                                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                    </textFieldCell>
+                                </textField>
+                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="rue-wY-tba">
+                                    <rect key="frame" x="-2" y="0.0" width="34" height="15"/>
+                                    <textFieldCell key="cell" lineBreakMode="clipping" alignment="left" title="Label" id="h2g-jl-8q8">
+                                        <font key="font" size="12" name="CircularStd-Book"/>
+                                        <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                    </textFieldCell>
+                                </textField>
+                            </subviews>
+                            <visibilityPriorities>
+                                <integer value="1000"/>
+                                <integer value="1000"/>
+                            </visibilityPriorities>
+                            <customSpacing>
+                                <real value="3.4028234663852886e+38"/>
+                                <real value="3.4028234663852886e+38"/>
+                            </customSpacing>
+                        </stackView>
+                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="8QJ-hX-DiT">
+                            <rect key="frame" x="321" y="61" width="39" height="18"/>
+                            <textFieldCell key="cell" lineBreakMode="clipping" alignment="right" title="Label" id="m0x-oE-C2b">
+                                <font key="font" size="14" name="CircularStd-Book"/>
+                                <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                            </textFieldCell>
+                        </textField>
+                    </subviews>
+                    <visibilityPriorities>
+                        <integer value="1000"/>
+                        <integer value="1000"/>
+                    </visibilityPriorities>
+                    <customSpacing>
+                        <real value="3.4028234663852886e+38"/>
+                        <real value="3.4028234663852886e+38"/>
+                    </customSpacing>
+                </stackView>
+            </subviews>
+            <constraints>
+                <constraint firstItem="QQs-Wv-qSy" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="16" id="0Qt-6s-Mdi"/>
+                <constraint firstAttribute="trailing" secondItem="QQs-Wv-qSy" secondAttribute="trailing" constant="16" id="3bo-Ua-vfd"/>
+                <constraint firstItem="QQs-Wv-qSy" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="13" id="DKP-6O-Mty"/>
+                <constraint firstAttribute="bottom" secondItem="QQs-Wv-qSy" secondAttribute="bottom" constant="13" id="msJ-oD-3kc"/>
+            </constraints>
+            <point key="canvasLocation" x="95" y="84"/>
+        </customView>
+        <collectionViewItem nibName="TransactionItem" id="D5g-h6-XIr" customClass="TransactionItem" customModule="Provenance" customModuleProvider="target">
+            <connections>
+                <outlet property="transactionAmount" destination="8QJ-hX-DiT" id="ADG-ZA-dQd"/>
+                <outlet property="transactionCreationDate" destination="rue-wY-tba" id="qLz-5w-3wX"/>
+                <outlet property="transactionDescription" destination="rUW-gy-5Ez" id="hzs-uh-z92"/>
+                <outlet property="view" destination="Hz6-mo-xeY" id="Vw4-Xr-FTf"/>
+            </connections>
+        </collectionViewItem>
+    </objects>
+</document>
