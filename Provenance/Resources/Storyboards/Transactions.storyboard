@@ -14,14 +14,25 @@
                         <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <searchField wantsLayer="YES" verticalHuggingPriority="750" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RXH-hK-SrJ">
+                            <stackView distribution="fill" orientation="horizontal" alignment="top" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jQH-9L-ft0">
                                 <rect key="frame" x="20" y="258" width="410" height="22"/>
-                                <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" usesSingleLineMode="YES" bezelStyle="round" id="QfM-TE-97c">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                </searchFieldCell>
-                            </searchField>
+                                <subviews>
+                                    <searchField wantsLayer="YES" verticalHuggingPriority="750" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RXH-hK-SrJ">
+                                        <rect key="frame" x="0.0" y="0.0" width="410" height="22"/>
+                                        <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" usesSingleLineMode="YES" bezelStyle="round" id="QfM-TE-97c">
+                                            <font key="font" metaFont="system"/>
+                                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </searchFieldCell>
+                                    </searchField>
+                                </subviews>
+                                <visibilityPriorities>
+                                    <integer value="1000"/>
+                                </visibilityPriorities>
+                                <customSpacing>
+                                    <real value="3.4028234663852886e+38"/>
+                                </customSpacing>
+                            </stackView>
                             <scrollView wantsLayer="YES" borderType="none" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bdI-ev-3Ul">
                                 <rect key="frame" x="0.0" y="0.0" width="450" height="250"/>
                                 <clipView key="contentView" id="MT8-bk-42m">
@@ -49,12 +60,12 @@
                             </scrollView>
                         </subviews>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="RXH-hK-SrJ" secondAttribute="trailing" constant="20" id="91h-LT-VrZ"/>
+                            <constraint firstItem="jQH-9L-ft0" firstAttribute="leading" secondItem="tOy-S4-hL0" secondAttribute="leading" constant="20" id="4HD-4l-03x"/>
+                            <constraint firstItem="jQH-9L-ft0" firstAttribute="top" secondItem="tOy-S4-hL0" secondAttribute="top" constant="20" id="5UE-k8-EwV"/>
+                            <constraint firstItem="bdI-ev-3Ul" firstAttribute="top" secondItem="jQH-9L-ft0" secondAttribute="bottom" constant="8" id="9Bx-2H-S5m"/>
                             <constraint firstAttribute="bottom" secondItem="bdI-ev-3Ul" secondAttribute="bottom" id="ERd-fn-p0P"/>
-                            <constraint firstItem="RXH-hK-SrJ" firstAttribute="leading" secondItem="tOy-S4-hL0" secondAttribute="leading" constant="20" id="QS1-JR-YVG"/>
                             <constraint firstAttribute="trailing" secondItem="bdI-ev-3Ul" secondAttribute="trailing" id="REI-FC-DGg"/>
-                            <constraint firstItem="RXH-hK-SrJ" firstAttribute="top" secondItem="tOy-S4-hL0" secondAttribute="top" constant="20" id="Vdy-vt-gsK"/>
-                            <constraint firstItem="bdI-ev-3Ul" firstAttribute="top" secondItem="RXH-hK-SrJ" secondAttribute="bottom" constant="8" id="enH-aC-bNQ"/>
+                            <constraint firstAttribute="trailing" secondItem="jQH-9L-ft0" secondAttribute="trailing" constant="20" id="X70-as-96h"/>
                             <constraint firstItem="bdI-ev-3Ul" firstAttribute="leading" secondItem="tOy-S4-hL0" secondAttribute="leading" id="nqe-48-YGL"/>
                         </constraints>
                     </view>
