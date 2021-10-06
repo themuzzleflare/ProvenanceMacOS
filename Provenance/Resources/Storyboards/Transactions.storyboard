@@ -11,36 +11,72 @@
             <objects>
                 <viewController id="bU7-R8-ocO" customClass="TransactionsVC" customModule="Provenance" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="tOy-S4-hL0">
-                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                        <rect key="frame" x="0.0" y="0.0" width="707" height="300"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <stackView distribution="fill" orientation="horizontal" alignment="top" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jQH-9L-ft0">
-                                <rect key="frame" x="20" y="258" width="410" height="22"/>
+                            <stackView distribution="fill" orientation="vertical" alignment="centerX" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jQH-9L-ft0">
+                                <rect key="frame" x="20" y="230" width="667" height="50"/>
                                 <subviews>
                                     <searchField wantsLayer="YES" verticalHuggingPriority="750" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RXH-hK-SrJ">
-                                        <rect key="frame" x="0.0" y="0.0" width="410" height="22"/>
+                                        <rect key="frame" x="74" y="28" width="520" height="22"/>
                                         <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" usesSingleLineMode="YES" bezelStyle="round" id="QfM-TE-97c">
                                             <font key="font" metaFont="system"/>
                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </searchFieldCell>
                                     </searchField>
+                                    <stackView distribution="fill" orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="V2z-cK-SaD">
+                                        <rect key="frame" x="264" y="0.0" width="139" height="20"/>
+                                        <subviews>
+                                            <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="j6O-fY-sj1">
+                                                <rect key="frame" x="-3" y="-4" width="39" height="25"/>
+                                                <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" id="jpw-5N-Mzf">
+                                                    <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                                    <font key="font" metaFont="menu"/>
+                                                    <menu key="menu" id="5pP-Tf-kO7"/>
+                                                </popUpButtonCell>
+                                                <connections>
+                                                    <action selector="categoryButtonAction:" target="bU7-R8-ocO" id="ESk-AJ-gIy"/>
+                                                </connections>
+                                            </popUpButton>
+                                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Xbu-Bz-r98">
+                                                <rect key="frame" x="38" y="1" width="101" height="18"/>
+                                                <buttonCell key="cell" type="check" title="Settled Only" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="khn-ea-N30">
+                                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                    <font key="font" metaFont="system"/>
+                                                </buttonCell>
+                                                <connections>
+                                                    <action selector="settledOnlyAction:" target="bU7-R8-ocO" id="9hd-38-sBF"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <visibilityPriorities>
+                                            <integer value="1000"/>
+                                            <integer value="1000"/>
+                                        </visibilityPriorities>
+                                        <customSpacing>
+                                            <real value="3.4028234663852886e+38"/>
+                                            <real value="3.4028234663852886e+38"/>
+                                        </customSpacing>
+                                    </stackView>
                                 </subviews>
                                 <visibilityPriorities>
+                                    <integer value="1000"/>
                                     <integer value="1000"/>
                                 </visibilityPriorities>
                                 <customSpacing>
                                     <real value="3.4028234663852886e+38"/>
+                                    <real value="3.4028234663852886e+38"/>
                                 </customSpacing>
                             </stackView>
                             <scrollView wantsLayer="YES" borderType="none" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bdI-ev-3Ul">
-                                <rect key="frame" x="0.0" y="0.0" width="450" height="250"/>
+                                <rect key="frame" x="0.0" y="0.0" width="707" height="222"/>
                                 <clipView key="contentView" id="MT8-bk-42m">
-                                    <rect key="frame" x="0.0" y="0.0" width="450" height="250"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="707" height="222"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <collectionView selectable="YES" id="g9r-hN-XbI">
-                                            <rect key="frame" x="0.0" y="0.0" width="450" height="250"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="707" height="222"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                                             <collectionViewFlowLayout key="collectionViewLayout" minimumInteritemSpacing="10" minimumLineSpacing="10" id="4Gb-Da-ryS">
                                                 <size key="itemSize" width="50" height="50"/>
@@ -54,7 +90,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="LVr-4H-1rV">
-                                    <rect key="frame" x="434" y="0.0" width="16" height="238"/>
+                                    <rect key="frame" x="691" y="0.0" width="16" height="198"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
@@ -70,8 +106,10 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="categoryPopupButton" destination="j6O-fY-sj1" id="4ZX-lC-apJ"/>
                         <outlet property="collectionView" destination="g9r-hN-XbI" id="kSm-aE-1pK"/>
                         <outlet property="searchField" destination="RXH-hK-SrJ" id="flc-Qc-ooY"/>
+                        <outlet property="settledOnlyCheckmark" destination="Xbu-Bz-r98" id="05h-yP-ZwR"/>
                     </connections>
                 </viewController>
                 <customObject id="9uD-mB-xHs" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>

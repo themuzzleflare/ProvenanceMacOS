@@ -4,13 +4,27 @@ import WidgetKit
 
 final class TransactionsVC: NSViewController {
   @IBOutlet weak var searchField: NSSearchField!
+  @IBOutlet weak var categoryPopupButton: NSPopUpButton!
+  @IBOutlet weak var settledOnlyCheckmark: NSButton!
   @IBOutlet weak var collectionView: NSCollectionView!
+  
+  @IBAction func categoryButtonAction(_ sender: NSPopUpButton) {
+    if let value = TransactionCategory.allCases.first(where: { $0.name == sender.titleOfSelectedItem }) {
+      categoryFilter = value
+    }
+  }
+  
+  @IBAction func settledOnlyAction(_ sender: NSButton) {
+    showSettledOnly = sender.state == .on ? true : false
+  }
+  
   
   private enum Section {
     case main
   }
   
   private typealias DataSource = NSCollectionViewDiffableDataSource<Section, TransactionCellModel>
+  
   private typealias Snapshot = NSDiffableDataSourceSnapshot<Section, TransactionCellModel>
   
   private lazy var dataSource = makeDataSource()
@@ -77,6 +91,8 @@ final class TransactionsVC: NSViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     configureObservers()
+    configureCategoryPopupMenu()
+    configureSettledOnlyCheckmark()
     configureSearchField()
     configureCollectionView()
     applySnapshot(animate: false)
@@ -121,6 +137,15 @@ final class TransactionsVC: NSViewController {
     collectionView.register(TransactionItem.nib, forItemWithIdentifier: TransactionItem.reuseIdentifier)
     collectionView.collectionViewLayout = .listLayout()
     collectionView.backgroundViewScrollsWithContent = true
+  }
+  
+  private func configureCategoryPopupMenu() {
+    categoryPopupButton.addItems(withTitles: TransactionCategory.allCases.map { $0.name })
+    categoryPopupButton.selectItem(withTitle: categoryFilter.name)
+  }
+  
+  private func configureSettledOnlyCheckmark() {
+    settledOnlyCheckmark.state = showSettledOnly ? .on : .off
   }
   
   private func transactionsUpdates() {
@@ -190,7 +215,9 @@ final class TransactionsVC: NSViewController {
   // MARK: - NSCollectionViewDelegate
 
 extension TransactionsVC: NSCollectionViewDelegate {
-  
+  func collectionView(_ collectionView: NSCollectionView, didSelectItemsAt indexPaths: Set<IndexPath>) {
+    collectionView.deselectItems(at: indexPaths)
+  }
 }
 
   // MARK: - NSSearchFieldDelegate
