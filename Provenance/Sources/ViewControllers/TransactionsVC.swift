@@ -1,6 +1,5 @@
 import Cocoa
 import Alamofire
-import WidgetKit
 
 final class TransactionsVC: NSViewController {
   @IBOutlet weak var searchField: NSSearchField!
@@ -145,7 +144,6 @@ final class TransactionsVC: NSViewController {
     noTransactions = transactions.isEmpty
     applySnapshot()
     searchField.placeholderString = preFilteredTransactions.searchFieldPlaceholder
-    WidgetCenter.shared.reloadAllTimelines()
   }
   
   private func filterUpdates() {
