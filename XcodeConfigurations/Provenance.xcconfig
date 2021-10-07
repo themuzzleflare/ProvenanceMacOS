@@ -1,7 +1,6 @@
 #include "Shared.xcconfig"
 
 PRODUCT_BUNDLE_IDENTIFIER = cloud.tavitian.provenance
-INFOPLIST_KEY_LSApplicationCategoryType = Finance
 INFOPLIST_KEY_NSMainStoryboardFile = Main
 INFOPLIST_KEY_NSPrincipalClass = NSApplication
 INFOPLIST_FILE = Provenance/Resources/Info.plist
