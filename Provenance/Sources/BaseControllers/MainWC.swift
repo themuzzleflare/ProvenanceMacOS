@@ -12,7 +12,7 @@ final class MainWC: NSWindowController {
 extension MainWC: NSWindowRestoration {
   static func restoreWindow(withIdentifier identifier: NSUserInterfaceItemIdentifier, state: NSCoder, completionHandler: @escaping (NSWindow?, Error?) -> Void) {
     let identifier = identifier.rawValue
-    var restoreWindow: NSWindow? = nil
+    var restoreWindow: NSWindow?
     if identifier == "MainWindow" {
       if let appDelegate = NSApplication.shared.delegate as? AppDelegate {
         restoreWindow = appDelegate.windowController?.window
