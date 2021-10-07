@@ -10,16 +10,12 @@ struct Pagination: Codable {
 
 extension Pagination {
   var prevCursor: String? {
-    guard let pagePrev = prev, let cursorUrl = URLComponents(string: pagePrev), let prevPageParameter = cursorUrl.queryItems?.first(where: { $0.name == UpFacade.ParamKeys.pageBefore })?.value else {
-      return nil
-    }
+    guard let pagePrev = prev, let cursorUrl = URLComponents(string: pagePrev), let prevPageParameter = cursorUrl.queryItems?.first(where: { $0.name == UpFacade.ParamKeys.pageBefore })?.value else { return nil }
     return prevPageParameter
   }
   
   var nextCursor: String? {
-    guard let pageNext = next, let cursorUrl = URLComponents(string: pageNext), let nextPageParameter = cursorUrl.queryItems?.first(where: { $0.name == UpFacade.ParamKeys.pageAfter })?.value else {
-      return nil
-    }
+    guard let pageNext = next, let cursorUrl = URLComponents(string: pageNext), let nextPageParameter = cursorUrl.queryItems?.first(where: { $0.name == UpFacade.ParamKeys.pageAfter })?.value else { return nil }
     return nextPageParameter
   }
 }

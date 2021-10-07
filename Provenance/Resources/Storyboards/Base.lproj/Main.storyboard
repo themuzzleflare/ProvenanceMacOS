@@ -704,7 +704,7 @@
         <!--TabController-->
         <scene sceneID="dLS-Ne-tfK">
             <objects>
-                <controllerPlaceholder storyboardName="TabController" id="zU3-cn-R5D" sceneMemberID="viewController"/>
+                <controllerPlaceholder storyboardName="TabController" referencedIdentifier="TabController" id="zU3-cn-R5D" sceneMemberID="viewController"/>
                 <customObject id="S76-5R-QPS" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="76" y="562"/>

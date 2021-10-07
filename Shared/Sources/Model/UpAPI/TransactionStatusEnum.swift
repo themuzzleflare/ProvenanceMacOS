@@ -24,7 +24,7 @@ extension TransactionStatusEnum {
     }
   }
   
-  var uiImage: NSImage {
+  var nsImage: NSImage {
     switch self {
     case .held:
       return .clock
@@ -42,7 +42,7 @@ extension TransactionStatusEnum {
     }
   }
   
-  var uiColour: NSColor {
+  var nsColour: NSColor {
     switch self {
     case .held:
       return .systemYellow

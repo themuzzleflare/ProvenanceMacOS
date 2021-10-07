@@ -24,6 +24,8 @@ struct TransactionCellModel {
   }
 }
 
+  // MARK: - Hashable
+
 extension TransactionCellModel: Hashable {
   func hash(into hasher: inout Hasher) {
     hasher.combine(id)

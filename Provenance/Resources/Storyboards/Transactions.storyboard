@@ -9,7 +9,7 @@
         <!--TransactionsVC-->
         <scene sceneID="PEd-7d-5j0">
             <objects>
-                <viewController id="bU7-R8-ocO" customClass="TransactionsVC" customModule="Provenance" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="TransactionsController" id="bU7-R8-ocO" customClass="TransactionsVC" customModule="Provenance" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="tOy-S4-hL0">
                         <rect key="frame" x="0.0" y="0.0" width="707" height="300"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -26,7 +26,7 @@
                                         </searchFieldCell>
                                     </searchField>
                                     <stackView distribution="fill" orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="V2z-cK-SaD">
-                                        <rect key="frame" x="264" y="0.0" width="139" height="20"/>
+                                        <rect key="frame" x="267" y="0.0" width="134" height="20"/>
                                         <subviews>
                                             <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="j6O-fY-sj1">
                                                 <rect key="frame" x="-3" y="-4" width="39" height="25"/>
@@ -40,8 +40,8 @@
                                                 </connections>
                                             </popUpButton>
                                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Xbu-Bz-r98">
-                                                <rect key="frame" x="38" y="1" width="101" height="18"/>
-                                                <buttonCell key="cell" type="check" title="Settled Only" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="khn-ea-N30">
+                                                <rect key="frame" x="40" y="2" width="94" height="16"/>
+                                                <buttonCell key="cell" type="bevel" title="Settled Only" bezelStyle="regularSquare" image="checkmark.circle" catalog="system" imagePosition="right" alternateImage="checkmark.circle.fill" inset="2" id="khn-ea-N30">
                                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                     <font key="font" metaFont="system"/>
                                                 </buttonCell>
@@ -117,4 +117,8 @@
             <point key="canvasLocation" x="-159" y="94"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="checkmark.circle" catalog="system" width="15" height="15"/>
+        <image name="checkmark.circle.fill" catalog="system" width="15" height="15"/>
+    </resources>
 </document>

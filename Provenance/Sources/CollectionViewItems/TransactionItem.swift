@@ -1,6 +1,6 @@
 import Cocoa
 
-class TransactionItem: NSCollectionViewItem {
+final class TransactionItem: NSCollectionViewItem {
   @IBOutlet weak var transactionDescription: NSTextField!
   @IBOutlet weak var transactionCreationDate: NSTextField!
   @IBOutlet weak var transactionAmount: NSTextField!

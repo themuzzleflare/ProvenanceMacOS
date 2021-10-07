@@ -10,7 +10,7 @@
         <!--TabVC-->
         <scene sceneID="fwj-qh-Bfq">
             <objects>
-                <tabViewController selectedTabViewItemIndex="0" tabStyle="toolbar" id="waL-RI-fYc" customClass="TabVC" customModule="Provenance" customModuleProvider="target" sceneMemberID="viewController">
+                <tabViewController storyboardIdentifier="TabController" selectedTabViewItemIndex="0" tabStyle="toolbar" id="waL-RI-fYc" customClass="TabVC" customModule="Provenance" customModuleProvider="target" sceneMemberID="viewController">
                     <tabViewItems>
                         <tabViewItem label="Transactions" id="9cp-o6-gzc">
                             <imageReference key="image" image="dollarsign.circle" catalog="system" symbolScale="large"/>
@@ -45,34 +45,34 @@
             </objects>
             <point key="canvasLocation" x="26" y="101"/>
         </scene>
-        <!--Transactions-->
+        <!--TransactionsController-->
         <scene sceneID="Aag-6y-cQl">
             <objects>
-                <controllerPlaceholder storyboardName="Transactions" id="GPA-wK-tMW" sceneMemberID="viewController"/>
+                <controllerPlaceholder storyboardName="Transactions" referencedIdentifier="TransactionsController" id="GPA-wK-tMW" sceneMemberID="viewController"/>
                 <customObject id="0P1-Ww-Nmr" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-355" y="428"/>
         </scene>
-        <!--Accounts-->
+        <!--AccountsController-->
         <scene sceneID="UKJ-k1-APy">
             <objects>
-                <controllerPlaceholder storyboardName="Accounts" id="iSH-v0-phP" sceneMemberID="viewController"/>
+                <controllerPlaceholder storyboardName="Accounts" referencedIdentifier="AccountsController" id="iSH-v0-phP" sceneMemberID="viewController"/>
                 <customObject id="2a3-iS-1SV" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-77" y="490"/>
         </scene>
-        <!--Tags-->
+        <!--TagsController-->
         <scene sceneID="BKE-M5-1UI">
             <objects>
-                <controllerPlaceholder storyboardName="Tags" id="B9y-eU-cWA" sceneMemberID="viewController"/>
+                <controllerPlaceholder storyboardName="Tags" referencedIdentifier="TagsController" id="B9y-eU-cWA" sceneMemberID="viewController"/>
                 <customObject id="pwH-eR-E2A" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="184" y="490"/>
         </scene>
-        <!--Categories-->
+        <!--CategoriesController-->
         <scene sceneID="JXl-GR-60h">
             <objects>
-                <controllerPlaceholder storyboardName="Categories" id="K8M-12-ERK" sceneMemberID="viewController"/>
+                <controllerPlaceholder storyboardName="Categories" referencedIdentifier="CategoriesController" id="K8M-12-ERK" sceneMemberID="viewController"/>
                 <customObject id="ydq-zz-33m" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="400" y="428"/>

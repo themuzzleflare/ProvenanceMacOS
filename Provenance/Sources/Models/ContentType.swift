@@ -60,7 +60,7 @@ extension ContentType {
     }
   }
   
-  func searchBarPlaceholder(count: Int) -> String {
+  func searchFieldPlaceholder(count: Int) -> String {
     return "Search \(count.description) \(count == 1 ? singular : plural)"
   }
 }

@@ -114,6 +114,9 @@
 		7A05EA3E270BCFCA004C958F /* BonMot in Frameworks */ = {isa = PBXBuildFile; productRef = 7A05EA3D270BCFCA004C958F /* BonMot */; };
 		7A05EA40270BD00B004C958F /* StringStyle+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A05EA3F270BD00A004C958F /* StringStyle+Extension.swift */; };
 		7A05EA42270BD3D1004C958F /* NSCollectionViewLayout+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A05EA41270BD3D0004C958F /* NSCollectionViewLayout+Extension.swift */; };
+		7A5B8D52270E65C600C132EE /* AccountCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A5B8D51270E65C600C132EE /* AccountCellModel.swift */; };
+		7A5B8D54270E65D000C132EE /* CategoryCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A5B8D53270E65D000C132EE /* CategoryCellModel.swift */; };
+		7A5B8D56270E65DA00C132EE /* TagCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A5B8D55270E65DA00C132EE /* TagCellModel.swift */; };
 		7A959F65270B9A6A00AC45F3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A959F64270B9A6A00AC45F3 /* AppDelegate.swift */; };
 		7A959F69270B9A6C00AC45F3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7A959F68270B9A6C00AC45F3 /* Assets.xcassets */; };
 		7A959F6C270B9A6C00AC45F3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7A959F6A270B9A6C00AC45F3 /* Main.storyboard */; };
@@ -449,6 +452,9 @@
 		7A05EA3A270BCF3D004C958F /* ContentType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentType.swift; sourceTree = "<group>"; };
 		7A05EA3F270BD00A004C958F /* StringStyle+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "StringStyle+Extension.swift"; sourceTree = "<group>"; };
 		7A05EA41270BD3D0004C958F /* NSCollectionViewLayout+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSCollectionViewLayout+Extension.swift"; sourceTree = "<group>"; };
+		7A5B8D51270E65C600C132EE /* AccountCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountCellModel.swift; sourceTree = "<group>"; };
+		7A5B8D53270E65D000C132EE /* CategoryCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCellModel.swift; sourceTree = "<group>"; };
+		7A5B8D55270E65DA00C132EE /* TagCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCellModel.swift; sourceTree = "<group>"; };
 		7A94DCE6270BF89100DA6FDF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7A959F61270B9A6A00AC45F3 /* Provenance.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Provenance.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A959F64270B9A6A00AC45F3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -643,7 +649,7 @@
 		7A05EA2B270BC3B5004C958F /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				7A05EA2C270BC3C4004C958F /* TransactionCellModel.swift */,
+				7A5B8D57270E65EA00C132EE /* CellModels */,
 				7A05EA3A270BCF3D004C958F /* ContentType.swift */,
 			);
 			path = Models;
@@ -658,6 +664,17 @@
 				7A05EA41270BD3D0004C958F /* NSCollectionViewLayout+Extension.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		7A5B8D57270E65EA00C132EE /* CellModels */ = {
+			isa = PBXGroup;
+			children = (
+				7A05EA2C270BC3C4004C958F /* TransactionCellModel.swift */,
+				7A5B8D51270E65C600C132EE /* AccountCellModel.swift */,
+				7A5B8D55270E65DA00C132EE /* TagCellModel.swift */,
+				7A5B8D53270E65D000C132EE /* CategoryCellModel.swift */,
+			);
+			path = CellModels;
 			sourceTree = "<group>";
 		};
 		7A959F58270B9A6A00AC45F3 = {
@@ -1077,6 +1094,7 @@
 				7A05E9CD270BA1C8004C958F /* Intents.intentdefinition in Sources */,
 				7A05E999270BA166004C958F /* Tag.swift in Sources */,
 				7A05E9AB270BA166004C958F /* SingleAccount.swift in Sources */,
+				7A5B8D54270E65D000C132EE /* CategoryCellModel.swift in Sources */,
 				7A05E9F0270BA324004C958F /* Double+Extension.swift in Sources */,
 				7A05E99C270BA166004C958F /* SingleCategory.swift in Sources */,
 				7A05E9C5270BA1A7004C958F /* AccountTypeOptionEnum.swift in Sources */,
@@ -1086,6 +1104,7 @@
 				7A05EA03270BA324004C958F /* Int+Extension.swift in Sources */,
 				7A05E99B270BA166004C958F /* AccountRelationship.swift in Sources */,
 				7A05EA22270BAAA6004C958F /* MainWC.swift in Sources */,
+				7A5B8D52270E65C600C132EE /* AccountCellModel.swift in Sources */,
 				7A05E9B4270BA166004C958F /* ErrorResponse.swift in Sources */,
 				7A05EA19270BA81D004C958F /* AccountsVC.swift in Sources */,
 				7A05EA3B270BCF3D004C958F /* ContentType.swift in Sources */,
@@ -1135,6 +1154,7 @@
 				7A05E9FD270BA324004C958F /* NSParagraphStyle+Extension.swift in Sources */,
 				7A05E993270BA166004C958F /* TransactionRelationship.swift in Sources */,
 				7A05EA13270BA7FB004C958F /* TransactionsVC.swift in Sources */,
+				7A5B8D56270E65DA00C132EE /* TagCellModel.swift in Sources */,
 				7A05E998270BA166004C958F /* SingleTransaction.swift in Sources */,
 				7A05E9C0270BA1A7004C958F /* AccountBalanceModel.swift in Sources */,
 				7A05E99F270BA166004C958F /* AccountAttribute.swift in Sources */,
@@ -1503,27 +1523,18 @@
 			baseConfigurationReference = 7AF4BD37270BE0B600C827A6 /* Provenance.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = Provenance/Resources/Provenance.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = JDL5FY6SCC;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Provenance/Resources/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.finance";
-				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2021 Paul Tavitian";
 				INFOPLIST_KEY_NSMainStoryboardFile = Main;
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 11.0;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = cloud.tavitian.provenance;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -1535,27 +1546,18 @@
 			baseConfigurationReference = 7AF4BD37270BE0B600C827A6 /* Provenance.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = Provenance/Resources/Provenance.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = JDL5FY6SCC;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Provenance/Resources/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.finance";
-				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2021 Paul Tavitian";
 				INFOPLIST_KEY_NSMainStoryboardFile = Main;
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 11.0;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = cloud.tavitian.provenance;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -1566,25 +1568,16 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 7A05E952270B9F31004C958F /* Widgets.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
-				CODE_SIGN_ENTITLEMENTS = Widgets/Resources/Widgets.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = JDL5FY6SCC;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Widgets/Resources/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Provenance Widgets";
-				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2021 Paul Tavitian";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 					"@executable_path/../../../../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 11.0;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = cloud.tavitian.provenance.widgets;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -1596,25 +1589,16 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 7A05E952270B9F31004C958F /* Widgets.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
-				CODE_SIGN_ENTITLEMENTS = Widgets/Resources/Widgets.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = JDL5FY6SCC;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Widgets/Resources/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Provenance Widgets";
-				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2021 Paul Tavitian";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 					"@executable_path/../../../../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 11.0;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = cloud.tavitian.provenance.widgets;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -1626,24 +1610,17 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 7A05E953270B9F39004C958F /* Intents.xcconfig */;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = Intents/Resources/Intents.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = JDL5FY6SCC;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Intents/Resources/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Provenance Intents";
-				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2021 Paul Tavitian";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 					"@executable_path/../../../../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 11.0;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = cloud.tavitian.provenance.intents;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -1655,24 +1632,17 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 7A05E953270B9F39004C958F /* Intents.xcconfig */;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = Intents/Resources/Intents.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = JDL5FY6SCC;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Intents/Resources/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Provenance Intents";
-				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2021 Paul Tavitian";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 					"@executable_path/../../../../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 11.0;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = cloud.tavitian.provenance.intents;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;

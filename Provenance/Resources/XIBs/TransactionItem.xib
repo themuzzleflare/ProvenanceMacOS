@@ -16,20 +16,20 @@
                 <stackView distribution="fill" orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QQs-Wv-qSy">
                     <rect key="frame" x="16" y="13" width="358" height="140"/>
                     <subviews>
-                        <stackView distribution="fill" orientation="vertical" alignment="leading" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9lF-sm-YoI">
-                            <rect key="frame" x="0.0" y="50" width="315" height="41"/>
+                        <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="0.0" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9lF-sm-YoI">
+                            <rect key="frame" x="0.0" y="54" width="299" height="33"/>
                             <subviews>
                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="rUW-gy-5Ez">
-                                    <rect key="frame" x="-2" y="23" width="40" height="18"/>
-                                    <textFieldCell key="cell" lineBreakMode="clipping" alignment="left" title="Label" id="RD2-p9-tf2">
+                                    <rect key="frame" x="-2" y="15" width="79" height="18"/>
+                                    <textFieldCell key="cell" lineBreakMode="clipping" alignment="left" title="Description" id="RD2-p9-tf2">
                                         <font key="font" size="14" name="CircularStd-Medium"/>
                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                     </textFieldCell>
                                 </textField>
                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="rue-wY-tba">
-                                    <rect key="frame" x="-2" y="0.0" width="34" height="15"/>
-                                    <textFieldCell key="cell" lineBreakMode="clipping" alignment="left" title="Label" id="h2g-jl-8q8">
+                                    <rect key="frame" x="-2" y="0.0" width="80" height="15"/>
+                                    <textFieldCell key="cell" lineBreakMode="clipping" alignment="left" title="Creation Date" id="h2g-jl-8q8">
                                         <font key="font" size="12" name="CircularStd-Book"/>
                                         <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -46,8 +46,8 @@
                             </customSpacing>
                         </stackView>
                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="8QJ-hX-DiT">
-                            <rect key="frame" x="321" y="61" width="39" height="18"/>
-                            <textFieldCell key="cell" lineBreakMode="clipping" alignment="right" title="Label" id="m0x-oE-C2b">
+                            <rect key="frame" x="305" y="61" width="55" height="18"/>
+                            <textFieldCell key="cell" lineBreakMode="clipping" alignment="right" title="Amount" id="m0x-oE-C2b">
                                 <font key="font" size="14" name="CircularStd-Book"/>
                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
