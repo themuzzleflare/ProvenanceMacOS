@@ -122,6 +122,8 @@
 		7A959F6C270B9A6C00AC45F3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7A959F6A270B9A6C00AC45F3 /* Main.storyboard */; };
 		7A959F76270B9B5000AC45F3 /* SwiftDate in Frameworks */ = {isa = PBXBuildFile; productRef = 7A959F75270B9B5000AC45F3 /* SwiftDate */; };
 		7A959F7A270B9C9100AC45F3 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 7A959F79270B9C9100AC45F3 /* Alamofire */; };
+		7AEDC993270E7566003EE8D7 /* Preferences.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7AEDC992270E7566003EE8D7 /* Preferences.storyboard */; };
+		7AEDC995270E75C7003EE8D7 /* PreferencesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AEDC994270E75C7003EE8D7 /* PreferencesVC.swift */; };
 		7AF4BC4B270BDA5600C827A6 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AF4BC4A270BDA5600C827A6 /* WidgetKit.framework */; platformFilter = maccatalyst; };
 		7AF4BC4D270BDA5600C827A6 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AF4BC4C270BDA5600C827A6 /* SwiftUI.framework */; platformFilter = maccatalyst; };
 		7AF4BC50270BDA5600C827A6 /* Widgets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AF4BC4F270BDA5600C827A6 /* Widgets.swift */; };
@@ -462,6 +464,8 @@
 		7A959F6B270B9A6C00AC45F3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		7A959F6D270B9A6C00AC45F3 /* Provenance.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Provenance.entitlements; sourceTree = "<group>"; };
 		7A959F77270B9BDA00AC45F3 /* Shared.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Shared.xcconfig; sourceTree = "<group>"; };
+		7AEDC992270E7566003EE8D7 /* Preferences.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Preferences.storyboard; sourceTree = "<group>"; };
+		7AEDC994270E75C7003EE8D7 /* PreferencesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesVC.swift; sourceTree = "<group>"; };
 		7AF4BC48270BDA5600C827A6 /* Provenance Widgets.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Provenance Widgets.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7AF4BC4A270BDA5600C827A6 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		7AF4BC4C270BDA5600C827A6 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
@@ -548,6 +552,7 @@
 				7A05EA18270BA81D004C958F /* AccountsVC.swift */,
 				7A05EA1A270BA827004C958F /* TagsVC.swift */,
 				7A05EA1C270BA832004C958F /* CategoriesVC.swift */,
+				7AEDC994270E75C7003EE8D7 /* PreferencesVC.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -625,6 +630,7 @@
 				7A05EA0C270BA744004C958F /* Accounts.storyboard */,
 				7A05EA0E270BA74A004C958F /* Tags.storyboard */,
 				7A05EA10270BA750004C958F /* Categories.storyboard */,
+				7AEDC992270E7566003EE8D7 /* Preferences.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -1054,6 +1060,7 @@
 				7A05E95E270BA0DB004C958F /* SF-Mono-Regular.otf in Resources */,
 				7A05E95B270BA0DB004C958F /* CircularStd-Bold.otf in Resources */,
 				7A05EA0D270BA744004C958F /* Accounts.storyboard in Resources */,
+				7AEDC993270E7566003EE8D7 /* Preferences.storyboard in Resources */,
 				7A959F6C270B9A6C00AC45F3 /* Main.storyboard in Resources */,
 				7A05E95A270BA0DB004C958F /* CircularStd-BookItalic.ttf in Resources */,
 				7A05EA11270BA750004C958F /* Categories.storyboard in Resources */,
@@ -1142,6 +1149,7 @@
 				7A05E9EC270BA324004C958F /* ListTransactionsIntentResponse+Extension.swift in Sources */,
 				7A05EA1D270BA832004C958F /* CategoriesVC.swift in Sources */,
 				7A05EA42270BD3D1004C958F /* NSCollectionViewLayout+Extension.swift in Sources */,
+				7AEDC995270E75C7003EE8D7 /* PreferencesVC.swift in Sources */,
 				7A05E992270BA166004C958F /* TagRelationship.swift in Sources */,
 				7A05E9C2270BA1A7004C958F /* TransactionGroupingEnum.swift in Sources */,
 				7A05E9C7270BA1A7004C958F /* ProvenanceApp.swift in Sources */,

@@ -1,6 +1,6 @@
 import Cocoa
 
-class AccountsVC: NSViewController {
+final class AccountsVC: NSViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
   }

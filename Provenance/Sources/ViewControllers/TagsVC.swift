@@ -1,6 +1,6 @@
 import Cocoa
 
-class TagsVC: NSViewController {
+final class TagsVC: NSViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
   }

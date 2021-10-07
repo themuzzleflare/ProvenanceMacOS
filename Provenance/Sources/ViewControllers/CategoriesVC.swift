@@ -1,6 +1,6 @@
 import Cocoa
 
-class CategoriesVC: NSViewController {
+final class CategoriesVC: NSViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
   }

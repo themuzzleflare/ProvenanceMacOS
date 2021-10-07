@@ -4,9 +4,28 @@ import WidgetKit
 
 final class TransactionsVC: NSViewController {
   @IBOutlet weak var searchField: NSSearchField!
-  @IBOutlet weak var categoryPopupButton: NSPopUpButton!
-  @IBOutlet weak var settledOnlyCheckmark: NSButton!
-  @IBOutlet weak var collectionView: NSCollectionView!
+  
+  @IBOutlet weak var categoryPopupButton: NSPopUpButton! {
+    didSet {
+      categoryPopupButton.addItems(withTitles: TransactionCategory.allCases.map { $0.name })
+      categoryPopupButton.selectItem(withTitle: categoryFilter.name)
+    }
+  }
+  
+  @IBOutlet weak var settledOnlyCheckmark: NSButton! {
+    didSet {
+      settledOnlyCheckmark.state = showSettledOnly ? .on : .off
+    }
+  }
+  
+  @IBOutlet weak var collectionView: NSCollectionView! {
+    didSet {
+      collectionView.dataSource = dataSource
+      collectionView.register(TransactionItem.nib, forItemWithIdentifier: TransactionItem.reuseIdentifier)
+      collectionView.collectionViewLayout = .listLayout()
+      collectionView.backgroundViewScrollsWithContent = true
+    }
+  }
   
   @IBAction func categoryButtonAction(_ sender: NSPopUpButton) {
     if let value = TransactionCategory.allCases.first(where: { $0.name == sender.titleOfSelectedItem }) {
@@ -17,7 +36,6 @@ final class TransactionsVC: NSViewController {
   @IBAction func settledOnlyAction(_ sender: NSButton) {
     showSettledOnly = sender.state == .on ? true : false
   }
-  
   
   private enum Section {
     case main
@@ -91,10 +109,6 @@ final class TransactionsVC: NSViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     configureObservers()
-    configureCategoryPopupMenu()
-    configureSettledOnlyCheckmark()
-    configureSearchField()
-    configureCollectionView()
     applySnapshot(animate: false)
   }
   
@@ -125,27 +139,6 @@ final class TransactionsVC: NSViewController {
     dateStyleObserver = nil
     settledOnlyObserver?.invalidate()
     settledOnlyObserver = nil
-  }
-  
-  private func configureSearchField() {
-    searchField.delegate = self
-  }
-  
-  private func configureCollectionView() {
-    collectionView.dataSource = dataSource
-    collectionView.delegate = self
-    collectionView.register(TransactionItem.nib, forItemWithIdentifier: TransactionItem.reuseIdentifier)
-    collectionView.collectionViewLayout = .listLayout()
-    collectionView.backgroundViewScrollsWithContent = true
-  }
-  
-  private func configureCategoryPopupMenu() {
-    categoryPopupButton.addItems(withTitles: TransactionCategory.allCases.map { $0.name })
-    categoryPopupButton.selectItem(withTitle: categoryFilter.name)
-  }
-  
-  private func configureSettledOnlyCheckmark() {
-    settledOnlyCheckmark.state = showSettledOnly ? .on : .off
   }
   
   private func transactionsUpdates() {

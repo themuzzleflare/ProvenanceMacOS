@@ -24,6 +24,9 @@
                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </searchFieldCell>
+                                        <connections>
+                                            <outlet property="delegate" destination="bU7-R8-ocO" id="Yli-N3-6al"/>
+                                        </connections>
                                     </searchField>
                                     <stackView distribution="fill" orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="V2z-cK-SaD">
                                         <rect key="frame" x="267" y="0.0" width="134" height="20"/>
@@ -41,8 +44,8 @@
                                             </popUpButton>
                                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Xbu-Bz-r98">
                                                 <rect key="frame" x="40" y="2" width="94" height="16"/>
-                                                <buttonCell key="cell" type="bevel" title="Settled Only" bezelStyle="regularSquare" image="checkmark.circle" catalog="system" imagePosition="right" alternateImage="checkmark.circle.fill" inset="2" id="khn-ea-N30">
-                                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                <buttonCell key="cell" type="bevel" title="Settled Only" bezelStyle="regularSquare" image="checkmark.circle" catalog="system" imagePosition="right" alignment="center" alternateImage="checkmark.circle.fill" inset="2" id="khn-ea-N30">
+                                                    <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
                                                     <font key="font" metaFont="system"/>
                                                 </buttonCell>
                                                 <connections>
@@ -78,10 +81,11 @@
                                         <collectionView selectable="YES" id="g9r-hN-XbI">
                                             <rect key="frame" x="0.0" y="0.0" width="707" height="222"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
-                                            <collectionViewFlowLayout key="collectionViewLayout" minimumInteritemSpacing="10" minimumLineSpacing="10" id="4Gb-Da-ryS">
-                                                <size key="itemSize" width="50" height="50"/>
-                                            </collectionViewFlowLayout>
+                                            <collectionViewLayout key="collectionViewLayout" id="O1M-WO-t58"/>
                                             <color key="primaryBackgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                            <connections>
+                                                <outlet property="delegate" destination="bU7-R8-ocO" id="Yt1-x0-nCV"/>
+                                            </connections>
                                         </collectionView>
                                     </subviews>
                                 </clipView>
@@ -90,7 +94,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="LVr-4H-1rV">
-                                    <rect key="frame" x="691" y="0.0" width="16" height="198"/>
+                                    <rect key="frame" x="691" y="0.0" width="16" height="192"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
