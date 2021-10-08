@@ -14,9 +14,9 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="D4L-jX-Reh">
-                    <rect key="frame" x="14" y="126" width="452" height="20"/>
+                    <rect key="frame" x="14" y="127" width="452" height="19"/>
                     <textFieldCell key="cell" alignment="center" title="Name" id="8ik-FZ-Hob">
-                        <font key="font" size="16" name="CircularStd-Book"/>
+                        <font key="font" size="15" name="CircularStd-Book"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
