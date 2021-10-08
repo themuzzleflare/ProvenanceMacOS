@@ -1,21 +1,14 @@
 import Cocoa
 
-final class TransactionItem: NSCollectionViewItem {
-  @IBOutlet weak var transactionDescription: NSTextField!
-  @IBOutlet weak var transactionCreationDate: NSTextField!
-  @IBOutlet weak var transactionAmount: NSTextField!
+final class CategoryItem: NSCollectionViewItem {
+  static let reuseIdentifier = NSUserInterfaceItemIdentifier("categoryItem")
+  static let nib = NSNib(nibNamed: "CategoryItem", bundle: nil)
   
-  static let reuseIdentifier = NSUserInterfaceItemIdentifier("transactionItem")
-  static let nib = NSNib(nibNamed: "TransactionItem", bundle: nil)
-  
-  var transaction: TransactionCellModel? {
+  var category: CategoryCellModel? {
     didSet {
       guard isViewLoaded else { return }
-      if let transaction = transaction {
-        transactionDescription.stringValue = transaction.transactionDescription
-        transactionCreationDate.stringValue = transaction.creationDate
-        transactionAmount.textColor = transaction.colour.nsColour
-        transactionAmount.stringValue = transaction.amount
+      if let category = category {
+        textField?.stringValue = category.name
       }
     }
   }

@@ -88,7 +88,6 @@ final class UpFacade {
         switch response.result {
         case let .success(transactions):
           if let nextCursor = transactions.links.nextCursor {
-            print("Calling completion with cursor: \(nextCursor)")
             listCompleteTransactions(
               cursor: nextCursor,
               inputTransactions: (inputTransactions + transactions.data),

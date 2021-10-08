@@ -13,7 +13,74 @@
                     <view key="view" id="tOy-S4-hL0">
                         <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <stackView distribution="fill" orientation="vertical" alignment="centerX" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fet-58-fCM">
+                                <rect key="frame" x="20" y="258" width="410" height="22"/>
+                                <subviews>
+                                    <searchField wantsLayer="YES" verticalHuggingPriority="750" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sfW-IK-SpN">
+                                        <rect key="frame" x="0.0" y="0.0" width="410" height="22"/>
+                                        <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" placeholderString="Search Tags" usesSingleLineMode="YES" bezelStyle="round" id="lSb-G4-Kx1">
+                                            <font key="font" metaFont="system"/>
+                                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </searchFieldCell>
+                                        <connections>
+                                            <outlet property="delegate" destination="bU7-R8-ocO" id="wa1-Wo-STF"/>
+                                        </connections>
+                                    </searchField>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="sfW-IK-SpN" firstAttribute="leading" secondItem="fet-58-fCM" secondAttribute="leading" id="FPi-tt-ZFj"/>
+                                    <constraint firstAttribute="trailing" secondItem="sfW-IK-SpN" secondAttribute="trailing" id="at3-4O-cf1"/>
+                                </constraints>
+                                <visibilityPriorities>
+                                    <integer value="1000"/>
+                                </visibilityPriorities>
+                                <customSpacing>
+                                    <real value="3.4028234663852886e+38"/>
+                                </customSpacing>
+                            </stackView>
+                            <scrollView wantsLayer="YES" borderType="none" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YWZ-vk-HwA">
+                                <rect key="frame" x="0.0" y="0.0" width="450" height="250"/>
+                                <clipView key="contentView" id="XZc-ig-73A">
+                                    <rect key="frame" x="0.0" y="0.0" width="450" height="250"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <collectionView selectable="YES" id="0cr-IP-ZOt">
+                                            <rect key="frame" x="0.0" y="0.0" width="450" height="158"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
+                                            <collectionViewLayout key="collectionViewLayout" id="Lyq-VX-z0b"/>
+                                            <color key="primaryBackgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                            <connections>
+                                                <outlet property="delegate" destination="bU7-R8-ocO" id="dhm-Pk-P6i"/>
+                                            </connections>
+                                        </collectionView>
+                                    </subviews>
+                                </clipView>
+                                <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="tNz-bG-hMM">
+                                    <rect key="frame" x="1" y="144" width="233" height="15"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </scroller>
+                                <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="Imn-b3-kIh">
+                                    <rect key="frame" x="234" y="1" width="15" height="143"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </scroller>
+                            </scrollView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="YWZ-vk-HwA" firstAttribute="leading" secondItem="tOy-S4-hL0" secondAttribute="leading" id="CgD-Pi-9Iq"/>
+                            <constraint firstAttribute="trailing" secondItem="YWZ-vk-HwA" secondAttribute="trailing" id="EQd-O9-lLc"/>
+                            <constraint firstAttribute="bottom" secondItem="YWZ-vk-HwA" secondAttribute="bottom" id="P45-7v-7mR"/>
+                            <constraint firstItem="fet-58-fCM" firstAttribute="top" secondItem="tOy-S4-hL0" secondAttribute="top" constant="20" id="PGW-RM-4lI"/>
+                            <constraint firstItem="fet-58-fCM" firstAttribute="leading" secondItem="tOy-S4-hL0" secondAttribute="leading" constant="20" id="QjA-fr-I9Z"/>
+                            <constraint firstAttribute="trailing" secondItem="fet-58-fCM" secondAttribute="trailing" constant="20" id="Ts2-aS-qcy"/>
+                            <constraint firstItem="YWZ-vk-HwA" firstAttribute="top" secondItem="fet-58-fCM" secondAttribute="bottom" constant="8" id="qiM-jr-dD3"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="collectionView" destination="0cr-IP-ZOt" id="lUY-tr-wEv"/>
+                        <outlet property="searchField" destination="sfW-IK-SpN" id="gWE-hS-kF8"/>
+                    </connections>
                 </viewController>
                 <customObject id="9uD-mB-xHs" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>

@@ -13,7 +13,90 @@
                     <view key="view" id="tOy-S4-hL0">
                         <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <stackView distribution="fill" orientation="vertical" alignment="centerX" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WHV-1F-1qC">
+                                <rect key="frame" x="20" y="228" width="410" height="52"/>
+                                <subviews>
+                                    <searchField wantsLayer="YES" verticalHuggingPriority="750" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E54-JT-d8z">
+                                        <rect key="frame" x="0.0" y="30" width="410" height="22"/>
+                                        <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" placeholderString="Search Categories" usesSingleLineMode="YES" bezelStyle="round" id="QhK-6A-qHk">
+                                            <font key="font" metaFont="system"/>
+                                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </searchFieldCell>
+                                        <connections>
+                                            <outlet property="delegate" destination="bU7-R8-ocO" id="Zrw-zC-b9D"/>
+                                        </connections>
+                                    </searchField>
+                                    <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="S68-FM-IeW">
+                                        <rect key="frame" x="140" y="-1" width="131" height="24"/>
+                                        <segmentedCell key="cell" borderStyle="border" alignment="left" style="rounded" trackingMode="selectOne" id="mbL-QP-Kgr">
+                                            <font key="font" metaFont="system"/>
+                                            <segments>
+                                                <segment label="Parent" width="61"/>
+                                                <segment label="Child" width="61" tag="1"/>
+                                            </segments>
+                                        </segmentedCell>
+                                        <connections>
+                                            <action selector="categoryTypeAction:" target="bU7-R8-ocO" id="EmM-aE-luB"/>
+                                        </connections>
+                                    </segmentedControl>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="E54-JT-d8z" firstAttribute="leading" secondItem="WHV-1F-1qC" secondAttribute="leading" id="Fgk-dP-24D"/>
+                                    <constraint firstAttribute="trailing" secondItem="E54-JT-d8z" secondAttribute="trailing" id="Itv-eZ-zBS"/>
+                                </constraints>
+                                <visibilityPriorities>
+                                    <integer value="1000"/>
+                                    <integer value="1000"/>
+                                </visibilityPriorities>
+                                <customSpacing>
+                                    <real value="3.4028234663852886e+38"/>
+                                    <real value="3.4028234663852886e+38"/>
+                                </customSpacing>
+                            </stackView>
+                            <scrollView wantsLayer="YES" borderType="none" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P3e-Ta-e8a">
+                                <rect key="frame" x="0.0" y="0.0" width="450" height="220"/>
+                                <clipView key="contentView" id="PfX-up-yrl">
+                                    <rect key="frame" x="0.0" y="0.0" width="450" height="220"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <collectionView selectable="YES" id="0KQ-vd-lFE">
+                                            <rect key="frame" x="0.0" y="0.0" width="450" height="158"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
+                                            <collectionViewLayout key="collectionViewLayout" id="Fwd-ss-ziw"/>
+                                            <color key="primaryBackgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                            <connections>
+                                                <outlet property="delegate" destination="bU7-R8-ocO" id="qqG-hp-1z6"/>
+                                            </connections>
+                                        </collectionView>
+                                    </subviews>
+                                </clipView>
+                                <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="6pr-Fu-nav">
+                                    <rect key="frame" x="1" y="144" width="233" height="15"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </scroller>
+                                <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="Sma-4r-FaF">
+                                    <rect key="frame" x="234" y="1" width="15" height="143"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </scroller>
+                            </scrollView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="P3e-Ta-e8a" secondAttribute="bottom" id="6Sc-Ad-3Hw"/>
+                            <constraint firstItem="P3e-Ta-e8a" firstAttribute="top" secondItem="WHV-1F-1qC" secondAttribute="bottom" constant="8" id="G5G-oR-vMv"/>
+                            <constraint firstAttribute="trailing" secondItem="P3e-Ta-e8a" secondAttribute="trailing" id="LJj-zM-f0g"/>
+                            <constraint firstItem="WHV-1F-1qC" firstAttribute="top" secondItem="tOy-S4-hL0" secondAttribute="top" constant="20" id="Q7g-a2-enu"/>
+                            <constraint firstAttribute="trailing" secondItem="WHV-1F-1qC" secondAttribute="trailing" constant="20" id="TYW-aD-3ug"/>
+                            <constraint firstItem="P3e-Ta-e8a" firstAttribute="leading" secondItem="tOy-S4-hL0" secondAttribute="leading" id="dQx-Fd-AsM"/>
+                            <constraint firstItem="WHV-1F-1qC" firstAttribute="leading" secondItem="tOy-S4-hL0" secondAttribute="leading" constant="20" id="tD1-pJ-ljy"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="categoryTypeSegmentedControl" destination="S68-FM-IeW" id="a0O-hH-VAD"/>
+                        <outlet property="collectionView" destination="0KQ-vd-lFE" id="ejC-CR-bZt"/>
+                        <outlet property="searchField" destination="E54-JT-d8z" id="2KZ-pF-mMV"/>
+                    </connections>
                 </viewController>
                 <customObject id="9uD-mB-xHs" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>

@@ -1,4 +1,4 @@
-import AppKit
+import CoreGraphics
 
 extension CGSize {
   static func cellNode(height: CGFloat) -> CGSize {

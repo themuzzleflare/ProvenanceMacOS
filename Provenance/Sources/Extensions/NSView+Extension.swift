@@ -1,5 +1,5 @@
-import SnapKit
 import AppKit
+import SnapKit
 
 extension NSView {
   static var plainView: NSView {
@@ -10,17 +10,18 @@ extension NSView {
     let view = NSView(frame: frame)
     let loadingIndicator = NSProgressIndicator()
     view.addSubview(loadingIndicator)
+    loadingIndicator.style = .spinning
+    loadingIndicator.startAnimation(self)
     loadingIndicator.snp.makeConstraints { (make) in
       make.center.equalToSuperview()
     }
-    loadingIndicator.style = .spinning
-    loadingIndicator.startAnimation(self)
     return view
   }
   
   static func noContentView(frame: CGRect, type: ContentType) -> NSView {
     let view = NSView(frame: frame)
-    let icon = NSImageView(image: .xmarkDiamond.withSymbolConfiguration(.init(pointSize: 100, weight: .bold))!)
+    let symbolConfiguration = NSImage.SymbolConfiguration(pointSize: 100, weight: .bold)
+    let icon = NSImageView(image: .xmarkDiamond.withSymbolConfiguration(symbolConfiguration)!)
     icon.contentTintColor = .placeholderTextColor
     let label = NSTextField(wrappingLabelWithString: type.noContentDescription)
     label.alignment = .center

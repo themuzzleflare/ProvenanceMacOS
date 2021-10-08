@@ -21,7 +21,7 @@ final class TransactionsVC: NSViewController {
     didSet {
       collectionView.dataSource = dataSource
       collectionView.register(TransactionItem.nib, forItemWithIdentifier: TransactionItem.reuseIdentifier)
-      collectionView.collectionViewLayout = .listLayout()
+      collectionView.collectionViewLayout = .listLayout
       collectionView.backgroundViewScrollsWithContent = true
     }
   }
