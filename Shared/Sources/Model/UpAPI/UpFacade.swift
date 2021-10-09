@@ -39,7 +39,7 @@ final class UpFacade {
     ]
     
     var parameters: Parameters = [
-      ParamKeys.pageSize: "20"
+      ParamKeys.pageSize: "100"
     ]
     
     if let cursor = cursor {

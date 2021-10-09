@@ -207,7 +207,13 @@ final class TransactionsVC: NSViewController {
 
 extension TransactionsVC: NSCollectionViewDelegate {
   func collectionView(_ collectionView: NSCollectionView, didSelectItemsAt indexPaths: Set<IndexPath>) {
+    guard let indexPath = indexPaths.first else { return }
+    let transaction = filteredTransactions[indexPath.item]
+    let viewController = TransactionDetailVC(parent ?? self, transaction: transaction)
     collectionView.deselectItems(at: indexPaths)
+    viewController.view.setFrameOrigin(NSPoint(x: 0, y: 0))
+    viewController.view.setFrameSize(view.frame.size)
+    view.window?.contentViewController = viewController
   }
 }
 

@@ -5,6 +5,16 @@ final class TransactionItem: NSCollectionViewItem {
   @IBOutlet weak var transactionCreationDate: NSTextField!
   @IBOutlet weak var transactionAmount: NSTextField!
   
+  @IBAction func copyDescription(_ sender: NSMenuItem) {
+    AppDelegate.pasteboard.setString(transactionDescription.stringValue, forType: .string)
+  }
+  @IBAction func copyCreationDate(_ sender: NSMenuItem) {
+    AppDelegate.pasteboard.setString(transactionCreationDate.stringValue, forType: .string)
+  }
+  @IBAction func copyAmount(_ sender: NSMenuItem) {
+    AppDelegate.pasteboard.setString(transactionAmount.stringValue, forType: .string)
+  }
+  
   static let reuseIdentifier = NSUserInterfaceItemIdentifier("transactionItem")
   static let nib = NSNib(nibNamed: "TransactionItem", bundle: nil)
   
@@ -14,15 +24,10 @@ final class TransactionItem: NSCollectionViewItem {
       if let transaction = transaction {
         transactionDescription.stringValue = transaction.transactionDescription
         transactionCreationDate.stringValue = transaction.creationDate
-        transactionAmount.textColor = transaction.colour.nsColour
         transactionAmount.stringValue = transaction.amount
+        transactionAmount.textColor = transaction.colour.nsColour
       }
     }
-  }
-  
-  override func viewDidLoad() {
-    super.viewDidLoad()
-    configureView()
   }
   
   override var highlightState: NSCollectionViewItem.HighlightState {
@@ -37,6 +42,11 @@ final class TransactionItem: NSCollectionViewItem {
     }
   }
   
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    configureView()
+  }
+  
   private func configureView() {
     view.wantsLayer = true
     view.layer?.borderColor = .separator
@@ -44,10 +54,8 @@ final class TransactionItem: NSCollectionViewItem {
   }
   
   private func updateSelectionHighlighting() {
-    if !isViewLoaded { return }
-    let showAsHighlighted = (highlightState == .forSelection) ||
-    (isSelected && highlightState != .forDeselection) ||
-    (highlightState == .asDropTarget)
-    view.layer?.backgroundColor = showAsHighlighted ? .selected : nil
+    guard isViewLoaded else { return }
+    let showAsHighlighted = (highlightState == .forSelection) || (isSelected && highlightState != .forDeselection) || (highlightState == .asDropTarget)
+    view.layer?.backgroundColor = showAsHighlighted ? .selectedControl : nil
   }
 }

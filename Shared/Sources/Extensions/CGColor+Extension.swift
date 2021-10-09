@@ -7,7 +7,7 @@ extension CGColor {
   }
   
     /// `NSColor.selectedControlColor.cgColor`.
-  static var selected: CGColor {
+  static var selectedControl: CGColor {
     return NSColor.selectedControlColor.cgColor
   }
 }

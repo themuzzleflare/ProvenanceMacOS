@@ -10,7 +10,7 @@
         <!--TabVC-->
         <scene sceneID="fwj-qh-Bfq">
             <objects>
-                <tabViewController storyboardIdentifier="TabController" selectedTabViewItemIndex="0" tabStyle="toolbar" id="waL-RI-fYc" customClass="TabVC" customModule="Provenance" customModuleProvider="target" sceneMemberID="viewController">
+                <tabViewController storyboardIdentifier="MainTabViewController" selectedTabViewItemIndex="0" tabStyle="toolbar" id="waL-RI-fYc" customClass="TabVC" customModule="Provenance" customModuleProvider="target" sceneMemberID="viewController">
                     <tabViewItems>
                         <tabViewItem label="Transactions" id="9cp-o6-gzc">
                             <imageReference key="image" image="dollarsign.circle" catalog="system" symbolScale="large"/>
@@ -25,7 +25,7 @@
                             <imageReference key="image" image="tray.full" catalog="system" symbolScale="large"/>
                         </tabViewItem>
                     </tabViewItems>
-                    <tabView key="tabView" type="noTabsNoBorder" id="dGc-TB-R8a">
+                    <tabView key="tabView" identifier="MainTabView" type="noTabsNoBorder" id="dGc-TB-R8a">
                         <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <font key="font" metaFont="message"/>
@@ -34,7 +34,7 @@
                         </connections>
                     </tabView>
                     <connections>
-                        <outlet property="tabView" destination="dGc-TB-R8a" id="EbE-jM-bdY"/>
+                        <outlet property="tabView" destination="dGc-TB-R8a" id="Fe5-9S-zwm"/>
                         <segue destination="GPA-wK-tMW" kind="relationship" relationship="tabItems" id="9oo-yi-v8f"/>
                         <segue destination="iSH-v0-phP" kind="relationship" relationship="tabItems" id="4Ax-h5-2lI"/>
                         <segue destination="B9y-eU-cWA" kind="relationship" relationship="tabItems" id="h86-0O-WoQ"/>

@@ -1,159 +1,163 @@
 import AppKit
 
 extension NSImage {
+  convenience init?(systemName: String) {
+    self.init(systemSymbolName: systemName, accessibilityDescription: nil)
+  }
+  
   static var upLogoRounded: NSImage {
     return NSImage(named: "UpLogoRounded")!
   }
   
   static var dollarsignCircle: NSImage {
-    return NSImage(systemSymbolName: "dollarsign.circle", accessibilityDescription: nil)!
+    return NSImage(systemName: "dollarsign.circle")!
   }
   
   static var dollarsignCircleFill: NSImage {
-    return NSImage(systemSymbolName: "dollarsign.circle.fill", accessibilityDescription: nil)!
+    return NSImage(systemName: "dollarsign.circle.fill")!
   }
   
   static var walletPass: NSImage {
-    return NSImage(systemSymbolName: "wallet.pass", accessibilityDescription: nil)!
+    return NSImage(systemName: "wallet.pass")!
   }
   
   static var walletPassFill: NSImage {
-    return NSImage(systemSymbolName: "wallet.pass.fill", accessibilityDescription: nil)!
+    return NSImage(systemName: "wallet.pass.fill")!
   }
   
   static var tag: NSImage {
-    return NSImage(systemSymbolName: "tag", accessibilityDescription: nil)!
+    return NSImage(systemName: "tag")!
   }
   
   static var tagFill: NSImage {
-    return NSImage(systemSymbolName: "tag.fill", accessibilityDescription: nil)!
+    return NSImage(systemName: "tag.fill")!
   }
   
   static var trayFull: NSImage {
-    return NSImage(systemSymbolName: "tray.full", accessibilityDescription: nil)!
+    return NSImage(systemName: "tray.full")!
   }
   
   static var trayFullFill: NSImage {
-    return NSImage(systemSymbolName: "tray.full.fill", accessibilityDescription: nil)!
+    return NSImage(systemName: "tray.full.fill")!
   }
   
   static var infoCircle: NSImage {
-    return NSImage(systemSymbolName: "info.circle", accessibilityDescription: nil)!
+    return NSImage(systemName: "info.circle")!
   }
   
   static var infoCircleFill: NSImage {
-    return NSImage(systemSymbolName: "info.circle.fill", accessibilityDescription: nil)!
+    return NSImage(systemName: "info.circle.fill")!
   }
   
   static var arrowUpArrowDown: NSImage {
-    return NSImage(systemSymbolName: "arrow.up.arrow.down", accessibilityDescription: nil)!
+    return NSImage(systemName: "arrow.up.arrow.down")!
   }
   
   static var arrowUpArrowDownCircle: NSImage {
-    return NSImage(systemSymbolName: "arrow.up.arrow.down.circle", accessibilityDescription: nil)!
+    return NSImage(systemName: "arrow.up.arrow.down.circle")!
   }
   
   static var arrowUpArrowDownCircleFill: NSImage {
-    return NSImage(systemSymbolName: "arrow.up.arrow.down.circle.fill", accessibilityDescription: nil)!
+    return NSImage(systemName: "arrow.up.arrow.down.circle.fill")!
   }
   
   static var checkmarkCircle: NSImage {
-    return NSImage(systemSymbolName: "checkmark.circle", accessibilityDescription: nil)!
+    return NSImage(systemName: "checkmark.circle")!
   }
   
   static var checkmarkCircleFill: NSImage {
-    return NSImage(systemSymbolName: "checkmark.circle.fill", accessibilityDescription: nil)!
+    return NSImage(systemName: "checkmark.circle.fill")!
   }
   
   static var clock: NSImage {
-    return NSImage(systemSymbolName: "clock", accessibilityDescription: nil)!
+    return NSImage(systemName: "clock")!
   }
   
   static var clockFill: NSImage {
-    return NSImage(systemSymbolName: "clock.fill", accessibilityDescription: nil)!
+    return NSImage(systemName: "clock.fill")!
   }
   
   static var boltHorizontalCircle: NSImage {
-    return NSImage(systemSymbolName: "bolt.horizontal.circle", accessibilityDescription: nil)!
+    return NSImage(systemName: "bolt.horizontal.circle")!
   }
   
   static var boltHorizontalCircleFill: NSImage {
-    return NSImage(systemSymbolName: "bolt.horizontal.circle.fill", accessibilityDescription: nil)!
+    return NSImage(systemName: "bolt.horizontal.circle.fill")!
   }
   
   static var calendarCircle: NSImage {
-    return NSImage(systemSymbolName: "calendar.circle", accessibilityDescription: nil)!
+    return NSImage(systemName: "calendar.circle")!
   }
   
   static var calendarBadgeClock: NSImage {
-    return NSImage(systemSymbolName: "calendar.badge.clock", accessibilityDescription: nil)!
+    return NSImage(systemName: "calendar.badge.clock")!
   }
   
   static var chevronLeftSlashChevronRight: NSImage {
-    return NSImage(systemSymbolName: "chevron.left.slash.chevron.right", accessibilityDescription: nil)!
+    return NSImage(systemName: "chevron.left.slash.chevron.right")!
   }
   
   static var docOnClipboard: NSImage {
-    return NSImage(systemSymbolName: "doc.on.clipboard", accessibilityDescription: nil)!
+    return NSImage(systemName: "doc.on.clipboard")!
   }
   
   static var envelope: NSImage {
-    return NSImage(systemSymbolName: "envelope", accessibilityDescription: nil)!
+    return NSImage(systemName: "envelope")!
   }
   
   static var envelopeFill: NSImage {
-    return NSImage(systemSymbolName: "envelope.fill", accessibilityDescription: nil)!
+    return NSImage(systemName: "envelope.fill")!
   }
   
   static var exclamationmarkTriangleFill: NSImage {
-    return NSImage(systemSymbolName: "exclamationmark.triangle.fill", accessibilityDescription: nil)!
+    return NSImage(systemName: "exclamationmark.triangle.fill")!
   }
   
   static var gear: NSImage {
-    return NSImage(systemSymbolName: "gear", accessibilityDescription: nil)!
+    return NSImage(systemName: "gear")!
   }
   
   static var gearshape: NSImage {
-    return NSImage(systemSymbolName: "gearshape", accessibilityDescription: nil)!
+    return NSImage(systemName: "gearshape")!
   }
   
   static var linkCircle: NSImage {
-    return NSImage(systemSymbolName: "link.circle", accessibilityDescription: nil)!
+    return NSImage(systemName: "link.circle")!
   }
   
   static var link: NSImage {
-    return NSImage(systemSymbolName: "link", accessibilityDescription: nil)!
+    return NSImage(systemName: "link")!
   }
   
   static var sliderHorizontal3: NSImage {
-    return NSImage(systemSymbolName: "slider.horizontal.3", accessibilityDescription: nil)!
+    return NSImage(systemName: "slider.horizontal.3")!
   }
   
   static var sliderVertical3: NSImage {
-    return NSImage(systemSymbolName: "slider.vertical.3", accessibilityDescription: nil)!
+    return NSImage(systemName: "slider.vertical.3")!
   }
   
   static var textAlignright: NSImage {
-    return NSImage(systemSymbolName: "text.alignright", accessibilityDescription: nil)!
+    return NSImage(systemName: "text.alignright")!
   }
   
   static var trash: NSImage {
-    return NSImage(systemSymbolName: "trash", accessibilityDescription: nil)!
+    return NSImage(systemName: "trash")!
   }
   
   static var xmarkDiamond: NSImage {
-    return NSImage(systemSymbolName: "xmark.diamond", accessibilityDescription: nil)!
+    return NSImage(systemName: "xmark.diamond")!
   }
   
   static var xmarkDiamondFill: NSImage {
-    return NSImage(systemSymbolName: "xmark.diamond.fill", accessibilityDescription: nil)!
+    return NSImage(systemName: "xmark.diamond.fill")!
   }
   
   static var squareStack: NSImage {
-    return NSImage(systemSymbolName: "square.stack", accessibilityDescription: nil)!
+    return NSImage(systemName: "square.stack")!
   }
   
   static var squareStackFill: NSImage {
-    return NSImage(systemSymbolName: "square.stack.fill", accessibilityDescription: nil)!
+    return NSImage(systemName: "square.stack.fill")!
   }
 }

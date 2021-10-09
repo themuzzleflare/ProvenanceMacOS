@@ -13,11 +13,6 @@ final class CategoryItem: NSCollectionViewItem {
     }
   }
   
-  override func viewDidLoad() {
-    super.viewDidLoad()
-    configureView()
-  }
-  
   override var highlightState: NSCollectionViewItem.HighlightState {
     didSet {
       updateSelectionHighlighting()
@@ -28,6 +23,11 @@ final class CategoryItem: NSCollectionViewItem {
     didSet {
       updateSelectionHighlighting()
     }
+  }
+  
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    configureView()
   }
   
   private func configureView() {
@@ -41,6 +41,7 @@ final class CategoryItem: NSCollectionViewItem {
     let showAsHighlighted = (highlightState == .forSelection) ||
     (isSelected && highlightState != .forDeselection) ||
     (highlightState == .asDropTarget)
-    view.layer?.backgroundColor = showAsHighlighted ? .selected : nil
+    textField?.textColor = showAsHighlighted ? .selectedControlTextColor : .labelColor
+    view.layer?.backgroundColor = showAsHighlighted ? .selectedControl : nil
   }
 }

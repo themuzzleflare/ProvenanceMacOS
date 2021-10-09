@@ -1,6 +1,6 @@
 import Foundation
 
-enum AppWidgets: Int, CaseIterable {
+enum AppWidgets: Int {
   case accountBalance = 0
   case latestTransaction = 1
 }

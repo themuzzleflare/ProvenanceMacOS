@@ -1,18 +1,19 @@
 import Cocoa
 
-final class AccountItem: NSCollectionViewItem {
-  @IBOutlet weak var accountBalance: NSTextField!
-  @IBOutlet weak var accountDisplayName: NSTextField!
+final class AttributeItem: NSCollectionViewItem {
+  @IBOutlet weak var leftLabel: NSTextField!
+  @IBOutlet weak var rightLabel: NSTextField!
   
-  static let reuseIdentifier = NSUserInterfaceItemIdentifier("accountItem")
-  static let nib = NSNib(nibNamed: "AccountItem", bundle: nil)
+  static let reuseIdentifier = NSUserInterfaceItemIdentifier("attributeItem")
+  static let nib = NSNib(nibNamed: "AttributeItem", bundle: nil)
   
-  var account: AccountCellModel? {
+  var attribute: DetailItem? {
     didSet {
       guard isViewLoaded else { return }
-      if let account = account {
-        accountBalance.stringValue = account.balance
-        accountDisplayName.stringValue = account.displayName
+      if let attribute = attribute {
+        leftLabel.stringValue = attribute.id
+        rightLabel.stringValue = attribute.value
+        rightLabel.font = attribute.valueFont
       }
     }
   }
@@ -45,6 +46,7 @@ final class AccountItem: NSCollectionViewItem {
     let showAsHighlighted = (highlightState == .forSelection) ||
     (isSelected && highlightState != .forDeselection) ||
     (highlightState == .asDropTarget)
+    textField?.textColor = showAsHighlighted ? .selectedControlTextColor : .labelColor
     view.layer?.backgroundColor = showAsHighlighted ? .selectedControl : nil
   }
 }

@@ -2,7 +2,11 @@ import Cocoa
 import SwiftDate
 
 @main class AppDelegate: NSObject, NSApplicationDelegate {
-  var windowController: MainWC?
+  static var pasteboard: NSPasteboard = {
+    let pasteboard = NSPasteboard.general
+    pasteboard.declareTypes([.string], owner: nil)
+    return pasteboard
+  }()
   
   func applicationDidFinishLaunching(_ aNotification: Notification) {
     SwiftDate.defaultRegion = .current
@@ -11,15 +15,11 @@ import SwiftDate
   func applicationWillTerminate(_ aNotification: Notification) {
   }
   
-  func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows flag: Bool) -> Bool {
-    if flag {
-      return true
-    }
-    windowController?.window?.makeKeyAndOrderFront(self)
-    return false
+  func applicationSupportsSecureRestorableState(_ app: NSApplication) -> Bool {
+    return true
   }
   
-  func applicationSupportsSecureRestorableState(_ app: NSApplication) -> Bool {
+  func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
     return true
   }
 }

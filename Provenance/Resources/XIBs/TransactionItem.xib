@@ -70,6 +70,9 @@
                 <constraint firstItem="QQs-Wv-qSy" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="13" id="DKP-6O-Mty"/>
                 <constraint firstAttribute="bottom" secondItem="QQs-Wv-qSy" secondAttribute="bottom" constant="13" id="msJ-oD-3kc"/>
             </constraints>
+            <connections>
+                <outlet property="menu" destination="3Zn-Iv-03Y" id="W8k-wf-N2J"/>
+            </connections>
             <point key="canvasLocation" x="95" y="84"/>
         </customView>
         <collectionViewItem nibName="TransactionItem" id="D5g-h6-XIr" customClass="TransactionItem" customModule="Provenance" customModuleProvider="target">
@@ -80,5 +83,33 @@
                 <outlet property="view" destination="Hz6-mo-xeY" id="Vw4-Xr-FTf"/>
             </connections>
         </collectionViewItem>
+        <menu id="3Zn-Iv-03Y">
+            <items>
+                <menuItem title="Copy Description" image="text.alignright" catalog="system" id="4gH-a8-71r">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="copyDescription:" target="D5g-h6-XIr" id="mGr-37-ETw"/>
+                    </connections>
+                </menuItem>
+                <menuItem title="Copy Creation Date" image="calendar.circle" catalog="system" id="SOp-vx-cGW">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="copyCreationDate:" target="D5g-h6-XIr" id="LeT-Py-wLE"/>
+                    </connections>
+                </menuItem>
+                <menuItem title="Copy Amount" image="dollarsign.circle" catalog="system" id="o2K-E9-JWu">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="copyAmount:" target="D5g-h6-XIr" id="vbN-66-DQ8"/>
+                    </connections>
+                </menuItem>
+            </items>
+            <point key="canvasLocation" x="182" y="-102"/>
+        </menu>
     </objects>
+    <resources>
+        <image name="calendar.circle" catalog="system" width="15" height="15"/>
+        <image name="dollarsign.circle" catalog="system" width="15" height="15"/>
+        <image name="text.alignright" catalog="system" width="16" height="13"/>
+    </resources>
 </document>

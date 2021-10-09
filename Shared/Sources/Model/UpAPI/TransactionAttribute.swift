@@ -62,16 +62,12 @@ extension TransactionAttribute {
   }
   
   var holdValue: String {
-    guard let holdInfo = holdInfo, holdInfo.amount.value != amount.value else {
-      return .emptyString
-    }
+    guard let holdInfo = holdInfo, holdInfo.amount.value != amount.value else { return .emptyString }
     return holdInfo.amount.valueLong
   }
   
   var holdForeignValue: String {
-    guard let holdForeignAmount = holdInfo?.foreignAmount, holdForeignAmount.value != foreignAmount?.value else {
-      return .emptyString
-    }
+    guard let holdForeignAmount = holdInfo?.foreignAmount, holdForeignAmount.value != foreignAmount?.value else { return .emptyString }
     return holdForeignAmount.valueLong
   }
   

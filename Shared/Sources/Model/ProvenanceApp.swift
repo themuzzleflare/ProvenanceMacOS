@@ -1,7 +1,7 @@
 import AppKit
 import SwiftDate
 
-class ProvenanceApp {
+final class ProvenanceApp {
   static let userDefaults = UserDefaults.provenance
   
   static func formatDate(for dateString: String, dateStyle: AppDateStyle) -> String {

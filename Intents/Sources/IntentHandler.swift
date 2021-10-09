@@ -8,6 +8,8 @@ final class IntentHandler: INExtension {
   }
 }
 
+  // MARK: - AccountSelectionIntentHandling
+
 extension IntentHandler: AccountSelectionIntentHandling {
   func provideAccountOptionsCollection(for intent: AccountSelectionIntent, with completion: @escaping (INObjectCollection<AccountType>?, Error?) -> Void) {
     UpFacade.listAccounts { (result) in
@@ -20,6 +22,8 @@ extension IntentHandler: AccountSelectionIntentHandling {
     }
   }
 }
+
+  // MARK: - ListTransactionsIntentHandling
 
 extension IntentHandler: ListTransactionsIntentHandling {
   func resolveSince(for intent: ListTransactionsIntent, with completion: @escaping (ListTransactionsSinceResolutionResult) -> Void) {
@@ -125,6 +129,8 @@ extension IntentHandler: ListTransactionsIntentHandling {
   }
 }
 
+  // MARK: - AddTagToTransactionIntentHandling
+
 extension IntentHandler: AddTagToTransactionIntentHandling {
   func provideTransactionOptionsCollection(for intent: AddTagToTransactionIntent, with completion: @escaping (INObjectCollection<TransactionType>?, Error?) -> Void) {
     UpFacade.listTransactions { (result) in
@@ -188,6 +194,8 @@ extension IntentHandler: AddTagToTransactionIntentHandling {
     }
   }
 }
+
+  // MARK: - RemoveTagFromTransactionIntentHandling
 
 extension IntentHandler: RemoveTagFromTransactionIntentHandling {
   func provideTransactionOptionsCollection(for intent: RemoveTagFromTransactionIntent, with completion: @escaping (INObjectCollection<TransactionType>?, Error?) -> Void) {
