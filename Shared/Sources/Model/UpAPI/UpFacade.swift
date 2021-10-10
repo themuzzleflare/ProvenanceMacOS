@@ -39,7 +39,7 @@ final class UpFacade {
     ]
     
     var parameters: Parameters = [
-      ParamKeys.pageSize: "100"
+      ParamKeys.pageSize: "20"
     ]
     
     if let cursor = cursor {
@@ -100,6 +100,25 @@ final class UpFacade {
           completion(.failure(error))
         }
       }
+  }
+  
+    /// List transactions by resource
+    ///
+    /// - Parameters:
+    ///   - resource: The resource to list transactions for.
+    ///   - completion: Block to execute for handling the request response.
+    ///
+    /// Retrieve a list of all transactions for a specific resource. The returned list is [paginated](https://developer.up.com.au/#pagination) and can be scrolled by following the `next` and `prev` links where present. To narrow the results to a specific date range pass one or both of `filter[since]` and `filter[until]` in the query string. These filter parameters **should not** be used for pagination. Results are ordered newest first to oldest last.
+  
+  static func listTransactions(filterBy resource: ResourceEnum, completion: @escaping (Result<[TransactionResource], AFError>) -> Void) {
+    switch resource {
+    case let .account(accountResource):
+      listTransactions(filterBy: accountResource, completion: completion)
+    case let .category(categoryResource):
+      listTransactions(filterBy: categoryResource, completion: completion)
+    case let .tag(tagResource):
+      listTransactions(filterBy: tagResource, completion: completion)
+    }
   }
   
     /// List transactions by account

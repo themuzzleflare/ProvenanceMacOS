@@ -6,11 +6,11 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--TransactionsVC-->
+        <!--Transactions-->
         <scene sceneID="PEd-7d-5j0">
             <objects>
-                <viewController storyboardIdentifier="TransactionsController" id="bU7-R8-ocO" customClass="TransactionsVC" customModule="Provenance" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" identifier="TransactionsView" id="tOy-S4-hL0">
+                <viewController title="Transactions" storyboardIdentifier="TransactionsController" id="bU7-R8-ocO" customClass="TransactionsVC" customModule="Provenance" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" identifier="transactionsView" id="tOy-S4-hL0">
                         <rect key="frame" x="0.0" y="0.0" width="707" height="300"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
@@ -28,12 +28,12 @@
                                             <outlet property="delegate" destination="bU7-R8-ocO" id="Yli-N3-6al"/>
                                         </connections>
                                     </searchField>
-                                    <stackView distribution="fill" orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="V2z-cK-SaD">
-                                        <rect key="frame" x="267" y="0.0" width="134" height="20"/>
+                                    <stackView distribution="fill" orientation="horizontal" alignment="centerY" spacing="10" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="V2z-cK-SaD">
+                                        <rect key="frame" x="266" y="0.0" width="136" height="20"/>
                                         <subviews>
                                             <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="j6O-fY-sj1">
                                                 <rect key="frame" x="-3" y="-4" width="39" height="25"/>
-                                                <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" id="jpw-5N-Mzf">
+                                                <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="jpw-5N-Mzf">
                                                     <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                                     <font key="font" metaFont="menu"/>
                                                     <menu key="menu" id="5pP-Tf-kO7"/>
@@ -43,7 +43,7 @@
                                                 </connections>
                                             </popUpButton>
                                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Xbu-Bz-r98">
-                                                <rect key="frame" x="40" y="2" width="94" height="16"/>
+                                                <rect key="frame" x="42" y="2" width="94" height="16"/>
                                                 <buttonCell key="cell" type="bevel" title="Settled Only" bezelStyle="regularSquare" image="checkmark.circle" catalog="system" imagePosition="right" alignment="center" alternateImage="checkmark.circle.fill" inset="2" id="khn-ea-N30">
                                                     <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
                                                     <font key="font" metaFont="system"/>
@@ -85,7 +85,7 @@
                                         <collectionView selectable="YES" id="g9r-hN-XbI">
                                             <rect key="frame" x="0.0" y="0.0" width="707" height="222"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
-                                            <collectionViewLayout key="collectionViewLayout" id="O1M-WO-t58"/>
+                                            <collectionViewLayout key="collectionViewLayout" id="XRy-HP-Yla"/>
                                             <color key="primaryBackgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             <connections>
                                                 <outlet property="delegate" destination="bU7-R8-ocO" id="Yt1-x0-nCV"/>
@@ -122,7 +122,7 @@
                 </viewController>
                 <customObject id="9uD-mB-xHs" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-159" y="94"/>
+            <point key="canvasLocation" x="-281.5" y="-90"/>
         </scene>
     </scenes>
     <resources>

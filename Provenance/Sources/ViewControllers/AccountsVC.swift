@@ -7,8 +7,8 @@ final class AccountsVC: NSViewController {
   @IBOutlet weak var collectionView: NSCollectionView! {
     didSet {
       collectionView.dataSource = dataSource
-      collectionView.register(AccountItem.nib, forItemWithIdentifier: AccountItem.reuseIdentifier)
-      collectionView.collectionViewLayout = .twoColumnGridLayout
+      collectionView.register(.accountItem, forItemWithIdentifier: .accountItem)
+      collectionView.collectionViewLayout = .twoColumnGrid
       collectionView.backgroundViewScrollsWithContent = true
     }
   }
@@ -82,6 +82,13 @@ final class AccountsVC: NSViewController {
   override func viewWillAppear() {
     super.viewWillAppear()
     fetchAccounts()
+    configureWindow()
+  }
+  
+  private func configureWindow() {
+    AppDelegate.windowController?.backButton.title = .emptyString
+    AppDelegate.windowController?.backButton.action = nil
+    AppDelegate.windowController?.window?.title = "Accounts"
   }
   
   private func configureObservers() {
@@ -106,7 +113,7 @@ final class AccountsVC: NSViewController {
     return DataSource(
       collectionView: collectionView,
       itemProvider: { (collectionView, indexPath, account) in
-        guard let item = collectionView.makeItem(withIdentifier: AccountItem.reuseIdentifier, for: indexPath) as? AccountItem else { fatalError() }
+        guard let item = collectionView.makeItem(withIdentifier: .accountItem, for: indexPath) as? AccountItem else { fatalError() }
         item.account = account
         return item
       }
@@ -165,7 +172,11 @@ final class AccountsVC: NSViewController {
 
 extension AccountsVC: NSCollectionViewDelegate {
   func collectionView(_ collectionView: NSCollectionView, didSelectItemsAt indexPaths: Set<IndexPath>) {
+    guard let indexPath = indexPaths.first else { return }
+    let account = filteredAccounts[indexPath.item]
+    let viewController = FilteredTransactionsVC(parent ?? self, previousTitle: "Accounts", resource: .account(account))
     collectionView.deselectItems(at: indexPaths)
+    view.window?.contentViewController = .navigation(parent ?? self, to: viewController)
   }
 }
 

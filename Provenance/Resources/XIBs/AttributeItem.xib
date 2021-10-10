@@ -9,24 +9,24 @@
         <customObject id="-2" userLabel="File's Owner" customClass="AttributeItem" customModule="Provenance" customModuleProvider="target"/>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
-        <customView id="Hz6-mo-xeY">
-            <rect key="frame" x="0.0" y="0.0" width="480" height="272"/>
+        <customView identifier="attributeItemView" id="Hz6-mo-xeY" customClass="CollectionItemView" customModule="Provenance" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="348" height="69"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <stackView distribution="equalSpacing" orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Cc4-Ok-B1F">
-                    <rect key="frame" x="16" y="13" width="448" height="246"/>
+                    <rect key="frame" x="16" y="13" width="316" height="43"/>
                     <subviews>
                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="kkj-V6-Gdw">
-                            <rect key="frame" x="-2" y="114" width="40" height="18"/>
-                            <textFieldCell key="cell" lineBreakMode="clipping" title="Label" id="Xw4-bD-d6X">
+                            <rect key="frame" x="-2" y="13" width="40" height="18"/>
+                            <textFieldCell key="cell" lineBreakMode="clipping" alignment="left" title="Label" id="Xw4-bD-d6X">
                                 <font key="font" size="14" name="CircularStd-Medium"/>
                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                             </textFieldCell>
                         </textField>
                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="KRP-f4-uz5">
-                            <rect key="frame" x="411" y="114" width="39" height="18"/>
-                            <textFieldCell key="cell" lineBreakMode="clipping" selectable="YES" title="Label" id="kdd-wK-ho9">
+                            <rect key="frame" x="279" y="13" width="39" height="18"/>
+                            <textFieldCell key="cell" lineBreakMode="clipping" selectable="YES" alignment="right" title="Label" id="kdd-wK-ho9">
                                 <font key="font" size="14" name="CircularStd-Book"/>
                                 <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -49,7 +49,7 @@
                 <constraint firstItem="Cc4-Ok-B1F" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="16" id="d33-iq-Kpi"/>
                 <constraint firstAttribute="bottom" secondItem="Cc4-Ok-B1F" secondAttribute="bottom" constant="13" id="nqr-Bu-7ne"/>
             </constraints>
-            <point key="canvasLocation" x="139" y="154"/>
+            <point key="canvasLocation" x="73" y="52.5"/>
         </customView>
         <collectionViewItem nibName="AttributeItem" id="UMV-ba-LNO" customClass="AttributeItem" customModule="Provenance" customModuleProvider="target">
             <connections>

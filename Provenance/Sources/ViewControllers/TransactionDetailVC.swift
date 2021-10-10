@@ -5,25 +5,14 @@ final class TransactionDetailVC: NSViewController {
   @IBOutlet weak var collectionView: NSCollectionView! {
     didSet {
       collectionView.dataSource = dataSource
-      collectionView.register(AttributeItem.nib, forItemWithIdentifier: AttributeItem.reuseIdentifier)
-      collectionView.collectionViewLayout = .listLayout
-    }
-  }
-  
-  @IBAction func backAction(_ sender: NSButton) {
-    previousViewController.view.setFrameOrigin(NSPoint(x: 0, y: 0))
-    previousViewController.view.setFrameSize(view.frame.size)
-    view.window?.contentViewController = previousViewController
-  }
-  
-  @IBOutlet weak var statusButton: NSButton! {
-    didSet {
-      statusButton.image = transaction.attributes.status.nsImage
-      statusButton.bezelColor = transaction.attributes.status.nsColour
+      collectionView.register(.attributeItem, forItemWithIdentifier: .attributeItem)
+      collectionView.collectionViewLayout = .transactionDetail
     }
   }
   
   private var previousViewController: NSViewController
+  
+  private var previousTitle: String
   
   private var transaction: TransactionResource {
     didSet {
@@ -73,8 +62,9 @@ final class TransactionDetailVC: NSViewController {
     }
   }
   
-  init(_ previousViewController: NSViewController, transaction: TransactionResource) {
+  init(_ previousViewController: NSViewController, previousTitle: String, transaction: TransactionResource) {
     self.previousViewController = previousViewController
+    self.previousTitle = previousTitle
     self.transaction = transaction
     super.init(nibName: "TransactionDetail", bundle: nil)
   }
@@ -96,6 +86,17 @@ final class TransactionDetailVC: NSViewController {
   override func viewWillAppear() {
     super.viewWillAppear()
     fetchTransaction()
+    configureWindow()
+  }
+  
+  private func configureWindow() {
+    AppDelegate.windowController?.window?.title = transaction.attributes.description
+    AppDelegate.windowController?.backButton.title = previousTitle
+    AppDelegate.windowController?.backButton.action = #selector(goBack)
+  }
+  
+  @objc private func goBack() {
+    view.window?.contentViewController = .navigation(self, to: previousViewController)
   }
   
   private func configureObserver() {
@@ -170,7 +171,7 @@ final class TransactionDetailVC: NSViewController {
     return DataSource(
       collectionView: collectionView,
       itemProvider: { (collectionView, indexPath, attribute) in
-        guard let item = collectionView.makeItem(withIdentifier: AttributeItem.reuseIdentifier, for: indexPath) as? AttributeItem else { fatalError() }
+        guard let item = collectionView.makeItem(withIdentifier: .attributeItem, for: indexPath) as? AttributeItem else { fatalError() }
         item.attribute = attribute
         return item
       }
@@ -210,5 +211,33 @@ final class TransactionDetailVC: NSViewController {
 extension TransactionDetailVC: NSCollectionViewDelegate {
   func collectionView(_ collectionView: NSCollectionView, didSelectItemsAt indexPaths: Set<IndexPath>) {
     collectionView.deselectItems(at: indexPaths)
+    if let indexPath = indexPaths.first, let attribute = dataSource.itemIdentifier(for: indexPath) {
+      switch attribute.id {
+      case "Account":
+        if let accountResource = account {
+          let viewController = FilteredTransactionsVC(self, previousTitle: transaction.attributes.description, resource: .account(accountResource))
+          view.window?.contentViewController = .navigation(self, to: viewController)
+        }
+      case "Transfer Account":
+        if let accountResource = transferAccount {
+          let viewController = FilteredTransactionsVC(self, previousTitle: transaction.attributes.description, resource: .account(accountResource))
+          view.window?.contentViewController = .navigation(self, to: viewController)
+        }
+      case "Parent Category":
+        if let categoryResource = parentCategory {
+          let viewController = FilteredTransactionsVC(self, previousTitle: transaction.attributes.description, resource: .category(categoryResource))
+          view.window?.contentViewController = .navigation(self, to: viewController)
+        }
+      case "Category":
+        if let categoryResource = category {
+          let viewController = FilteredTransactionsVC(self, previousTitle: transaction.attributes.description, resource: .category(categoryResource))
+          view.window?.contentViewController = .navigation(self, to: viewController)
+        }
+      case "Tags":
+        break
+      default:
+        break
+      }
+    }
   }
 }

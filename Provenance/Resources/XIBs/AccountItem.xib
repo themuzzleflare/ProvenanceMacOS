@@ -10,24 +10,24 @@
         <customObject id="-2" userLabel="File's Owner" customClass="AccountItem" customModule="Provenance" customModuleProvider="target"/>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
-        <customView id="Hz6-mo-xeY">
-            <rect key="frame" x="0.0" y="0.0" width="192" height="62"/>
+        <customView identifier="accountItemView" id="Hz6-mo-xeY" customClass="CollectionItemView" customModule="Provenance" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="260" height="96"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <stackView distribution="fill" orientation="vertical" alignment="centerX" spacing="5" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DFb-1E-Vjb">
-                    <rect key="frame" x="16" y="10" width="160" height="43"/>
+                    <rect key="frame" x="16" y="27" width="228" height="43"/>
                     <subviews>
                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Xld-hH-0Sv">
-                            <rect key="frame" x="47" y="21" width="66" height="22"/>
-                            <textFieldCell key="cell" lineBreakMode="clipping" title="Balance" id="bX9-qz-TnT">
+                            <rect key="frame" x="79" y="21" width="70" height="22"/>
+                            <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="Balance" id="bX9-qz-TnT">
                                 <font key="font" size="17" name="CircularStd-Bold"/>
                                 <color key="textColor" name="AccentColor"/>
                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                             </textFieldCell>
                         </textField>
                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="cer-Sf-34U">
-                            <rect key="frame" x="37" y="0.0" width="86" height="16"/>
-                            <textFieldCell key="cell" lineBreakMode="clipping" title="Display Name" id="WLx-K0-FhZ">
+                            <rect key="frame" x="69" y="0.0" width="90" height="16"/>
+                            <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="Display Name" id="WLx-K0-FhZ">
                                 <font key="font" size="13" name="CircularStd-Book"/>
                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -50,7 +50,10 @@
                 <constraint firstItem="DFb-1E-Vjb" firstAttribute="centerX" secondItem="Hz6-mo-xeY" secondAttribute="centerX" id="X8c-BM-3ZM"/>
                 <constraint firstAttribute="trailing" secondItem="DFb-1E-Vjb" secondAttribute="trailing" constant="16" id="oWd-gj-jtR"/>
             </constraints>
-            <point key="canvasLocation" x="-6" y="15"/>
+            <connections>
+                <outlet property="menu" destination="dAZ-nR-gxj" id="wiw-Mj-aal"/>
+            </connections>
+            <point key="canvasLocation" x="-3" y="32"/>
         </customView>
         <collectionViewItem nibName="AccountItem" id="koT-K8-eGv" customClass="AccountItem" customModule="Provenance" customModuleProvider="target">
             <connections>
@@ -59,8 +62,27 @@
                 <outlet property="view" destination="Hz6-mo-xeY" id="AKh-QP-POY"/>
             </connections>
         </collectionViewItem>
+        <menu id="dAZ-nR-gxj">
+            <items>
+                <menuItem title="Copy Balance" image="dollarsign.circle" catalog="system" id="naD-IR-EBy">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="copyBalance:" target="koT-K8-eGv" id="0Eh-lG-T6J"/>
+                    </connections>
+                </menuItem>
+                <menuItem title="Copy Display Name" image="text.alignright" catalog="system" id="Z4F-ch-gmN">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="copyDisplayName:" target="koT-K8-eGv" id="mCE-81-bAi"/>
+                    </connections>
+                </menuItem>
+            </items>
+            <point key="canvasLocation" x="-3" y="161"/>
+        </menu>
     </objects>
     <resources>
+        <image name="dollarsign.circle" catalog="system" width="15" height="15"/>
+        <image name="text.alignright" catalog="system" width="16" height="13"/>
         <namedColor name="AccentColor">
             <color red="1" green="0.47843137254901963" blue="0.40392156862745099" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

@@ -1,6 +1,6 @@
 import Foundation
 
-struct AccountCellModel {
+struct AccountCellModel: Identifiable {
   let id: String
   let balance: String
   let displayName: String

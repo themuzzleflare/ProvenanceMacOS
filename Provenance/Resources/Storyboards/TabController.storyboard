@@ -10,22 +10,22 @@
         <!--TabVC-->
         <scene sceneID="fwj-qh-Bfq">
             <objects>
-                <tabViewController storyboardIdentifier="MainTabViewController" selectedTabViewItemIndex="0" tabStyle="toolbar" id="waL-RI-fYc" customClass="TabVC" customModule="Provenance" customModuleProvider="target" sceneMemberID="viewController">
+                <tabViewController storyboardIdentifier="MainTabViewController" selectedTabViewItemIndex="0" id="waL-RI-fYc" customClass="TabVC" customModule="Provenance" customModuleProvider="target" sceneMemberID="viewController">
                     <tabViewItems>
-                        <tabViewItem label="Transactions" id="9cp-o6-gzc">
-                            <imageReference key="image" image="dollarsign.circle" catalog="system" symbolScale="large"/>
+                        <tabViewItem label="Transactions" identifier="transactionsTab" id="9cp-o6-gzc">
+                            <imageReference key="image" image="dollarsign.circle" catalog="system" symbolScale="default"/>
                         </tabViewItem>
-                        <tabViewItem label="Accounts" id="Cd3-Kc-N7t">
-                            <imageReference key="image" image="wallet.pass" catalog="system" symbolScale="large"/>
+                        <tabViewItem label="Accounts" identifier="accountsTab" id="Cd3-Kc-N7t">
+                            <imageReference key="image" image="wallet.pass" catalog="system" symbolScale="default"/>
                         </tabViewItem>
-                        <tabViewItem label="Tags" id="Xwl-3w-LdX">
-                            <imageReference key="image" image="tag" catalog="system" symbolScale="large"/>
+                        <tabViewItem label="Tags" identifier="tagsTab" id="Xwl-3w-LdX">
+                            <imageReference key="image" image="tag" catalog="system" symbolScale="default"/>
                         </tabViewItem>
-                        <tabViewItem label="Categories" id="aqh-D0-p84">
-                            <imageReference key="image" image="tray.full" catalog="system" symbolScale="large"/>
+                        <tabViewItem label="Categories" identifier="categoriesTab" id="aqh-D0-p84">
+                            <imageReference key="image" image="tray.full" catalog="system" symbolScale="default"/>
                         </tabViewItem>
                     </tabViewItems>
-                    <tabView key="tabView" identifier="MainTabView" type="noTabsNoBorder" id="dGc-TB-R8a">
+                    <tabView key="tabView" identifier="mainTabView" type="noTabsNoBorder" id="dGc-TB-R8a">
                         <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <font key="font" metaFont="message"/>
@@ -79,9 +79,9 @@
         </scene>
     </scenes>
     <resources>
-        <image name="dollarsign.circle" catalog="system" width="20" height="20"/>
-        <image name="tag" catalog="system" width="22" height="22"/>
-        <image name="tray.full" catalog="system" width="24" height="17"/>
-        <image name="wallet.pass" catalog="system" width="18" height="21"/>
+        <image name="dollarsign.circle" catalog="system" width="15" height="15"/>
+        <image name="tag" catalog="system" width="17" height="17"/>
+        <image name="tray.full" catalog="system" width="18" height="13"/>
+        <image name="wallet.pass" catalog="system" width="14" height="16"/>
     </resources>
 </document>

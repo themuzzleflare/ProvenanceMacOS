@@ -6,10 +6,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--TagsVC-->
+        <!--Tags-->
         <scene sceneID="PEd-7d-5j0">
             <objects>
-                <viewController storyboardIdentifier="TagsController" id="bU7-R8-ocO" customClass="TagsVC" customModule="Provenance" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Tags" storyboardIdentifier="TagsController" id="bU7-R8-ocO" customClass="TagsVC" customModule="Provenance" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" identifier="TagsView" id="tOy-S4-hL0">
                         <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
                         <autoresizingMask key="autoresizingMask"/>

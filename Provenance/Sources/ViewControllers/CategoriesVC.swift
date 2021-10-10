@@ -7,8 +7,8 @@ final class CategoriesVC: NSViewController {
   @IBOutlet weak var collectionView: NSCollectionView! {
     didSet {
       collectionView.dataSource = dataSource
-      collectionView.register(CategoryItem.nib, forItemWithIdentifier: CategoryItem.reuseIdentifier)
-      collectionView.collectionViewLayout = .twoColumnGridLayout
+      collectionView.register(.categoryItem, forItemWithIdentifier: .categoryItem)
+      collectionView.collectionViewLayout = .twoColumnGrid
       collectionView.backgroundViewScrollsWithContent = true
     }
   }
@@ -82,6 +82,13 @@ final class CategoriesVC: NSViewController {
   override func viewWillAppear() {
     super.viewWillAppear()
     fetchCategories()
+    configureWindow()
+  }
+  
+  private func configureWindow() {
+    AppDelegate.windowController?.backButton.title = .emptyString
+    AppDelegate.windowController?.backButton.action = nil
+    AppDelegate.windowController?.window?.title = "Categories"
   }
   
   private func configureObservers() {
@@ -106,7 +113,7 @@ final class CategoriesVC: NSViewController {
     return DataSource(
       collectionView: collectionView,
       itemProvider: { (collectionView, indexPath, category) in
-        guard let item = collectionView.makeItem(withIdentifier: CategoryItem.reuseIdentifier, for: indexPath) as? CategoryItem else { fatalError() }
+        guard let item = collectionView.makeItem(withIdentifier: .categoryItem, for: indexPath) as? CategoryItem else { fatalError() }
         item.category = category
         return item
       }
@@ -165,7 +172,11 @@ final class CategoriesVC: NSViewController {
 
 extension CategoriesVC: NSCollectionViewDelegate {
   func collectionView(_ collectionView: NSCollectionView, didSelectItemsAt indexPaths: Set<IndexPath>) {
+    guard let indexPath = indexPaths.first else { return }
+    let category = filteredCategories[indexPath.item]
+    let viewController = FilteredTransactionsVC(parent ?? self, previousTitle: "Categories", resource: .category(category))
     collectionView.deselectItems(at: indexPaths)
+    view.window?.contentViewController = .navigation(parent ?? self, to: viewController)
   }
 }
 

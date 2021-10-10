@@ -1,5 +1,6 @@
 import Cocoa
 import Alamofire
+import SwiftDate
 
 final class TransactionsVC: NSViewController {
   @IBOutlet weak var searchField: NSSearchField!
@@ -20,8 +21,9 @@ final class TransactionsVC: NSViewController {
   @IBOutlet weak var collectionView: NSCollectionView! {
     didSet {
       collectionView.dataSource = dataSource
-      collectionView.register(TransactionItem.nib, forItemWithIdentifier: TransactionItem.reuseIdentifier)
-      collectionView.collectionViewLayout = .listLayout
+      collectionView.register(.transactionItem, forItemWithIdentifier: .transactionItem)
+      collectionView.register(.dateSupplementaryView, forSupplementaryViewOfKind: NSCollectionView.elementKindSectionHeader, withIdentifier: .dateSupplementaryView)
+      collectionView.collectionViewLayout = .listHeaders
       collectionView.backgroundViewScrollsWithContent = true
     }
   }
@@ -36,13 +38,9 @@ final class TransactionsVC: NSViewController {
     showSettledOnly = sender.state == .on ? true : false
   }
   
-  private enum Section {
-    case main
-  }
+  private typealias DataSource = NSCollectionViewDiffableDataSource<SortedTransactionModel, TransactionCellModel>
   
-  private typealias DataSource = NSCollectionViewDiffableDataSource<Section, TransactionCellModel>
-  
-  private typealias Snapshot = NSDiffableDataSourceSnapshot<Section, TransactionCellModel>
+  private typealias Snapshot = NSDiffableDataSourceSnapshot<SortedTransactionModel, TransactionCellModel>
   
   private lazy var dataSource = makeDataSource()
   
@@ -90,17 +88,6 @@ final class TransactionsVC: NSViewController {
     }
   }
   
-  private func makeDataSource() -> DataSource {
-    return DataSource(
-      collectionView: collectionView,
-      itemProvider: { (collectionView, indexPath, transaction) in
-        guard let item = collectionView.makeItem(withIdentifier: TransactionItem.reuseIdentifier, for: indexPath) as? TransactionItem else { fatalError() }
-        item.transaction = transaction
-        return item
-      }
-    )
-  }
-  
   deinit {
     removeObservers()
   }
@@ -114,6 +101,13 @@ final class TransactionsVC: NSViewController {
   override func viewWillAppear() {
     super.viewWillAppear()
     fetchingTasks()
+    configureWindow()
+  }
+  
+  private func configureWindow() {
+    AppDelegate.windowController?.backButton.title = .emptyString
+    AppDelegate.windowController?.backButton.action = nil
+    AppDelegate.windowController?.window?.title = "Transactions"
   }
   
   private func configureObservers() {
@@ -155,12 +149,30 @@ final class TransactionsVC: NSViewController {
     fetchTransactions()
   }
   
+  private func makeDataSource() -> DataSource {
+    let dataSource = DataSource(
+      collectionView: collectionView,
+      itemProvider: { (collectionView, indexPath, transaction) in
+        guard let item = collectionView.makeItem(withIdentifier: .transactionItem, for: indexPath) as? TransactionItem else { fatalError() }
+        item.transaction = transaction
+        return item
+      }
+    )
+    dataSource.supplementaryViewProvider = { (collectionView, kind, indexPath) in
+      guard let view = collectionView.makeSupplementaryView(ofKind: kind, withIdentifier: .dateSupplementaryView, for: indexPath) as? DateSupplementaryView else { fatalError() }
+      view.label.stringValue = self.filteredTransactions.sortedTransactionModels[indexPath.section].id.toString(.date(.medium))
+      return view
+    }
+    return dataSource
+  }
+  
   private func applySnapshot(animate: Bool = true) {
     var snapshot = Snapshot()
-    snapshot.appendSections([.main])
-    snapshot.appendItems(filteredTransactions.transactionCellModels, toSection: .main)
     
-    if filteredTransactions.isEmpty && transactionsError.isEmpty {
+    snapshot.appendSections(filteredTransactions.sortedTransactionModels)
+    filteredTransactions.sortedTransactionModels.forEach { snapshot.appendItems($0.transactions, toSection: $0) }
+    
+    if snapshot.itemIdentifiers.isEmpty && transactionsError.isEmpty {
       if transactions.isEmpty && !noTransactions {
         collectionView.backgroundView = .loadingView(frame: collectionView.bounds, contentType: .transactions)
       } else {
@@ -208,12 +220,10 @@ final class TransactionsVC: NSViewController {
 extension TransactionsVC: NSCollectionViewDelegate {
   func collectionView(_ collectionView: NSCollectionView, didSelectItemsAt indexPaths: Set<IndexPath>) {
     guard let indexPath = indexPaths.first else { return }
-    let transaction = filteredTransactions[indexPath.item]
-    let viewController = TransactionDetailVC(parent ?? self, transaction: transaction)
+    let transaction = filteredTransactions.sortedTransactionCoreModels[indexPath.section].transactions[indexPath.item]
+    let viewController = TransactionDetailVC(parent ?? self, previousTitle: "Transactions", transaction: transaction)
     collectionView.deselectItems(at: indexPaths)
-    viewController.view.setFrameOrigin(NSPoint(x: 0, y: 0))
-    viewController.view.setFrameSize(view.frame.size)
-    view.window?.contentViewController = viewController
+    view.window?.contentViewController = .navigation(parent ?? self, to: viewController)
   }
 }
 

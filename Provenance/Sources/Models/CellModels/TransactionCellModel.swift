@@ -1,6 +1,6 @@
 import Foundation
 
-struct TransactionCellModel {
+struct TransactionCellModel: Identifiable {
   let id: String
   let transactionDescription: String
   let creationDate: String

@@ -15,10 +15,10 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <stackView distribution="fill" orientation="vertical" alignment="centerX" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5zJ-bn-PBq">
-                                <rect key="frame" x="20" y="228" width="410" height="52"/>
+                                <rect key="frame" x="20" y="258" width="410" height="22"/>
                                 <subviews>
                                     <searchField wantsLayer="YES" verticalHuggingPriority="750" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yn9-DA-Ngv">
-                                        <rect key="frame" x="0.0" y="30" width="410" height="22"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="410" height="22"/>
                                         <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" placeholderString="Search Accounts" usesSingleLineMode="YES" bezelStyle="round" id="klS-Vf-tMk">
                                             <font key="font" metaFont="system"/>
                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -28,8 +28,8 @@
                                             <outlet property="delegate" destination="bU7-R8-ocO" id="L17-Y6-xxM"/>
                                         </connections>
                                     </searchField>
-                                    <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="N7I-Cr-5OB">
-                                        <rect key="frame" x="104" y="-1" width="203" height="24"/>
+                                    <segmentedControl hidden="YES" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="N7I-Cr-5OB">
+                                        <rect key="frame" x="-2" y="-1" width="203" height="24"/>
                                         <segmentedCell key="cell" borderStyle="border" alignment="left" style="rounded" trackingMode="selectOne" id="Xiv-Sy-S7c">
                                             <font key="font" metaFont="system"/>
                                             <segments>
@@ -55,14 +55,14 @@
                                     <real value="3.4028234663852886e+38"/>
                                 </customSpacing>
                             </stackView>
-                            <scrollView wantsLayer="YES" borderType="none" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZDm-h1-GOe">
-                                <rect key="frame" x="0.0" y="0.0" width="450" height="220"/>
+                            <scrollView wantsLayer="YES" borderType="none" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZDm-h1-GOe">
+                                <rect key="frame" x="0.0" y="0.0" width="450" height="250"/>
                                 <clipView key="contentView" id="Otm-jW-uYT">
-                                    <rect key="frame" x="0.0" y="0.0" width="450" height="220"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="450" height="250"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <collectionView selectable="YES" id="7R7-21-HWW">
-                                            <rect key="frame" x="0.0" y="0.0" width="450" height="158"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="450" height="250"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                                             <collectionViewLayout key="collectionViewLayout" id="6w4-xI-50j"/>
                                             <color key="primaryBackgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -73,7 +73,7 @@
                                     </subviews>
                                 </clipView>
                                 <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="g1c-BT-yd3">
-                                    <rect key="frame" x="1" y="144" width="233" height="15"/>
+                                    <rect key="frame" x="-100" y="-100" width="233" height="15"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="Xhm-zN-WqC">

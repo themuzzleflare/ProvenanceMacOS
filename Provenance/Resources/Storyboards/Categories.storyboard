@@ -6,19 +6,19 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--CategoriesVC-->
+        <!--Categories-->
         <scene sceneID="PEd-7d-5j0">
             <objects>
-                <viewController storyboardIdentifier="CategoriesController" id="bU7-R8-ocO" customClass="CategoriesVC" customModule="Provenance" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Categories" storyboardIdentifier="CategoriesController" id="bU7-R8-ocO" customClass="CategoriesVC" customModule="Provenance" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" identifier="CategoriesView" id="tOy-S4-hL0">
                         <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <stackView distribution="fill" orientation="vertical" alignment="centerX" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WHV-1F-1qC">
-                                <rect key="frame" x="20" y="228" width="410" height="52"/>
+                                <rect key="frame" x="20" y="258" width="410" height="22"/>
                                 <subviews>
                                     <searchField wantsLayer="YES" verticalHuggingPriority="750" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E54-JT-d8z">
-                                        <rect key="frame" x="0.0" y="30" width="410" height="22"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="410" height="22"/>
                                         <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" placeholderString="Search Categories" usesSingleLineMode="YES" bezelStyle="round" id="QhK-6A-qHk">
                                             <font key="font" metaFont="system"/>
                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -28,8 +28,8 @@
                                             <outlet property="delegate" destination="bU7-R8-ocO" id="Zrw-zC-b9D"/>
                                         </connections>
                                     </searchField>
-                                    <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="S68-FM-IeW">
-                                        <rect key="frame" x="140" y="-1" width="131" height="24"/>
+                                    <segmentedControl hidden="YES" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="S68-FM-IeW">
+                                        <rect key="frame" x="-2" y="-1" width="131" height="24"/>
                                         <segmentedCell key="cell" borderStyle="border" alignment="left" style="rounded" trackingMode="selectOne" id="mbL-QP-Kgr">
                                             <font key="font" metaFont="system"/>
                                             <segments>
@@ -55,14 +55,14 @@
                                     <real value="3.4028234663852886e+38"/>
                                 </customSpacing>
                             </stackView>
-                            <scrollView wantsLayer="YES" borderType="none" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P3e-Ta-e8a">
-                                <rect key="frame" x="0.0" y="0.0" width="450" height="220"/>
+                            <scrollView wantsLayer="YES" borderType="none" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P3e-Ta-e8a">
+                                <rect key="frame" x="0.0" y="0.0" width="450" height="250"/>
                                 <clipView key="contentView" id="PfX-up-yrl">
-                                    <rect key="frame" x="0.0" y="0.0" width="450" height="220"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="450" height="250"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <collectionView selectable="YES" id="0KQ-vd-lFE">
-                                            <rect key="frame" x="0.0" y="0.0" width="450" height="158"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="450" height="250"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                                             <collectionViewLayout key="collectionViewLayout" id="Fwd-ss-ziw"/>
                                             <color key="primaryBackgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -73,7 +73,7 @@
                                     </subviews>
                                 </clipView>
                                 <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="6pr-Fu-nav">
-                                    <rect key="frame" x="1" y="144" width="233" height="15"/>
+                                    <rect key="frame" x="-100" y="-100" width="233" height="15"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="Sma-4r-FaF">

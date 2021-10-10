@@ -10,7 +10,7 @@
         <scene sceneID="rJb-V0-hdc">
             <objects>
                 <windowController storyboardIdentifier="PreferencesWindowController" id="yDD-OO-eVs" sceneMemberID="viewController">
-                    <window key="window" identifier="PreferencesWindow" title="Preferences" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="qzq-UP-fcF">
+                    <window key="window" identifier="preferencesWindow" title="Preferences" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="qzq-UP-fcF">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
                         <rect key="contentRect" x="163" y="197" width="480" height="270"/>
@@ -35,7 +35,7 @@
         <scene sceneID="xky-hd-Riw">
             <objects>
                 <viewController storyboardIdentifier="PreferencesViewController" id="xg4-LS-tat" customClass="PreferencesVC" customModule="Provenance" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" identifier="PreferencesView" id="3Oc-cD-94D">
+                    <view key="view" identifier="preferencesView" id="3Oc-cD-94D">
                         <rect key="frame" x="0.0" y="0.0" width="546" height="270"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>

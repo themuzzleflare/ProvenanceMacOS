@@ -1,11 +1,15 @@
 import Cocoa
 
-final class AccountItem: NSCollectionViewItem {
+final class AccountItem: CollectionViewItem {
   @IBOutlet weak var accountBalance: NSTextField!
   @IBOutlet weak var accountDisplayName: NSTextField!
   
-  static let reuseIdentifier = NSUserInterfaceItemIdentifier("accountItem")
-  static let nib = NSNib(nibNamed: "AccountItem", bundle: nil)
+  @IBAction func copyBalance(_ sender: NSMenuItem) {
+    NSPasteboard.general.setString(accountBalance.stringValue, forType: .string)
+  }
+  @IBAction func copyDisplayName(_ sender: NSMenuItem) {
+    NSPasteboard.general.setString(accountDisplayName.stringValue, forType: .string)
+  }
   
   var account: AccountCellModel? {
     didSet {
@@ -17,34 +21,19 @@ final class AccountItem: NSCollectionViewItem {
     }
   }
   
-  override var highlightState: NSCollectionViewItem.HighlightState {
-    didSet {
-      updateSelectionHighlighting()
-    }
-  }
-  
-  override var isSelected: Bool {
-    didSet {
-      updateSelectionHighlighting()
-    }
-  }
-  
   override func viewDidLoad() {
     super.viewDidLoad()
     configureView()
   }
   
   private func configureView() {
-    view.wantsLayer = true
-    view.layer?.borderColor = .separator
-    view.layer?.borderWidth = 0.5
+    view.layer?.cornerRadius = 10.0
   }
   
-  private func updateSelectionHighlighting() {
-    if !isViewLoaded { return }
-    let showAsHighlighted = (highlightState == .forSelection) ||
-    (isSelected && highlightState != .forDeselection) ||
-    (highlightState == .asDropTarget)
-    view.layer?.backgroundColor = showAsHighlighted ? .selectedControl : nil
+  override func updateSelectionHighlighting() {
+    guard isViewLoaded else { return }
+    super.updateSelectionHighlighting()
+    accountBalance.textColor = showAsHighlighted ? .selectedControlTextColor : .accentColor
+    accountDisplayName.textColor = showAsHighlighted ? .selectedControlTextColor : .labelColor
   }
 }

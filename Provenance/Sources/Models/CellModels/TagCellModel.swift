@@ -1,6 +1,6 @@
 import Foundation
 
-struct TagCellModel {
+struct TagCellModel: Identifiable {
   let id: String
   
   init(tag: TagResource) {

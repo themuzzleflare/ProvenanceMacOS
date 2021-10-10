@@ -2,14 +2,11 @@ import Cocoa
 import SwiftDate
 
 @main class AppDelegate: NSObject, NSApplicationDelegate {
-  static var pasteboard: NSPasteboard = {
-    let pasteboard = NSPasteboard.general
-    pasteboard.declareTypes([.string], owner: nil)
-    return pasteboard
-  }()
+  static var windowController: MainWC?
   
   func applicationDidFinishLaunching(_ aNotification: Notification) {
     SwiftDate.defaultRegion = .current
+    NSPasteboard.general.declareTypes([.string], owner: nil)
   }
   
   func applicationWillTerminate(_ aNotification: Notification) {

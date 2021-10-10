@@ -1,6 +1,6 @@
 import Foundation
 
-struct CategoryCellModel {
+struct CategoryCellModel: Identifiable {
   let id: String
   let name: String
   
