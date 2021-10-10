@@ -6,7 +6,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <customObject id="-2" userLabel="File's Owner" customClass="AttributeItem" customModule="Provenance" customModuleProvider="target"/>
+        <customObject id="-2" userLabel="File's Owner"/>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customView identifier="attributeItemView" id="Hz6-mo-xeY" customClass="CollectionItemView" customModule="Provenance" customModuleProvider="target">
@@ -26,7 +26,7 @@
                         </textField>
                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="KRP-f4-uz5">
                             <rect key="frame" x="279" y="13" width="39" height="18"/>
-                            <textFieldCell key="cell" lineBreakMode="clipping" selectable="YES" alignment="right" title="Label" id="kdd-wK-ho9">
+                            <textFieldCell key="cell" lineBreakMode="clipping" alignment="right" title="Label" id="kdd-wK-ho9">
                                 <font key="font" size="14" name="CircularStd-Book"/>
                                 <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -49,6 +49,9 @@
                 <constraint firstItem="Cc4-Ok-B1F" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="16" id="d33-iq-Kpi"/>
                 <constraint firstAttribute="bottom" secondItem="Cc4-Ok-B1F" secondAttribute="bottom" constant="13" id="nqr-Bu-7ne"/>
             </constraints>
+            <connections>
+                <outlet property="menu" destination="1ti-GP-Dr9" id="j8s-VL-JrA"/>
+            </connections>
             <point key="canvasLocation" x="73" y="52.5"/>
         </customView>
         <collectionViewItem nibName="AttributeItem" id="UMV-ba-LNO" customClass="AttributeItem" customModule="Provenance" customModuleProvider="target">
@@ -58,5 +61,19 @@
                 <outlet property="view" destination="Hz6-mo-xeY" id="qd7-oV-Nwt"/>
             </connections>
         </collectionViewItem>
+        <menu id="1ti-GP-Dr9">
+            <items>
+                <menuItem title="Copy" image="text.alignright" catalog="system" id="ryX-by-FDF">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="copyAttribute:" target="UMV-ba-LNO" id="8eX-kh-4Ez"/>
+                    </connections>
+                </menuItem>
+            </items>
+            <point key="canvasLocation" x="73" y="180"/>
+        </menu>
     </objects>
+    <resources>
+        <image name="text.alignright" catalog="system" width="16" height="13"/>
+    </resources>
 </document>

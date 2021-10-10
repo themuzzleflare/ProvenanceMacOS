@@ -4,6 +4,10 @@ final class AttributeItem: CollectionViewItem {
   @IBOutlet weak var leftLabel: NSTextField!
   @IBOutlet weak var rightLabel: NSTextField!
   
+  @IBAction func copyAttribute(_ sender: NSMenuItem) {
+    NSPasteboard.general.setString(rightLabel.stringValue, forType: .string)
+  }
+  
   var attribute: DetailItem? {
     didSet {
       guard isViewLoaded else { return }

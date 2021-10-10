@@ -1,6 +1,10 @@
 import Cocoa
 
 final class CategoryItem: CollectionViewItem {
+  @IBAction func copyCategoryName(_ sender: NSMenuItem) {
+    NSPasteboard.general.setString(textField?.stringValue ?? .emptyString, forType: .string)
+  }
+  
   var category: CategoryCellModel? {
     didSet {
       guard isViewLoaded else { return }
