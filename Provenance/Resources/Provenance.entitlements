@@ -6,7 +6,7 @@
 	<true/>
 	<key>com.apple.security.application-groups</key>
 	<array>
-		<string>$(TeamIdentifierPrefix)group.cloud.tavitian.provenance</string>
+		<string>$(TeamIdentifierPrefix)group.$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	</array>
 	<key>com.apple.security.files.user-selected.read-only</key>
 	<true/>

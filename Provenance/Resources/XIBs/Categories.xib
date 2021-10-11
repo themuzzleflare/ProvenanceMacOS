@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="19162" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="19162"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="CategoriesVC" customModule="Provenance" customModuleProvider="target">
+            <connections>
+                <outlet property="categoryTypeSegmentedControl" destination="47t-fI-bjY" id="MYA-VC-Y5Q"/>
+                <outlet property="collectionView" destination="rnq-Ha-Ff8" id="K1S-Vd-pTX"/>
+                <outlet property="view" destination="c22-O7-iKe" id="H7d-nR-IPS"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <customView id="c22-O7-iKe">
+            <rect key="frame" x="0.0" y="0.0" width="520" height="339"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <subviews>
+                <stackView distribution="fill" orientation="vertical" alignment="centerX" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hEL-vB-ZJv">
+                    <rect key="frame" x="20" y="319" width="480" height="0.0"/>
+                    <subviews>
+                        <segmentedControl hidden="YES" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="47t-fI-bjY">
+                            <rect key="frame" x="-2" y="-23" width="131" height="24"/>
+                            <segmentedCell key="cell" borderStyle="border" alignment="left" style="rounded" trackingMode="selectOne" id="ufV-lQ-Ltm">
+                                <font key="font" metaFont="system"/>
+                                <segments>
+                                    <segment label="Parent" width="61"/>
+                                    <segment label="Child" width="61" tag="1"/>
+                                </segments>
+                            </segmentedCell>
+                            <connections>
+                                <action selector="categoryTypeAction:" target="-2" id="opf-fu-n6y"/>
+                            </connections>
+                        </segmentedControl>
+                    </subviews>
+                    <visibilityPriorities>
+                        <integer value="1000"/>
+                    </visibilityPriorities>
+                    <customSpacing>
+                        <real value="3.4028234663852886e+38"/>
+                    </customSpacing>
+                </stackView>
+                <scrollView wantsLayer="YES" borderType="none" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8dS-p7-ktg">
+                    <rect key="frame" x="0.0" y="0.0" width="520" height="311"/>
+                    <clipView key="contentView" id="SlJ-ei-JlE">
+                        <rect key="frame" x="0.0" y="0.0" width="520" height="311"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView selectable="YES" id="rnq-Ha-Ff8">
+                                <rect key="frame" x="0.0" y="0.0" width="520" height="311"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
+                                <collectionViewLayout key="collectionViewLayout" id="Axk-VE-tMV"/>
+                                <color key="primaryBackgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                <connections>
+                                    <outlet property="delegate" destination="-2" id="faM-EV-EmO"/>
+                                </connections>
+                            </collectionView>
+                        </subviews>
+                    </clipView>
+                    <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="T8N-L1-I8m">
+                        <rect key="frame" x="-100" y="-100" width="233" height="15"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </scroller>
+                    <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="VfT-QH-2UB">
+                        <rect key="frame" x="465" y="0.0" width="15" height="242"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </scroller>
+                </scrollView>
+            </subviews>
+            <constraints>
+                <constraint firstItem="hEL-vB-ZJv" firstAttribute="top" secondItem="c22-O7-iKe" secondAttribute="top" constant="20" id="6PF-tA-1AI"/>
+                <constraint firstItem="8dS-p7-ktg" firstAttribute="top" secondItem="hEL-vB-ZJv" secondAttribute="bottom" constant="8" id="ONO-Lc-fwD"/>
+                <constraint firstItem="hEL-vB-ZJv" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" constant="20" id="Sy4-y2-hSN"/>
+                <constraint firstItem="8dS-p7-ktg" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" id="T3e-52-IZ6"/>
+                <constraint firstAttribute="trailing" secondItem="hEL-vB-ZJv" secondAttribute="trailing" constant="20" id="hjO-qf-9Aa"/>
+                <constraint firstAttribute="trailing" secondItem="8dS-p7-ktg" secondAttribute="trailing" id="hk9-cU-uai"/>
+                <constraint firstAttribute="bottom" secondItem="8dS-p7-ktg" secondAttribute="bottom" id="rSf-it-qXY"/>
+            </constraints>
+            <point key="canvasLocation" x="123" y="120.5"/>
+        </customView>
+    </objects>
+</document>

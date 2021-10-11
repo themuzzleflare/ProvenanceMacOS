@@ -1,10 +1,10 @@
 import AppKit
 
 struct CategoryResource: Codable, Identifiable {
-    /// The type of this resource: `categories`
+  /// The type of this resource: `categories`
   var type = "categories"
   
-    /// The unique identifier for this category. This is a human-readable but URL-safe value.
+  /// The unique identifier for this category. This is a human-readable but URL-safe value.
   var id: String
   
   var attributes: CategoryAttribute

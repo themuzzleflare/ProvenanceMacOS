@@ -2,7 +2,12 @@ import Cocoa
 import Alamofire
 
 final class FilteredTransactionsVC: NSViewController {
-  @IBOutlet weak var searchField: NSSearchField!
+  private lazy var searchField: NSSearchField = {
+    let field = NSSearchField()
+    field.delegate = self
+    field.placeholderString = "Search Transactions"
+    return field
+  }()
   
   @IBOutlet weak var collectionView: NSCollectionView! {
     didSet {
@@ -23,11 +28,13 @@ final class FilteredTransactionsVC: NSViewController {
     case main
   }
   
-  private typealias DataSource = NSCollectionViewDiffableDataSource<Section, TransactionCellModel>
+  private typealias DataSource = NSCollectionViewDiffableDataSource<Section, TransactionViewModel>
   
-  private typealias Snapshot = NSDiffableDataSourceSnapshot<Section, TransactionCellModel>
+  private typealias Snapshot = NSDiffableDataSourceSnapshot<Section, TransactionViewModel>
   
   private lazy var dataSource = makeDataSource()
+  
+  private lazy var toolbar = NSToolbar(self, type: .filteredTransactions)
   
   private var dateStyleObserver: NSKeyValueObservation?
   
@@ -73,9 +80,8 @@ final class FilteredTransactionsVC: NSViewController {
   }
   
   private func configureWindow() {
-    AppDelegate.windowController?.window?.title = resource.windowTitle
-    AppDelegate.windowController?.backButton.title = previousTitle
-    AppDelegate.windowController?.backButton.action = #selector(goBack)
+    AppDelegate.windowController?.window?.toolbar = toolbar
+    AppDelegate.windowController?.window?.title = resource.description
   }
   
   @objc private func goBack() {
@@ -117,8 +123,9 @@ final class FilteredTransactionsVC: NSViewController {
   
   private func applySnapshot(animate: Bool = true) {
     var snapshot = Snapshot()
+    
     snapshot.appendSections([.main])
-    snapshot.appendItems(filteredTransactions.transactionCellModels, toSection: .main)
+    snapshot.appendItems(filteredTransactions.transactionViewModels, toSection: .main)
     
     if filteredTransactions.isEmpty && transactionsError.isEmpty {
       if transactions.isEmpty && !noTransactions {
@@ -163,19 +170,42 @@ final class FilteredTransactionsVC: NSViewController {
   }
 }
 
-  // MARK: - NSCollectionViewDelegate
+// MARK: - NSToolbarDelegate
+
+extension FilteredTransactionsVC: NSToolbarDelegate {
+  func toolbar(_ toolbar: NSToolbar, itemForItemIdentifier itemIdentifier: NSToolbarItem.Identifier, willBeInsertedIntoToolbar flag: Bool) -> NSToolbarItem? {
+    switch itemIdentifier {
+    case .backButton:
+      return .backButton(title: previousTitle, action: #selector(goBack))
+    case .transactionsSearch:
+      return NSSearchToolbarItem(itemIdentifier: itemIdentifier, searchField: searchField)
+    default:
+      return nil
+    }
+  }
+  
+  func toolbarDefaultItemIdentifiers(_ toolbar: NSToolbar) -> [NSToolbarItem.Identifier] {
+    return [.backButton, .transactionsSearch]
+  }
+  
+  func toolbarAllowedItemIdentifiers(_ toolbar: NSToolbar) -> [NSToolbarItem.Identifier] {
+    return toolbarDefaultItemIdentifiers(toolbar)
+  }
+}
+
+// MARK: - NSCollectionViewDelegate
 
 extension FilteredTransactionsVC: NSCollectionViewDelegate {
   func collectionView(_ collectionView: NSCollectionView, didSelectItemsAt indexPaths: Set<IndexPath>) {
     guard let indexPath = indexPaths.first else { return }
     let transaction = filteredTransactions[indexPath.item]
-    let viewController = TransactionDetailVC(self, previousTitle: resource.windowTitle, transaction: transaction)
+    let viewController = TransactionDetailVC(self, previousTitle: resource.description, transaction: transaction)
     collectionView.deselectItems(at: indexPaths)
     view.window?.contentViewController = .navigation(self, to: viewController)
   }
 }
 
-  // MARK: - NSSearchFieldDelegate
+// MARK: - NSSearchFieldDelegate
 
 extension FilteredTransactionsVC: NSSearchFieldDelegate {
   func controlTextDidChange(_ obj: Notification) {

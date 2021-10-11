@@ -93,6 +93,10 @@ extension NSImage {
     return NSImage(systemName: "calendar.badge.clock")!
   }
   
+  static var chevronLeft: NSImage {
+    return NSImage(systemName: "chevron.left")!
+  }
+  
   static var chevronLeftSlashChevronRight: NSImage {
     return NSImage(systemName: "chevron.left.slash.chevron.right")!
   }

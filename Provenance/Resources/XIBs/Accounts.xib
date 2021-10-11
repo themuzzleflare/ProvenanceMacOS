@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="19162" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="19162"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="AccountsVC" customModule="Provenance" customModuleProvider="target">
+            <connections>
+                <outlet property="accountTypeSegmentedControl" destination="Zc8-DA-8Ta" id="oON-c9-9Yb"/>
+                <outlet property="collectionView" destination="YK8-w5-EN1" id="Ftp-qN-tWX"/>
+                <outlet property="view" destination="c22-O7-iKe" id="SGf-xE-J97"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <customView id="c22-O7-iKe">
+            <rect key="frame" x="0.0" y="0.0" width="480" height="501"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <subviews>
+                <stackView distribution="fill" orientation="vertical" alignment="centerX" spacing="0.0" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zYv-FL-keu">
+                    <rect key="frame" x="20" y="481" width="440" height="0.0"/>
+                    <subviews>
+                        <segmentedControl hidden="YES" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Zc8-DA-8Ta">
+                            <rect key="frame" x="-2" y="-23" width="209" height="24"/>
+                            <segmentedCell key="cell" borderStyle="border" alignment="left" style="rounded" trackingMode="selectOne" id="dvb-cL-gTg">
+                                <font key="font" metaFont="system"/>
+                                <segments>
+                                    <segment label="Transactional" toolTip="Filter by transactional account types." width="100"/>
+                                    <segment label="Saver" toolTip="Filter by saver account types." width="100" tag="1"/>
+                                </segments>
+                            </segmentedCell>
+                            <connections>
+                                <action selector="accountTypeAction:" target="-2" id="Yh4-4f-E0g"/>
+                            </connections>
+                        </segmentedControl>
+                    </subviews>
+                    <visibilityPriorities>
+                        <integer value="1000"/>
+                    </visibilityPriorities>
+                    <customSpacing>
+                        <real value="3.4028234663852886e+38"/>
+                    </customSpacing>
+                </stackView>
+                <scrollView wantsLayer="YES" borderType="none" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QtW-b0-9mG">
+                    <rect key="frame" x="0.0" y="0.0" width="480" height="473"/>
+                    <clipView key="contentView" id="2kd-n1-wtl">
+                        <rect key="frame" x="0.0" y="0.0" width="480" height="473"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView selectable="YES" id="YK8-w5-EN1">
+                                <rect key="frame" x="0.0" y="0.0" width="480" height="473"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
+                                <collectionViewLayout key="collectionViewLayout" id="wSx-qD-E2h"/>
+                                <color key="primaryBackgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                <connections>
+                                    <outlet property="delegate" destination="-2" id="6hf-pW-a2W"/>
+                                </connections>
+                            </collectionView>
+                        </subviews>
+                    </clipView>
+                    <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="vJT-8P-u6P">
+                        <rect key="frame" x="-100" y="-100" width="233" height="15"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </scroller>
+                    <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="up9-mh-Cef">
+                        <rect key="frame" x="234" y="1" width="15" height="143"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </scroller>
+                </scrollView>
+            </subviews>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="QtW-b0-9mG" secondAttribute="trailing" id="EZ6-fy-kVQ"/>
+                <constraint firstAttribute="trailing" secondItem="zYv-FL-keu" secondAttribute="trailing" constant="20" id="EdU-a0-Mac"/>
+                <constraint firstItem="QtW-b0-9mG" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" id="FWw-kL-ix9"/>
+                <constraint firstItem="QtW-b0-9mG" firstAttribute="top" secondItem="zYv-FL-keu" secondAttribute="bottom" constant="8" id="ISW-Y6-Vkz"/>
+                <constraint firstItem="zYv-FL-keu" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" constant="20" id="c4d-cF-ECQ"/>
+                <constraint firstItem="zYv-FL-keu" firstAttribute="top" secondItem="c22-O7-iKe" secondAttribute="top" constant="20" id="en8-d1-kKC"/>
+                <constraint firstAttribute="bottom" secondItem="QtW-b0-9mG" secondAttribute="bottom" id="jOT-lL-7zy"/>
+            </constraints>
+            <point key="canvasLocation" x="-32" y="-16.5"/>
+        </customView>
+    </objects>
+</document>

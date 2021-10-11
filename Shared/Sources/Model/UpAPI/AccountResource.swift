@@ -1,10 +1,10 @@
 import AppKit
 
 struct AccountResource: Codable, Identifiable {
-    /// The type of this resource: `accounts`
+  /// The type of this resource: `accounts`
   var type = "accounts"
   
-    /// The unique identifier for this account.
+  /// The unique identifier for this account.
   var id: String
   
   var attributes: AccountAttribute

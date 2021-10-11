@@ -1,10 +1,10 @@
 import AppKit
 
 struct TransactionResource: Codable, Identifiable {
-    /// The type of this resource: `transactions`
+  /// The type of this resource: `transactions`
   var type = "transactions"
   
-    /// The unique identifier for this transaction.
+  /// The unique identifier for this transaction.
   var id: String
   
   var attributes: TransactionAttribute

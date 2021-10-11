@@ -2,7 +2,12 @@ import Cocoa
 import Alamofire
 
 final class AccountsVC: NSViewController {
-  @IBOutlet weak var searchField: NSSearchField!
+  private lazy var searchField: NSSearchField = {
+    let field = NSSearchField()
+    field.delegate = self
+    field.placeholderString = "Search Accounts"
+    return field
+  }()
   
   @IBOutlet weak var collectionView: NSCollectionView! {
     didSet {
@@ -32,11 +37,13 @@ final class AccountsVC: NSViewController {
     case main
   }
   
-  private typealias DataSource = NSCollectionViewDiffableDataSource<Section, AccountCellModel>
+  private typealias DataSource = NSCollectionViewDiffableDataSource<Section, AccountViewModel>
   
-  private typealias Snapshot = NSDiffableDataSourceSnapshot<Section, AccountCellModel>
+  private typealias Snapshot = NSDiffableDataSourceSnapshot<Section, AccountViewModel>
   
   private lazy var dataSource = makeDataSource()
+  
+  private lazy var toolbar = NSToolbar(self, type: .accounts)
   
   private var accountFilter: AccountTypeOptionEnum = ProvenanceApp.userDefaults.appAccountFilter {
     didSet {
@@ -69,8 +76,16 @@ final class AccountsVC: NSViewController {
     return accounts.filtered(filter: accountFilter, searchField: searchField)
   }
   
+  override init(nibName nibNameOrNil: NSNib.Name?, bundle nibBundleOrNil: Bundle?) {
+    super.init(nibName: "Accounts", bundle: nil)
+  }
+  
   deinit {
     removeObservers()
+  }
+  
+  required init?(coder: NSCoder) {
+    fatalError("Not implemented")
   }
   
   override func viewDidLoad() {
@@ -86,8 +101,7 @@ final class AccountsVC: NSViewController {
   }
   
   private func configureWindow() {
-    AppDelegate.windowController?.backButton.title = .emptyString
-    AppDelegate.windowController?.backButton.action = nil
+    AppDelegate.windowController?.window?.toolbar = toolbar
     AppDelegate.windowController?.window?.title = "Accounts"
   }
   
@@ -123,7 +137,7 @@ final class AccountsVC: NSViewController {
   private func applySnapshot(animate: Bool = true) {
     var snapshot = Snapshot()
     snapshot.appendSections([.main])
-    snapshot.appendItems(filteredAccounts.accountCellModels, toSection: .main)
+    snapshot.appendItems(filteredAccounts.accountViewModels, toSection: .main)
     
     if filteredAccounts.isEmpty && accountsError.isEmpty {
       if accounts.isEmpty && !noAccounts {
@@ -168,7 +182,28 @@ final class AccountsVC: NSViewController {
   }
 }
 
-  // MARK: - NSCollectionViewDelegate
+// MARK: - NSToolbarDelegate
+
+extension AccountsVC: NSToolbarDelegate {
+  func toolbar(_ toolbar: NSToolbar, itemForItemIdentifier itemIdentifier: NSToolbarItem.Identifier, willBeInsertedIntoToolbar flag: Bool) -> NSToolbarItem? {
+    switch itemIdentifier {
+    case .accountsSearch:
+      return NSSearchToolbarItem(itemIdentifier: itemIdentifier, searchField: searchField)
+    default:
+      return nil
+    }
+  }
+  
+  func toolbarDefaultItemIdentifiers(_ toolbar: NSToolbar) -> [NSToolbarItem.Identifier] {
+    return [.accountsSearch]
+  }
+  
+  func toolbarAllowedItemIdentifiers(_ toolbar: NSToolbar) -> [NSToolbarItem.Identifier] {
+    return toolbarDefaultItemIdentifiers(toolbar)
+  }
+}
+
+// MARK: - NSCollectionViewDelegate
 
 extension AccountsVC: NSCollectionViewDelegate {
   func collectionView(_ collectionView: NSCollectionView, didSelectItemsAt indexPaths: Set<IndexPath>) {
@@ -180,7 +215,7 @@ extension AccountsVC: NSCollectionViewDelegate {
   }
 }
 
-  // MARK: - NSSearchFieldDelegate
+// MARK: - NSSearchFieldDelegate
 
 extension AccountsVC: NSSearchFieldDelegate {
   func controlTextDidChange(_ obj: Notification) {

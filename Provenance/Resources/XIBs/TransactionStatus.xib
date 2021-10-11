@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="19162" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="19162"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="TransactionStatusVC" customModule="Provenance" customModuleProvider="target">
+            <connections>
+                <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <customView id="Hz6-mo-xeY">
+            <rect key="frame" x="0.0" y="0.0" width="480" height="272"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <subviews>
+                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="3mY-94-Lde">
+                    <rect key="frame" x="16" y="247" width="15" height="15"/>
+                    <buttonCell key="cell" type="bevel" bezelStyle="rounded" image="x.circle.fill" catalog="system" imagePosition="only" alignment="center" inset="2" id="EDo-PH-7R3">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system"/>
+                        <string key="keyEquivalent" base64-UTF8="YES">
+Gw
+</string>
+                    </buttonCell>
+                    <color key="contentTintColor" name="systemRedColor" catalog="System" colorSpace="catalog"/>
+                    <connections>
+                        <action selector="dismissAction:" target="-2" id="G3v-pV-mgp"/>
+                    </connections>
+                </button>
+                <stackView distribution="fill" orientation="vertical" alignment="centerX" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uVc-F8-6z2">
+                    <rect key="frame" x="200" y="112" width="81" height="48"/>
+                    <subviews>
+                        <stackView distribution="fill" orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Pjt-lb-jVf">
+                            <rect key="frame" x="9" y="28" width="63" height="20"/>
+                            <subviews>
+                                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="X36-uD-7cy">
+                                    <rect key="frame" x="0.0" y="1" width="20" height="20"/>
+                                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="lMW-hH-jZi">
+                                        <imageReference key="image" image="clock" catalog="system" symbolScale="large"/>
+                                    </imageCell>
+                                    <color key="contentTintColor" name="systemYellowColor" catalog="System" colorSpace="catalog"/>
+                                </imageView>
+                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="tI5-Bc-VHO">
+                                    <rect key="frame" x="26" y="0.0" width="39" height="20"/>
+                                    <textFieldCell key="cell" lineBreakMode="clipping" title="Held" id="51j-6G-zhN">
+                                        <font key="font" size="16" name="CircularStd-Medium"/>
+                                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                    </textFieldCell>
+                                </textField>
+                            </subviews>
+                            <visibilityPriorities>
+                                <integer value="1000"/>
+                                <integer value="1000"/>
+                            </visibilityPriorities>
+                            <customSpacing>
+                                <real value="3.4028234663852886e+38"/>
+                                <real value="3.4028234663852886e+38"/>
+                            </customSpacing>
+                        </stackView>
+                        <stackView distribution="fill" orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="o7r-mD-f3f">
+                            <rect key="frame" x="0.0" y="0.0" width="81" height="20"/>
+                            <subviews>
+                                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="VcP-wt-eCB">
+                                    <rect key="frame" x="0.0" y="1" width="20" height="20"/>
+                                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="lRU-jn-sDR">
+                                        <imageReference key="image" image="checkmark.circle" catalog="system" symbolScale="large"/>
+                                    </imageCell>
+                                    <color key="contentTintColor" name="systemGreenColor" catalog="System" colorSpace="catalog"/>
+                                </imageView>
+                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="klf-LE-4Xx">
+                                    <rect key="frame" x="26" y="0.0" width="57" height="20"/>
+                                    <textFieldCell key="cell" lineBreakMode="clipping" title="Settled" id="KYw-FJ-myP">
+                                        <font key="font" size="16" name="CircularStd-Medium"/>
+                                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                    </textFieldCell>
+                                </textField>
+                            </subviews>
+                            <visibilityPriorities>
+                                <integer value="1000"/>
+                                <integer value="1000"/>
+                            </visibilityPriorities>
+                            <customSpacing>
+                                <real value="3.4028234663852886e+38"/>
+                                <real value="3.4028234663852886e+38"/>
+                            </customSpacing>
+                        </stackView>
+                    </subviews>
+                    <visibilityPriorities>
+                        <integer value="1000"/>
+                        <integer value="1000"/>
+                    </visibilityPriorities>
+                    <customSpacing>
+                        <real value="3.4028234663852886e+38"/>
+                        <real value="3.4028234663852886e+38"/>
+                    </customSpacing>
+                </stackView>
+            </subviews>
+            <constraints>
+                <constraint firstItem="3mY-94-Lde" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="13" id="AuZ-ZW-bf2"/>
+                <constraint firstItem="uVc-F8-6z2" firstAttribute="centerY" secondItem="Hz6-mo-xeY" secondAttribute="centerY" id="aGl-08-8IQ"/>
+                <constraint firstItem="3mY-94-Lde" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="16" id="ic7-md-7FX"/>
+                <constraint firstItem="uVc-F8-6z2" firstAttribute="centerX" secondItem="Hz6-mo-xeY" secondAttribute="centerX" id="t3C-Yy-Cng"/>
+            </constraints>
+            <point key="canvasLocation" x="139" y="114"/>
+        </customView>
+    </objects>
+    <resources>
+        <image name="checkmark.circle" catalog="system" width="20" height="20"/>
+        <image name="clock" catalog="system" width="20" height="20"/>
+        <image name="x.circle.fill" catalog="system" width="15" height="15"/>
+    </resources>
+</document>

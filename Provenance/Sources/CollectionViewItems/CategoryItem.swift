@@ -5,7 +5,7 @@ final class CategoryItem: CollectionViewItem {
     NSPasteboard.general.setString(textField?.stringValue ?? .emptyString, forType: .string)
   }
   
-  var category: CategoryCellModel? {
+  var category: CategoryViewModel? {
     didSet {
       guard isViewLoaded else { return }
       if let category = category {

@@ -3,46 +3,44 @@ import Alamofire
 import SwiftDate
 
 final class TransactionsVC: NSViewController {
-  @IBOutlet weak var searchField: NSSearchField!
+  private lazy var searchField: NSSearchField = {
+    let field = NSSearchField()
+    field.delegate = self
+    field.placeholderString = "Search Transactions"
+    return field
+  }()
   
-  @IBOutlet weak var categoryPopupButton: NSPopUpButton! {
-    didSet {
-      categoryPopupButton.addItems(withTitles: TransactionCategory.allCases.map { $0.name })
-      categoryPopupButton.selectItem(withTitle: categoryFilter.name)
-    }
-  }
-  
-  @IBOutlet weak var settledOnlyCheckmark: NSButton! {
-    didSet {
-      settledOnlyCheckmark.state = showSettledOnly ? .on : .off
-    }
-  }
+  private lazy var categoryPopupButton: NSPopUpButton = {
+    let button = NSPopUpButton()
+    button.addItems(withTitles: TransactionCategory.allCases.names)
+    button.selectItem(withTitle: categoryFilter.description)
+    button.action = #selector(categoryButtonAction)
+    return button
+  }()
   
   @IBOutlet weak var collectionView: NSCollectionView! {
     didSet {
       collectionView.dataSource = dataSource
       collectionView.register(.transactionItem, forItemWithIdentifier: .transactionItem)
       collectionView.register(.dateSupplementaryView, forSupplementaryViewOfKind: NSCollectionView.elementKindSectionHeader, withIdentifier: .dateSupplementaryView)
-      collectionView.collectionViewLayout = .listHeaders
+      collectionView.collectionViewLayout = .listPinnedHeaders
       collectionView.backgroundViewScrollsWithContent = true
     }
   }
   
-  @IBAction func categoryButtonAction(_ sender: NSPopUpButton) {
-    if let value = TransactionCategory.allCases.first(where: { $0.name == sender.titleOfSelectedItem }) {
+  @objc private func categoryButtonAction() {
+    if let value = TransactionCategory.allCases.first(where: { $0.description == categoryPopupButton.titleOfSelectedItem }) {
       categoryFilter = value
     }
   }
   
-  @IBAction func settledOnlyAction(_ sender: NSButton) {
-    showSettledOnly = sender.state == .on ? true : false
-  }
+  private typealias DataSource = NSCollectionViewDiffableDataSource<SortedTransactionModel, TransactionViewModel>
   
-  private typealias DataSource = NSCollectionViewDiffableDataSource<SortedTransactionModel, TransactionCellModel>
-  
-  private typealias Snapshot = NSDiffableDataSourceSnapshot<SortedTransactionModel, TransactionCellModel>
+  private typealias Snapshot = NSDiffableDataSourceSnapshot<SortedTransactionModel, TransactionViewModel>
   
   private lazy var dataSource = makeDataSource()
+  
+  private lazy var toolbar = NSToolbar(self, type: .transactions)
   
   private var apiKeyObserver: NSKeyValueObservation?
   
@@ -88,8 +86,16 @@ final class TransactionsVC: NSViewController {
     }
   }
   
+  override init(nibName nibNameOrNil: NSNib.Name?, bundle nibBundleOrNil: Bundle?) {
+    super.init(nibName: "Transactions", bundle: nil)
+  }
+  
   deinit {
     removeObservers()
+  }
+  
+  required init?(coder: NSCoder) {
+    fatalError("Not implemented")
   }
   
   override func viewDidLoad() {
@@ -105,9 +111,9 @@ final class TransactionsVC: NSViewController {
   }
   
   private func configureWindow() {
-    AppDelegate.windowController?.backButton.title = .emptyString
-    AppDelegate.windowController?.backButton.action = nil
+    AppDelegate.windowController?.window?.toolbar = toolbar
     AppDelegate.windowController?.window?.title = "Transactions"
+    toolbar.selectedItemIdentifier = showSettledOnly ? .settledOnly : nil
   }
   
   private func configureObservers() {
@@ -213,9 +219,43 @@ final class TransactionsVC: NSViewController {
     transactionsError = error.errorDescription ?? error.localizedDescription
     transactions.removeAll()
   }
+  
+  @objc private func settledOnlyToolbarAction() {
+    showSettledOnly.toggle()
+    toolbar.selectedItemIdentifier = showSettledOnly ? .settledOnly : nil
+  }
 }
 
-  // MARK: - NSCollectionViewDelegate
+// MARK: - NSToolbarDelegate
+
+extension TransactionsVC: NSToolbarDelegate {
+  func toolbar(_ toolbar: NSToolbar, itemForItemIdentifier itemIdentifier: NSToolbarItem.Identifier, willBeInsertedIntoToolbar flag: Bool) -> NSToolbarItem? {
+    switch itemIdentifier {
+    case .categoryFilter:
+      return NSToolbarItem(itemIdentifier: itemIdentifier, view: categoryPopupButton)
+    case .settledOnly:
+      return .settledOnlyButton(action: #selector(settledOnlyToolbarAction))
+    case .transactionsSearch:
+      return NSSearchToolbarItem(itemIdentifier: itemIdentifier, searchField: searchField)
+    default:
+      return nil
+    }
+  }
+  
+  func toolbarDefaultItemIdentifiers(_ toolbar: NSToolbar) -> [NSToolbarItem.Identifier] {
+    return [.categoryFilter, .settledOnly, .flexibleSpace, .transactionsSearch]
+  }
+  
+  func toolbarSelectableItemIdentifiers(_ toolbar: NSToolbar) -> [NSToolbarItem.Identifier] {
+    return [.settledOnly]
+  }
+  
+  func toolbarAllowedItemIdentifiers(_ toolbar: NSToolbar) -> [NSToolbarItem.Identifier] {
+    return toolbarDefaultItemIdentifiers(toolbar)
+  }
+}
+
+// MARK: - NSCollectionViewDelegate
 
 extension TransactionsVC: NSCollectionViewDelegate {
   func collectionView(_ collectionView: NSCollectionView, didSelectItemsAt indexPaths: Set<IndexPath>) {
@@ -227,7 +267,7 @@ extension TransactionsVC: NSCollectionViewDelegate {
   }
 }
 
-  // MARK: - NSSearchFieldDelegate
+// MARK: - NSSearchFieldDelegate
 
 extension TransactionsVC: NSSearchFieldDelegate {
   func controlTextDidChange(_ obj: Notification) {

@@ -12,11 +12,13 @@ import SwiftDate
   func applicationWillTerminate(_ aNotification: Notification) {
   }
   
-  func applicationSupportsSecureRestorableState(_ app: NSApplication) -> Bool {
-    return true
+  func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows flag: Bool) -> Bool {
+    if flag { return true }
+    AppDelegate.windowController?.window?.makeKeyAndOrderFront(self)
+    return false
   }
   
-  func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
+  func applicationSupportsSecureRestorableState(_ app: NSApplication) -> Bool {
     return true
   }
 }

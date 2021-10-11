@@ -26,6 +26,8 @@ final class TransactionDetailVC: NSViewController {
   
   private lazy var dataSource = makeDataSource()
   
+  private lazy var toolbar = NSToolbar(self, type: .transactionDetail)
+  
   private var dateStyleObserver: NSKeyValueObservation?
   
   private var filteredSections: [DetailSection] {
@@ -90,9 +92,8 @@ final class TransactionDetailVC: NSViewController {
   }
   
   private func configureWindow() {
+    AppDelegate.windowController?.window?.toolbar = toolbar
     AppDelegate.windowController?.window?.title = transaction.attributes.description
-    AppDelegate.windowController?.backButton.title = previousTitle
-    AppDelegate.windowController?.backButton.action = #selector(goBack)
   }
   
   @objc private func goBack() {
@@ -204,9 +205,36 @@ final class TransactionDetailVC: NSViewController {
   
   private func display(_ error: AFError) {
   }
+  
+  @objc private func openTransactionStatusView() {
+    presentAsSheet(TransactionStatusVC())
+  }
 }
 
-  // MARK: - NSCollectionViewDelegate
+// MARK: - NSToolbarDelegate
+
+extension TransactionDetailVC: NSToolbarDelegate {
+  func toolbar(_ toolbar: NSToolbar, itemForItemIdentifier itemIdentifier: NSToolbarItem.Identifier, willBeInsertedIntoToolbar flag: Bool) -> NSToolbarItem? {
+    switch itemIdentifier {
+    case .backButton:
+      return .backButton(title: previousTitle, action: #selector(goBack))
+    case .transactionStatus:
+      return .transactionStatusIcon(status: transaction.attributes.status, action: #selector(openTransactionStatusView))
+    default:
+      return nil
+    }
+  }
+  
+  func toolbarDefaultItemIdentifiers(_ toolbar: NSToolbar) -> [NSToolbarItem.Identifier] {
+    return [.backButton, .transactionStatus]
+  }
+  
+  func toolbarAllowedItemIdentifiers(_ toolbar: NSToolbar) -> [NSToolbarItem.Identifier] {
+    return toolbarDefaultItemIdentifiers(toolbar)
+  }
+}
+
+// MARK: - NSCollectionViewDelegate
 
 extension TransactionDetailVC: NSCollectionViewDelegate {
   func collectionView(_ collectionView: NSCollectionView, didSelectItemsAt indexPaths: Set<IndexPath>) {

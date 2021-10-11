@@ -1,10 +1,10 @@
 import Foundation
 
 enum ContentType: Int {
-  case transactions = 0
-  case accounts = 1
-  case tags = 2
-  case categories = 3
+  case transactions
+  case accounts
+  case tags
+  case categories
 }
 
 extension ContentType {

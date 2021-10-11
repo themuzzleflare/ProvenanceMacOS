@@ -11,7 +11,7 @@ final class AccountItem: CollectionViewItem {
     NSPasteboard.general.setString(accountDisplayName.stringValue, forType: .string)
   }
   
-  var account: AccountCellModel? {
+  var account: AccountViewModel? {
     didSet {
       guard isViewLoaded else { return }
       if let account = account {

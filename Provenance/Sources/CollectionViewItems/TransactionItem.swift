@@ -15,7 +15,7 @@ final class TransactionItem: CollectionViewItem {
     NSPasteboard.general.setString(transactionAmount.stringValue, forType: .string)
   }
   
-  var transaction: TransactionCellModel? {
+  var transaction: TransactionViewModel? {
     didSet {
       guard isViewLoaded else { return }
       if let transaction = transaction {

@@ -5,7 +5,7 @@ final class TagItem: CollectionViewItem {
     NSPasteboard.general.setString(textField?.stringValue ?? .emptyString, forType: .string)
   }
   
-  var tag: TagCellModel? {
+  var tag: TagViewModel? {
     didSet {
       guard isViewLoaded else { return }
       if let tag = tag {

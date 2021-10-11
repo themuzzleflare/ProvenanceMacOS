@@ -12,7 +12,7 @@
 			<key>INEnumGeneratesHeader</key>
 			<true/>
 			<key>INEnumName</key>
-			<string>Status</string>
+			<string>StatusEnum</string>
 			<key>INEnumType</key>
 			<string>Regular</string>
 			<key>INEnumValues</key>
@@ -65,7 +65,7 @@
 			<key>INEnumGeneratesHeader</key>
 			<true/>
 			<key>INEnumName</key>
-			<string>DateStyle</string>
+			<string>DateStyleEnum</string>
 			<key>INEnumType</key>
 			<string>Regular</string>
 			<key>INEnumValues</key>
@@ -118,7 +118,7 @@
 			<key>INEnumGeneratesHeader</key>
 			<true/>
 			<key>INEnumName</key>
-			<string>TransactionColour</string>
+			<string>TransactionColourEnum</string>
 			<key>INEnumType</key>
 			<string>Regular</string>
 			<key>INEnumValues</key>
@@ -159,7 +159,7 @@
 	<key>INIntentDefinitionNamespace</key>
 	<string>0x5oXc</string>
 	<key>INIntentDefinitionSystemVersion</key>
-	<string>21A5506j</string>
+	<string>21A5543b</string>
 	<key>INIntentDefinitionToolsBuildVersion</key>
 	<string>13A233</string>
 	<key>INIntentDefinitionToolsVersion</key>
@@ -294,7 +294,7 @@
 					<key>INIntentParameterDisplayPriority</key>
 					<integer>3</integer>
 					<key>INIntentParameterEnumType</key>
-					<string>Status</string>
+					<string>StatusEnum</string>
 					<key>INIntentParameterEnumTypeNamespace</key>
 					<string>0x5oXc</string>
 					<key>INIntentParameterMetadata</key>
@@ -685,7 +685,7 @@
 					<key>INIntentParameterDisplayPriority</key>
 					<integer>1</integer>
 					<key>INIntentParameterEnumType</key>
-					<string>DateStyle</string>
+					<string>DateStyleEnum</string>
 					<key>INIntentParameterEnumTypeNamespace</key>
 					<string>0x5oXc</string>
 					<key>INIntentParameterMetadata</key>
@@ -1535,7 +1535,7 @@
 					<key>INTypePropertyDisplayPriority</key>
 					<integer>8</integer>
 					<key>INTypePropertyEnumType</key>
-					<string>TransactionColour</string>
+					<string>TransactionColourEnum</string>
 					<key>INTypePropertyEnumTypeNamespace</key>
 					<string>0x5oXc</string>
 					<key>INTypePropertyName</key>

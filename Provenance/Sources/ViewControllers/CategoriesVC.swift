@@ -2,7 +2,12 @@ import Cocoa
 import Alamofire
 
 final class CategoriesVC: NSViewController {
-  @IBOutlet weak var searchField: NSSearchField!
+  private lazy var searchField: NSSearchField = {
+    let field = NSSearchField()
+    field.delegate = self
+    field.placeholderString = "Search Categories"
+    return field
+  }()
   
   @IBOutlet weak var collectionView: NSCollectionView! {
     didSet {
@@ -32,11 +37,13 @@ final class CategoriesVC: NSViewController {
     case main
   }
   
-  private typealias DataSource = NSCollectionViewDiffableDataSource<Section, CategoryCellModel>
+  private typealias DataSource = NSCollectionViewDiffableDataSource<Section, CategoryViewModel>
   
-  private typealias Snapshot = NSDiffableDataSourceSnapshot<Section, CategoryCellModel>
+  private typealias Snapshot = NSDiffableDataSourceSnapshot<Section, CategoryViewModel>
   
   private lazy var dataSource = makeDataSource()
+  
+  private lazy var toolbar = NSToolbar(self, type: .transactions)
   
   private var categoryFilter: CategoryTypeEnum = ProvenanceApp.userDefaults.appCategoryFilter {
     didSet {
@@ -69,8 +76,16 @@ final class CategoriesVC: NSViewController {
     return categories.filtered(filter: categoryFilter, searchField: searchField)
   }
   
+  override init(nibName nibNameOrNil: NSNib.Name?, bundle nibBundleOrNil: Bundle?) {
+    super.init(nibName: "Categories", bundle: nil)
+  }
+  
   deinit {
     removeObservers()
+  }
+  
+  required init?(coder: NSCoder) {
+    fatalError("Not implemented")
   }
   
   override func viewDidLoad() {
@@ -86,8 +101,7 @@ final class CategoriesVC: NSViewController {
   }
   
   private func configureWindow() {
-    AppDelegate.windowController?.backButton.title = .emptyString
-    AppDelegate.windowController?.backButton.action = nil
+    AppDelegate.windowController?.window?.toolbar = toolbar
     AppDelegate.windowController?.window?.title = "Categories"
   }
   
@@ -123,7 +137,7 @@ final class CategoriesVC: NSViewController {
   private func applySnapshot(animate: Bool = true) {
     var snapshot = Snapshot()
     snapshot.appendSections([.main])
-    snapshot.appendItems(filteredCategories.categoryCellModels, toSection: .main)
+    snapshot.appendItems(filteredCategories.categoryViewModels, toSection: .main)
     
     if filteredCategories.isEmpty && categoriesError.isEmpty {
       if categories.isEmpty && !noCategories {
@@ -168,7 +182,28 @@ final class CategoriesVC: NSViewController {
   }
 }
 
-  // MARK: - NSCollectionViewDelegate
+// MARK: - NSToolbarDelegate
+
+extension CategoriesVC: NSToolbarDelegate {
+  func toolbar(_ toolbar: NSToolbar, itemForItemIdentifier itemIdentifier: NSToolbarItem.Identifier, willBeInsertedIntoToolbar flag: Bool) -> NSToolbarItem? {
+    switch itemIdentifier {
+    case .categoriesSearch:
+      return NSSearchToolbarItem(itemIdentifier: itemIdentifier, searchField: searchField)
+    default:
+      return nil
+    }
+  }
+  
+  func toolbarDefaultItemIdentifiers(_ toolbar: NSToolbar) -> [NSToolbarItem.Identifier] {
+    return [.categoriesSearch]
+  }
+  
+  func toolbarAllowedItemIdentifiers(_ toolbar: NSToolbar) -> [NSToolbarItem.Identifier] {
+    return toolbarDefaultItemIdentifiers(toolbar)
+  }
+}
+
+// MARK: - NSCollectionViewDelegate
 
 extension CategoriesVC: NSCollectionViewDelegate {
   func collectionView(_ collectionView: NSCollectionView, didSelectItemsAt indexPaths: Set<IndexPath>) {
@@ -180,7 +215,7 @@ extension CategoriesVC: NSCollectionViewDelegate {
   }
 }
 
-  // MARK: - NSSearchFieldDelegate
+// MARK: - NSSearchFieldDelegate
 
 extension CategoriesVC: NSSearchFieldDelegate {
   func controlTextDidChange(_ obj: Notification) {

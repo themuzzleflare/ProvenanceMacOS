@@ -2,27 +2,27 @@ import Foundation
 import CoreGraphics
 
 extension Int {
-    /// NSNumber.
+  /// NSNumber.
   var nsNumber: NSNumber {
     return NSNumber(value: self)
   }
   
-    /// UInt.
+  /// UInt.
   var uInt: UInt {
     return UInt(self)
   }
   
-    /// Double.
+  /// Double.
   var double: Double {
     return Double(self)
   }
   
-    /// Float.
+  /// Float.
   var float: Float {
     return Float(self)
   }
   
-    /// CGFloat.
+  /// CGFloat.
   var cgFloat: CGFloat {
     return CGFloat(self)
   }

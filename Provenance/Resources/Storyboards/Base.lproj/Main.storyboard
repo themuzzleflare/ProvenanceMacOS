@@ -3,7 +3,6 @@
     <dependencies>
         <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="19162"/>
-        <capability name="Image references" minToolsVersion="12.0"/>
     </dependencies>
     <scenes>
         <!--Application-->
@@ -358,7 +357,7 @@
                 <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="61" y="-68"/>
+            <point key="canvasLocation" x="67" y="-95"/>
         </scene>
         <!--PreferencesWindowController-->
         <scene sceneID="AIX-ph-C7C">
@@ -366,36 +365,23 @@
                 <controllerPlaceholder storyboardName="Preferences" referencedIdentifier="PreferencesWindowController" id="B7j-VN-KOX" sceneMemberID="viewController"/>
                 <customObject id="83g-8r-TV8" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="543" y="-68"/>
+            <point key="canvasLocation" x="453" y="-95"/>
         </scene>
         <!--Window Controller-->
         <scene sceneID="R2V-B0-nI4">
             <objects>
                 <windowController storyboardIdentifier="MainWindowController" id="B8D-0N-5wS" customClass="MainWC" customModule="Provenance" customModuleProvider="target" sceneMemberID="viewController">
-                    <window key="window" identifier="MainWindow" title="Provenance" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" tabbingMode="disallowed" toolbarStyle="unified" id="IQv-IB-iLA">
+                    <window key="window" identifier="MainWindow" title="Provenance" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" tabbingMode="disallowed" id="IQv-IB-iLA">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
                         <rect key="contentRect" x="196" y="240" width="480" height="270"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1055"/>
-                        <toolbar key="toolbar" implicitIdentifier="B6B9F7CA-6215-48BD-BB50-C75F76A038B6" explicitIdentifier="mainToolbar" autosavesConfiguration="NO" allowsUserCustomization="NO" displayMode="iconOnly" sizeMode="regular" id="klD-6E-q9V">
-                            <allowedToolbarItems>
-                                <toolbarItem implicitItemIdentifier="5941D195-1539-41D1-889B-BD1BF279A58C" explicitItemIdentifier="backButton" label="Back" paletteLabel="Back" navigational="YES" id="1KY-uW-yVC">
-                                    <imageReference key="image" image="NSGoBackTemplate" symbolScale="default"/>
-                                    <size key="minSize" width="24" height="25"/>
-                                    <size key="maxSize" width="24" height="25"/>
-                                </toolbarItem>
-                            </allowedToolbarItems>
-                            <defaultToolbarItems>
-                                <toolbarItem reference="1KY-uW-yVC"/>
-                            </defaultToolbarItems>
-                        </toolbar>
                         <connections>
                             <outlet property="delegate" destination="B8D-0N-5wS" id="XqH-hk-xw3"/>
                         </connections>
                     </window>
                     <connections>
-                        <outlet property="backButton" destination="1KY-uW-yVC" id="LFZ-3f-5ya"/>
-                        <segue destination="zU3-cn-R5D" kind="relationship" relationship="window.shadowedContentViewController" id="DHI-2l-4mS"/>
+                        <segue destination="1SE-N6-4xV" kind="relationship" relationship="window.shadowedContentViewController" id="SJf-nu-PLx"/>
                     </connections>
                 </windowController>
                 <customObject id="Oky-zY-oP4" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
@@ -403,16 +389,15 @@
             <point key="canvasLocation" x="66" y="193"/>
         </scene>
         <!--MainTabViewController-->
-        <scene sceneID="dLS-Ne-tfK">
+        <scene sceneID="MV8-hK-aNt">
             <objects>
-                <controllerPlaceholder storyboardName="TabController" referencedIdentifier="MainTabViewController" id="zU3-cn-R5D" sceneMemberID="viewController"/>
-                <customObject id="S76-5R-QPS" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <controllerPlaceholder storyboardName="TabController" referencedIdentifier="MainTabViewController" id="1SE-N6-4xV" sceneMemberID="viewController"/>
+                <customObject id="2v8-l4-QyY" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="66" y="532"/>
+            <point key="canvasLocation" x="66" y="474"/>
         </scene>
     </scenes>
     <resources>
-        <image name="NSGoBackTemplate" width="10" height="14"/>
         <image name="gear" catalog="system" width="17" height="17"/>
         <image name="info.circle" catalog="system" width="15" height="15"/>
     </resources>

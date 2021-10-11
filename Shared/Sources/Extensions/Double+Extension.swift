@@ -2,22 +2,22 @@ import Foundation
 import CoreGraphics
 
 extension Double {
-    /// NSNumber.
+  /// NSNumber.
   var nsNumber: NSNumber {
     return NSNumber(value: self)
   }
   
-    /// Int.
+  /// Int.
   var integer: Int {
     return Int(self)
   }
   
-    /// Float.
+  /// Float.
   var float: Float {
     return Float(self)
   }
   
-    /// CGFloat.
+  /// CGFloat.
   var cgFloat: CGFloat {
     return CGFloat(self)
   }

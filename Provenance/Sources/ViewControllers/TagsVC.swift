@@ -2,7 +2,12 @@ import Cocoa
 import Alamofire
 
 final class TagsVC: NSViewController {
-  @IBOutlet weak var searchField: NSSearchField!
+  private lazy var searchField: NSSearchField = {
+    let field = NSSearchField()
+    field.delegate = self
+    field.placeholderString = "Search Tags"
+    return field
+  }()
   
   @IBOutlet weak var collectionView: NSCollectionView! {
     didSet {
@@ -17,11 +22,13 @@ final class TagsVC: NSViewController {
     case main
   }
   
-  private typealias DataSource = NSCollectionViewDiffableDataSource<Section, TagCellModel>
+  private typealias DataSource = NSCollectionViewDiffableDataSource<Section, TagViewModel>
   
-  private typealias Snapshot = NSDiffableDataSourceSnapshot<Section, TagCellModel>
+  private typealias Snapshot = NSDiffableDataSourceSnapshot<Section, TagViewModel>
   
   private lazy var dataSource = makeDataSource()
+  
+  private lazy var toolbar = NSToolbar(self, type: .tags)
   
   private var apiKeyObserver: NSKeyValueObservation?
   
@@ -41,8 +48,16 @@ final class TagsVC: NSViewController {
     return tags.filtered(searchField: searchField)
   }
   
+  override init(nibName nibNameOrNil: NSNib.Name?, bundle nibBundleOrNil: Bundle?) {
+    super.init(nibName: "Tags", bundle: nil)
+  }
+  
   deinit {
     removeObservers()
+  }
+  
+  required init?(coder: NSCoder) {
+    fatalError("Not implemented")
   }
   
   override func viewDidLoad() {
@@ -58,8 +73,7 @@ final class TagsVC: NSViewController {
   }
   
   private func configureWindow() {
-    AppDelegate.windowController?.backButton.title = .emptyString
-    AppDelegate.windowController?.backButton.action = nil
+    AppDelegate.windowController?.window?.toolbar = toolbar
     AppDelegate.windowController?.window?.title = "Tags"
   }
   
@@ -89,7 +103,7 @@ final class TagsVC: NSViewController {
   private func applySnapshot(animate: Bool = true) {
     var snapshot = Snapshot()
     snapshot.appendSections([.main])
-    snapshot.appendItems(filteredTags.tagCellModels, toSection: .main)
+    snapshot.appendItems(filteredTags.tagViewModels, toSection: .main)
     
     if filteredTags.isEmpty && tagsError.isEmpty {
       if tags.isEmpty && !noTags {
@@ -134,7 +148,28 @@ final class TagsVC: NSViewController {
   }
 }
 
-  // MARK: - NSCollectionViewDelegate
+// MARK: - NSToolbarDelegate
+
+extension TagsVC: NSToolbarDelegate {
+  func toolbar(_ toolbar: NSToolbar, itemForItemIdentifier itemIdentifier: NSToolbarItem.Identifier, willBeInsertedIntoToolbar flag: Bool) -> NSToolbarItem? {
+    switch itemIdentifier {
+    case .tagsSearch:
+      return NSSearchToolbarItem(itemIdentifier: itemIdentifier, searchField: searchField)
+    default:
+      return nil
+    }
+  }
+  
+  func toolbarDefaultItemIdentifiers(_ toolbar: NSToolbar) -> [NSToolbarItem.Identifier] {
+    return [.tagsSearch]
+  }
+  
+  func toolbarAllowedItemIdentifiers(_ toolbar: NSToolbar) -> [NSToolbarItem.Identifier] {
+    return toolbarDefaultItemIdentifiers(toolbar)
+  }
+}
+
+// MARK: - NSCollectionViewDelegate
 
 extension TagsVC: NSCollectionViewDelegate {
   func collectionView(_ collectionView: NSCollectionView, didSelectItemsAt indexPaths: Set<IndexPath>) {
@@ -146,7 +181,7 @@ extension TagsVC: NSCollectionViewDelegate {
   }
 }
 
-  // MARK: - NSSearchFieldDelegate
+// MARK: - NSSearchFieldDelegate
 
 extension TagsVC: NSSearchFieldDelegate {
   func controlTextDidChange(_ obj: Notification) {
