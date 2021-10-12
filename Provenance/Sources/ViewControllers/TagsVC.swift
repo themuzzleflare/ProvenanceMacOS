@@ -102,6 +102,7 @@ final class TagsVC: NSViewController {
   
   private func applySnapshot(animate: Bool = true) {
     var snapshot = Snapshot()
+    
     snapshot.appendSections([.main])
     snapshot.appendItems(filteredTags.tagViewModels, toSection: .main)
     

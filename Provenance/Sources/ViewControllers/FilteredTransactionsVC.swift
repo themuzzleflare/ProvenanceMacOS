@@ -176,7 +176,7 @@ extension FilteredTransactionsVC: NSToolbarDelegate {
   func toolbar(_ toolbar: NSToolbar, itemForItemIdentifier itemIdentifier: NSToolbarItem.Identifier, willBeInsertedIntoToolbar flag: Bool) -> NSToolbarItem? {
     switch itemIdentifier {
     case .backButton:
-      return .backButton(title: previousTitle, action: #selector(goBack))
+      return .backButton(self, title: previousTitle, action: #selector(goBack))
     case .transactionsSearch:
       return NSSearchToolbarItem(itemIdentifier: itemIdentifier, searchField: searchField)
     default:

@@ -20,8 +20,7 @@ extension NSView {
   
   static func noContentView(frame: CGRect, type: ContentType) -> NSView {
     let view = NSView(frame: frame)
-    let symbolConfiguration = NSImage.SymbolConfiguration(pointSize: 100, weight: .regular)
-    let icon = NSImageView(image: .xmarkDiamond.withSymbolConfiguration(symbolConfiguration)!)
+    let icon = NSImageView(image: .xmarkDiamond.withSymbolConfiguration(.noContent)!)
     icon.contentTintColor = .placeholderTextColor
     let label = NSTextField(wrappingLabelWithString: type.noContentDescription)
     label.alignment = .center

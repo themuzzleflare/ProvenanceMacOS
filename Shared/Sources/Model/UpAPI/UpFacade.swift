@@ -110,10 +110,10 @@ struct UpFacade {
     switch resource {
     case let .account(accountResource):
       listTransactions(filterBy: accountResource, completion: completion)
-    case let .category(categoryResource):
-      listTransactions(filterBy: categoryResource, completion: completion)
     case let .tag(tagResource):
       listTransactions(filterBy: tagResource, completion: completion)
+    case let .category(categoryResource):
+      listTransactions(filterBy: categoryResource, completion: completion)
     }
   }
   

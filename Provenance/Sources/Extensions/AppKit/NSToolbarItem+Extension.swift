@@ -6,26 +6,32 @@ extension NSToolbarItem {
     self.view = view
   }
   
-  static func backButton(title: String, action: Selector) -> NSToolbarItem {
+  static func backButton(_ target: NSViewController, title: String, action: Selector) -> NSToolbarItem {
     let toolbarItem = NSToolbarItem(itemIdentifier: .backButton)
     toolbarItem.isNavigational = true
     toolbarItem.image = .chevronLeft
     toolbarItem.title = title
+    toolbarItem.visibilityPriority = .high
+    toolbarItem.target = target
     toolbarItem.action = action
     return toolbarItem
   }
   
-  static func transactionStatusIcon(status: TransactionStatusEnum, action: Selector) -> NSToolbarItem {
+  static func transactionStatusIcon(_ target: NSViewController, status: TransactionStatusEnum, action: Selector) -> NSToolbarItem {
     let toolbarItem = NSToolbarItem(itemIdentifier: .transactionStatus)
     toolbarItem.image = status.nsImage
+    toolbarItem.toolTip = status.description + "."
+    toolbarItem.target = target
     toolbarItem.action = action
     return toolbarItem
   }
   
-  static func settledOnlyButton(action: Selector) -> NSToolbarItem {
+  static func settledOnlyButton(_ target: NSViewController, action: Selector) -> NSToolbarItem {
     let toolbarItem = NSToolbarItem(itemIdentifier: .settledOnly)
     toolbarItem.title = "Settled Only"
-    toolbarItem.image = .checkmarkCircle
+    toolbarItem.image = .checkmarkCircle.withSymbolConfiguration(.small)
+    toolbarItem.toolTip = "Filter by settled transactions only."
+    toolbarItem.target = target
     toolbarItem.action = action
     return toolbarItem
   }

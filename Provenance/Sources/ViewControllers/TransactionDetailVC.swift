@@ -217,9 +217,9 @@ extension TransactionDetailVC: NSToolbarDelegate {
   func toolbar(_ toolbar: NSToolbar, itemForItemIdentifier itemIdentifier: NSToolbarItem.Identifier, willBeInsertedIntoToolbar flag: Bool) -> NSToolbarItem? {
     switch itemIdentifier {
     case .backButton:
-      return .backButton(title: previousTitle, action: #selector(goBack))
+      return .backButton(self, title: previousTitle, action: #selector(goBack))
     case .transactionStatus:
-      return .transactionStatusIcon(status: transaction.attributes.status, action: #selector(openTransactionStatusView))
+      return .transactionStatusIcon(self, status: transaction.attributes.status, action: #selector(openTransactionStatusView))
     default:
       return nil
     }

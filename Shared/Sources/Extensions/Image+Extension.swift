@@ -89,6 +89,10 @@ extension Image {
     return Image(systemName: "calendar.badge.clock")
   }
   
+  static var chevronLeft: Image {
+    return Image(systemName: "chevron.left")
+  }
+  
   static var chevronLeftSlashChevronRight: Image {
     return Image(systemName: "chevron.left.slash.chevron.right")
   }

@@ -56,7 +56,6 @@
 		7A05E9B3270BA166004C958F /* CashbackObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A05E98A270BA166004C958F /* CashbackObject.swift */; };
 		7A05E9B4270BA166004C958F /* ErrorResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A05E98B270BA166004C958F /* ErrorResponse.swift */; };
 		7A05E9C0270BA1A7004C958F /* AccountBalanceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A05E9B5270BA1A6004C958F /* AccountBalanceModel.swift */; };
-		7A05E9C1270BA1A7004C958F /* InfoPlist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A05E9B6270BA1A6004C958F /* InfoPlist.swift */; };
 		7A05E9C2270BA1A7004C958F /* TransactionGroupingEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A05E9B7270BA1A6004C958F /* TransactionGroupingEnum.swift */; };
 		7A05E9C3270BA1A7004C958F /* TransactionCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A05E9B8270BA1A7004C958F /* TransactionCategory.swift */; };
 		7A05E9C4270BA1A7004C958F /* CategoryTypeEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A05E9B9270BA1A7004C958F /* CategoryTypeEnum.swift */; };
@@ -123,6 +122,7 @@
 		7A1118442711776B002536E5 /* NSViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A1118432711776B002536E5 /* NSViewController+Extension.swift */; };
 		7A36D2932712BBE20081E255 /* NSDirectionalEdgeInsets+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A36D2922712BBE20081E255 /* NSDirectionalEdgeInsets+Extension.swift */; };
 		7A36D2952712BC7A0081E255 /* NSStoryboard+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A36D2942712BC7A0081E255 /* NSStoryboard+Extension.swift */; };
+		7A3835FF27155921007F58DB /* NSImageSymbolConfiguration+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A3835FE27155921007F58DB /* NSImageSymbolConfiguration+Extension.swift */; };
 		7A4F2111270FA53800C0AF8C /* AccountItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A4F210F270FA53800C0AF8C /* AccountItem.swift */; };
 		7A4F2112270FA53800C0AF8C /* AccountItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7A4F2110270FA53800C0AF8C /* AccountItem.xib */; };
 		7A4F2114270FA8AF00C0AF8C /* AccountResource+ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A4F2113270FA8AF00C0AF8C /* AccountResource+ViewModel.swift */; };
@@ -198,7 +198,6 @@
 		7AF4BC8D270BDE8200C827A6 /* CategoryResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A05E968270BA163004C958F /* CategoryResource.swift */; };
 		7AF4BC8E270BDE8200C827A6 /* TagResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A05E966270BA163004C958F /* TagResource.swift */; };
 		7AF4BC8F270BDE8200C827A6 /* AppWidgets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A05E9BF270BA1A7004C958F /* AppWidgets.swift */; };
-		7AF4BC90270BDE8200C827A6 /* InfoPlist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A05E9B6270BA1A6004C958F /* InfoPlist.swift */; };
 		7AF4BC91270BDE8200C827A6 /* CategoryRelationship.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A05E975270BA164004C958F /* CategoryRelationship.swift */; };
 		7AF4BC92270BDE8200C827A6 /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A05E980270BA165004C958F /* Transaction.swift */; };
 		7AF4BC93270BDE8200C827A6 /* TransactionsLinksObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A05E97E270BA165004C958F /* TransactionsLinksObject.swift */; };
@@ -250,7 +249,6 @@
 		7AF4BCC1270BDE8200C827A6 /* CategoryResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A05E968270BA163004C958F /* CategoryResource.swift */; };
 		7AF4BCC2270BDE8200C827A6 /* TagResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A05E966270BA163004C958F /* TagResource.swift */; };
 		7AF4BCC3270BDE8200C827A6 /* AppWidgets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A05E9BF270BA1A7004C958F /* AppWidgets.swift */; };
-		7AF4BCC4270BDE8200C827A6 /* InfoPlist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A05E9B6270BA1A6004C958F /* InfoPlist.swift */; };
 		7AF4BCC5270BDE8200C827A6 /* CategoryRelationship.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A05E975270BA164004C958F /* CategoryRelationship.swift */; };
 		7AF4BCC6270BDE8200C827A6 /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A05E980270BA165004C958F /* Transaction.swift */; };
 		7AF4BCC7270BDE8200C827A6 /* TransactionsLinksObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A05E97E270BA165004C958F /* TransactionsLinksObject.swift */; };
@@ -434,7 +432,6 @@
 		7A05E98A270BA166004C958F /* CashbackObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CashbackObject.swift; sourceTree = "<group>"; };
 		7A05E98B270BA166004C958F /* ErrorResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorResponse.swift; sourceTree = "<group>"; };
 		7A05E9B5270BA1A6004C958F /* AccountBalanceModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountBalanceModel.swift; sourceTree = "<group>"; };
-		7A05E9B6270BA1A6004C958F /* InfoPlist.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoPlist.swift; sourceTree = "<group>"; };
 		7A05E9B7270BA1A6004C958F /* TransactionGroupingEnum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionGroupingEnum.swift; sourceTree = "<group>"; };
 		7A05E9B8270BA1A7004C958F /* TransactionCategory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionCategory.swift; sourceTree = "<group>"; };
 		7A05E9B9270BA1A7004C958F /* CategoryTypeEnum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryTypeEnum.swift; sourceTree = "<group>"; };
@@ -499,6 +496,7 @@
 		7A1118432711776B002536E5 /* NSViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSViewController+Extension.swift"; sourceTree = "<group>"; };
 		7A36D2922712BBE20081E255 /* NSDirectionalEdgeInsets+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSDirectionalEdgeInsets+Extension.swift"; sourceTree = "<group>"; };
 		7A36D2942712BC7A0081E255 /* NSStoryboard+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSStoryboard+Extension.swift"; sourceTree = "<group>"; };
+		7A3835FE27155921007F58DB /* NSImageSymbolConfiguration+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSImageSymbolConfiguration+Extension.swift"; sourceTree = "<group>"; };
 		7A4F210F270FA53800C0AF8C /* AccountItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountItem.swift; sourceTree = "<group>"; };
 		7A4F2110270FA53800C0AF8C /* AccountItem.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AccountItem.xib; sourceTree = "<group>"; };
 		7A4F2113270FA8AF00C0AF8C /* AccountResource+ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AccountResource+ViewModel.swift"; sourceTree = "<group>"; };
@@ -811,6 +809,7 @@
 				7A0D539A27123BFE00A024D6 /* NSUserInterfaceItemIdentifier+Extension.swift */,
 				7A36D2922712BBE20081E255 /* NSDirectionalEdgeInsets+Extension.swift */,
 				7AB93EB62714120600A08538 /* NSImageView+Extension.swift */,
+				7A3835FE27155921007F58DB /* NSImageSymbolConfiguration+Extension.swift */,
 			);
 			path = AppKit;
 			sourceTree = "<group>";
@@ -1010,7 +1009,6 @@
 			isa = PBXGroup;
 			children = (
 				7A05E9BC270BA1A7004C958F /* ProvenanceApp.swift */,
-				7A05E9B6270BA1A6004C958F /* InfoPlist.swift */,
 				7A05E9BD270BA1A7004C958F /* AppDateStyle.swift */,
 				7A05E9BA270BA1A7004C958F /* AccountTypeOptionEnum.swift */,
 				7A05E9B9270BA1A7004C958F /* CategoryTypeEnum.swift */,
@@ -1154,6 +1152,8 @@
 				7AF4BC68270BDA9C00C827A6 /* PBXTargetDependency */,
 			);
 			name = Provenance;
+			packageProductDependencies = (
+			);
 			productName = Provenance;
 			productReference = 7A959F61270B9A6A00AC45F3 /* Provenance.app */;
 			productType = "com.apple.product-type.application";
@@ -1225,6 +1225,8 @@
 				Base,
 			);
 			mainGroup = 7A959F58270B9A6A00AC45F3;
+			packageReferences = (
+			);
 			productRefGroup = 7A959F62270B9A6A00AC45F3 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -1392,7 +1394,6 @@
 				7A05E9F0270BA324004C958F /* Double+Extension.swift in Sources */,
 				7A05E99C270BA166004C958F /* SingleCategory.swift in Sources */,
 				7A05E9C5270BA1A7004C958F /* AccountTypeOptionEnum.swift in Sources */,
-				7A05E9C1270BA1A7004C958F /* InfoPlist.swift in Sources */,
 				7A05E98F270BA166004C958F /* TagResource.swift in Sources */,
 				7A05E9AC270BA166004C958F /* Category.swift in Sources */,
 				7A05EA03270BA324004C958F /* Int+Extension.swift in Sources */,
@@ -1506,6 +1507,7 @@
 				7A05EA04270BA324004C958F /* NSFont+Extension.swift in Sources */,
 				7A4F2111270FA53800C0AF8C /* AccountItem.swift in Sources */,
 				7A05E991270BA166004C958F /* CategoryResource.swift in Sources */,
+				7A3835FF27155921007F58DB /* NSImageSymbolConfiguration+Extension.swift in Sources */,
 				7A0D53A22712445700A024D6 /* SortedTransactionModel.swift in Sources */,
 				7A05E9B0270BA166004C958F /* CategoryRelationshipChildren.swift in Sources */,
 			);
@@ -1578,7 +1580,6 @@
 				7AF4BCAE270BDE8200C827A6 /* ErrorObject.swift in Sources */,
 				7AF4BCAD270BDE8200C827A6 /* TransactionRelationshipAccount.swift in Sources */,
 				7AF4BCEE270BDE9C00C827A6 /* CategoryType+Extension.swift in Sources */,
-				7AF4BC90270BDE8200C827A6 /* InfoPlist.swift in Sources */,
 				7AF4BD34270BDFCF00C827A6 /* AccountBalance.swift in Sources */,
 				7AF4BCE6270BDE9C00C827A6 /* NumberFormatter+Extension.swift in Sources */,
 				7AF4BCF5270BDE9C00C827A6 /* NSString+Extension.swift in Sources */,
@@ -1671,7 +1672,6 @@
 				7AF4BCE2270BDE8200C827A6 /* ErrorObject.swift in Sources */,
 				7AF4BCE1270BDE8200C827A6 /* TransactionRelationshipAccount.swift in Sources */,
 				7AF4BD0A270BDE9C00C827A6 /* CategoryType+Extension.swift in Sources */,
-				7AF4BCC4270BDE8200C827A6 /* InfoPlist.swift in Sources */,
 				7AF4BD02270BDE9C00C827A6 /* NumberFormatter+Extension.swift in Sources */,
 				7AF4BD11270BDE9C00C827A6 /* NSString+Extension.swift in Sources */,
 				7AF4BC65270BDA9C00C827A6 /* IntentHandler.swift in Sources */,

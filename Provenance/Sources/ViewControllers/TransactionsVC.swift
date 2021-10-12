@@ -10,13 +10,33 @@ final class TransactionsVC: NSViewController {
     return field
   }()
   
-  private lazy var categoryPopupButton: NSPopUpButton = {
-    let button = NSPopUpButton()
-    button.addItems(withTitles: TransactionCategory.allCases.names)
-    button.selectItem(withTitle: categoryFilter.description)
-    button.action = #selector(categoryButtonAction)
-    return button
+  private var categorySegmentedControl: NSSegmentedControl {
+    let segmentedControl = NSSegmentedControl(images: [.trayFull], trackingMode: .selectOne, target: nil, action: nil)
+    segmentedControl.setMenu(categoryMenu, forSegment: 0)
+    segmentedControl.setShowsMenuIndicator(true, forSegment: 0)
+    return segmentedControl
+  }
+  
+  private lazy var categoryToolbarItem: NSToolbarItem = {
+    let toolbarItem = NSToolbarItem(itemIdentifier: .categoryFilter)
+    toolbarItem.view = categorySegmentedControl
+    toolbarItem.label = "Category"
+    toolbarItem.image = .trayFull
+    toolbarItem.toolTip = "Filter by the selected category."
+    toolbarItem.menuFormRepresentation = nil
+    return toolbarItem
   }()
+  
+  private var categoryMenu: NSMenu {
+    let categoryMenu = NSMenu(title: "Category")
+    TransactionCategory.allCases.forEach { (category) in
+      let menuItem = NSMenuItem(title: category.description, action: #selector(categoryButtonAction(_:)), keyEquivalent: .emptyString)
+      menuItem.target = self
+      menuItem.state = category == categoryFilter ? .on : .off
+      categoryMenu.addItem(menuItem)
+    }
+    return categoryMenu
+  }
   
   @IBOutlet weak var collectionView: NSCollectionView! {
     didSet {
@@ -25,12 +45,6 @@ final class TransactionsVC: NSViewController {
       collectionView.register(.dateSupplementaryView, forSupplementaryViewOfKind: NSCollectionView.elementKindSectionHeader, withIdentifier: .dateSupplementaryView)
       collectionView.collectionViewLayout = .listPinnedHeaders
       collectionView.backgroundViewScrollsWithContent = true
-    }
-  }
-  
-  @objc private func categoryButtonAction() {
-    if let value = TransactionCategory.allCases.first(where: { $0.description == categoryPopupButton.titleOfSelectedItem }) {
-      categoryFilter = value
     }
   }
   
@@ -147,6 +161,7 @@ final class TransactionsVC: NSViewController {
   }
   
   private func filterUpdates() {
+    categoryToolbarItem.view = categorySegmentedControl
     searchField.placeholderString = preFilteredTransactions.searchFieldPlaceholder
     applySnapshot()
   }
@@ -224,6 +239,12 @@ final class TransactionsVC: NSViewController {
     showSettledOnly.toggle()
     toolbar.selectedItemIdentifier = showSettledOnly ? .settledOnly : nil
   }
+  
+  @objc private func categoryButtonAction(_ sender: NSMenuItem) {
+    if let value = TransactionCategory.allCases.first(where: { $0.description == sender.title }) {
+      categoryFilter = value
+    }
+  }
 }
 
 // MARK: - NSToolbarDelegate
@@ -232,9 +253,11 @@ extension TransactionsVC: NSToolbarDelegate {
   func toolbar(_ toolbar: NSToolbar, itemForItemIdentifier itemIdentifier: NSToolbarItem.Identifier, willBeInsertedIntoToolbar flag: Bool) -> NSToolbarItem? {
     switch itemIdentifier {
     case .categoryFilter:
-      return NSToolbarItem(itemIdentifier: itemIdentifier, view: categoryPopupButton)
+      return categoryToolbarItem
     case .settledOnly:
-      return .settledOnlyButton(action: #selector(settledOnlyToolbarAction))
+      return .settledOnlyButton(self, action: #selector(settledOnlyToolbarAction))
+    case .flexibleSpace:
+      return NSToolbarItem(itemIdentifier: itemIdentifier)
     case .transactionsSearch:
       return NSSearchToolbarItem(itemIdentifier: itemIdentifier, searchField: searchField)
     default:
@@ -243,7 +266,7 @@ extension TransactionsVC: NSToolbarDelegate {
   }
   
   func toolbarDefaultItemIdentifiers(_ toolbar: NSToolbar) -> [NSToolbarItem.Identifier] {
-    return [.categoryFilter, .settledOnly, .flexibleSpace, .transactionsSearch]
+    return [.settledOnly, .categoryFilter, .flexibleSpace, .transactionsSearch]
   }
   
   func toolbarSelectableItemIdentifiers(_ toolbar: NSToolbar) -> [NSToolbarItem.Identifier] {
