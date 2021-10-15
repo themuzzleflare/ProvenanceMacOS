@@ -21,7 +21,15 @@ extension NSUserInterfaceItemIdentifier {
     return NSUserInterfaceItemIdentifier("attributeItem")
   }
   
+  static var textItem: NSUserInterfaceItemIdentifier {
+    return NSUserInterfaceItemIdentifier("textItem")
+  }
+  
   static var dateSupplementaryView: NSUserInterfaceItemIdentifier {
     return NSUserInterfaceItemIdentifier("dateSupplementaryView")
+  }
+  
+  static var textSupplementaryView: NSUserInterfaceItemIdentifier {
+    return NSUserInterfaceItemIdentifier("textSupplementaryView")
   }
 }

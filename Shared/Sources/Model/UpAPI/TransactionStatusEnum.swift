@@ -45,9 +45,9 @@ extension TransactionStatusEnum {
   var nsColour: NSColor {
     switch self {
     case .held:
-      return .systemYellow
+      return .yellow
     case .settled:
-      return .systemGreen
+      return .green
     }
   }
   

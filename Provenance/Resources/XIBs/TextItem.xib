@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="19162" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="19162"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="TextItem" customModule="Provenance" customModuleProvider="target"/>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <customView id="Hz6-mo-xeY">
+            <rect key="frame" x="0.0" y="0.0" width="480" height="272"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <subviews>
+                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="WzW-F3-2t4">
+                    <rect key="frame" x="14" y="127" width="452" height="18"/>
+                    <textFieldCell key="cell" selectable="YES" title="Multiline Label" id="dXm-Li-JTf">
+                        <font key="font" size="14" name="CircularStd-Book"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+            </subviews>
+            <constraints>
+                <constraint firstItem="WzW-F3-2t4" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="16" id="X8X-Vg-K2M"/>
+                <constraint firstItem="WzW-F3-2t4" firstAttribute="centerY" secondItem="Hz6-mo-xeY" secondAttribute="centerY" id="gIi-J1-9mo"/>
+                <constraint firstAttribute="trailing" secondItem="WzW-F3-2t4" secondAttribute="trailing" constant="16" id="n7d-ue-6nK"/>
+            </constraints>
+            <point key="canvasLocation" x="139" y="137"/>
+        </customView>
+        <collectionViewItem nibName="TextItem" id="eMI-de-JSL" customClass="TextItem" customModule="Provenance" customModuleProvider="target">
+            <connections>
+                <outlet property="textField" destination="WzW-F3-2t4" id="jzp-EE-kct"/>
+                <outlet property="view" destination="Hz6-mo-xeY" id="bqr-Ta-2MX"/>
+            </connections>
+        </collectionViewItem>
+    </objects>
+</document>

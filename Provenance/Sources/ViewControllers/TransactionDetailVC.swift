@@ -26,7 +26,7 @@ final class TransactionDetailVC: NSViewController {
   
   private lazy var dataSource = makeDataSource()
   
-  private lazy var toolbar = NSToolbar(self, type: .transactionDetail)
+  private lazy var toolbar = NSToolbar(self, identifier: .transactionDetail)
   
   private var dateStyleObserver: NSKeyValueObservation?
   
@@ -73,6 +73,7 @@ final class TransactionDetailVC: NSViewController {
   
   deinit {
     removeObserver()
+    print("deinit")
   }
   
   required init?(coder: NSCoder) {
@@ -92,8 +93,8 @@ final class TransactionDetailVC: NSViewController {
   }
   
   private func configureWindow() {
-    AppDelegate.windowController?.window?.toolbar = toolbar
-    AppDelegate.windowController?.window?.title = transaction.attributes.description
+    NSApp.mainWindow?.toolbar = toolbar
+    NSApp.mainWindow?.title = transaction.attributes.description
   }
   
   @objc private func goBack() {
@@ -262,7 +263,8 @@ extension TransactionDetailVC: NSCollectionViewDelegate {
           view.window?.contentViewController = .navigation(self, to: viewController)
         }
       case "Tags":
-        break
+        let viewController = TransactionTagsVC(self, transaction: transaction)
+        view.window?.contentViewController = .navigation(self, to: viewController)
       default:
         break
       }

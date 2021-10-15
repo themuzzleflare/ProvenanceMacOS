@@ -3,39 +3,26 @@ import Alamofire
 import SwiftDate
 
 final class TransactionsVC: NSViewController {
-  private lazy var searchField: NSSearchField = {
-    let field = NSSearchField()
-    field.delegate = self
-    field.placeholderString = "Search Transactions"
-    return field
-  }()
+  private lazy var searchField = NSSearchField(self, type: .transactions)
   
   private var categorySegmentedControl: NSSegmentedControl {
-    let segmentedControl = NSSegmentedControl(images: [.trayFull], trackingMode: .selectOne, target: nil, action: nil)
-    segmentedControl.setMenu(categoryMenu, forSegment: 0)
-    segmentedControl.setShowsMenuIndicator(true, forSegment: 0)
-    return segmentedControl
+    return .categories(menu: categoryMenu)
   }
   
-  private lazy var categoryToolbarItem: NSToolbarItem = {
-    let toolbarItem = NSToolbarItem(itemIdentifier: .categoryFilter)
-    toolbarItem.view = categorySegmentedControl
-    toolbarItem.label = "Category"
-    toolbarItem.image = .trayFull
-    toolbarItem.toolTip = "Filter by the selected category."
-    toolbarItem.menuFormRepresentation = nil
-    return toolbarItem
-  }()
+  private lazy var categoryToolbarItem = NSToolbarItem.categories(segmentedControl: categorySegmentedControl, menuFormRepresentation: categoryMenuFormRepresentation)
+  
+  private lazy var settledOnlyToolbarItem = NSToolbarItem.settledOnlyButton(self, action: #selector(settledOnlyToolbarAction), menuFormRepresentation: settledOnlyMenuFormRepresentation)
   
   private var categoryMenu: NSMenu {
-    let categoryMenu = NSMenu(title: "Category")
-    TransactionCategory.allCases.forEach { (category) in
-      let menuItem = NSMenuItem(title: category.description, action: #selector(categoryButtonAction(_:)), keyEquivalent: .emptyString)
-      menuItem.target = self
-      menuItem.state = category == categoryFilter ? .on : .off
-      categoryMenu.addItem(menuItem)
-    }
-    return categoryMenu
+    return .categoryMenu(self, filter: categoryFilter, action: #selector(categoryButtonAction(_:)))
+  }
+  
+  private var categoryMenuFormRepresentation: NSMenuItem {
+    return .categoryMenuFormRepresentation(submenu: categoryMenu)
+  }
+  
+  private var settledOnlyMenuFormRepresentation: NSMenuItem {
+    return .settledOnlyMenuItem(self, settledOnly: showSettledOnly, action: #selector(settledOnlyToolbarAction))
   }
   
   @IBOutlet weak var collectionView: NSCollectionView! {
@@ -54,7 +41,7 @@ final class TransactionsVC: NSViewController {
   
   private lazy var dataSource = makeDataSource()
   
-  private lazy var toolbar = NSToolbar(self, type: .transactions)
+  private lazy var toolbar = NSToolbar(self, identifier: .transactions)
   
   private var apiKeyObserver: NSKeyValueObservation?
   
@@ -106,6 +93,7 @@ final class TransactionsVC: NSViewController {
   
   deinit {
     removeObservers()
+    print("deinit")
   }
   
   required init?(coder: NSCoder) {
@@ -162,6 +150,10 @@ final class TransactionsVC: NSViewController {
   
   private func filterUpdates() {
     categoryToolbarItem.view = categorySegmentedControl
+    categoryToolbarItem.image = categoryFilter == .all ? .trayFull : .trayFullFill
+    categoryToolbarItem.menuFormRepresentation = categoryMenuFormRepresentation
+    settledOnlyToolbarItem.image = showSettledOnly ? .checkmarkCircleFill.withSymbolConfiguration(.small) : .checkmarkCircle.withSymbolConfiguration(.small)
+    settledOnlyToolbarItem.menuFormRepresentation = settledOnlyMenuFormRepresentation
     searchField.placeholderString = preFilteredTransactions.searchFieldPlaceholder
     applySnapshot()
   }
@@ -171,20 +163,19 @@ final class TransactionsVC: NSViewController {
   }
   
   private func makeDataSource() -> DataSource {
-    let dataSource = DataSource(
+    return DataSource(
       collectionView: collectionView,
       itemProvider: { (collectionView, indexPath, transaction) in
         guard let item = collectionView.makeItem(withIdentifier: .transactionItem, for: indexPath) as? TransactionItem else { fatalError() }
         item.transaction = transaction
         return item
+      },
+      supplementaryViewProvider: { (collectionView, kind, indexPath) in
+        guard let view = collectionView.makeSupplementaryView(ofKind: kind, withIdentifier: .dateSupplementaryView, for: indexPath) as? DateSupplementaryView else { fatalError() }
+        view.label.stringValue = self.filteredTransactions.sortedTransactionModels[indexPath.section].id.toString(.date(.medium))
+        return view
       }
     )
-    dataSource.supplementaryViewProvider = { (collectionView, kind, indexPath) in
-      guard let view = collectionView.makeSupplementaryView(ofKind: kind, withIdentifier: .dateSupplementaryView, for: indexPath) as? DateSupplementaryView else { fatalError() }
-      view.label.stringValue = self.filteredTransactions.sortedTransactionModels[indexPath.section].id.toString(.date(.medium))
-      return view
-    }
-    return dataSource
   }
   
   private func applySnapshot(animate: Bool = true) {
@@ -252,10 +243,10 @@ final class TransactionsVC: NSViewController {
 extension TransactionsVC: NSToolbarDelegate {
   func toolbar(_ toolbar: NSToolbar, itemForItemIdentifier itemIdentifier: NSToolbarItem.Identifier, willBeInsertedIntoToolbar flag: Bool) -> NSToolbarItem? {
     switch itemIdentifier {
+    case .settledOnly:
+      return settledOnlyToolbarItem
     case .categoryFilter:
       return categoryToolbarItem
-    case .settledOnly:
-      return .settledOnlyButton(self, action: #selector(settledOnlyToolbarAction))
     case .flexibleSpace:
       return NSToolbarItem(itemIdentifier: itemIdentifier)
     case .transactionsSearch:

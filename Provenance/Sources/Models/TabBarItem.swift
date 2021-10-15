@@ -8,6 +8,19 @@ enum TabBarItem: Int, CaseIterable {
 }
 
 extension TabBarItem {
+  var identifier: String {
+    switch self {
+    case .transactions:
+      return "transactionsTabViewItem"
+    case .accounts:
+      return "accountsTabViewItem"
+    case .tags:
+      return "tagsTabViewItem"
+    case .categories:
+      return "categoriesTabViewItem"
+    }
+  }
+  
   var viewController: NSViewController {
     switch self {
     case .transactions:
@@ -47,8 +60,22 @@ extension TabBarItem {
     }
   }
   
+  var selectedImage: NSImage? {
+    switch self {
+    case .transactions:
+      return .dollarsignCircleFill
+    case .accounts:
+      return .walletPassFill
+    case .tags:
+      return .tagFill
+    case .categories:
+      return .trayFullFill
+    }
+  }
+  
   var tabViewItem: NSTabViewItem {
     return NSTabViewItem(
+      identifier: self.identifier,
       viewController: self.viewController,
       label: self.label,
       image: self.image

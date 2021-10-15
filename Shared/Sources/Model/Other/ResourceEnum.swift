@@ -7,6 +7,10 @@ enum ResourceEnum {
 }
 
 extension ResourceEnum {
+  //  var accountResource: AccountResource {
+  //
+  //  }
+  
   var description: String {
     switch self {
     case let .account(accountResource):
@@ -15,6 +19,17 @@ extension ResourceEnum {
       return tagResource.id
     case let .category(categoryResource):
       return categoryResource.attributes.name
+    }
+  }
+  
+  var resourcEnumRaw: ResourceEnumRaw {
+    switch self {
+    case .account:
+      return .account
+    case .tag:
+      return .tag
+    case .category:
+      return .category
     }
   }
 }

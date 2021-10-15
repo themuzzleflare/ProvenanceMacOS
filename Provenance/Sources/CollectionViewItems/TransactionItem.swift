@@ -17,13 +17,12 @@ final class TransactionItem: CollectionViewItem {
   
   var transaction: TransactionViewModel? {
     didSet {
-      guard isViewLoaded else { return }
-      if let transaction = transaction {
-        transactionDescription.stringValue = transaction.transactionDescription
-        transactionCreationDate.stringValue = transaction.creationDate
-        transactionAmount.stringValue = transaction.amount
-        transactionAmount.textColor = transaction.colour.nsColour
-      }
+      guard isViewLoaded, let transaction = transaction else { return }
+      transactionDescription.stringValue = transaction.transactionDescription
+      transactionCreationDate.stringValue = transaction.creationDate
+      transactionAmount.stringValue = transaction.amount
+      transactionAmount.textColor = transaction.colour.nsColour
+      configureMenu()
     }
   }
   
@@ -33,5 +32,38 @@ final class TransactionItem: CollectionViewItem {
     transactionDescription.textColor = showAsHighlighted ? .selectedControlTextColor : .labelColor
     transactionCreationDate.textColor = showAsHighlighted ? .selectedControlTextColor : .secondaryLabelColor
     transactionAmount.textColor = showAsHighlighted ? .selectedControlTextColor : transaction?.colour.nsColour
+  }
+  
+  private func configureMenu() {
+    guard view.menu?.item(withTitle: "Remove") == nil, let viewController = collectionView?.delegate as? FilteredTransactionsVC, viewController.resource.resourcEnumRaw == .tag else { return }
+    let menuItem = NSMenuItem(title: "Remove", action: #selector(removeTransaction), keyEquivalent: .emptyString)
+    menuItem.image = .trash
+    view.menu?.addItem(.separator())
+    view.menu?.addItem(menuItem)
+  }
+  
+  @objc private func removeTransaction() {
+    guard let viewController = collectionView?.delegate as? FilteredTransactionsVC, case let .tag(tag) = viewController.resource, let indexPath = collectionView?.indexPath(for: self) else { return }
+    let transaction = viewController.filteredTransactions[indexPath.item]
+    let alert = NSAlert(
+      alertStyle: .informational,
+      icon: .tag,
+      messageText: "Confirmation",
+      informativeText: "Are you sure you want to remove \(tag.id) from \(transaction.attributes.description)?"
+    )
+    alert.addButton(withTitle: "Remove")
+    alert.addButton(withTitle: "Cancel")
+    switch alert.runModal() {
+    case .alertFirstButtonReturn:
+      UpFacade.modifyTags(removing: tag, from: transaction) { (error) in
+        if let error = error {
+          print(error.localizedDescription)
+        } else {
+          viewController.fetchingTasks()
+        }
+      }
+    default:
+      break
+    }
   }
 }

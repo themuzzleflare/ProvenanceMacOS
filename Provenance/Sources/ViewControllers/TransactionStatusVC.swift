@@ -9,11 +9,11 @@ final class TransactionStatusVC: NSViewController {
     super.init(nibName: "TransactionStatus", bundle: nil)
   }
   
-  required init?(coder: NSCoder) {
-    fatalError("Not implemented")
+  deinit {
+    print("deinit")
   }
   
-  override func viewDidLoad() {
-    super.viewDidLoad()
+  required init?(coder: NSCoder) {
+    fatalError("Not implemented")
   }
 }

@@ -8,9 +8,8 @@ extension NSView {
   
   static func loadingView(frame: CGRect, contentType: ContentType) -> NSView {
     let view = NSView(frame: frame)
-    let loadingIndicator = NSProgressIndicator()
+    let loadingIndicator = NSProgressIndicator(style: .spinning)
     view.addSubview(loadingIndicator)
-    loadingIndicator.style = .spinning
     loadingIndicator.startAnimation(self)
     loadingIndicator.snp.makeConstraints { (make) in
       make.center.equalToSuperview()

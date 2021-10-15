@@ -2,12 +2,7 @@ import Cocoa
 import Alamofire
 
 final class CategoriesVC: NSViewController {
-  private lazy var searchField: NSSearchField = {
-    let field = NSSearchField()
-    field.delegate = self
-    field.placeholderString = "Search Categories"
-    return field
-  }()
+  private lazy var searchField = NSSearchField(self, type: .categories)
   
   @IBOutlet weak var collectionView: NSCollectionView! {
     didSet {
@@ -43,7 +38,7 @@ final class CategoriesVC: NSViewController {
   
   private lazy var dataSource = makeDataSource()
   
-  private lazy var toolbar = NSToolbar(self, type: .transactions)
+  private lazy var toolbar = NSToolbar(self, identifier: .transactions)
   
   private var categoryFilter: CategoryTypeEnum = ProvenanceApp.userDefaults.appCategoryFilter {
     didSet {
@@ -82,6 +77,7 @@ final class CategoriesVC: NSViewController {
   
   deinit {
     removeObservers()
+    print("deinit")
   }
   
   required init?(coder: NSCoder) {
@@ -101,8 +97,8 @@ final class CategoriesVC: NSViewController {
   }
   
   private func configureWindow() {
-    AppDelegate.windowController?.window?.toolbar = toolbar
-    AppDelegate.windowController?.window?.title = "Categories"
+    NSApp.mainWindow?.toolbar = toolbar
+    NSApp.mainWindow?.title = "Categories"
   }
   
   private func configureObservers() {
@@ -136,10 +132,11 @@ final class CategoriesVC: NSViewController {
   
   private func applySnapshot(animate: Bool = true) {
     var snapshot = Snapshot()
+    
     snapshot.appendSections([.main])
     snapshot.appendItems(filteredCategories.categoryViewModels, toSection: .main)
     
-    if filteredCategories.isEmpty && categoriesError.isEmpty {
+    if snapshot.itemIdentifiers.isEmpty && categoriesError.isEmpty {
       if categories.isEmpty && !noCategories {
         collectionView.backgroundView = .loadingView(frame: collectionView.bounds, contentType: .categories)
       } else {

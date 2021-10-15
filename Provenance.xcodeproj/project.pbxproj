@@ -120,6 +120,12 @@
 		7A111841271173D8002536E5 /* ResourceEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A11183F2711712E002536E5 /* ResourceEnum.swift */; };
 		7A111842271173D8002536E5 /* ResourceEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A11183F2711712E002536E5 /* ResourceEnum.swift */; };
 		7A1118442711776B002536E5 /* NSViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A1118432711776B002536E5 /* NSViewController+Extension.swift */; };
+		7A27E9432718FD500069FE05 /* TransactionTagsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A27E9412718FD500069FE05 /* TransactionTagsVC.swift */; };
+		7A27E9442718FD500069FE05 /* TransactionTags.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7A27E9422718FD500069FE05 /* TransactionTags.xib */; };
+		7A27E94627191CBF0069FE05 /* ResourceEnumRaw.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A27E94527191CBF0069FE05 /* ResourceEnumRaw.swift */; };
+		7A27E94727191F210069FE05 /* ResourceEnumRaw.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A27E94527191CBF0069FE05 /* ResourceEnumRaw.swift */; };
+		7A27E94827191F210069FE05 /* ResourceEnumRaw.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A27E94527191CBF0069FE05 /* ResourceEnumRaw.swift */; };
+		7A27E94A271951CA0069FE05 /* NSProgressIndicator+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A27E949271951CA0069FE05 /* NSProgressIndicator+Extension.swift */; };
 		7A36D2932712BBE20081E255 /* NSDirectionalEdgeInsets+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A36D2922712BBE20081E255 /* NSDirectionalEdgeInsets+Extension.swift */; };
 		7A36D2952712BC7A0081E255 /* NSStoryboard+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A36D2942712BC7A0081E255 /* NSStoryboard+Extension.swift */; };
 		7A3835FF27155921007F58DB /* NSImageSymbolConfiguration+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A3835FE27155921007F58DB /* NSImageSymbolConfiguration+Extension.swift */; };
@@ -159,7 +165,28 @@
 		7AB93EBD27141DBA00A08538 /* TransactionStatus.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7AB93EBB27141DB900A08538 /* TransactionStatus.xib */; };
 		7AD0C31B2712532C005F2F81 /* DateSupplementaryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7AD0C31A2712532C005F2F81 /* DateSupplementaryView.xib */; };
 		7AD0C31D2712602F005F2F81 /* SortedTransactionCoreModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AD0C31C2712602F005F2F81 /* SortedTransactionCoreModel.swift */; };
+		7AD1838E27178E47004C94B3 /* AddTagsTransactionSelectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AD1838C27178E47004C94B3 /* AddTagsTransactionSelectionVC.swift */; };
+		7AD1838F27178E47004C94B3 /* AddTagsTransactionSelection.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7AD1838D27178E47004C94B3 /* AddTagsTransactionSelection.xib */; };
+		7AD1839227178E89004C94B3 /* AddTagsTagSelectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AD1839027178E89004C94B3 /* AddTagsTagSelectionVC.swift */; };
+		7AD1839327178E89004C94B3 /* AddTagsTagSelection.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7AD1839127178E89004C94B3 /* AddTagsTagSelection.xib */; };
+		7AD1839627178E9C004C94B3 /* AddTagsConfirmationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AD1839427178E9C004C94B3 /* AddTagsConfirmationVC.swift */; };
+		7AD1839727178E9C004C94B3 /* AddTagsConfirmation.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7AD1839527178E9C004C94B3 /* AddTagsConfirmation.xib */; };
+		7AE0DCCD2716AE890062D038 /* NSCollectionViewDiffableDataSource+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AE0DCCC2716AE890062D038 /* NSCollectionViewDiffableDataSource+Extension.swift */; };
+		7AE0DD382716B3340062D038 /* NSSearchField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AE0DD372716B3340062D038 /* NSSearchField+Extension.swift */; };
+		7AE0DD3A2716B33F0062D038 /* NSSegmentedControl+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AE0DD392716B33F0062D038 /* NSSegmentedControl+Extension.swift */; };
+		7AE0DD3C2716B3500062D038 /* NSMenu+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AE0DD3B2716B3500062D038 /* NSMenu+Extension.swift */; };
+		7AE0DD3E2716B4810062D038 /* NSMenuItem+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AE0DD3D2716B4810062D038 /* NSMenuItem+Extension.swift */; };
 		7AE210C12713CF5C00E0EBDD /* NSToolbarIdentifier+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AE210C02713CF5C00E0EBDD /* NSToolbarIdentifier+Extension.swift */; };
+		7AE8FE2B2717ACB300D7443B /* TextItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AE8FE292717ACB300D7443B /* TextItem.swift */; };
+		7AE8FE2C2717ACB300D7443B /* TextItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7AE8FE2A2717ACB300D7443B /* TextItem.xib */; };
+		7AE8FE2F2717B2EA00D7443B /* TextSupplementaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AE8FE2D2717B2EA00D7443B /* TextSupplementaryView.swift */; };
+		7AE8FE302717B2EA00D7443B /* TextSupplementaryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7AE8FE2E2717B2EA00D7443B /* TextSupplementaryView.xib */; };
+		7AE8FE352717BDC000D7443B /* DoubleClickDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AE8FE342717BDC000D7443B /* DoubleClickDelegate.swift */; };
+		7AE8FE372717C64E00D7443B /* NSCollectionViewItemHighlightState+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AE8FE362717C64E00D7443B /* NSCollectionViewItemHighlightState+Extension.swift */; };
+		7AE8FE3D2717CCC400D7443B /* CreateTags.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7AE8FE3B2717CCC400D7443B /* CreateTags.xib */; };
+		7AE8FE3F2717D2A600D7443B /* NSTextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AE8FE3E2717D2A600D7443B /* NSTextField+Extension.swift */; };
+		7AE8FE402717E56600D7443B /* CreateTagsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AE8FE3A2717CCC400D7443B /* CreateTagsVC.swift */; };
+		7AE8FE412717E57000D7443B /* NSAlert+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AE8FE382717CAF800D7443B /* NSAlert+Extension.swift */; };
 		7AEDC993270E7566003EE8D7 /* Preferences.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7AEDC992270E7566003EE8D7 /* Preferences.storyboard */; };
 		7AEDC995270E75C7003EE8D7 /* PreferencesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AEDC994270E75C7003EE8D7 /* PreferencesVC.swift */; };
 		7AF4BC4B270BDA5600C827A6 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AF4BC4A270BDA5600C827A6 /* WidgetKit.framework */; platformFilter = maccatalyst; };
@@ -494,6 +521,10 @@
 		7A11183A27115E8E002536E5 /* FilteredTransactions.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FilteredTransactions.xib; sourceTree = "<group>"; };
 		7A11183F2711712E002536E5 /* ResourceEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourceEnum.swift; sourceTree = "<group>"; };
 		7A1118432711776B002536E5 /* NSViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSViewController+Extension.swift"; sourceTree = "<group>"; };
+		7A27E9412718FD500069FE05 /* TransactionTagsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionTagsVC.swift; sourceTree = "<group>"; };
+		7A27E9422718FD500069FE05 /* TransactionTags.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TransactionTags.xib; sourceTree = "<group>"; };
+		7A27E94527191CBF0069FE05 /* ResourceEnumRaw.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourceEnumRaw.swift; sourceTree = "<group>"; };
+		7A27E949271951CA0069FE05 /* NSProgressIndicator+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSProgressIndicator+Extension.swift"; sourceTree = "<group>"; };
 		7A36D2922712BBE20081E255 /* NSDirectionalEdgeInsets+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSDirectionalEdgeInsets+Extension.swift"; sourceTree = "<group>"; };
 		7A36D2942712BC7A0081E255 /* NSStoryboard+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSStoryboard+Extension.swift"; sourceTree = "<group>"; };
 		7A3835FE27155921007F58DB /* NSImageSymbolConfiguration+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSImageSymbolConfiguration+Extension.swift"; sourceTree = "<group>"; };
@@ -543,7 +574,28 @@
 		7AB93EBB27141DB900A08538 /* TransactionStatus.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TransactionStatus.xib; sourceTree = "<group>"; };
 		7AD0C31A2712532C005F2F81 /* DateSupplementaryView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DateSupplementaryView.xib; sourceTree = "<group>"; };
 		7AD0C31C2712602F005F2F81 /* SortedTransactionCoreModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortedTransactionCoreModel.swift; sourceTree = "<group>"; };
+		7AD1838C27178E47004C94B3 /* AddTagsTransactionSelectionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTagsTransactionSelectionVC.swift; sourceTree = "<group>"; };
+		7AD1838D27178E47004C94B3 /* AddTagsTransactionSelection.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddTagsTransactionSelection.xib; sourceTree = "<group>"; };
+		7AD1839027178E89004C94B3 /* AddTagsTagSelectionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTagsTagSelectionVC.swift; sourceTree = "<group>"; };
+		7AD1839127178E89004C94B3 /* AddTagsTagSelection.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddTagsTagSelection.xib; sourceTree = "<group>"; };
+		7AD1839427178E9C004C94B3 /* AddTagsConfirmationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTagsConfirmationVC.swift; sourceTree = "<group>"; };
+		7AD1839527178E9C004C94B3 /* AddTagsConfirmation.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddTagsConfirmation.xib; sourceTree = "<group>"; };
+		7AE0DCCC2716AE890062D038 /* NSCollectionViewDiffableDataSource+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSCollectionViewDiffableDataSource+Extension.swift"; sourceTree = "<group>"; };
+		7AE0DD372716B3340062D038 /* NSSearchField+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSSearchField+Extension.swift"; sourceTree = "<group>"; };
+		7AE0DD392716B33F0062D038 /* NSSegmentedControl+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSSegmentedControl+Extension.swift"; sourceTree = "<group>"; };
+		7AE0DD3B2716B3500062D038 /* NSMenu+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSMenu+Extension.swift"; sourceTree = "<group>"; };
+		7AE0DD3D2716B4810062D038 /* NSMenuItem+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSMenuItem+Extension.swift"; sourceTree = "<group>"; };
 		7AE210C02713CF5C00E0EBDD /* NSToolbarIdentifier+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSToolbarIdentifier+Extension.swift"; sourceTree = "<group>"; };
+		7AE8FE292717ACB300D7443B /* TextItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextItem.swift; sourceTree = "<group>"; };
+		7AE8FE2A2717ACB300D7443B /* TextItem.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TextItem.xib; sourceTree = "<group>"; };
+		7AE8FE2D2717B2EA00D7443B /* TextSupplementaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextSupplementaryView.swift; sourceTree = "<group>"; };
+		7AE8FE2E2717B2EA00D7443B /* TextSupplementaryView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TextSupplementaryView.xib; sourceTree = "<group>"; };
+		7AE8FE342717BDC000D7443B /* DoubleClickDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleClickDelegate.swift; sourceTree = "<group>"; };
+		7AE8FE362717C64E00D7443B /* NSCollectionViewItemHighlightState+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSCollectionViewItemHighlightState+Extension.swift"; sourceTree = "<group>"; };
+		7AE8FE382717CAF800D7443B /* NSAlert+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSAlert+Extension.swift"; sourceTree = "<group>"; };
+		7AE8FE3A2717CCC400D7443B /* CreateTagsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTagsVC.swift; sourceTree = "<group>"; };
+		7AE8FE3B2717CCC400D7443B /* CreateTags.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreateTags.xib; sourceTree = "<group>"; };
+		7AE8FE3E2717D2A600D7443B /* NSTextField+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSTextField+Extension.swift"; sourceTree = "<group>"; };
 		7AEDC992270E7566003EE8D7 /* Preferences.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Preferences.storyboard; sourceTree = "<group>"; };
 		7AEDC994270E75C7003EE8D7 /* PreferencesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesVC.swift; sourceTree = "<group>"; };
 		7AF4BC48270BDA5600C827A6 /* Provenance Widgets.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Provenance Widgets.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -635,6 +687,11 @@
 				7A11183927115E8E002536E5 /* FilteredTransactionsVC.swift */,
 				7A7A3901270FF21C008B3E37 /* TransactionDetailVC.swift */,
 				7AB93EBA27141DB900A08538 /* TransactionStatusVC.swift */,
+				7A27E9412718FD500069FE05 /* TransactionTagsVC.swift */,
+				7AD1838C27178E47004C94B3 /* AddTagsTransactionSelectionVC.swift */,
+				7AD1839027178E89004C94B3 /* AddTagsTagSelectionVC.swift */,
+				7AD1839427178E9C004C94B3 /* AddTagsConfirmationVC.swift */,
+				7AE8FE3A2717CCC400D7443B /* CreateTagsVC.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -648,6 +705,7 @@
 				7A4F211A270FCB1100C0AF8C /* TagItem.swift */,
 				7A4F211E270FCF4800C0AF8C /* CategoryItem.swift */,
 				7A7A3905270FF253008B3E37 /* AttributeItem.swift */,
+				7AE8FE292717ACB300D7443B /* TextItem.swift */,
 			);
 			path = CollectionViewItems;
 			sourceTree = "<group>";
@@ -721,6 +779,9 @@
 		7A05EA07270BA6F5004C958F /* XIBs */ = {
 			isa = PBXGroup;
 			children = (
+				7AD1838D27178E47004C94B3 /* AddTagsTransactionSelection.xib */,
+				7AD1839127178E89004C94B3 /* AddTagsTagSelection.xib */,
+				7AD1839527178E9C004C94B3 /* AddTagsConfirmation.xib */,
 				7AB42D862713F34E0006110F /* Transactions.xib */,
 				7AB42D882713FE4B0006110F /* Accounts.xib */,
 				7AB42D8A2713FE510006110F /* Tags.xib */,
@@ -734,6 +795,10 @@
 				7AB93EBB27141DB900A08538 /* TransactionStatus.xib */,
 				7A11183A27115E8E002536E5 /* FilteredTransactions.xib */,
 				7AD0C31A2712532C005F2F81 /* DateSupplementaryView.xib */,
+				7AE8FE2E2717B2EA00D7443B /* TextSupplementaryView.xib */,
+				7AE8FE2A2717ACB300D7443B /* TextItem.xib */,
+				7AE8FE3B2717CCC400D7443B /* CreateTags.xib */,
+				7A27E9422718FD500069FE05 /* TransactionTags.xib */,
 			);
 			path = XIBs;
 			sourceTree = "<group>";
@@ -772,6 +837,7 @@
 			isa = PBXGroup;
 			children = (
 				7A0D539D271242AD00A024D6 /* DateSupplementaryView.swift */,
+				7AE8FE2D2717B2EA00D7443B /* TextSupplementaryView.swift */,
 			);
 			path = SupplementaryViews;
 			sourceTree = "<group>";
@@ -799,6 +865,7 @@
 				7A05EA41270BD3D0004C958F /* NSCollectionViewLayout+Extension.swift */,
 				7A1118432711776B002536E5 /* NSViewController+Extension.swift */,
 				7AB42D842713F2AF0006110F /* NSTabViewItem+Extension.swift */,
+				7AE0DCCC2716AE890062D038 /* NSCollectionViewDiffableDataSource+Extension.swift */,
 				7A36D2942712BC7A0081E255 /* NSStoryboard+Extension.swift */,
 				7A0D539827123B2200A024D6 /* NSNib+Extension.swift */,
 				7AB42D822713EA880006110F /* NSToolbar+Extension.swift */,
@@ -810,6 +877,14 @@
 				7A36D2922712BBE20081E255 /* NSDirectionalEdgeInsets+Extension.swift */,
 				7AB93EB62714120600A08538 /* NSImageView+Extension.swift */,
 				7A3835FE27155921007F58DB /* NSImageSymbolConfiguration+Extension.swift */,
+				7AE0DD372716B3340062D038 /* NSSearchField+Extension.swift */,
+				7AE0DD392716B33F0062D038 /* NSSegmentedControl+Extension.swift */,
+				7AE0DD3B2716B3500062D038 /* NSMenu+Extension.swift */,
+				7AE0DD3D2716B4810062D038 /* NSMenuItem+Extension.swift */,
+				7AE8FE362717C64E00D7443B /* NSCollectionViewItemHighlightState+Extension.swift */,
+				7AE8FE382717CAF800D7443B /* NSAlert+Extension.swift */,
+				7AE8FE3E2717D2A600D7443B /* NSTextField+Extension.swift */,
+				7A27E949271951CA0069FE05 /* NSProgressIndicator+Extension.swift */,
 			);
 			path = AppKit;
 			sourceTree = "<group>";
@@ -983,6 +1058,7 @@
 		7A959F81270B9D1900AC45F3 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				7AE8FE332717BDB600D7443B /* Protocols */,
 				7A111834271150C0002536E5 /* Views */,
 				7A05EA2B270BC3B5004C958F /* Models */,
 				7A05EA2E270BC47C004C958F /* Extensions */,
@@ -1016,8 +1092,17 @@
 				7A05E9B8270BA1A7004C958F /* TransactionCategory.swift */,
 				7A05E9B7270BA1A6004C958F /* TransactionGroupingEnum.swift */,
 				7A11183F2711712E002536E5 /* ResourceEnum.swift */,
+				7A27E94527191CBF0069FE05 /* ResourceEnumRaw.swift */,
 			);
 			path = Other;
+			sourceTree = "<group>";
+		};
+		7AE8FE332717BDB600D7443B /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				7AE8FE342717BDC000D7443B /* DoubleClickDelegate.swift */,
+			);
+			path = Protocols;
 			sourceTree = "<group>";
 		};
 		7AF4BC49270BDA5600C827A6 /* Frameworks */ = {
@@ -1248,23 +1333,30 @@
 				7A05E95C270BA0DB004C958F /* CircularStd-Book.otf in Resources */,
 				7A4F2112270FA53800C0AF8C /* AccountItem.xib in Resources */,
 				7A959F69270B9A6C00AC45F3 /* Assets.xcassets in Resources */,
+				7AD1839327178E89004C94B3 /* AddTagsTagSelection.xib in Resources */,
+				7AE8FE302717B2EA00D7443B /* TextSupplementaryView.xib in Resources */,
 				7AB42D8D2713FE570006110F /* Categories.xib in Resources */,
 				7A05EA09270BA724004C958F /* TabController.storyboard in Resources */,
 				7AB42D872713F34E0006110F /* Transactions.xib in Resources */,
 				7A4F211D270FCB1100C0AF8C /* TagItem.xib in Resources */,
 				7A4F2121270FCF4800C0AF8C /* CategoryItem.xib in Resources */,
+				7AE8FE2C2717ACB300D7443B /* TextItem.xib in Resources */,
 				7A05E95E270BA0DB004C958F /* SF-Mono-Regular.otf in Resources */,
 				7AB93EBD27141DBA00A08538 /* TransactionStatus.xib in Resources */,
 				7AD0C31B2712532C005F2F81 /* DateSupplementaryView.xib in Resources */,
 				7A05E95B270BA0DB004C958F /* CircularStd-Bold.otf in Resources */,
 				7AB42D892713FE4B0006110F /* Accounts.xib in Resources */,
 				7AEDC993270E7566003EE8D7 /* Preferences.storyboard in Resources */,
+				7A27E9442718FD500069FE05 /* TransactionTags.xib in Resources */,
 				7A959F6C270B9A6C00AC45F3 /* Main.storyboard in Resources */,
 				7AB42D8B2713FE510006110F /* Tags.xib in Resources */,
+				7AD1839727178E9C004C94B3 /* AddTagsConfirmation.xib in Resources */,
 				7A05E95A270BA0DB004C958F /* CircularStd-BookItalic.ttf in Resources */,
 				7A7A390E270FF6F0008B3E37 /* TransactionDetail.xib in Resources */,
 				7A7A3908270FF253008B3E37 /* AttributeItem.xib in Resources */,
+				7AE8FE3D2717CCC400D7443B /* CreateTags.xib in Resources */,
 				7A05E95D270BA0DB004C958F /* CircularStd-Medium.otf in Resources */,
+				7AD1838F27178E47004C94B3 /* AddTagsTransactionSelection.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1392,6 +1484,7 @@
 				7AD0C31D2712602F005F2F81 /* SortedTransactionCoreModel.swift in Sources */,
 				7AB93EBC27141DBA00A08538 /* TransactionStatusVC.swift in Sources */,
 				7A05E9F0270BA324004C958F /* Double+Extension.swift in Sources */,
+				7AD1838E27178E47004C94B3 /* AddTagsTransactionSelectionVC.swift in Sources */,
 				7A05E99C270BA166004C958F /* SingleCategory.swift in Sources */,
 				7A05E9C5270BA1A7004C958F /* AccountTypeOptionEnum.swift in Sources */,
 				7A05E98F270BA166004C958F /* TagResource.swift in Sources */,
@@ -1405,16 +1498,21 @@
 				7A05EA19270BA81D004C958F /* AccountsVC.swift in Sources */,
 				7A05EA3B270BCF3D004C958F /* ContentType.swift in Sources */,
 				7A111836271150D9002536E5 /* CollectionItemView.swift in Sources */,
+				7AD1839227178E89004C94B3 /* AddTagsTagSelectionVC.swift in Sources */,
 				7A05E9FA270BA324004C958F /* Font+Extension.swift in Sources */,
 				7A05E9AE270BA166004C958F /* Account.swift in Sources */,
 				7A05E9A6270BA166004C958F /* RelatedLink.swift in Sources */,
+				7AE8FE2F2717B2EA00D7443B /* TextSupplementaryView.swift in Sources */,
 				7A05E9EF270BA324004C958F /* StatusEnum+Extension.swift in Sources */,
 				7A05E9AF270BA166004C958F /* Pagination.swift in Sources */,
 				7A05E9A2270BA166004C958F /* TransactionAttribute.swift in Sources */,
 				7A36D2932712BBE20081E255 /* NSDirectionalEdgeInsets+Extension.swift in Sources */,
+				7AE8FE352717BDC000D7443B /* DoubleClickDelegate.swift in Sources */,
 				7A05E9A0270BA166004C958F /* MoneyObject.swift in Sources */,
+				7AD1839627178E9C004C94B3 /* AddTagsConfirmationVC.swift in Sources */,
 				7A05EA01270BA324004C958F /* AccountType+Extension.swift in Sources */,
 				7A05EA1B270BA827004C958F /* TagsVC.swift in Sources */,
+				7AE8FE2B2717ACB300D7443B /* TextItem.swift in Sources */,
 				7A05E9EA270BA324004C958F /* AddTagToTransactionIntentResponse+Extension.swift in Sources */,
 				7A4F2114270FA8AF00C0AF8C /* AccountResource+ViewModel.swift in Sources */,
 				7A05E9AA270BA166004C958F /* TransactionRelationshipTransferAccount.swift in Sources */,
@@ -1431,6 +1529,7 @@
 				7A4F2117270FC4C200C0AF8C /* CategoryResource+ViewModel.swift in Sources */,
 				7A05E9FC270BA324004C958F /* String+Extension.swift in Sources */,
 				7A05E9EE270BA324004C958F /* NSUserActivity+Extension.swift in Sources */,
+				7AE8FE372717C64E00D7443B /* NSCollectionViewItemHighlightState+Extension.swift in Sources */,
 				7A05E9B1270BA166004C958F /* TransactionStatusEnum.swift in Sources */,
 				7A05E9F8270BA324004C958F /* CategoryType+Extension.swift in Sources */,
 				7A05E9F1270BA324004C958F /* UserDefaults+Extension.swift in Sources */,
@@ -1440,6 +1539,7 @@
 				7A05E994270BA166004C958F /* AccountTypeEnum.swift in Sources */,
 				7A959F65270B9A6A00AC45F3 /* AppDelegate.swift in Sources */,
 				7A05E9C8270BA1A7004C958F /* AppDateStyle.swift in Sources */,
+				7AE8FE3F2717D2A600D7443B /* NSTextField+Extension.swift in Sources */,
 				7A05E9EC270BA324004C958F /* ListTransactionsIntentResponse+Extension.swift in Sources */,
 				7A05EA1D270BA832004C958F /* CategoriesVC.swift in Sources */,
 				7AB42D832713EA880006110F /* NSToolbar+Extension.swift in Sources */,
@@ -1451,20 +1551,26 @@
 				7A05E992270BA166004C958F /* TagRelationship.swift in Sources */,
 				7A05E9C2270BA1A7004C958F /* TransactionGroupingEnum.swift in Sources */,
 				7A4F211C270FCB1100C0AF8C /* TagItem.swift in Sources */,
+				7AE0DD3E2716B4810062D038 /* NSMenuItem+Extension.swift in Sources */,
+				7A27E94627191CBF0069FE05 /* ResourceEnumRaw.swift in Sources */,
 				7A05E9C7270BA1A7004C958F /* ProvenanceApp.swift in Sources */,
 				7A05E9A9270BA166004C958F /* Transaction.swift in Sources */,
 				7A05E9A8270BA166004C958F /* RelationshipData.swift in Sources */,
 				7A05E9C3270BA1A7004C958F /* TransactionCategory.swift in Sources */,
 				7A05EA05270BA324004C958F /* TransactionType+Extension.swift in Sources */,
+				7AE0DD3C2716B3500062D038 /* NSMenu+Extension.swift in Sources */,
 				7A05EA02270BA324004C958F /* CGColor+Extension.swift in Sources */,
 				7A0D539927123B2200A024D6 /* NSNib+Extension.swift in Sources */,
 				7A05E98D270BA166004C958F /* CategoryRelationshipParent.swift in Sources */,
 				7A05E9FD270BA324004C958F /* NSParagraphStyle+Extension.swift in Sources */,
 				7A05E993270BA166004C958F /* TransactionRelationship.swift in Sources */,
 				7A4F2119270FC4CD00C0AF8C /* TagResource+ViewModel.swift in Sources */,
+				7A27E9432718FD500069FE05 /* TransactionTagsVC.swift in Sources */,
+				7AE8FE412717E57000D7443B /* NSAlert+Extension.swift in Sources */,
 				7A05EA13270BA7FB004C958F /* TransactionsVC.swift in Sources */,
 				7A5B8D56270E65DA00C132EE /* TagViewModel.swift in Sources */,
 				7A05E998270BA166004C958F /* SingleTransaction.swift in Sources */,
+				7AE0DD382716B3340062D038 /* NSSearchField+Extension.swift in Sources */,
 				7A4F2120270FCF4800C0AF8C /* CategoryItem.swift in Sources */,
 				7A05E9C0270BA1A7004C958F /* AccountBalanceModel.swift in Sources */,
 				7A05E99F270BA166004C958F /* AccountAttribute.swift in Sources */,
@@ -1490,6 +1596,7 @@
 				7A05EA36270BCDE6004C958F /* NSView+Extension.swift in Sources */,
 				7A05E9A5270BA166004C958F /* ErrorSource.swift in Sources */,
 				7A05E9F4270BA324004C958F /* NSAttributedString+Extension.swift in Sources */,
+				7AE8FE402717E56600D7443B /* CreateTagsVC.swift in Sources */,
 				7A05E98E270BA166004C958F /* TransactionResource.swift in Sources */,
 				7A05E9A3270BA166004C958F /* AccountResource.swift in Sources */,
 				7A111838271158CD002536E5 /* CollectionViewItem.swift in Sources */,
@@ -1499,7 +1606,10 @@
 				7A05E9F7270BA324004C958F /* NSColor+Extension.swift in Sources */,
 				7AB42D812713E68A0006110F /* NSToolbarItem+Extension.swift in Sources */,
 				7A7A38FE270FF17B008B3E37 /* DetailSection.swift in Sources */,
+				7AE0DD3A2716B33F0062D038 /* NSSegmentedControl+Extension.swift in Sources */,
+				7A27E94A271951CA0069FE05 /* NSProgressIndicator+Extension.swift in Sources */,
 				7A05E99D270BA166004C958F /* RoundUpObject.swift in Sources */,
+				7AE0DCCD2716AE890062D038 /* NSCollectionViewDiffableDataSource+Extension.swift in Sources */,
 				7A11183B27115E8E002536E5 /* FilteredTransactionsVC.swift in Sources */,
 				7A05E9CA270BA1A7004C958F /* AppWidgets.swift in Sources */,
 				7A0D539E271242AD00A024D6 /* DateSupplementaryView.swift in Sources */,
@@ -1561,6 +1671,7 @@
 				7AF4BD31270BDFCF00C827A6 /* LatestTransactionEntry.swift in Sources */,
 				7AF4BC8F270BDE8200C827A6 /* AppWidgets.swift in Sources */,
 				7AF4BC96270BDE8200C827A6 /* UpFacade.swift in Sources */,
+				7A27E94827191F210069FE05 /* ResourceEnumRaw.swift in Sources */,
 				7AF4BC83270BDE8200C827A6 /* TransactionRelationshipTag.swift in Sources */,
 				7AF4BCE8270BDE9C00C827A6 /* NSUserActivity+Extension.swift in Sources */,
 				7A111842271173D8002536E5 /* ResourceEnum.swift in Sources */,
@@ -1657,6 +1768,7 @@
 				7AF4BCCA270BDE8200C827A6 /* UpFacade.swift in Sources */,
 				7AF4BCB7270BDE8200C827A6 /* TransactionRelationshipTag.swift in Sources */,
 				7AF4BD04270BDE9C00C827A6 /* NSUserActivity+Extension.swift in Sources */,
+				7A27E94727191F210069FE05 /* ResourceEnumRaw.swift in Sources */,
 				7AF4BD19270BDE9C00C827A6 /* NSFont+Extension.swift in Sources */,
 				7AF4BCC9270BDE8200C827A6 /* ErrorSource.swift in Sources */,
 				7AF4BD10270BDE9C00C827A6 /* NSImage+Extension.swift in Sources */,

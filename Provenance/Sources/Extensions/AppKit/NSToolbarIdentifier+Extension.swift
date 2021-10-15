@@ -13,6 +13,10 @@ extension NSToolbar.Identifier {
     return NSToolbar.Identifier("tagsToolbar")
   }
   
+  static var transactionTags: NSToolbar.Identifier {
+    return NSToolbar.Identifier("transactionTagsToolbar")
+  }
+  
   static var categories: NSToolbar.Identifier {
     return NSToolbar.Identifier("categoriesToolbar")
   }
@@ -23,5 +27,17 @@ extension NSToolbar.Identifier {
   
   static var transactionDetail: NSToolbar.Identifier {
     return NSToolbar.Identifier("transactionDetailToolbar")
+  }
+  
+  static var confirmation: NSToolbar.Identifier {
+    return NSToolbar.Identifier("confirmationToolbar")
+  }
+  
+  static var selectTransaction: NSToolbar.Identifier {
+    return NSToolbar.Identifier("selectTransactionToolbar")
+  }
+  
+  static var selectTags: NSToolbar.Identifier {
+    return NSToolbar.Identifier("selectTagsToolbar")
   }
 }

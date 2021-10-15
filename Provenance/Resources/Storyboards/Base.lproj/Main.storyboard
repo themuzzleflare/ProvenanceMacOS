@@ -15,14 +15,14 @@
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="Provenance" systemMenu="apple" id="uQy-DD-JDr">
                                     <items>
-                                        <menuItem title="About Provenance" image="info.circle" catalog="system" id="5kV-Vb-QxS">
+                                        <menuItem title="About Provenance" id="5kV-Vb-QxS">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
                                                 <action selector="orderFrontStandardAboutPanel:" target="Ady-hI-5gd" id="Exp-CZ-Vem"/>
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="VOq-y0-SEH"/>
-                                        <menuItem title="Preferences…" image="gear" catalog="system" keyEquivalent="," id="BOF-NM-1cW">
+                                        <menuItem title="Preferences…" keyEquivalent="," id="BOF-NM-1cW">
                                             <connections>
                                                 <segue destination="B7j-VN-KOX" kind="show" identifier="showPreferences" id="gtT-zy-YBC"/>
                                             </connections>
@@ -295,6 +295,18 @@
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="hB3-LF-h0Y"/>
+                                        <menuItem title="Tabs" identifier="tabsSubmenuItem" id="m0l-Uu-aRN">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <menu key="submenu" title="Tabs" id="r7I-hi-ofP">
+                                                <items>
+                                                    <menuItem title="Transactions" state="on" onStateImage="dollarsign.circle.fill" catalog="system" offStateImage="dollarsign.circle" keyEquivalent="1" identifier="transactionsMenuItem" id="crr-Cu-3OU"/>
+                                                    <menuItem title="Accounts" onStateImage="wallet.pass.fill" catalog="system" offStateImage="wallet.pass" tag="1" keyEquivalent="2" identifier="accountsMenuItem" id="FXn-AO-udK"/>
+                                                    <menuItem title="Tags" onStateImage="tag.fill" catalog="system" offStateImage="tag" tag="2" keyEquivalent="3" identifier="tagsMenuItem" id="uxL-et-mHu"/>
+                                                    <menuItem title="Categories" onStateImage="tray.full.fill" catalog="system" offStateImage="tray.full" tag="3" keyEquivalent="4" identifier="categoriesMenuItem" id="112-lf-AXa"/>
+                                                </items>
+                                            </menu>
+                                        </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="6QR-vi-TTf"/>
                                         <menuItem title="Show Sidebar" keyEquivalent="s" id="kIP-vf-haE">
                                             <modifierMask key="keyEquivalentModifierMask" control="YES" command="YES"/>
                                             <connections>
@@ -353,7 +365,14 @@
                         <outlet property="delegate" destination="Voe-Tx-rLC" id="PrD-fu-P6m"/>
                     </connections>
                 </application>
-                <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="Provenance" customModuleProvider="target"/>
+                <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="Provenance" customModuleProvider="target">
+                    <connections>
+                        <outlet property="accountsMenuItem" destination="FXn-AO-udK" id="S4e-OO-tc1"/>
+                        <outlet property="categoriesMenuItem" destination="112-lf-AXa" id="gtS-Q2-LRw"/>
+                        <outlet property="tagsMenuItem" destination="uxL-et-mHu" id="RoO-gf-Dys"/>
+                        <outlet property="transactionsMenuItem" destination="crr-Cu-3OU" id="U8Z-gS-7zs"/>
+                    </connections>
+                </customObject>
                 <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -398,7 +417,13 @@
         </scene>
     </scenes>
     <resources>
-        <image name="gear" catalog="system" width="17" height="17"/>
-        <image name="info.circle" catalog="system" width="15" height="15"/>
+        <image name="dollarsign.circle" catalog="system" width="15" height="15"/>
+        <image name="dollarsign.circle.fill" catalog="system" width="15" height="15"/>
+        <image name="tag" catalog="system" width="17" height="17"/>
+        <image name="tag.fill" catalog="system" width="17" height="17"/>
+        <image name="tray.full" catalog="system" width="18" height="13"/>
+        <image name="tray.full.fill" catalog="system" width="18" height="13"/>
+        <image name="wallet.pass" catalog="system" width="14" height="16"/>
+        <image name="wallet.pass.fill" catalog="system" width="14" height="16"/>
     </resources>
 </document>

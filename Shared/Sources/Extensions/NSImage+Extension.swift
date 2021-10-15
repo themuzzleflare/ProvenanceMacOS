@@ -29,6 +29,10 @@ extension NSImage {
     return NSImage(systemName: "tag")!
   }
   
+  static var tagSlash: NSImage {
+    return NSImage(systemName: "tag.slash")!
+  }
+  
   static var tagFill: NSImage {
     return NSImage(systemName: "tag.fill")!
   }
@@ -97,6 +101,10 @@ extension NSImage {
     return NSImage(systemName: "chevron.left")!
   }
   
+  static var chevronRight: NSImage {
+    return NSImage(systemName: "chevron.right")!
+  }
+  
   static var chevronLeftSlashChevronRight: NSImage {
     return NSImage(systemName: "chevron.left.slash.chevron.right")!
   }
@@ -163,5 +171,9 @@ extension NSImage {
   
   static var squareStackFill: NSImage {
     return NSImage(systemName: "square.stack.fill")!
+  }
+  
+  static var plus: NSImage {
+    return NSImage(systemName: "plus")!
   }
 }

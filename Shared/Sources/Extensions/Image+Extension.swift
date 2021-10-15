@@ -25,6 +25,10 @@ extension Image {
     return Image(systemName: "tag")
   }
   
+  static var tagSlash: Image {
+    return Image(systemName: "tag.slash")
+  }
+  
   static var tagFill: Image {
     return Image(systemName: "tag.fill")
   }
@@ -91,6 +95,10 @@ extension Image {
   
   static var chevronLeft: Image {
     return Image(systemName: "chevron.left")
+  }
+  
+  static var chevronRight: Image {
+    return Image(systemName: "chevron.right")
   }
   
   static var chevronLeftSlashChevronRight: Image {

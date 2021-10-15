@@ -1,9 +1,7 @@
 import Cocoa
 import Alamofire
 
-final class TagsVC: NSViewController {
-  private lazy var searchField = NSSearchField(self, type: .tags)
-  
+final class AddTagsTagSelectionVC: NSViewController {
   @IBOutlet weak var collectionView: NSCollectionView! {
     didSet {
       collectionView.dataSource = dataSource
@@ -13,19 +11,27 @@ final class TagsVC: NSViewController {
     }
   }
   
-  private enum Section {
+  private var previousViewController: NSViewController
+  
+  private var transaction: TransactionResource
+  
+  enum Section {
     case main
   }
   
-  private typealias DataSource = NSCollectionViewDiffableDataSource<Section, TagViewModel>
+  typealias DataSource = NSCollectionViewDiffableDataSource<Section, TagViewModel>
   
-  private typealias Snapshot = NSDiffableDataSourceSnapshot<Section, TagViewModel>
+  typealias Snapshot = NSDiffableDataSourceSnapshot<Section, TagViewModel>
   
-  private lazy var dataSource = makeDataSource()
+  lazy var dataSource = makeDataSource()
   
-  private lazy var toolbar = NSToolbar(self, identifier: .tags)
+  private lazy var toolbar = NSToolbar(self, identifier: .selectTags)
   
-  private var apiKeyObserver: NSKeyValueObservation?
+  private lazy var searchField = NSSearchField(self, type: .tags)
+  
+  lazy var createTagsAlert = NSAlert.createTags(self)
+  
+  lazy var createTagsViewController = CreateTagsVC(self)
   
   private var noTags: Bool = false
   
@@ -43,12 +49,13 @@ final class TagsVC: NSViewController {
     return tags.filtered(searchField: searchField)
   }
   
-  override init(nibName nibNameOrNil: NSNib.Name?, bundle nibBundleOrNil: Bundle?) {
-    super.init(nibName: "Tags", bundle: nil)
+  init(_ previousViewController: NSViewController, transaction: TransactionResource) {
+    self.previousViewController = previousViewController
+    self.transaction = transaction
+    super.init(nibName: "AddTagsTagSelection", bundle: nil)
   }
   
   deinit {
-    removeObserver()
     print("deinit")
   }
   
@@ -58,7 +65,6 @@ final class TagsVC: NSViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    configureObserver()
     applySnapshot(animate: false)
   }
   
@@ -70,26 +76,15 @@ final class TagsVC: NSViewController {
   
   private func configureWindow() {
     NSApp.mainWindow?.toolbar = toolbar
-    NSApp.mainWindow?.title = "Tags"
+    NSApp.mainWindow?.title = "Select Tag"
   }
   
-  private func configureObserver() {
-    apiKeyObserver = ProvenanceApp.userDefaults.observe(\.apiKey, options: .new) { [weak self] (_, _) in
-      guard let weakSelf = self else { return }
-      weakSelf.fetchTags()
-    }
-  }
-  
-  private func removeObserver() {
-    apiKeyObserver?.invalidate()
-    apiKeyObserver = nil
-  }
-  
-  private func makeDataSource() -> DataSource {
+  func makeDataSource() -> DataSource {
     return DataSource(
       collectionView: collectionView,
-      itemProvider: { (collectionView, indexPath, tag) in
+      itemProvider: { [weak self] (collectionView, indexPath, tag) in
         guard let item = collectionView.makeItem(withIdentifier: .tagItem, for: indexPath) as? TagItem else { fatalError() }
+        item.delegate = self
         item.tag = tag
         return item
       }
@@ -144,22 +139,45 @@ final class TagsVC: NSViewController {
     tags.removeAll()
   }
   
-  @objc private func addTags() {
-    let viewController = AddTagsTransactionSelectionVC(parent ?? self, previousTitle: "Tags")
-    view.window?.contentViewController = .navigation(parent ?? self, to: viewController)
+  @objc private func goBack() {
+    view.window?.contentViewController = .navigation(self, to: previousViewController)
+  }
+  
+  @objc private func next() {
+    let selectedTags = collectionView.selectionIndexPaths.map { (indexPath) in
+      return filteredTags[indexPath.item]
+    }
+    let viewController = AddTagsConfirmationVC(self, transaction: transaction, tags: selectedTags)
+    view.window?.contentViewController = .navigation(self, to: viewController)
+  }
+  
+  @objc private func createTag() {
+    switch createTagsAlert.runModal() {
+    case .alertFirstButtonReturn:
+      let viewController = AddTagsConfirmationVC(self, transaction: transaction, tags: createTagsViewController.textFields.tagResources)
+      view.window?.contentViewController = .navigation(self, to: viewController)
+    default:
+      break
+    }
+    createTagsViewController = CreateTagsVC(self)
+    createTagsAlert = NSAlert.createTags(self)
   }
 }
 
 // MARK: - NSToolbarDelegate
 
-extension TagsVC: NSToolbarDelegate {
+extension AddTagsTagSelectionVC: NSToolbarDelegate {
   func toolbar(_ toolbar: NSToolbar, itemForItemIdentifier itemIdentifier: NSToolbarItem.Identifier, willBeInsertedIntoToolbar flag: Bool) -> NSToolbarItem? {
     switch itemIdentifier {
-    case .addTags:
-      return .addTags(self, action: #selector(addTags))
+    case .backButton:
+      return .backButton(self, title: transaction.attributes.description, action: #selector(goBack))
+    case .createTag:
+      return .createTag(self, action: #selector(createTag))
+    case .next:
+      return .next(self, action: #selector(next))
     case .flexibleSpace:
       return NSToolbarItem(itemIdentifier: itemIdentifier)
-    case .tagsSearch:
+    case .selectTagsSearch:
       return NSSearchToolbarItem(itemIdentifier: itemIdentifier, searchField: searchField)
     default:
       return nil
@@ -167,7 +185,7 @@ extension TagsVC: NSToolbarDelegate {
   }
   
   func toolbarDefaultItemIdentifiers(_ toolbar: NSToolbar) -> [NSToolbarItem.Identifier] {
-    return [.addTags, .flexibleSpace, .tagsSearch]
+    return [.backButton, .createTag, .next, .flexibleSpace, .selectTagsSearch]
   }
   
   func toolbarAllowedItemIdentifiers(_ toolbar: NSToolbar) -> [NSToolbarItem.Identifier] {
@@ -177,37 +195,44 @@ extension TagsVC: NSToolbarDelegate {
 
 // MARK: - NSToolbarItemValidation
 
-extension TagsVC: NSToolbarItemValidation {
+extension AddTagsTagSelectionVC: NSToolbarItemValidation {
   @discardableResult func validateToolbarItem(_ item: NSToolbarItem) -> Bool {
     switch item.itemIdentifier {
-    case .addTags:
-      if tagsError.isEmpty {
-        item.toolTip = "Add tags."
+    case .createTag:
+      if collectionView.selectionIndexPaths.isEmpty {
+        item.toolTip = "Create new tags."
       } else {
-        item.toolTip = "Resolve the current error before adding tags."
+        item.toolTip = "You must deselect all tags before creating new tags."
       }
-      return tagsError.isEmpty
+      return collectionView.selectionIndexPaths.isEmpty
+    case .next:
+      if collectionView.selectionIndexPaths.isEmpty {
+        item.toolTip = "You must select a tag in order to proceed."
+      } else if collectionView.selectionIndexPaths.count > 6 {
+        item.toolTip = "You can only select a maximum of 6 tags."
+      } else {
+        item.toolTip = "Confirm selection."
+      }
+      return !collectionView.selectionIndexPaths.isEmpty && collectionView.selectionIndexPaths.count <= 6
     default:
       return true
     }
   }
 }
 
-// MARK: - NSCollectionViewDelegate
+// MARK: - DoubleClickDelegate
 
-extension TagsVC: NSCollectionViewDelegate {
-  func collectionView(_ collectionView: NSCollectionView, didSelectItemsAt indexPaths: Set<IndexPath>) {
-    guard let indexPath = indexPaths.first else { return }
+extension AddTagsTagSelectionVC: DoubleClickDelegate {
+  func didDoubleClick(indexPath: IndexPath) {
     let tag = filteredTags[indexPath.item]
-    let viewController = FilteredTransactionsVC(parent ?? self, previousTitle: "Tags", resource: .tag(tag))
-    collectionView.deselectItems(at: indexPaths)
-    view.window?.contentViewController = .navigation(parent ?? self, to: viewController)
+    let viewController = AddTagsConfirmationVC(self, transaction: transaction, tag: tag)
+    view.window?.contentViewController = .navigation(self, to: viewController)
   }
 }
 
 // MARK: - NSSearchFieldDelegate
 
-extension TagsVC: NSSearchFieldDelegate {
+extension AddTagsTagSelectionVC: NSSearchFieldDelegate {
   func controlTextDidChange(_ obj: Notification) {
     applySnapshot()
   }

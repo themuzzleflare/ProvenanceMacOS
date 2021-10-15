@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="19162" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="19162"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="CreateTagsVC" customModule="Provenance" customModuleProvider="target">
+            <connections>
+                <outlet property="lol" destination="wom-g7-MFA" id="3wq-Ps-ikH"/>
+                <outlet property="textField1" destination="QTX-DN-HZN" id="YdC-p7-kAw"/>
+                <outlet property="textField2" destination="wom-g7-MFA" id="JmR-cw-zpy"/>
+                <outlet property="textField3" destination="5Hx-pw-Z70" id="J4W-Ap-aAL"/>
+                <outlet property="textField4" destination="xUo-V5-b60" id="kXw-6x-Uir"/>
+                <outlet property="textField5" destination="f1z-pw-yF9" id="Yat-kb-xer"/>
+                <outlet property="textField6" destination="jAN-JY-nwl" id="XQu-To-XYo"/>
+                <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <customView id="Hz6-mo-xeY">
+            <rect key="frame" x="0.0" y="0.0" width="376" height="221"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <subviews>
+                <stackView distribution="fill" orientation="vertical" alignment="centerX" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZbQ-Ay-DkV">
+                    <rect key="frame" x="16" y="25" width="344" height="172"/>
+                    <subviews>
+                        <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="QTX-DN-HZN">
+                            <rect key="frame" x="124" y="150" width="96" height="22"/>
+                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="Tag 1" bezelStyle="round" id="IYP-xY-dmi">
+                                <font key="font" usesAppearanceFont="YES"/>
+                                <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                            </textFieldCell>
+                            <connections>
+                                <outlet property="delegate" destination="-2" id="cg1-Zi-1z6"/>
+                                <outlet property="nextKeyView" destination="wom-g7-MFA" id="OjD-n7-vVI"/>
+                            </connections>
+                        </textField>
+                        <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="wom-g7-MFA">
+                            <rect key="frame" x="124" y="120" width="96" height="22"/>
+                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="Tag 2" bezelStyle="round" id="gPW-3p-LWQ">
+                                <font key="font" usesAppearanceFont="YES"/>
+                                <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                            </textFieldCell>
+                            <connections>
+                                <outlet property="delegate" destination="-2" id="Bwd-MF-M6z"/>
+                                <outlet property="nextKeyView" destination="5Hx-pw-Z70" id="CQC-v8-BNV"/>
+                            </connections>
+                        </textField>
+                        <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="5Hx-pw-Z70">
+                            <rect key="frame" x="124" y="90" width="96" height="22"/>
+                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="Tag 3" bezelStyle="round" id="TXU-vd-jpb">
+                                <font key="font" usesAppearanceFont="YES"/>
+                                <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                            </textFieldCell>
+                            <connections>
+                                <outlet property="delegate" destination="-2" id="9Vf-nb-Ei2"/>
+                                <outlet property="nextKeyView" destination="xUo-V5-b60" id="9g9-Ct-yQR"/>
+                            </connections>
+                        </textField>
+                        <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="xUo-V5-b60">
+                            <rect key="frame" x="124" y="60" width="96" height="22"/>
+                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="Tag 4" bezelStyle="round" id="0lo-EA-EC6">
+                                <font key="font" usesAppearanceFont="YES"/>
+                                <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                            </textFieldCell>
+                            <connections>
+                                <outlet property="delegate" destination="-2" id="du1-A8-QVX"/>
+                                <outlet property="nextKeyView" destination="f1z-pw-yF9" id="zDE-xP-zEV"/>
+                            </connections>
+                        </textField>
+                        <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="f1z-pw-yF9">
+                            <rect key="frame" x="124" y="30" width="96" height="22"/>
+                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="Tag 5" bezelStyle="round" id="QSu-3N-zde">
+                                <font key="font" metaFont="system"/>
+                                <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                            </textFieldCell>
+                            <connections>
+                                <outlet property="delegate" destination="-2" id="o8T-6J-FMp"/>
+                                <outlet property="nextKeyView" destination="jAN-JY-nwl" id="geC-ud-ycJ"/>
+                            </connections>
+                        </textField>
+                        <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="jAN-JY-nwl">
+                            <rect key="frame" x="124" y="0.0" width="96" height="22"/>
+                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="Tag 6" bezelStyle="round" id="oPe-6V-mOx">
+                                <font key="font" metaFont="system"/>
+                                <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                            </textFieldCell>
+                            <connections>
+                                <outlet property="delegate" destination="-2" id="Rp0-9s-pRC"/>
+                            </connections>
+                        </textField>
+                    </subviews>
+                    <visibilityPriorities>
+                        <integer value="1000"/>
+                        <integer value="1000"/>
+                        <integer value="1000"/>
+                        <integer value="1000"/>
+                        <integer value="1000"/>
+                        <integer value="1000"/>
+                    </visibilityPriorities>
+                    <customSpacing>
+                        <real value="3.4028234663852886e+38"/>
+                        <real value="3.4028234663852886e+38"/>
+                        <real value="3.4028234663852886e+38"/>
+                        <real value="3.4028234663852886e+38"/>
+                        <real value="3.4028234663852886e+38"/>
+                        <real value="3.4028234663852886e+38"/>
+                    </customSpacing>
+                </stackView>
+            </subviews>
+            <constraints>
+                <constraint firstItem="ZbQ-Ay-DkV" firstAttribute="centerY" secondItem="Hz6-mo-xeY" secondAttribute="centerY" id="7Zq-At-fuR"/>
+                <constraint firstAttribute="trailing" secondItem="ZbQ-Ay-DkV" secondAttribute="trailing" constant="16" id="IE1-q8-PUX"/>
+                <constraint firstItem="ZbQ-Ay-DkV" firstAttribute="centerX" secondItem="Hz6-mo-xeY" secondAttribute="centerX" id="u7X-ke-nBD"/>
+                <constraint firstItem="ZbQ-Ay-DkV" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="16" id="vFc-zs-XCx"/>
+            </constraints>
+            <point key="canvasLocation" x="87" y="66.5"/>
+        </customView>
+    </objects>
+</document>

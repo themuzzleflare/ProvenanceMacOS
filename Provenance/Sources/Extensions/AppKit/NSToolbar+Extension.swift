@@ -1,8 +1,8 @@
 import AppKit
 
 extension NSToolbar {
-  convenience init(_ delegate: NSToolbarDelegate, type: NSToolbar.Identifier) {
-    self.init(identifier: type)
+  convenience init(_ delegate: NSToolbarDelegate, identifier: NSToolbar.Identifier) {
+    self.init(identifier: identifier)
     self.delegate = delegate
     self.displayMode = .iconOnly
     self.allowsUserCustomization = false

@@ -1,9 +1,7 @@
 import Cocoa
 import Alamofire
 
-final class FilteredTransactionsVC: NSViewController {
-  private lazy var searchField = NSSearchField(self, type: .transactions)
-  
+final class AddTagsTransactionSelectionVC: NSViewController {
   @IBOutlet weak var collectionView: NSCollectionView! {
     didSet {
       collectionView.dataSource = dataSource
@@ -17,8 +15,6 @@ final class FilteredTransactionsVC: NSViewController {
   
   private var previousTitle: String
   
-  var resource: ResourceEnum
-  
   private enum Section {
     case main
   }
@@ -29,7 +25,9 @@ final class FilteredTransactionsVC: NSViewController {
   
   private lazy var dataSource = makeDataSource()
   
-  private lazy var toolbar = NSToolbar(self, identifier: .filteredTransactions)
+  private lazy var searchField = NSSearchField(self, type: .transactions)
+  
+  private lazy var toolbar = NSToolbar(self, identifier: .selectTransaction)
   
   private var dateStyleObserver: NSKeyValueObservation?
   
@@ -43,15 +41,14 @@ final class FilteredTransactionsVC: NSViewController {
     }
   }
   
-  var filteredTransactions: [TransactionResource] {
+  private var filteredTransactions: [TransactionResource] {
     return transactions.filtered(searchField: searchField)
   }
   
-  init(_ previousViewController: NSViewController, previousTitle: String, resource: ResourceEnum) {
+  init(_ previousViewController: NSViewController, previousTitle: String) {
     self.previousViewController = previousViewController
     self.previousTitle = previousTitle
-    self.resource = resource
-    super.init(nibName: "FilteredTransactions", bundle: nil)
+    super.init(nibName: "AddTagsTransactionSelection", bundle: nil)
   }
   
   deinit {
@@ -77,11 +74,7 @@ final class FilteredTransactionsVC: NSViewController {
   
   private func configureWindow() {
     NSApp.mainWindow?.toolbar = toolbar
-    NSApp.mainWindow?.title = resource.description
-  }
-  
-  @objc private func goBack() {
-    view.window?.contentViewController = .navigation(self, to: previousViewController)
+    NSApp.mainWindow?.title = "Select Transaction"
   }
   
   private func configureObserver() {
@@ -98,16 +91,11 @@ final class FilteredTransactionsVC: NSViewController {
   
   private func transactionsUpdates() {
     noTransactions = transactions.isEmpty
-    switch resource {
-    case .tag where transactions.isEmpty:
-      goBack()
-    default:
-      applySnapshot()
-      searchField.placeholderString = filteredTransactions.searchFieldPlaceholder
-    }
+    applySnapshot()
+    searchField.placeholderString = transactions.searchFieldPlaceholder
   }
   
-  func fetchingTasks() {
+  private func fetchingTasks() {
     fetchTransactions()
   }
   
@@ -147,8 +135,8 @@ final class FilteredTransactionsVC: NSViewController {
     dataSource.apply(snapshot, animatingDifferences: animate)
   }
   
-  func fetchTransactions() {
-    UpFacade.listTransactions(filterBy: resource) { (result) in
+  private func fetchTransactions() {
+    UpFacade.listTransactions { (result) in
       DispatchQueue.main.async {
         switch result {
         case let .success(transactions):
@@ -169,16 +157,20 @@ final class FilteredTransactionsVC: NSViewController {
     transactionsError = error.errorDescription ?? error.localizedDescription
     transactions.removeAll()
   }
+  
+  @objc private func goBack() {
+    view.window?.contentViewController = .navigation(self, to: previousViewController)
+  }
 }
 
 // MARK: - NSToolbarDelegate
 
-extension FilteredTransactionsVC: NSToolbarDelegate {
+extension AddTagsTransactionSelectionVC: NSToolbarDelegate {
   func toolbar(_ toolbar: NSToolbar, itemForItemIdentifier itemIdentifier: NSToolbarItem.Identifier, willBeInsertedIntoToolbar flag: Bool) -> NSToolbarItem? {
     switch itemIdentifier {
     case .backButton:
       return .backButton(self, title: previousTitle, action: #selector(goBack))
-    case .filteredTransactionsSearch:
+    case .selectTransactionsSearch:
       return NSSearchToolbarItem(itemIdentifier: itemIdentifier, searchField: searchField)
     default:
       return nil
@@ -186,7 +178,7 @@ extension FilteredTransactionsVC: NSToolbarDelegate {
   }
   
   func toolbarDefaultItemIdentifiers(_ toolbar: NSToolbar) -> [NSToolbarItem.Identifier] {
-    return [.backButton, .filteredTransactionsSearch]
+    return [.backButton, .selectTransactionsSearch]
   }
   
   func toolbarAllowedItemIdentifiers(_ toolbar: NSToolbar) -> [NSToolbarItem.Identifier] {
@@ -196,11 +188,11 @@ extension FilteredTransactionsVC: NSToolbarDelegate {
 
 // MARK: - NSCollectionViewDelegate
 
-extension FilteredTransactionsVC: NSCollectionViewDelegate {
+extension AddTagsTransactionSelectionVC: NSCollectionViewDelegate {
   func collectionView(_ collectionView: NSCollectionView, didSelectItemsAt indexPaths: Set<IndexPath>) {
     guard let indexPath = indexPaths.first else { return }
     let transaction = filteredTransactions[indexPath.item]
-    let viewController = TransactionDetailVC(self, previousTitle: resource.description, transaction: transaction)
+    let viewController = AddTagsTagSelectionVC(self, transaction: transaction)
     collectionView.deselectItems(at: indexPaths)
     view.window?.contentViewController = .navigation(self, to: viewController)
   }
@@ -208,9 +200,8 @@ extension FilteredTransactionsVC: NSCollectionViewDelegate {
 
 // MARK: - NSSearchFieldDelegate
 
-extension FilteredTransactionsVC: NSSearchFieldDelegate {
+extension AddTagsTransactionSelectionVC: NSSearchFieldDelegate {
   func controlTextDidChange(_ obj: Notification) {
     applySnapshot()
   }
 }
-

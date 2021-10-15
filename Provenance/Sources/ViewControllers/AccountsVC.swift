@@ -2,12 +2,7 @@ import Cocoa
 import Alamofire
 
 final class AccountsVC: NSViewController {
-  private lazy var searchField: NSSearchField = {
-    let field = NSSearchField()
-    field.delegate = self
-    field.placeholderString = "Search Accounts"
-    return field
-  }()
+  private lazy var searchField = NSSearchField(self, type: .accounts)
   
   @IBOutlet weak var collectionView: NSCollectionView! {
     didSet {
@@ -43,7 +38,7 @@ final class AccountsVC: NSViewController {
   
   private lazy var dataSource = makeDataSource()
   
-  private lazy var toolbar = NSToolbar(self, type: .accounts)
+  private lazy var toolbar = NSToolbar(self, identifier: .accounts)
   
   private var accountFilter: AccountTypeOptionEnum = ProvenanceApp.userDefaults.appAccountFilter {
     didSet {
@@ -82,6 +77,7 @@ final class AccountsVC: NSViewController {
   
   deinit {
     removeObservers()
+    print("deinit")
   }
   
   required init?(coder: NSCoder) {
@@ -101,8 +97,8 @@ final class AccountsVC: NSViewController {
   }
   
   private func configureWindow() {
-    AppDelegate.windowController?.window?.toolbar = toolbar
-    AppDelegate.windowController?.window?.title = "Accounts"
+    NSApp.mainWindow?.toolbar = toolbar
+    NSApp.mainWindow?.title = "Accounts"
   }
   
   private func configureObservers() {
@@ -136,10 +132,11 @@ final class AccountsVC: NSViewController {
   
   private func applySnapshot(animate: Bool = true) {
     var snapshot = Snapshot()
+    
     snapshot.appendSections([.main])
     snapshot.appendItems(filteredAccounts.accountViewModels, toSection: .main)
     
-    if filteredAccounts.isEmpty && accountsError.isEmpty {
+    if snapshot.itemIdentifiers.isEmpty && accountsError.isEmpty {
       if accounts.isEmpty && !noAccounts {
         collectionView.backgroundView = .loadingView(frame: collectionView.bounds, contentType: .accounts)
       } else {

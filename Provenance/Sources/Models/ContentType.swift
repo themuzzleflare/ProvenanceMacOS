@@ -60,6 +60,19 @@ extension ContentType {
     }
   }
   
+  var searchPlaceholder: String {
+    switch self {
+    case .transactions:
+      return "Search Transactions"
+    case .accounts:
+      return "Search Accounts"
+    case .tags:
+      return "Search Tags"
+    case .categories:
+      return "Search Categories"
+    }
+  }
+  
   func searchFieldPlaceholder(count: Int) -> String {
     return "Search \(count.description) \(count == 1 ? singular : plural)"
   }

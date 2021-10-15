@@ -4,6 +4,11 @@ import SwiftDate
 @main class AppDelegate: NSObject, NSApplicationDelegate {
   static var windowController: MainWC?
   
+  @IBOutlet weak var transactionsMenuItem: NSMenuItem!
+  @IBOutlet weak var accountsMenuItem: NSMenuItem!
+  @IBOutlet weak var tagsMenuItem: NSMenuItem!
+  @IBOutlet weak var categoriesMenuItem: NSMenuItem!
+  
   func applicationDidFinishLaunching(_ aNotification: Notification) {
     SwiftDate.defaultRegion = .current
     NSPasteboard.general.declareTypes([.string], owner: nil)
