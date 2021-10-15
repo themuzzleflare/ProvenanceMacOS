@@ -1,26 +1,13 @@
 import AppKit
 
-enum TabBarItem: Int, CaseIterable {
-  case transactions
-  case accounts
-  case tags
-  case categories
+enum TabBarItem: String, CaseIterable {
+  case transactions = "transactionsTabViewItem"
+  case accounts = "accountsTabViewItem"
+  case tags = "tagsTabViewItem"
+  case categories = "categoriesTabViewItem"
 }
 
 extension TabBarItem {
-  var identifier: String {
-    switch self {
-    case .transactions:
-      return "transactionsTabViewItem"
-    case .accounts:
-      return "accountsTabViewItem"
-    case .tags:
-      return "tagsTabViewItem"
-    case .categories:
-      return "categoriesTabViewItem"
-    }
-  }
-  
   var viewController: NSViewController {
     switch self {
     case .transactions:
@@ -73,9 +60,23 @@ extension TabBarItem {
     }
   }
   
+  var menuItem: NSMenuItem? {
+    guard let applicationDelegate = NSApp.delegate as? AppDelegate else { return nil }
+    switch self {
+    case .transactions:
+      return applicationDelegate.transactionsMenuItem
+    case .accounts:
+      return applicationDelegate.accountsMenuItem
+    case .tags:
+      return applicationDelegate.tagsMenuItem
+    case .categories:
+      return applicationDelegate.categoriesMenuItem
+    }
+  }
+  
   var tabViewItem: NSTabViewItem {
     return NSTabViewItem(
-      identifier: self.identifier,
+      identifier: self.rawValue,
       viewController: self.viewController,
       label: self.label,
       image: self.image

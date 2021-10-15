@@ -299,7 +299,7 @@
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <menu key="submenu" title="Tabs" id="r7I-hi-ofP">
                                                 <items>
-                                                    <menuItem title="Transactions" state="on" onStateImage="dollarsign.circle.fill" catalog="system" offStateImage="dollarsign.circle" keyEquivalent="1" identifier="transactionsMenuItem" id="crr-Cu-3OU"/>
+                                                    <menuItem title="Transactions" onStateImage="dollarsign.circle.fill" catalog="system" offStateImage="dollarsign.circle" keyEquivalent="1" identifier="transactionsMenuItem" id="crr-Cu-3OU"/>
                                                     <menuItem title="Accounts" onStateImage="wallet.pass.fill" catalog="system" offStateImage="wallet.pass" tag="1" keyEquivalent="2" identifier="accountsMenuItem" id="FXn-AO-udK"/>
                                                     <menuItem title="Tags" onStateImage="tag.fill" catalog="system" offStateImage="tag" tag="2" keyEquivalent="3" identifier="tagsMenuItem" id="uxL-et-mHu"/>
                                                     <menuItem title="Categories" onStateImage="tray.full.fill" catalog="system" offStateImage="tray.full" tag="3" keyEquivalent="4" identifier="categoriesMenuItem" id="112-lf-AXa"/>

@@ -2,19 +2,19 @@ import Cocoa
 
 final class TabVC: NSTabViewController {
   @objc private func transactions() {
-    tabView.selectTabViewItem(withIdentifier: TabBarItem.transactions.identifier)
+    tabView.selectTabViewItem(withIdentifier: TabBarItem.transactions.rawValue)
   }
   
   @objc private func accounts() {
-    tabView.selectTabViewItem(withIdentifier: TabBarItem.accounts.identifier)
+    tabView.selectTabViewItem(withIdentifier: TabBarItem.accounts.rawValue)
   }
   
   @objc private func tags() {
-    tabView.selectTabViewItem(withIdentifier: TabBarItem.tags.identifier)
+    tabView.selectTabViewItem(withIdentifier: TabBarItem.tags.rawValue)
   }
   
   @objc private func categories() {
-    tabView.selectTabViewItem(withIdentifier: TabBarItem.categories.identifier)
+    tabView.selectTabViewItem(withIdentifier: TabBarItem.categories.rawValue)
   }
   
   override func viewDidLoad() {
@@ -41,40 +41,11 @@ final class TabVC: NSTabViewController {
   }
   
   override func tabView(_ tabView: NSTabView, willSelect tabViewItem: NSTabViewItem?) {
-    guard let applicationDelegate = NSApp.delegate as? AppDelegate, let previousTabViewItem = tabView.selectedTabViewItem, let tabViewItem = tabViewItem, let previousIdentifier = previousTabViewItem.identifier as? String, let identifier = tabViewItem.identifier as? String else { return }
-    switch previousIdentifier {
-    case TabBarItem.transactions.identifier:
-      applicationDelegate.transactionsMenuItem.state = .off
-      previousTabViewItem.image = TabBarItem.transactions.image
-    case TabBarItem.accounts.identifier:
-      applicationDelegate.accountsMenuItem.state = .off
-      previousTabViewItem.image = TabBarItem.accounts.image
-    case TabBarItem.tags.identifier:
-      applicationDelegate.tagsMenuItem.state = .off
-      previousTabViewItem.image = TabBarItem.tags.image
-    case TabBarItem.categories.identifier:
-      applicationDelegate.categoriesMenuItem.state = .off
-      previousTabViewItem.image = TabBarItem.categories.image
-    default:
-      break
-    }
-    switch identifier {
-    case TabBarItem.transactions.identifier:
-      applicationDelegate.transactionsMenuItem.state = .on
-      tabViewItem.image = TabBarItem.transactions.selectedImage
-    case TabBarItem.accounts.identifier:
-      applicationDelegate.accountsMenuItem.state = .on
-      tabViewItem.image = TabBarItem.accounts.selectedImage
-    case TabBarItem.tags.identifier:
-      applicationDelegate.tagsMenuItem.state = .on
-      tabViewItem.image = TabBarItem.tags.selectedImage
-    case TabBarItem.categories.identifier:
-      applicationDelegate.categoriesMenuItem.state = .on
-      tabViewItem.image = TabBarItem.categories.selectedImage
-    default:
-      break
-    }
-    
+    guard let previousTabViewItem = tabView.selectedTabViewItem, let tabViewItem = tabViewItem, let previousIdentifier = previousTabViewItem.identifier as? String, let identifier = tabViewItem.identifier as? String, let previousTabBarItem = TabBarItem(rawValue: previousIdentifier), let tabBarItem = TabBarItem(rawValue: identifier) else { return }
+    previousTabBarItem.menuItem?.state = .off
+    previousTabViewItem.image = previousTabBarItem.image
+    tabBarItem.menuItem?.state = .on
+    tabViewItem.image = tabBarItem.selectedImage
     selectedTabViewItemIndex = tabView.indexOfTabViewItem(tabViewItem)
   }
   

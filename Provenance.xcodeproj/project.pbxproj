@@ -580,6 +580,8 @@
 		7AD1839127178E89004C94B3 /* AddTagsTagSelection.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddTagsTagSelection.xib; sourceTree = "<group>"; };
 		7AD1839427178E9C004C94B3 /* AddTagsConfirmationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTagsConfirmationVC.swift; sourceTree = "<group>"; };
 		7AD1839527178E9C004C94B3 /* AddTagsConfirmation.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddTagsConfirmation.xib; sourceTree = "<group>"; };
+		7AD70A53271A33F9009CC2D6 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		7AD70A54271A33F9009CC2D6 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		7AE0DCCC2716AE890062D038 /* NSCollectionViewDiffableDataSource+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSCollectionViewDiffableDataSource+Extension.swift"; sourceTree = "<group>"; };
 		7AE0DD372716B3340062D038 /* NSSearchField+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSSearchField+Extension.swift"; sourceTree = "<group>"; };
 		7AE0DD392716B33F0062D038 /* NSSegmentedControl+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSSegmentedControl+Extension.swift"; sourceTree = "<group>"; };
@@ -932,6 +934,8 @@
 		7A959F58270B9A6A00AC45F3 = {
 			isa = PBXGroup;
 			children = (
+				7AD70A54271A33F9009CC2D6 /* LICENSE */,
+				7AD70A53271A33F9009CC2D6 /* README.md */,
 				7A959F73270B9B0E00AC45F3 /* XcodeConfigurations */,
 				7A959F7B270B9CF600AC45F3 /* Shared */,
 				7A959F63270B9A6A00AC45F3 /* Provenance */,
