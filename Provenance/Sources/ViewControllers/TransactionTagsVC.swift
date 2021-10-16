@@ -6,7 +6,6 @@ final class TransactionTagsVC: NSViewController {
       collectionView.dataSource = dataSource
       collectionView.register(.tagItem, forItemWithIdentifier: .tagItem)
       collectionView.collectionViewLayout = .tags
-      collectionView.backgroundViewScrollsWithContent = true
     }
   }
   

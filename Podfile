@@ -10,6 +10,7 @@ target 'Provenance' do
   pod 'SwiftDate'
   pod 'SnapKit'
   pod 'BonMot'
+  pod 'SwiftLint'
 
 end
 

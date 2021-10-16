@@ -13,9 +13,9 @@
             <rect key="frame" x="0.0" y="0.0" width="332" height="108"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="D4L-jX-Reh">
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D4L-jX-Reh">
                     <rect key="frame" x="14" y="45" width="304" height="19"/>
-                    <textFieldCell key="cell" alignment="center" title="Name" id="8ik-FZ-Hob">
+                    <textFieldCell key="cell" allowsUndo="NO" alignment="center" title="Name" id="8ik-FZ-Hob">
                         <font key="font" size="15" name="CircularStd-Book"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -48,6 +48,9 @@
                     </connections>
                 </menuItem>
             </items>
+            <connections>
+                <outlet property="delegate" destination="6mK-X2-WFW" id="tbG-8v-PQL"/>
+            </connections>
             <point key="canvasLocation" x="65" y="226"/>
         </menu>
     </objects>

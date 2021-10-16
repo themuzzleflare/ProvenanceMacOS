@@ -7,19 +7,13 @@ final class CategoryItem: CollectionViewItem {
   
   var category: CategoryViewModel? {
     didSet {
-      guard isViewLoaded else { return }
-      if let category = category {
-        textField?.stringValue = category.name
-      }
+      guard isViewLoaded, let category = category else { return }
+      textField?.stringValue = category.name
     }
   }
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    configureView()
-  }
-  
-  private func configureView() {
     view.layer?.cornerRadius = 10.0
   }
 }

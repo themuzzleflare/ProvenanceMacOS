@@ -8,7 +8,6 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="CreateTagsVC" customModule="Provenance" customModuleProvider="target">
             <connections>
-                <outlet property="lol" destination="wom-g7-MFA" id="3wq-Ps-ikH"/>
                 <outlet property="textField1" destination="QTX-DN-HZN" id="YdC-p7-kAw"/>
                 <outlet property="textField2" destination="wom-g7-MFA" id="JmR-cw-zpy"/>
                 <outlet property="textField3" destination="5Hx-pw-Z70" id="J4W-Ap-aAL"/>

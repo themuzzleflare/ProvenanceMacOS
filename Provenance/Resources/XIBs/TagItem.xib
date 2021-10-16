@@ -13,9 +13,9 @@
             <rect key="frame" x="0.0" y="0.0" width="210" height="51"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="QVm-BG-h3k">
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QVm-BG-h3k">
                     <rect key="frame" x="14" y="17" width="46" height="18"/>
-                    <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="Name" id="i2r-4f-0DA">
+                    <textFieldCell key="cell" lineBreakMode="clipping" allowsUndo="NO" alignment="center" title="Name" id="i2r-4f-0DA">
                         <font key="font" size="14" name="CircularStd-Book"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -27,7 +27,7 @@
                 <constraint firstItem="QVm-BG-h3k" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="16" id="wUA-DP-ebV"/>
             </constraints>
             <connections>
-                <outlet property="menu" destination="za0-Qm-asL" id="V8d-Q2-y8o"/>
+                <outlet property="menu" destination="za0-Qm-asL" id="fAX-MW-8NJ"/>
             </connections>
             <point key="canvasLocation" x="4" y="43.5"/>
         </customView>
@@ -46,6 +46,9 @@
                     </connections>
                 </menuItem>
             </items>
+            <connections>
+                <outlet property="delegate" destination="fSa-ZG-rdd" id="0b8-EZ-hJ8"/>
+            </connections>
             <point key="canvasLocation" x="4" y="176"/>
         </menu>
     </objects>

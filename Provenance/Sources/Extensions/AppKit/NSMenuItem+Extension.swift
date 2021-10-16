@@ -8,21 +8,21 @@ extension NSMenuItem {
     return menuItem
   }
   
-  static func settledOnlyMenuItem(_ target: NSViewController, settledOnly: Bool, action: Selector) -> NSMenuItem {
+  static func settledOnlyMenuFormRepresentation(_ target: NSViewController, settledOnly: Bool, action: Selector) -> NSMenuItem {
     let menuItem = NSMenuItem(title: "Settled Only", action: action, keyEquivalent: .emptyString)
     menuItem.target = target
-    menuItem.onStateImage = .checkmarkCircleFill
+    menuItem.state = settledOnly ? .on : .off
     menuItem.offStateImage = .checkmarkCircle
-    menuItem.state = settledOnly.controlState == menuItem.state ? .on : .off
+    menuItem.onStateImage = .checkmarkCircleFill
     return menuItem
   }
   
-  static func categoryMenuFormRepresentation(submenu: NSMenu) -> NSMenuItem {
+  static func categoryMenuFormRepresentation(category: TransactionCategory, submenu: NSMenu) -> NSMenuItem {
     let menuItem = NSMenuItem(title: "Category", action: nil, keyEquivalent: .emptyString)
-    menuItem.state = ProvenanceApp.userDefaults.appSelectedCategory == .all ? .off : .on
+    menuItem.state = category == .all ? .off : .on
+    menuItem.submenu = submenu
     menuItem.offStateImage = .trayFull
     menuItem.onStateImage = .trayFullFill
-    menuItem.submenu = submenu
     return menuItem
   }
 }

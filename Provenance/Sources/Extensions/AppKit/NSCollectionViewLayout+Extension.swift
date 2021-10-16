@@ -67,7 +67,6 @@ extension NSCollectionViewLayout {
     return layout
   }
   
-  
   static var twoColumnGrid: NSCollectionViewLayout {
     return NSCollectionViewCompositionalLayout { (_, _) in
       let itemSize = NSCollectionLayoutSize(

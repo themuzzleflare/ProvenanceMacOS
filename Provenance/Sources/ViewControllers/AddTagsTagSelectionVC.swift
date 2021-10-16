@@ -154,7 +154,8 @@ final class AddTagsTagSelectionVC: NSViewController {
   @objc private func createTag() {
     switch createTagsAlert.runModal() {
     case .alertFirstButtonReturn:
-      let viewController = AddTagsConfirmationVC(self, transaction: transaction, tags: createTagsViewController.textFields.tagResources)
+      let tags = createTagsViewController.textFields.tagResources
+      let viewController = AddTagsConfirmationVC(self, transaction: transaction, tags: tags)
       view.window?.contentViewController = .navigation(self, to: viewController)
     default:
       break

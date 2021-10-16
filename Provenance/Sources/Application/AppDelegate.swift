@@ -14,9 +14,6 @@ import SwiftDate
     NSPasteboard.general.declareTypes([.string], owner: nil)
   }
   
-  func applicationWillTerminate(_ aNotification: Notification) {
-  }
-  
   func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows flag: Bool) -> Bool {
     if flag { return true }
     AppDelegate.windowController?.window?.makeKeyAndOrderFront(self)

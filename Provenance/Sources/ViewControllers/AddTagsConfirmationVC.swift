@@ -6,7 +6,9 @@ final class AddTagsConfirmationVC: NSViewController {
       collectionView.register(.tagItem, forItemWithIdentifier: .tagItem)
       collectionView.register(.transactionItem, forItemWithIdentifier: .transactionItem)
       collectionView.register(.textItem, forItemWithIdentifier: .textItem)
-      collectionView.register(.textSupplementaryView, forSupplementaryViewOfKind: NSCollectionView.elementKindSectionHeader, withIdentifier: .textSupplementaryView)
+      collectionView.register(.textSupplementaryView,
+                              forSupplementaryViewOfKind: NSCollectionView.elementKindSectionHeader,
+                              withIdentifier: .textSupplementaryView)
       collectionView.collectionViewLayout = .confirmation
     }
   }
@@ -141,13 +143,13 @@ extension AddTagsConfirmationVC: NSCollectionViewDataSource {
     guard let view = collectionView.makeSupplementaryView(ofKind: kind, withIdentifier: .textSupplementaryView, for: indexPath) as? TextSupplementaryView else { fatalError() }
     switch indexPath.section {
     case 0:
-      view.label.stringValue = "Adding \(tags.count == 1 ? "Tag" : "Tags")"
+      view.label.stringValue = "Adding \(tags.count == 1 ? "Tag" : "Tags")".uppercased()
       return view
     case 1:
-      view.label.stringValue = "To Transaction"
+      view.label.stringValue = "To Transaction".uppercased()
       return view
     case 2:
-      view.label.stringValue = "Summary"
+      view.label.stringValue = "Summary".uppercased()
       return view
     default:
       fatalError()

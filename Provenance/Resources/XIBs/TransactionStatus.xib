@@ -45,9 +45,9 @@ Gw
                                     </imageCell>
                                     <color key="contentTintColor" name="systemYellowColor" catalog="System" colorSpace="catalog"/>
                                 </imageView>
-                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="tI5-Bc-VHO">
+                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tI5-Bc-VHO">
                                     <rect key="frame" x="26" y="0.0" width="39" height="20"/>
-                                    <textFieldCell key="cell" lineBreakMode="clipping" title="Held" id="51j-6G-zhN">
+                                    <textFieldCell key="cell" lineBreakMode="clipping" allowsUndo="NO" title="Held" id="51j-6G-zhN">
                                         <font key="font" size="16" name="CircularStd-Medium"/>
                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -73,9 +73,9 @@ Gw
                                     </imageCell>
                                     <color key="contentTintColor" name="systemGreenColor" catalog="System" colorSpace="catalog"/>
                                 </imageView>
-                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="klf-LE-4Xx">
+                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="klf-LE-4Xx">
                                     <rect key="frame" x="26" y="0.0" width="57" height="20"/>
-                                    <textFieldCell key="cell" lineBreakMode="clipping" title="Settled" id="KYw-FJ-myP">
+                                    <textFieldCell key="cell" lineBreakMode="clipping" allowsUndo="NO" title="Settled" id="KYw-FJ-myP">
                                         <font key="font" size="16" name="CircularStd-Medium"/>
                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>

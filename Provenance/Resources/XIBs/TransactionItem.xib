@@ -19,17 +19,17 @@
                         <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="0.0" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9lF-sm-YoI">
                             <rect key="frame" x="0.0" y="3" width="307" height="33"/>
                             <subviews>
-                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="rUW-gy-5Ez">
+                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rUW-gy-5Ez">
                                     <rect key="frame" x="-2" y="15" width="79" height="18"/>
-                                    <textFieldCell key="cell" lineBreakMode="clipping" alignment="left" title="Description" id="RD2-p9-tf2">
+                                    <textFieldCell key="cell" lineBreakMode="clipping" allowsUndo="NO" alignment="left" title="Description" id="RD2-p9-tf2">
                                         <font key="font" size="14" name="CircularStd-Medium"/>
                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                     </textFieldCell>
                                 </textField>
-                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="rue-wY-tba">
+                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rue-wY-tba">
                                     <rect key="frame" x="-2" y="0.0" width="80" height="15"/>
-                                    <textFieldCell key="cell" lineBreakMode="clipping" alignment="left" title="Creation Date" id="h2g-jl-8q8">
+                                    <textFieldCell key="cell" lineBreakMode="clipping" allowsUndo="NO" alignment="left" title="Creation Date" id="h2g-jl-8q8">
                                         <font key="font" size="12" name="CircularStd-Book"/>
                                         <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -45,9 +45,9 @@
                                 <real value="3.4028234663852886e+38"/>
                             </customSpacing>
                         </stackView>
-                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="8QJ-hX-DiT">
+                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8QJ-hX-DiT">
                             <rect key="frame" x="313" y="10" width="55" height="18"/>
-                            <textFieldCell key="cell" lineBreakMode="clipping" alignment="right" title="Amount" id="m0x-oE-C2b">
+                            <textFieldCell key="cell" lineBreakMode="clipping" allowsUndo="NO" alignment="right" title="Amount" id="m0x-oE-C2b">
                                 <font key="font" size="14" name="CircularStd-Book"/>
                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -104,6 +104,9 @@
                     </connections>
                 </menuItem>
             </items>
+            <connections>
+                <outlet property="delegate" destination="D5g-h6-XIr" id="66C-YR-j4Q"/>
+            </connections>
             <point key="canvasLocation" x="99" y="170"/>
         </menu>
     </objects>

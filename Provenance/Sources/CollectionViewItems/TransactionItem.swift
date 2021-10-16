@@ -8,9 +8,11 @@ final class TransactionItem: CollectionViewItem {
   @IBAction func copyDescription(_ sender: NSMenuItem) {
     NSPasteboard.general.setString(transactionDescription.stringValue, forType: .string)
   }
+  
   @IBAction func copyCreationDate(_ sender: NSMenuItem) {
     NSPasteboard.general.setString(transactionCreationDate.stringValue, forType: .string)
   }
+  
   @IBAction func copyAmount(_ sender: NSMenuItem) {
     NSPasteboard.general.setString(transactionAmount.stringValue, forType: .string)
   }

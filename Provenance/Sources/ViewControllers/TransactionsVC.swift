@@ -9,27 +9,32 @@ final class TransactionsVC: NSViewController {
     return .categories(menu: categoryMenu)
   }
   
-  private lazy var categoryToolbarItem = NSToolbarItem.categories(segmentedControl: categorySegmentedControl, menuFormRepresentation: categoryMenuFormRepresentation)
+  private lazy var categoryToolbarItem = NSToolbarItem.categories(segmentedControl: categorySegmentedControl,
+                                                                  menuFormRepresentation: categoryMenuFormRepresentation)
   
-  private lazy var settledOnlyToolbarItem = NSToolbarItem.settledOnlyButton(self, action: #selector(settledOnlyToolbarAction), menuFormRepresentation: settledOnlyMenuFormRepresentation)
+  private lazy var settledOnlyToolbarItem = NSToolbarItem.settledOnlyButton(self,
+                                                                            action: #selector(settledOnlyToolbarAction),
+                                                                            menuFormRepresentation: settledOnlyMenuFormRepresentation)
   
   private var categoryMenu: NSMenu {
     return .categoryMenu(self, filter: categoryFilter, action: #selector(categoryButtonAction(_:)))
   }
   
   private var categoryMenuFormRepresentation: NSMenuItem {
-    return .categoryMenuFormRepresentation(submenu: categoryMenu)
+    return .categoryMenuFormRepresentation(category: categoryFilter, submenu: categoryMenu)
   }
   
   private var settledOnlyMenuFormRepresentation: NSMenuItem {
-    return .settledOnlyMenuItem(self, settledOnly: showSettledOnly, action: #selector(settledOnlyToolbarAction))
+    return .settledOnlyMenuFormRepresentation(self, settledOnly: showSettledOnly, action: #selector(settledOnlyToolbarAction))
   }
   
   @IBOutlet weak var collectionView: NSCollectionView! {
     didSet {
       collectionView.dataSource = dataSource
       collectionView.register(.transactionItem, forItemWithIdentifier: .transactionItem)
-      collectionView.register(.dateSupplementaryView, forSupplementaryViewOfKind: NSCollectionView.elementKindSectionHeader, withIdentifier: .dateSupplementaryView)
+      collectionView.register(.dateSupplementaryView,
+                              forSupplementaryViewOfKind: NSCollectionView.elementKindSectionHeader,
+                              withIdentifier: .dateSupplementaryView)
       collectionView.collectionViewLayout = .listPinnedHeaders
       collectionView.backgroundViewScrollsWithContent = true
     }
@@ -65,7 +70,8 @@ final class TransactionsVC: NSViewController {
   
   private var preFilteredTransactions: [TransactionResource] {
     return transactions.filter { (transaction) in
-      return (!showSettledOnly || transaction.attributes.status.isSettled) && (categoryFilter == .all || categoryFilter.rawValue == transaction.relationships.category.data?.id)
+      return (!showSettledOnly || transaction.attributes.status.isSettled) &&
+      (categoryFilter == .all || categoryFilter.rawValue == transaction.relationships.category.data?.id)
     }
   }
   
@@ -243,10 +249,10 @@ final class TransactionsVC: NSViewController {
 extension TransactionsVC: NSToolbarDelegate {
   func toolbar(_ toolbar: NSToolbar, itemForItemIdentifier itemIdentifier: NSToolbarItem.Identifier, willBeInsertedIntoToolbar flag: Bool) -> NSToolbarItem? {
     switch itemIdentifier {
-    case .settledOnly:
-      return settledOnlyToolbarItem
     case .categoryFilter:
       return categoryToolbarItem
+    case .settledOnly:
+      return settledOnlyToolbarItem
     case .flexibleSpace:
       return NSToolbarItem(itemIdentifier: itemIdentifier)
     case .transactionsSearch:
@@ -257,7 +263,7 @@ extension TransactionsVC: NSToolbarDelegate {
   }
   
   func toolbarDefaultItemIdentifiers(_ toolbar: NSToolbar) -> [NSToolbarItem.Identifier] {
-    return [.settledOnly, .categoryFilter, .flexibleSpace, .transactionsSearch]
+    return [.categoryFilter, .settledOnly, .flexibleSpace, .transactionsSearch]
   }
   
   func toolbarSelectableItemIdentifiers(_ toolbar: NSToolbar) -> [NSToolbarItem.Identifier] {

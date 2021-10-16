@@ -16,17 +16,17 @@
                 <stackView distribution="equalSpacing" orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Cc4-Ok-B1F">
                     <rect key="frame" x="16" y="13" width="316" height="43"/>
                     <subviews>
-                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="kkj-V6-Gdw">
+                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kkj-V6-Gdw">
                             <rect key="frame" x="-2" y="13" width="40" height="18"/>
-                            <textFieldCell key="cell" lineBreakMode="clipping" alignment="left" title="Label" id="Xw4-bD-d6X">
+                            <textFieldCell key="cell" lineBreakMode="clipping" allowsUndo="NO" alignment="left" title="Label" id="Xw4-bD-d6X">
                                 <font key="font" size="14" name="CircularStd-Medium"/>
                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                             </textFieldCell>
                         </textField>
-                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="KRP-f4-uz5">
+                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KRP-f4-uz5">
                             <rect key="frame" x="279" y="13" width="39" height="18"/>
-                            <textFieldCell key="cell" lineBreakMode="clipping" alignment="right" title="Label" id="kdd-wK-ho9">
+                            <textFieldCell key="cell" lineBreakMode="clipping" allowsUndo="NO" alignment="right" title="Label" id="kdd-wK-ho9">
                                 <font key="font" size="14" name="CircularStd-Book"/>
                                 <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -70,6 +70,9 @@
                     </connections>
                 </menuItem>
             </items>
+            <connections>
+                <outlet property="delegate" destination="UMV-ba-LNO" id="cjV-cv-5fa"/>
+            </connections>
             <point key="canvasLocation" x="73" y="180"/>
         </menu>
     </objects>

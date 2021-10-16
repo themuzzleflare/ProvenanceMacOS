@@ -7,26 +7,21 @@ final class AccountItem: CollectionViewItem {
   @IBAction func copyBalance(_ sender: NSMenuItem) {
     NSPasteboard.general.setString(accountBalance.stringValue, forType: .string)
   }
+  
   @IBAction func copyDisplayName(_ sender: NSMenuItem) {
     NSPasteboard.general.setString(accountDisplayName.stringValue, forType: .string)
   }
   
   var account: AccountViewModel? {
     didSet {
-      guard isViewLoaded else { return }
-      if let account = account {
-        accountBalance.stringValue = account.balance
-        accountDisplayName.stringValue = account.displayName
-      }
+      guard isViewLoaded, let account = account else { return }
+      accountBalance.stringValue = account.balance
+      accountDisplayName.stringValue = account.displayName
     }
   }
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    configureView()
-  }
-  
-  private func configureView() {
     view.layer?.cornerRadius = 10.0
   }
   

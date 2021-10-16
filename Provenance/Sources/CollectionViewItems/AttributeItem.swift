@@ -10,12 +10,10 @@ final class AttributeItem: CollectionViewItem {
   
   var attribute: DetailItem? {
     didSet {
-      guard isViewLoaded else { return }
-      if let attribute = attribute {
-        leftLabel.stringValue = attribute.id
-        rightLabel.stringValue = attribute.value
-        rightLabel.font = attribute.valueFont
-      }
+      guard isViewLoaded, let attribute = attribute else { return }
+      leftLabel.stringValue = attribute.id
+      rightLabel.stringValue = attribute.value
+      rightLabel.font = attribute.valueFont
     }
   }
   

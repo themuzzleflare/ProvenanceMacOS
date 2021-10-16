@@ -1,5 +1,9 @@
 import Cocoa
 
 final class TextSupplementaryView: NSVisualEffectView, NSCollectionViewElement {
-  @IBOutlet weak var label: NSTextField!
+  @IBOutlet weak var label: NSTextField! {
+    didSet {
+      material = .headerView
+    }
+  }
 }

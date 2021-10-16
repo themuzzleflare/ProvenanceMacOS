@@ -17,17 +17,17 @@
                 <stackView distribution="fill" orientation="vertical" alignment="centerX" spacing="5" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DFb-1E-Vjb">
                     <rect key="frame" x="16" y="27" width="228" height="43"/>
                     <subviews>
-                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Xld-hH-0Sv">
+                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xld-hH-0Sv">
                             <rect key="frame" x="79" y="21" width="70" height="22"/>
-                            <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="Balance" id="bX9-qz-TnT">
+                            <textFieldCell key="cell" lineBreakMode="clipping" allowsUndo="NO" alignment="center" title="Balance" id="bX9-qz-TnT">
                                 <font key="font" size="17" name="CircularStd-Bold"/>
                                 <color key="textColor" name="AccentColor"/>
                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                             </textFieldCell>
                         </textField>
-                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="cer-Sf-34U">
+                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cer-Sf-34U">
                             <rect key="frame" x="69" y="0.0" width="90" height="16"/>
-                            <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="Display Name" id="WLx-K0-FhZ">
+                            <textFieldCell key="cell" lineBreakMode="clipping" allowsUndo="NO" alignment="center" title="Display Name" id="WLx-K0-FhZ">
                                 <font key="font" size="13" name="CircularStd-Book"/>
                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -77,6 +77,9 @@
                     </connections>
                 </menuItem>
             </items>
+            <connections>
+                <outlet property="delegate" destination="koT-K8-eGv" id="1t5-ph-JqT"/>
+            </connections>
             <point key="canvasLocation" x="-3" y="161"/>
         </menu>
     </objects>
@@ -84,7 +87,7 @@
         <image name="dollarsign.circle" catalog="system" width="15" height="15"/>
         <image name="text.alignright" catalog="system" width="16" height="13"/>
         <namedColor name="AccentColor">
-            <color red="1" green="0.47843137254901963" blue="0.40392156862745099" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.4779999852180481" blue="0.40400001406669617" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

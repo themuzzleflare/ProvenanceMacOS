@@ -26,6 +26,7 @@ extension NSView {
     label.textColor = .placeholderTextColor
     label.font = .circularStdMedium(size: 23)
     label.maximumNumberOfLines = 2
+    label.isSelectable = false
     let verticalStack = NSStackView(views: [icon, label])
     view.addSubview(verticalStack)
     verticalStack.snp.makeConstraints { (make) in

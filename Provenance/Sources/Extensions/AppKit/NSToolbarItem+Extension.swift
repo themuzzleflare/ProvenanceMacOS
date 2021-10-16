@@ -10,10 +10,10 @@ extension NSToolbarItem {
     let toolbarItem = NSToolbarItem(itemIdentifier: .backButton)
     toolbarItem.isNavigational = true
     toolbarItem.isBordered = true
+    toolbarItem.visibilityPriority = .high
     toolbarItem.image = .chevronLeft
     toolbarItem.title = title
     toolbarItem.toolTip = title
-    toolbarItem.visibilityPriority = .high
     toolbarItem.target = target
     toolbarItem.action = action
     return toolbarItem
@@ -65,6 +65,7 @@ extension NSToolbarItem {
     let toolbarItem = NSToolbarItem(itemIdentifier: .next)
     toolbarItem.isNavigational = true
     toolbarItem.isBordered = true
+    toolbarItem.visibilityPriority = .high
     toolbarItem.image = .chevronRight
     toolbarItem.label = "Next"
     toolbarItem.toolTip = "Confirm selection."

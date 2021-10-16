@@ -21,7 +21,7 @@ final class TagItem: CollectionViewItem {
   
   override func mouseDown(with event: NSEvent) {
     super.mouseDown(with: event)
-    guard let delegate = delegate, event.clickCount == 2, let indexPath = collectionView?.indexPath(for: self) else { return }
+    guard event.clickCount == 2, let delegate = delegate, let indexPath = collectionView?.indexPath(for: self) else { return }
     delegate.didDoubleClick(indexPath: indexPath)
   }
   

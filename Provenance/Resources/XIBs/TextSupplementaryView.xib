@@ -10,13 +10,13 @@
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customView id="Hz6-mo-xeY" customClass="TextSupplementaryView" customModule="Provenance" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="480" height="272"/>
+            <rect key="frame" x="0.0" y="0.0" width="422" height="79"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="PR8-gJ-eBK">
-                    <rect key="frame" x="14" y="127" width="39" height="18"/>
-                    <textFieldCell key="cell" lineBreakMode="clipping" title="Label" id="9Ax-SF-hfT">
-                        <font key="font" size="14" name="CircularStd-Book"/>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PR8-gJ-eBK">
+                    <rect key="frame" x="14" y="32" width="394" height="16"/>
+                    <textFieldCell key="cell" lineBreakMode="clipping" allowsUndo="NO" alignment="left" title="Label" id="9Ax-SF-hfT">
+                        <font key="font" metaFont="system"/>
                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
@@ -25,11 +25,12 @@
             <constraints>
                 <constraint firstItem="PR8-gJ-eBK" firstAttribute="centerY" secondItem="Hz6-mo-xeY" secondAttribute="centerY" id="B83-9C-EqV"/>
                 <constraint firstItem="PR8-gJ-eBK" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="16" id="cAQ-FB-DAV"/>
+                <constraint firstAttribute="trailing" secondItem="PR8-gJ-eBK" secondAttribute="trailing" constant="16" id="kHf-Cj-ZY7"/>
             </constraints>
             <connections>
                 <outlet property="label" destination="PR8-gJ-eBK" id="fKg-jc-xyx"/>
             </connections>
-            <point key="canvasLocation" x="139" y="137"/>
+            <point key="canvasLocation" x="110" y="40.5"/>
         </customView>
     </objects>
 </document>

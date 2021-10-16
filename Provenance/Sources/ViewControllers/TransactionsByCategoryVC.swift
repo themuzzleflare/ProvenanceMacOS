@@ -177,4 +177,3 @@ extension FilteredTransactionsVC: NSSearchFieldDelegate {
     applySnapshot()
   }
 }
-

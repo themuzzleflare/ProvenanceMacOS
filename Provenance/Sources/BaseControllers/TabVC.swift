@@ -41,7 +41,15 @@ final class TabVC: NSTabViewController {
   }
   
   override func tabView(_ tabView: NSTabView, willSelect tabViewItem: NSTabViewItem?) {
-    guard let previousTabViewItem = tabView.selectedTabViewItem, let tabViewItem = tabViewItem, let previousIdentifier = previousTabViewItem.identifier as? String, let identifier = tabViewItem.identifier as? String, let previousTabBarItem = TabBarItem(rawValue: previousIdentifier), let tabBarItem = TabBarItem(rawValue: identifier) else { return }
+    guard let previousTabViewItem = tabView.selectedTabViewItem,
+          let tabViewItem = tabViewItem,
+          let previousIdentifier = previousTabViewItem.identifier as? String,
+          let identifier = tabViewItem.identifier as? String,
+          let previousTabBarItem = TabBarItem(rawValue: previousIdentifier),
+          let tabBarItem = TabBarItem(rawValue: identifier)
+    else {
+      return
+    }
     previousTabBarItem.menuItem?.state = .off
     previousTabViewItem.image = previousTabBarItem.image
     tabBarItem.menuItem?.state = .on
