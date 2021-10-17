@@ -16,4 +16,9 @@ final class CategoryItem: CollectionViewItem {
     super.viewDidLoad()
     view.layer?.cornerRadius = 10.0
   }
+  
+  override func updateSelectionHighlighting() {
+    guard isViewLoaded else { return }
+    super.updateSelectionHighlighting()
+  }
 }

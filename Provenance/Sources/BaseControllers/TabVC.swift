@@ -51,16 +51,12 @@ final class TabVC: NSTabViewController {
       return
     }
     previousTabBarItem.menuItem?.state = .off
-    previousTabViewItem.image = previousTabBarItem.image
     tabBarItem.menuItem?.state = .on
-    tabViewItem.image = tabBarItem.selectedImage
     selectedTabViewItemIndex = tabView.indexOfTabViewItem(tabViewItem)
   }
   
   private func configure() {
     tabStyle = .segmentedControlOnTop
-    TabBarItem.allCases.tabViewItems.forEach { (item) in
-      addTabViewItem(item)
-    }
+    tabViewItems = TabBarItem.allCases.tabViewItems
   }
 }

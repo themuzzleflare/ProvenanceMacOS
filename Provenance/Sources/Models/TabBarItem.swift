@@ -11,7 +11,7 @@ extension TabBarItem {
   var viewController: NSViewController {
     switch self {
     case .transactions:
-      return TransactionsVC()
+      return TransactionsVCAlt()
     case .accounts:
       return AccountsVC()
     case .tags:
@@ -44,19 +44,6 @@ extension TabBarItem {
       return .tag
     case .categories:
       return .trayFull
-    }
-  }
-  
-  var selectedImage: NSImage? {
-    switch self {
-    case .transactions:
-      return .dollarsignCircleFill
-    case .accounts:
-      return .walletPassFill
-    case .tags:
-      return .tagFill
-    case .categories:
-      return .trayFullFill
     }
   }
   

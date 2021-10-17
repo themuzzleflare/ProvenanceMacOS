@@ -10,11 +10,11 @@
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customView identifier="categoryItemView" id="Hz6-mo-xeY" customClass="CollectionItemView" customModule="Provenance" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="332" height="108"/>
+            <rect key="frame" x="0.0" y="0.0" width="210" height="63"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D4L-jX-Reh">
-                    <rect key="frame" x="14" y="45" width="304" height="19"/>
+                    <rect key="frame" x="14" y="22" width="182" height="19"/>
                     <textFieldCell key="cell" allowsUndo="NO" alignment="center" title="Name" id="8ik-FZ-Hob">
                         <font key="font" size="15" name="CircularStd-Book"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -31,7 +31,7 @@
             <connections>
                 <outlet property="menu" destination="5x4-Pz-sud" id="QCg-ZJ-xIt"/>
             </connections>
-            <point key="canvasLocation" x="65" y="72"/>
+            <point key="canvasLocation" x="65" y="100"/>
         </customView>
         <collectionViewItem nibName="CategoryItem" id="6mK-X2-WFW" customClass="CategoryItem" customModule="Provenance" customModuleProvider="target">
             <connections>

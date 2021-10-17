@@ -80,7 +80,7 @@
             <connections>
                 <outlet property="delegate" destination="koT-K8-eGv" id="1t5-ph-JqT"/>
             </connections>
-            <point key="canvasLocation" x="-3" y="161"/>
+            <point key="canvasLocation" x="-3" y="160.5"/>
         </menu>
     </objects>
     <resources>

@@ -107,7 +107,7 @@
             <connections>
                 <outlet property="delegate" destination="D5g-h6-XIr" id="66C-YR-j4Q"/>
             </connections>
-            <point key="canvasLocation" x="99" y="170"/>
+            <point key="canvasLocation" x="99" y="169.5"/>
         </menu>
     </objects>
     <resources>

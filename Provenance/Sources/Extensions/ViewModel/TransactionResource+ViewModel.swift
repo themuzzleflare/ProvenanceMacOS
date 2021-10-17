@@ -4,12 +4,22 @@ extension TransactionResource {
   var transactionViewModel: TransactionViewModel {
     return TransactionViewModel(transaction: self)
   }
+  
+  var transactionCellModel: TransactionCellModel {
+    return TransactionCellModel(transaction: self)
+  }
 }
 
 extension Array where Element == TransactionResource {
   var transactionViewModels: [TransactionViewModel] {
     return self.map { (transaction) in
       return transaction.transactionViewModel
+    }
+  }
+  
+  var transactionCellModels: [TransactionCellModel] {
+    return self.map { (transaction) in
+      return transaction.transactionCellModel
     }
   }
   

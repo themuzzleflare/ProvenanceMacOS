@@ -11,6 +11,7 @@ target 'Provenance' do
   pod 'SnapKit'
   pod 'BonMot'
   pod 'SwiftLint'
+  pod 'IGListKit/Diffing'
 
 end
 

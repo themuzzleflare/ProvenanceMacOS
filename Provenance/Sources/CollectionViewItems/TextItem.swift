@@ -5,4 +5,9 @@ final class TextItem: CollectionViewItem {
     super.viewDidLoad()
     textField?.maximumNumberOfLines = 3
   }
+  
+  override func updateSelectionHighlighting() {
+    guard isViewLoaded else { return }
+    super.updateSelectionHighlighting()
+  }
 }

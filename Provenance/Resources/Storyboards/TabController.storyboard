@@ -9,7 +9,7 @@
         <!--TabVC-->
         <scene sceneID="fwj-qh-Bfq">
             <objects>
-                <tabViewController storyboardIdentifier="MainTabViewController" showSeguePresentationStyle="single" tabStyle="toolbar" id="waL-RI-fYc" customClass="TabVC" customModule="Provenance" customModuleProvider="target" sceneMemberID="viewController">
+                <tabViewController storyboardIdentifier="MainTabViewController" showSeguePresentationStyle="single" id="waL-RI-fYc" customClass="TabVC" customModule="Provenance" customModuleProvider="target" sceneMemberID="viewController">
                     <tabView key="tabView" identifier="mainTabView" type="noTabsNoBorder" id="dGc-TB-R8a">
                         <rect key="frame" x="0.0" y="0.0" width="650" height="369"/>
                         <autoresizingMask key="autoresizingMask"/>

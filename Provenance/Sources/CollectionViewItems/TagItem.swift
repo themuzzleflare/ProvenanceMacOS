@@ -19,6 +19,11 @@ final class TagItem: CollectionViewItem {
     print("deinit tagItem")
   }
   
+  override func updateSelectionHighlighting() {
+    guard isViewLoaded else { return }
+    super.updateSelectionHighlighting()
+  }
+  
   override func mouseDown(with event: NSEvent) {
     super.mouseDown(with: event)
     guard event.clickCount == 2, let delegate = delegate, let indexPath = collectionView?.indexPath(for: self) else { return }
