@@ -11,7 +11,7 @@ extension TabBarItem {
   var viewController: NSViewController {
     switch self {
     case .transactions:
-      return TransactionsVCAlt()
+      return TransactionsVC()
     case .accounts:
       return AccountsVC()
     case .tags:

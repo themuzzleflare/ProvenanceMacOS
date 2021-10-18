@@ -153,6 +153,9 @@
 		7A7A3907270FF253008B3E37 /* AttributeItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A7A3905270FF253008B3E37 /* AttributeItem.swift */; };
 		7A7A3908270FF253008B3E37 /* AttributeItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7A7A3906270FF253008B3E37 /* AttributeItem.xib */; };
 		7A7A390E270FF6F0008B3E37 /* TransactionDetail.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7A7A390C270FF6F0008B3E37 /* TransactionDetail.xib */; };
+		7A8C12AE271CD5E800F6A633 /* AccountCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8C12AD271CD5E800F6A633 /* AccountCellModel.swift */; };
+		7A8C12B0271CD5F200F6A633 /* TagCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8C12AF271CD5F200F6A633 /* TagCellModel.swift */; };
+		7A8C12B2271CD5FC00F6A633 /* CategoryCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8C12B1271CD5FC00F6A633 /* CategoryCellModel.swift */; };
 		7A959F65270B9A6A00AC45F3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A959F64270B9A6A00AC45F3 /* AppDelegate.swift */; };
 		7A959F69270B9A6C00AC45F3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7A959F68270B9A6C00AC45F3 /* Assets.xcassets */; };
 		7A959F6C270B9A6C00AC45F3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7A959F6A270B9A6C00AC45F3 /* Main.storyboard */; };
@@ -563,6 +566,9 @@
 		7A7A3905270FF253008B3E37 /* AttributeItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttributeItem.swift; sourceTree = "<group>"; };
 		7A7A3906270FF253008B3E37 /* AttributeItem.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AttributeItem.xib; sourceTree = "<group>"; };
 		7A7A390C270FF6F0008B3E37 /* TransactionDetail.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TransactionDetail.xib; sourceTree = "<group>"; };
+		7A8C12AD271CD5E800F6A633 /* AccountCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountCellModel.swift; sourceTree = "<group>"; };
+		7A8C12AF271CD5F200F6A633 /* TagCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCellModel.swift; sourceTree = "<group>"; };
+		7A8C12B1271CD5FC00F6A633 /* CategoryCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCellModel.swift; sourceTree = "<group>"; };
 		7A94DCE6270BF89100DA6FDF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7A959F61270B9A6A00AC45F3 /* Provenance.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Provenance.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A959F64270B9A6A00AC45F3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -863,6 +869,9 @@
 			isa = PBXGroup;
 			children = (
 				7A0E6C2A271ADBB600BD85CD /* TransactionCellModel.swift */,
+				7A8C12AD271CD5E800F6A633 /* AccountCellModel.swift */,
+				7A8C12AF271CD5F200F6A633 /* TagCellModel.swift */,
+				7A8C12B1271CD5FC00F6A633 /* CategoryCellModel.swift */,
 			);
 			path = ListDiffable;
 			sourceTree = "<group>";
@@ -935,8 +944,8 @@
 			children = (
 				7A05EA2F270BC4A9004C958F /* TransactionResource+ViewModel.swift */,
 				7A4F2113270FA8AF00C0AF8C /* AccountResource+ViewModel.swift */,
-				7A4F2116270FC4C200C0AF8C /* CategoryResource+ViewModel.swift */,
 				7A4F2118270FC4CD00C0AF8C /* TagResource+ViewModel.swift */,
+				7A4F2116270FC4C200C0AF8C /* CategoryResource+ViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1570,6 +1579,7 @@
 				7A05E9EF270BA324004C958F /* StatusEnum+Extension.swift in Sources */,
 				7A05E9AF270BA166004C958F /* Pagination.swift in Sources */,
 				7A05E9A2270BA166004C958F /* TransactionAttribute.swift in Sources */,
+				7A8C12B0271CD5F200F6A633 /* TagCellModel.swift in Sources */,
 				7A36D2932712BBE20081E255 /* NSDirectionalEdgeInsets+Extension.swift in Sources */,
 				7AE8FE352717BDC000D7443B /* DoubleClickDelegate.swift in Sources */,
 				7A05E9A0270BA166004C958F /* MoneyObject.swift in Sources */,
@@ -1615,6 +1625,7 @@
 				7A05E992270BA166004C958F /* TagRelationship.swift in Sources */,
 				7A05E9C2270BA1A7004C958F /* TransactionGroupingEnum.swift in Sources */,
 				7A4F211C270FCB1100C0AF8C /* TagItem.swift in Sources */,
+				7A8C12AE271CD5E800F6A633 /* AccountCellModel.swift in Sources */,
 				7AE0DD3E2716B4810062D038 /* NSMenuItem+Extension.swift in Sources */,
 				7A27E94627191CBF0069FE05 /* ResourceEnumRaw.swift in Sources */,
 				7A05E9C7270BA1A7004C958F /* ProvenanceApp.swift in Sources */,
@@ -1625,6 +1636,7 @@
 				7AE0DD3C2716B3500062D038 /* NSMenu+Extension.swift in Sources */,
 				7A05EA02270BA324004C958F /* CGColor+Extension.swift in Sources */,
 				7A0D539927123B2200A024D6 /* NSNib+Extension.swift in Sources */,
+				7A8C12B2271CD5FC00F6A633 /* CategoryCellModel.swift in Sources */,
 				7A05E98D270BA166004C958F /* CategoryRelationshipParent.swift in Sources */,
 				7A05E9FD270BA324004C958F /* NSParagraphStyle+Extension.swift in Sources */,
 				7A05E993270BA166004C958F /* TransactionRelationship.swift in Sources */,

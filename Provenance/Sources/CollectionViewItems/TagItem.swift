@@ -16,7 +16,7 @@ final class TagItem: CollectionViewItem {
   }
   
   deinit {
-    print("deinit tagItem")
+    print("deinit TagItem")
   }
   
   override func updateSelectionHighlighting() {

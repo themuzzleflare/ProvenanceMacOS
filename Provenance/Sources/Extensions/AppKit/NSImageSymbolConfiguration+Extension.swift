@@ -5,6 +5,10 @@ extension NSImage.SymbolConfiguration {
     return NSImage.SymbolConfiguration(scale: .small)
   }
   
+  static var medium: NSImage.SymbolConfiguration {
+    return NSImage.SymbolConfiguration(scale: .medium)
+  }
+  
   static var large: NSImage.SymbolConfiguration {
     return NSImage.SymbolConfiguration(scale: .large)
   }

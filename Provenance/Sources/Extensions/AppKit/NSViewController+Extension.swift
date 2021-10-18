@@ -1,9 +1,9 @@
 import AppKit
 
 extension NSViewController {
-  static func navigation(_ from: NSViewController, to viewController: NSViewController) -> NSViewController {
-    viewController.view.setFrameOrigin(NSPoint(x: 0, y: 0))
-    viewController.view.setFrameSize(from.view.frame.size)
-    return viewController
+  static func navigation(_ fromViewController: NSViewController, to toViewController: NSViewController) -> NSViewController {
+    toViewController.view.setFrameOrigin(.zero)
+    toViewController.view.setFrameSize(fromViewController.view.frame.size)
+    return toViewController
   }
 }

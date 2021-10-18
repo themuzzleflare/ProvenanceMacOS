@@ -12,13 +12,12 @@ final class CategoryItem: CollectionViewItem {
     }
   }
   
+  deinit {
+    print("deinit CategoryItem")
+  }
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     view.layer?.cornerRadius = 10.0
-  }
-  
-  override func updateSelectionHighlighting() {
-    guard isViewLoaded else { return }
-    super.updateSelectionHighlighting()
   }
 }

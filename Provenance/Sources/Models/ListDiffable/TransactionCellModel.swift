@@ -23,6 +23,10 @@ final class TransactionCellModel {
     self.amount = amount
     self.colour = colour
   }
+  
+  deinit {
+    print("deinit TransactionCellModel")
+  }
 }
 
 // MARK: - ListDiffable

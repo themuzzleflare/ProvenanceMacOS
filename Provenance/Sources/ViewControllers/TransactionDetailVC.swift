@@ -238,6 +238,16 @@ extension TransactionDetailVC: NSToolbarDelegate {
 // MARK: - NSCollectionViewDelegate
 
 extension TransactionDetailVC: NSCollectionViewDelegate {
+  func collectionView(_ collectionView: NSCollectionView, shouldChangeItemsAt indexPaths: Set<IndexPath>, to highlightState: NSCollectionViewItem.HighlightState) -> Set<IndexPath> {
+    guard let indexPath = indexPaths.first, let attribute = dataSource.itemIdentifier(for: indexPath), (attribute.id == "Account" || attribute.id == "Transfer Account" || attribute.id == "Parent Category" || attribute.id == "Category" || attribute.id == "Tags") else { return Set() }
+    return indexPaths
+  }
+  
+//  func collectionView(_ collectionView: NSCollectionView, shouldSelectItemsAt indexPaths: Set<IndexPath>) -> Set<IndexPath> {
+//    guard let indexPath = indexPaths.first, let attribute = dataSource.itemIdentifier(for: indexPath), (attribute.id == "Account" || attribute.id == "Transfer Account" || attribute.id == "Parent Category" || attribute.id == "Category" || attribute.id == "Tags") else { return Set() }
+//    return indexPaths
+//  }
+  
   func collectionView(_ collectionView: NSCollectionView, didSelectItemsAt indexPaths: Set<IndexPath>) {
     collectionView.deselectItems(at: indexPaths)
     if let indexPath = indexPaths.first, let attribute = dataSource.itemIdentifier(for: indexPath) {

@@ -23,7 +23,7 @@ extension NSToolbarItem {
     let toolbarItem = NSToolbarItem(itemIdentifier: .transactionStatus)
     toolbarItem.isBordered = true
     toolbarItem.image = status.nsImage.withSymbolConfiguration(.large)
-    toolbarItem.toolTip = status.description + "."
+    toolbarItem.toolTip = status.description
     toolbarItem.target = target
     toolbarItem.action = action
     return toolbarItem
@@ -63,7 +63,6 @@ extension NSToolbarItem {
   
   static func next(_ target: NSViewController, action: Selector) -> NSToolbarItem {
     let toolbarItem = NSToolbarItem(itemIdentifier: .next)
-    toolbarItem.isNavigational = true
     toolbarItem.isBordered = true
     toolbarItem.visibilityPriority = .high
     toolbarItem.image = .chevronRight

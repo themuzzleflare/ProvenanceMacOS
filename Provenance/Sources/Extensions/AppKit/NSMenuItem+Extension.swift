@@ -26,3 +26,11 @@ extension NSMenuItem {
     return menuItem
   }
 }
+
+extension Array where Element: NSMenuItem {
+  static func categoryMenuItems(_ target: NSViewController, filter: TransactionCategory, action: Selector) -> [NSMenuItem] {
+    return TransactionCategory.allCases.map { (category) in
+      return .categoryMenuItem(target, category: category, filter: filter, action: action)
+    }
+  }
+}

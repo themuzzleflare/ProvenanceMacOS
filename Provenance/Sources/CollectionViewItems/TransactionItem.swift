@@ -28,6 +28,10 @@ final class TransactionItem: CollectionViewItem {
     }
   }
   
+  deinit {
+    print("deinit TransactionItem")
+  }
+  
   override func updateSelectionHighlighting() {
     guard isViewLoaded else { return }
     super.updateSelectionHighlighting()

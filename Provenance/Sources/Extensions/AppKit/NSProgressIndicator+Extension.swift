@@ -8,10 +8,7 @@ extension NSProgressIndicator {
   }
   
   static var loadingToolbarItemView: NSProgressIndicator {
-    let progressIndicator = NSProgressIndicator(
-      style: .spinning,
-      controlSize: .small
-    )
+    let progressIndicator = NSProgressIndicator(style: .spinning, controlSize: .small)
     progressIndicator.startAnimation(self)
     return progressIndicator
   }

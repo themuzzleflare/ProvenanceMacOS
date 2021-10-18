@@ -36,7 +36,8 @@ extension AccountResource {
 extension Array where Element == AccountResource {
   func filtered(filter: AccountTypeOptionEnum, searchField: NSSearchField) -> [AccountResource] {
     return self.filter { (account) in
-      return searchField.stringValue.isEmpty || (account.attributes.displayName.localizedStandardContains(searchField.stringValue) && account.attributes.accountType == filter.accountTypeEnum)
+      return searchField.stringValue.isEmpty ||
+      (account.attributes.displayName.localizedStandardContains(searchField.stringValue) && account.attributes.accountType == filter.accountTypeEnum)
     }
   }
   

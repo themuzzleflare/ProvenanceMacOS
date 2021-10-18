@@ -19,7 +19,8 @@ final class TabVC: NSTabViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    configure()
+    tabStyle = .segmentedControlOnTop
+    tabViewItems = TabBarItem.allCases.tabViewItems
   }
   
   override func viewDidAppear() {
@@ -53,10 +54,5 @@ final class TabVC: NSTabViewController {
     previousTabBarItem.menuItem?.state = .off
     tabBarItem.menuItem?.state = .on
     selectedTabViewItemIndex = tabView.indexOfTabViewItem(tabViewItem)
-  }
-  
-  private func configure() {
-    tabStyle = .segmentedControlOnTop
-    tabViewItems = TabBarItem.allCases.tabViewItems
   }
 }

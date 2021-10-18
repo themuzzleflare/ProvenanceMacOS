@@ -1,11 +1,15 @@
 import AppKit
 
 extension NSMenu {
+  convenience init(title: String, items: [NSMenuItem]) {
+    self.init(title: title)
+    self.items = items
+  }
+  
   static func categoryMenu(_ target: NSViewController, filter: TransactionCategory, action: Selector) -> NSMenu {
-    let categoryMenu = NSMenu(title: "Category")
-    TransactionCategory.allCases.forEach { (category) in
-      categoryMenu.addItem(.categoryMenuItem(target, category: category, filter: filter, action: action))
-    }
-    return categoryMenu
+    return NSMenu(
+      title: "Category",
+      items: .categoryMenuItems(target, filter: filter, action: action)
+    )
   }
 }

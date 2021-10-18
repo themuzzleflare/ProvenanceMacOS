@@ -22,11 +22,11 @@ extension NSView {
     let icon = NSImageView(image: .xmarkDiamond.withSymbolConfiguration(.noContent)!)
     icon.contentTintColor = .placeholderTextColor
     let label = NSTextField(wrappingLabelWithString: type.noContentDescription)
+    label.isSelectable = false
     label.alignment = .center
     label.textColor = .placeholderTextColor
     label.font = .circularStdMedium(size: 23)
     label.maximumNumberOfLines = 2
-    label.isSelectable = false
     let verticalStack = NSStackView(views: [icon, label])
     view.addSubview(verticalStack)
     verticalStack.snp.makeConstraints { (make) in
@@ -49,6 +49,7 @@ extension NSView {
       make.right.equalToSuperview().inset(16)
       make.center.equalToSuperview()
     }
+    label.isSelectable = false
     label.alignment = .center
     label.textColor = .placeholderTextColor
     label.font = .circularStdBook(size: 15)

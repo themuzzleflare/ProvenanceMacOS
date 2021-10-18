@@ -7,10 +7,6 @@ enum ResourceEnum {
 }
 
 extension ResourceEnum {
-  //  var accountResource: AccountResource {
-  //
-  //  }
-  
   var description: String {
     switch self {
     case let .account(accountResource):

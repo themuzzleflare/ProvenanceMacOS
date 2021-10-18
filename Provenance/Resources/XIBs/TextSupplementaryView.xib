@@ -14,9 +14,9 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PR8-gJ-eBK">
-                    <rect key="frame" x="14" y="32" width="394" height="16"/>
+                    <rect key="frame" x="14" y="31" width="394" height="17"/>
                     <textFieldCell key="cell" lineBreakMode="clipping" allowsUndo="NO" alignment="left" title="Label" id="9Ax-SF-hfT">
-                        <font key="font" metaFont="system"/>
+                        <font key="font" metaFont="systemMedium" size="14"/>
                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>

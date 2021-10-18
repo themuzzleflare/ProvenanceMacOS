@@ -17,6 +17,10 @@ final class AttributeItem: CollectionViewItem {
     }
   }
   
+  deinit {
+    print("deinit AttributeItem")
+  }
+  
   override func updateSelectionHighlighting() {
     guard isViewLoaded else { return }
     super.updateSelectionHighlighting()

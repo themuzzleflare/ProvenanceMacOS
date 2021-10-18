@@ -20,6 +20,10 @@ final class AccountItem: CollectionViewItem {
     }
   }
   
+  deinit {
+    print("deinit AccountItem")
+  }
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     view.layer?.cornerRadius = 10.0
