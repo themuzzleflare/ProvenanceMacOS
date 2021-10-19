@@ -6,7 +6,7 @@ struct TransactionViewModel: Identifiable {
   let creationDate: String
   let amount: String
   let colour: TransactionColourEnum
-  
+
   init(transaction: TransactionResource) {
     self.id = transaction.id
     self.transactionDescription = transaction.attributes.description
@@ -14,7 +14,7 @@ struct TransactionViewModel: Identifiable {
     self.amount = transaction.attributes.amount.valueShort
     self.colour = transaction.attributes.amount.transactionType.colour
   }
-  
+
   init(id: String, transactionDescription: String, creationDate: String, amount: String, colour: TransactionColourEnum) {
     self.id = id
     self.transactionDescription = transactionDescription
@@ -27,11 +27,11 @@ struct TransactionViewModel: Identifiable {
 // MARK: - Hashable
 
 extension TransactionViewModel: Hashable {
-  func hash(into hasher: inout Hasher) {
-    hasher.combine(id)
-  }
-  
   static func == (lhs: TransactionViewModel, rhs: TransactionViewModel) -> Bool {
     lhs.id == rhs.id && lhs.creationDate == rhs.creationDate
+  }
+
+  func hash(into hasher: inout Hasher) {
+    hasher.combine(id)
   }
 }

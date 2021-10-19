@@ -1,11 +1,13 @@
 import WidgetKit
 
 extension UserDefaults {
-  /// A `UserDefaults` instance for the application group. Observations should be made on a **stored variable** of this value. Key-value observations on computed variables do not work.
+  /// A `UserDefaults` instance for the application group.
+  /// Observations should be made on a **stored variable** of this value.
+  /// Key-value observations on computed variables do not work.
   static var provenance: UserDefaults {
     return UserDefaults(suiteName: "JDL5FY6SCC.group.cloud.tavitian.provenance") ?? .standard
   }
-  
+
   /// The string of the "apiKey" key.
   @objc dynamic var apiKey: String {
     get {
@@ -16,7 +18,7 @@ extension UserDefaults {
       WidgetCenter.shared.reloadAllTimelines()
     }
   }
-  
+
   /// The integer of the "dateStyle" key.
   @objc dynamic var dateStyle: Int {
     get {
@@ -27,7 +29,7 @@ extension UserDefaults {
       WidgetCenter.shared.reloadTimelines(ofKind: AppWidgets.latestTransaction.kind)
     }
   }
-  
+
   /// The integer of the "accountFilter" key.
   @objc dynamic var accountFilter: Int {
     get {
@@ -37,7 +39,7 @@ extension UserDefaults {
       setValue(newValue, forKey: Keys.accountFilter)
     }
   }
-  
+
   /// The integer of the "categoryFilter" key.
   @objc dynamic var categoryFilter: Int {
     get {
@@ -47,7 +49,7 @@ extension UserDefaults {
       setValue(newValue, forKey: Keys.categoryFilter)
     }
   }
-  
+
   /// The boolean of the "settledOnly" key.
   @objc dynamic var settledOnly: Bool {
     get {
@@ -57,7 +59,7 @@ extension UserDefaults {
       setValue(newValue, forKey: Keys.settledOnly)
     }
   }
-  
+
   /// The integer of the "transactionGrouping" key.
   @objc dynamic var transactionGrouping: Int {
     get {
@@ -67,7 +69,7 @@ extension UserDefaults {
       setValue(newValue, forKey: Keys.transactionGrouping)
     }
   }
-  
+
   @objc dynamic var paginationCursor: String {
     get {
       return string(forKey: Keys.paginationCursor) ?? .emptyString
@@ -76,7 +78,7 @@ extension UserDefaults {
       setValue(newValue, forKey: Keys.paginationCursor)
     }
   }
-  
+
   /// The last selected account for the account balance widget.
   var selectedAccount: String? {
     get {
@@ -86,7 +88,7 @@ extension UserDefaults {
       setValue(newValue, forKey: Keys.selectedAccount)
     }
   }
-  
+
   var selectedCategory: String {
     get {
       return string(forKey: Keys.selectedCategory) ?? TransactionCategory.all.rawValue
@@ -95,7 +97,7 @@ extension UserDefaults {
       setValue(newValue, forKey: Keys.selectedCategory)
     }
   }
-  
+
   var appSelectedCategory: TransactionCategory {
     get {
       return TransactionCategory(rawValue: selectedCategory) ?? .all
@@ -104,7 +106,7 @@ extension UserDefaults {
       selectedCategory = newValue.rawValue
     }
   }
-  
+
   /// The configured `AppDateStyle` enumeration based on the integer of the "dateStyle" key.
   var appDateStyle: AppDateStyle {
     get {
@@ -114,7 +116,7 @@ extension UserDefaults {
       dateStyle = newValue.rawValue
     }
   }
-  
+
   /// The configured `AccountTypeOptionEnum` enumeration based on the integer of the "accountFilter" key.
   var appAccountFilter: AccountTypeOptionEnum {
     get {
@@ -124,7 +126,7 @@ extension UserDefaults {
       accountFilter = newValue.rawValue
     }
   }
-  
+
   /// The configured `CategoryTypeEnum` enumeration based on the integer of the "categoryFilter" key.
   var appCategoryFilter: CategoryTypeEnum {
     get {
@@ -134,7 +136,7 @@ extension UserDefaults {
       categoryFilter = newValue.rawValue
     }
   }
-  
+
   /// The configured `TransactionGroupingEnum` enumeration based on the integer of the "transactionGrouping" key.
   var appTransactionGrouping: TransactionGroupingEnum {
     get {
@@ -144,12 +146,12 @@ extension UserDefaults {
       transactionGrouping = newValue.rawValue
     }
   }
-  
+
   /// The short version string of the application.
   var appVersion: String {
     return string(forKey: Keys.appVersion) ?? "Unknown"
   }
-  
+
   /// The build number of the application.
   var appBuild: String {
     return string(forKey: Keys.appBuild) ?? "Unknown"
@@ -157,7 +159,7 @@ extension UserDefaults {
 }
 
 extension UserDefaults {
-  private struct Keys {
+  private enum Keys {
     static let apiKey = "apiKey"
     static let dateStyle = "dateStyle"
     static let accountFilter = "accountFilter"

@@ -3,31 +3,84 @@ import Alamofire
 import SwiftDate
 
 final class TransactionsVC: NSViewController {
+  private typealias DataSource = NSCollectionViewDiffableDataSource<SortedTransactionModel, TransactionViewModel>
+
+  private typealias Snapshot = NSDiffableDataSourceSnapshot<SortedTransactionModel, TransactionViewModel>
+
   private lazy var searchField = NSSearchField(self, type: .transactions)
-  
+
   private var categorySegmentedControl: NSSegmentedControl {
     return .categories(menu: categoryMenu)
   }
-  
+
   private lazy var categoryToolbarItem = NSToolbarItem.categories(segmentedControl: categorySegmentedControl,
                                                                   menuFormRepresentation: categoryMenuFormRepresentation)
-  
+
   private lazy var settledOnlyToolbarItem = NSToolbarItem.settledOnlyButton(self,
                                                                             action: #selector(settledOnlyToolbarAction),
                                                                             menuFormRepresentation: settledOnlyMenuFormRepresentation)
-  
+
   private var categoryMenu: NSMenu {
     return .categoryMenu(self, filter: categoryFilter, action: #selector(categoryButtonAction(_:)))
   }
-  
+
   private var categoryMenuFormRepresentation: NSMenuItem {
     return .categoryMenuFormRepresentation(category: categoryFilter, submenu: categoryMenu)
   }
-  
+
   private var settledOnlyMenuFormRepresentation: NSMenuItem {
     return .settledOnlyMenuFormRepresentation(self, settledOnly: showSettledOnly, action: #selector(settledOnlyToolbarAction))
   }
-  
+
+  private lazy var dataSource = makeDataSource()
+
+  private lazy var toolbar = NSToolbar(self, identifier: .transactions)
+
+  private var apiKeyObserver: NSKeyValueObservation?
+
+  private var dateStyleObserver: NSKeyValueObservation?
+
+  private var settledOnlyObserver: NSKeyValueObservation?
+
+  private var noTransactions: Bool = false
+
+  private var transactionsError = String()
+
+  private var transactions = [TransactionResource]() {
+    didSet {
+      transactionsUpdates()
+    }
+  }
+
+  private var filteredTransactions: [TransactionResource] {
+    return preFilteredTransactions.filtered(searchField: searchField)
+  }
+
+  private var preFilteredTransactions: [TransactionResource] {
+    return transactions.filter { (transaction) in
+      return (!showSettledOnly || transaction.attributes.status.isSettled) &&
+      (categoryFilter == .all || categoryFilter.rawValue == transaction.relationships.category.data?.id)
+    }
+  }
+
+  private var categoryFilter: TransactionCategory = ProvenanceApp.userDefaults.appSelectedCategory {
+    didSet {
+      if ProvenanceApp.userDefaults.selectedCategory != categoryFilter.rawValue {
+        ProvenanceApp.userDefaults.selectedCategory = categoryFilter.rawValue
+      }
+      filterUpdates()
+    }
+  }
+
+  private var showSettledOnly: Bool = ProvenanceApp.userDefaults.settledOnly {
+    didSet {
+      if ProvenanceApp.userDefaults.settledOnly != showSettledOnly {
+        ProvenanceApp.userDefaults.settledOnly = showSettledOnly
+      }
+      filterUpdates()
+    }
+  }
+
   @IBOutlet weak var collectionView: NSCollectionView! {
     didSet {
       collectionView.dataSource = dataSource
@@ -39,79 +92,21 @@ final class TransactionsVC: NSViewController {
       collectionView.backgroundViewScrollsWithContent = true
     }
   }
-  
-  private typealias DataSource = NSCollectionViewDiffableDataSource<SortedTransactionModel, TransactionViewModel>
-  
-  private typealias Snapshot = NSDiffableDataSourceSnapshot<SortedTransactionModel, TransactionViewModel>
-  
-  private lazy var dataSource = makeDataSource()
-  
-  private lazy var toolbar = NSToolbar(self, identifier: .transactions)
-  
-  private var apiKeyObserver: NSKeyValueObservation?
-  
-  private var dateStyleObserver: NSKeyValueObservation?
-  
-  private var settledOnlyObserver: NSKeyValueObservation?
-  
-  private var noTransactions: Bool = false
-  
-  private var transactionsError = String()
-  
-  private var transactions = [TransactionResource]() {
-    didSet {
-      transactionsUpdates()
-    }
-  }
-  
-  private var filteredTransactions: [TransactionResource] {
-    return preFilteredTransactions.filtered(searchField: searchField)
-  }
-  
-  private var preFilteredTransactions: [TransactionResource] {
-    return transactions.filter { (transaction) in
-      return (!showSettledOnly || transaction.attributes.status.isSettled) &&
-      (categoryFilter == .all || categoryFilter.rawValue == transaction.relationships.category.data?.id)
-    }
-  }
-  
-  private var categoryFilter: TransactionCategory = ProvenanceApp.userDefaults.appSelectedCategory {
-    didSet {
-      if ProvenanceApp.userDefaults.selectedCategory != categoryFilter.rawValue {
-        ProvenanceApp.userDefaults.selectedCategory = categoryFilter.rawValue
-      }
-      filterUpdates()
-    }
-  }
-  
-  private var showSettledOnly: Bool = ProvenanceApp.userDefaults.settledOnly {
-    didSet {
-      if ProvenanceApp.userDefaults.settledOnly != showSettledOnly {
-        ProvenanceApp.userDefaults.settledOnly = showSettledOnly
-      }
-      filterUpdates()
-    }
-  }
-  
+
   override init(nibName nibNameOrNil: NSNib.Name?, bundle nibBundleOrNil: Bundle?) {
     super.init(nibName: "Transactions", bundle: nil)
   }
-  
-  deinit {
-    removeObservers()
-    print("deinit")
-  }
-  
+
   required init?(coder: NSCoder) {
     fatalError("Not implemented")
   }
-  
+
   override func viewDidLoad() {
     super.viewDidLoad()
     configureObservers()
     applySnapshot(animate: false)
   }
-  
+
   override func viewWillAppear() {
     super.viewWillAppear()
     fetchingTasks()
@@ -120,24 +115,18 @@ final class TransactionsVC: NSViewController {
     appDelegate.refreshMenuItem.title = "Refresh Transactions"
     appDelegate.refreshMenuItem.action = #selector(refreshTransactions)
   }
-  
-//  override func viewWillDisappear() {
-//    super.viewWillDisappear()
-//    guard let appDelegate = NSApp.delegate as? AppDelegate else { return }
-//    appDelegate.refreshMenuItem.title = "Refresh"
-//    appDelegate.refreshMenuItem.action = nil
-//  }
-  
-  @objc private func refreshTransactions() {
+
+  @objc
+  private func refreshTransactions() {
     fetchTransactions()
   }
-  
+
   private func configureWindow() {
     AppDelegate.windowController?.window?.toolbar = toolbar
     AppDelegate.windowController?.window?.title = "Transactions"
     toolbar.selectedItemIdentifier = showSettledOnly ? .settledOnly : nil
   }
-  
+
   private func configureObservers() {
     apiKeyObserver = ProvenanceApp.userDefaults.observe(\.apiKey, options: .new) { [weak self] (_, _) in
       guard let weakSelf = self else { return }
@@ -152,7 +141,7 @@ final class TransactionsVC: NSViewController {
       weakSelf.showSettledOnly = value
     }
   }
-  
+
   private func removeObservers() {
     apiKeyObserver?.invalidate()
     apiKeyObserver = nil
@@ -161,13 +150,13 @@ final class TransactionsVC: NSViewController {
     settledOnlyObserver?.invalidate()
     settledOnlyObserver = nil
   }
-  
+
   private func transactionsUpdates() {
     noTransactions = transactions.isEmpty
     applySnapshot()
     searchField.placeholderString = preFilteredTransactions.searchFieldPlaceholder
   }
-  
+
   private func filterUpdates() {
     categoryToolbarItem.view = categorySegmentedControl
     categoryToolbarItem.image = categoryFilter == .all ? .trayFull : .trayFullFill
@@ -177,11 +166,11 @@ final class TransactionsVC: NSViewController {
     searchField.placeholderString = preFilteredTransactions.searchFieldPlaceholder
     applySnapshot()
   }
-  
+
   private func fetchingTasks() {
     fetchTransactions()
   }
-  
+
   private func makeDataSource() -> DataSource {
     return DataSource(
       collectionView: collectionView,
@@ -197,13 +186,13 @@ final class TransactionsVC: NSViewController {
       }
     )
   }
-  
+
   private func applySnapshot(animate: Bool = true) {
     var snapshot = Snapshot()
-    
+
     snapshot.appendSections(filteredTransactions.sortedTransactionModels)
     filteredTransactions.sortedTransactionModels.forEach { snapshot.appendItems($0.transactions, toSection: $0) }
-    
+
     if snapshot.itemIdentifiers.isEmpty && transactionsError.isEmpty {
       if transactions.isEmpty && !noTransactions {
         collectionView.backgroundView = .loadingView(frame: collectionView.bounds, contentType: .transactions)
@@ -219,10 +208,10 @@ final class TransactionsVC: NSViewController {
         }
       }
     }
-    
+
     dataSource.apply(snapshot, animatingDifferences: animate)
   }
-  
+
   private func fetchTransactions() {
     UpFacade.listTransactions { (result) in
       DispatchQueue.main.async {
@@ -235,26 +224,33 @@ final class TransactionsVC: NSViewController {
       }
     }
   }
-  
+
   private func display(_ transactions: [TransactionResource]) {
     transactionsError = .emptyString
     self.transactions = transactions
   }
-  
+
   private func display(_ error: AFError) {
     transactionsError = error.errorDescription ?? error.localizedDescription
     transactions.removeAll()
   }
-  
-  @objc private func settledOnlyToolbarAction() {
+
+  @objc
+  private func settledOnlyToolbarAction() {
     showSettledOnly.toggle()
     toolbar.selectedItemIdentifier = showSettledOnly ? .settledOnly : nil
   }
-  
-  @objc private func categoryButtonAction(_ sender: NSMenuItem) {
+
+  @objc
+  private func categoryButtonAction(_ sender: NSMenuItem) {
     if let value = TransactionCategory.allCases.first(where: { $0.description == sender.title }) {
       categoryFilter = value
     }
+  }
+
+  deinit {
+    removeObservers()
+    print("deinit")
   }
 }
 
@@ -275,15 +271,15 @@ extension TransactionsVC: NSToolbarDelegate {
       return nil
     }
   }
-  
+
   func toolbarDefaultItemIdentifiers(_ toolbar: NSToolbar) -> [NSToolbarItem.Identifier] {
     return [.categoryFilter, .settledOnly, .flexibleSpace, .transactionsSearch]
   }
-  
+
   func toolbarSelectableItemIdentifiers(_ toolbar: NSToolbar) -> [NSToolbarItem.Identifier] {
     return [.settledOnly]
   }
-  
+
   func toolbarAllowedItemIdentifiers(_ toolbar: NSToolbar) -> [NSToolbarItem.Identifier] {
     return toolbarDefaultItemIdentifiers(toolbar)
   }

@@ -2,8 +2,39 @@ import Cocoa
 import Alamofire
 
 final class FilteredTransactionsVC: NSViewController {
+
+  private typealias DataSource = NSCollectionViewDiffableDataSource<Section, TransactionCellModel>
+
+  private typealias Snapshot = NSDiffableDataSourceSnapshot<Section, TransactionCellModel>
+
+  private enum Section {
+    case main
+  }
+
+  private var previousViewController: NSViewController
+
+  private var category: CategoryResource
+
+  private lazy var dataSource = makeDataSource()
+
+  private var dateStyleObserver: NSKeyValueObservation?
+
+  private var noTransactions: Bool = false
+
+  private var transactionsError = String()
+
+  private var transactions = [TransactionResource]() {
+    didSet {
+      transactionsUpdates()
+    }
+  }
+
+  private var filteredTransactions: [TransactionResource] {
+    return transactions.filtered(searchField: searchField)
+  }
+
   @IBOutlet weak var searchField: NSSearchField!
-  
+
   @IBOutlet weak var collectionView: NSCollectionView! {
     didSet {
       collectionView.dataSource = dataSource
@@ -12,91 +43,57 @@ final class FilteredTransactionsVC: NSViewController {
       collectionView.backgroundViewScrollsWithContent = true
     }
   }
-  
-  @IBAction func backButtonAction(_ sender: NSButton) {
-    previousViewController.view.setFrameOrigin(NSPoint(x: 0, y: 0))
-    previousViewController.view.setFrameSize(view.frame.size)
-    view.window?.contentViewController = previousViewController
-  }
-  
-  private var previousViewController: NSViewController
-  
-  private var category: CategoryResource
-  
-  private enum Section {
-    case main
-  }
-  
-  private typealias DataSource = NSCollectionViewDiffableDataSource<Section, TransactionCellModel>
-  
-  private typealias Snapshot = NSDiffableDataSourceSnapshot<Section, TransactionCellModel>
-  
-  private lazy var dataSource = makeDataSource()
-  
-  private var dateStyleObserver: NSKeyValueObservation?
-  
-  private var noTransactions: Bool = false
-  
-  private var transactionsError = String()
-  
-  private var transactions = [TransactionResource]() {
-    didSet {
-      transactionsUpdates()
-    }
-  }
-  
-  private var filteredTransactions: [TransactionResource] {
-    return transactions.filtered(searchField: searchField)
-  }
-  
+
   init(_ previousViewController: NSViewController, category: CategoryResource) {
     self.previousViewController = previousViewController
     self.category = category
     super.init(nibName: "TransactionsByCategory", bundle: nil)
   }
-  
-  deinit {
-    removeObserver()
-  }
-  
+
   required init?(coder: NSCoder) {
     fatalError("Not implemented")
   }
-  
+
   override func viewDidLoad() {
     super.viewDidLoad()
     configureObserver()
     applySnapshot(animate: false)
   }
-  
+
   override func viewWillAppear() {
     super.viewWillAppear()
     fetchingTasks()
     AppDelegate.windowController?.window?.title = category.attributes.name
   }
-  
+
+  @IBAction func backButtonAction(_ sender: NSButton) {
+    previousViewController.view.setFrameOrigin(NSPoint(x: 0, y: 0))
+    previousViewController.view.setFrameSize(view.frame.size)
+    view.window?.contentViewController = previousViewController
+  }
+
   private func configureObserver() {
     dateStyleObserver = ProvenanceApp.userDefaults.observe(\.dateStyle, options: .new) { [weak self] (_, _) in
       guard let weakSelf = self else { return }
       weakSelf.applySnapshot()
     }
   }
-  
+
   private func removeObserver() {
     dateStyleObserver?.invalidate()
     dateStyleObserver = nil
   }
-  
+
   private func transactionsUpdates() {
     noTransactions = transactions.isEmpty
     applySnapshot()
     searchField.placeholderString = filteredTransactions.searchFieldPlaceholder
   }
-  
+
   private func fetchingTasks() {
     fetchTransactions()
   }
-  
+
   private func makeDataSource() -> DataSource {
     return DataSource(
       collectionView: collectionView,
@@ -107,12 +104,12 @@ final class FilteredTransactionsVC: NSViewController {
       }
     )
   }
-  
+
   private func applySnapshot(animate: Bool = true) {
     var snapshot = Snapshot()
     snapshot.appendSections([.main])
     snapshot.appendItems(filteredTransactions.transactionCellModels, toSection: .main)
-    
+
     if filteredTransactions.isEmpty && transactionsError.isEmpty {
       if transactions.isEmpty && !noTransactions {
         collectionView.backgroundView = .loadingView(frame: collectionView.bounds, contentType: .transactions)
@@ -128,10 +125,10 @@ final class FilteredTransactionsVC: NSViewController {
         }
       }
     }
-    
+
     dataSource.apply(snapshot, animatingDifferences: animate)
   }
-  
+
   private func fetchTransactions() {
     UpFacade.listTransactions(filterBy: category) { (result) in
       DispatchQueue.main.async {
@@ -144,15 +141,19 @@ final class FilteredTransactionsVC: NSViewController {
       }
     }
   }
-  
+
   private func display(_ transactions: [TransactionResource]) {
     transactionsError = .emptyString
     self.transactions = transactions
   }
-  
+
   private func display(_ error: AFError) {
     transactionsError = error.errorDescription ?? error.localizedDescription
     transactions.removeAll()
+  }
+
+  deinit {
+    removeObserver()
   }
 }
 

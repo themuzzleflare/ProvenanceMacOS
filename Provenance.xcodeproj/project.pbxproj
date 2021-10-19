@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		06BCE525B9CF55F7BAA01F68 /* Pods_Provenance_Intents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D569ACAD928E239E4C8D9B5B /* Pods_Provenance_Intents.framework */; };
 		7177A53878906F9C1112ABF1 /* Pods_Provenance.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3497C87A0DD713AD7B8BC60A /* Pods_Provenance.framework */; };
+		7A005B32271E91F700FE95B6 /* LatestTransactionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A005B31271E91F700FE95B6 /* LatestTransactionView.swift */; };
+		7A005B34271E92C900FE95B6 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A005B33271E92C900FE95B6 /* ErrorView.swift */; };
+		7A005B36271E933E00FE95B6 /* AccountBalanceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A005B35271E933E00FE95B6 /* AccountBalanceView.swift */; };
 		7A05E95A270BA0DB004C958F /* CircularStd-BookItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7A05E955270BA0DB004C958F /* CircularStd-BookItalic.ttf */; };
 		7A05E95B270BA0DB004C958F /* CircularStd-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7A05E956270BA0DB004C958F /* CircularStd-Bold.otf */; };
 		7A05E95C270BA0DB004C958F /* CircularStd-Book.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7A05E957270BA0DB004C958F /* CircularStd-Book.otf */; };
@@ -421,6 +424,9 @@
 		194FDA4BD2848B4AA24C89E0 /* Pods_Provenance_Widgets.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Provenance_Widgets.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F12A55B6632559739FC19C2 /* Pods-Provenance Widgets.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Provenance Widgets.debug.xcconfig"; path = "Target Support Files/Pods-Provenance Widgets/Pods-Provenance Widgets.debug.xcconfig"; sourceTree = "<group>"; };
 		3497C87A0DD713AD7B8BC60A /* Pods_Provenance.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Provenance.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7A005B31271E91F700FE95B6 /* LatestTransactionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LatestTransactionView.swift; sourceTree = "<group>"; };
+		7A005B33271E92C900FE95B6 /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
+		7A005B35271E933E00FE95B6 /* AccountBalanceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountBalanceView.swift; sourceTree = "<group>"; };
 		7A05E952270B9F31004C958F /* Widgets.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Widgets.xcconfig; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.xcconfig; };
 		7A05E953270B9F39004C958F /* Intents.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Intents.xcconfig; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.xcconfig; };
 		7A05E955270BA0DB004C958F /* CircularStd-BookItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "CircularStd-BookItalic.ttf"; sourceTree = "<group>"; };
@@ -805,25 +811,25 @@
 		7A05EA07270BA6F5004C958F /* XIBs */ = {
 			isa = PBXGroup;
 			children = (
-				7A0E6C26271ADA3700BD85CD /* TransactionsAlt.xib */,
 				7AB42D862713F34E0006110F /* Transactions.xib */,
+				7A0E6C26271ADA3700BD85CD /* TransactionsAlt.xib */,
 				7AB42D882713FE4B0006110F /* Accounts.xib */,
 				7AB42D8A2713FE510006110F /* Tags.xib */,
-				7AB42D8C2713FE570006110F /* Categories.xib */,
 				7AD1838D27178E47004C94B3 /* AddTagsTransactionSelection.xib */,
 				7AD1839127178E89004C94B3 /* AddTagsTagSelection.xib */,
 				7AD1839527178E9C004C94B3 /* AddTagsConfirmation.xib */,
+				7AB42D8C2713FE570006110F /* Categories.xib */,
 				7A05EA32270BC50A004C958F /* TransactionItem.xib */,
 				7A4F2110270FA53800C0AF8C /* AccountItem.xib */,
 				7A4F211B270FCB1100C0AF8C /* TagItem.xib */,
 				7A4F211F270FCF4800C0AF8C /* CategoryItem.xib */,
 				7A7A3906270FF253008B3E37 /* AttributeItem.xib */,
+				7AE8FE2A2717ACB300D7443B /* TextItem.xib */,
 				7A7A390C270FF6F0008B3E37 /* TransactionDetail.xib */,
 				7AB93EBB27141DB900A08538 /* TransactionStatus.xib */,
 				7A11183A27115E8E002536E5 /* FilteredTransactions.xib */,
 				7AD0C31A2712532C005F2F81 /* DateSupplementaryView.xib */,
 				7AE8FE2E2717B2EA00D7443B /* TextSupplementaryView.xib */,
-				7AE8FE2A2717ACB300D7443B /* TextItem.xib */,
 				7AE8FE3B2717CCC400D7443B /* CreateTags.xib */,
 				7A27E9422718FD500069FE05 /* TransactionTags.xib */,
 				7A8934E1271E345F00943014 /* TransactionsByAccount.xib */,
@@ -1212,6 +1218,7 @@
 				7AF4BC4F270BDA5600C827A6 /* Widgets.swift */,
 				7AF4BD29270BDFCE00C827A6 /* AccountBalance */,
 				7AF4BD23270BDFCE00C827A6 /* LatestTransaction */,
+				7A005B33271E92C900FE95B6 /* ErrorView.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -1246,9 +1253,10 @@
 			children = (
 				7AF4BD24270BDFCE00C827A6 /* LatestTransactionProvider.swift */,
 				7AF4BD25270BDFCE00C827A6 /* LatestTransactionEntryView.swift */,
-				7AF4BD26270BDFCE00C827A6 /* LatestTransaction.swift */,
 				7AF4BD27270BDFCE00C827A6 /* LatestTransactionEntry.swift */,
 				7AF4BD28270BDFCE00C827A6 /* TransactionCellView.swift */,
+				7A005B31271E91F700FE95B6 /* LatestTransactionView.swift */,
+				7AF4BD26270BDFCE00C827A6 /* LatestTransaction.swift */,
 			);
 			path = LatestTransaction;
 			sourceTree = "<group>";
@@ -1257,9 +1265,10 @@
 			isa = PBXGroup;
 			children = (
 				7AF4BD2A270BDFCE00C827A6 /* AccountBalanceEntry.swift */,
-				7AF4BD2B270BDFCE00C827A6 /* AccountBalance.swift */,
 				7AF4BD2C270BDFCE00C827A6 /* AccountBalanceEntryView.swift */,
 				7AF4BD2D270BDFCE00C827A6 /* AccountBalanceProvider.swift */,
+				7A005B35271E933E00FE95B6 /* AccountBalanceView.swift */,
+				7AF4BD2B270BDFCE00C827A6 /* AccountBalance.swift */,
 			);
 			path = AccountBalance;
 			sourceTree = "<group>";
@@ -1717,6 +1726,7 @@
 				7AF4BCAB270BDE8200C827A6 /* SingleTransaction.swift in Sources */,
 				7AF4BC80270BDE8200C827A6 /* HoldInfoObject.swift in Sources */,
 				7AF4BCF8270BDE9C00C827A6 /* TransactionColourEnum+Extension.swift in Sources */,
+				7A005B34271E92C900FE95B6 /* ErrorView.swift in Sources */,
 				7AF4BC84270BDE8200C827A6 /* ModifyTags.swift in Sources */,
 				7AF4BC7D270BDE8200C827A6 /* Category.swift in Sources */,
 				7AF4BCEA270BDE9C00C827A6 /* Int+Extension.swift in Sources */,
@@ -1746,6 +1756,7 @@
 				7AF4BC72270BDC5D00C827A6 /* Intents.intentdefinition in Sources */,
 				7AF4BCEC270BDE9C00C827A6 /* CGFloat+Extension.swift in Sources */,
 				7AF4BD2F270BDFCF00C827A6 /* LatestTransactionEntryView.swift in Sources */,
+				7A005B36271E933E00FE95B6 /* AccountBalanceView.swift in Sources */,
 				7AF4BCF1270BDE9C00C827A6 /* NSAttributedString+Extension.swift in Sources */,
 				7AF4BC9E270BDE8200C827A6 /* Account.swift in Sources */,
 				7AF4BC8E270BDE8200C827A6 /* TagResource.swift in Sources */,
@@ -1786,6 +1797,7 @@
 				7AF4BC88270BDE8200C827A6 /* SingleAccount.swift in Sources */,
 				7AF4BCE5270BDE9C00C827A6 /* NSEdgeInsets+Extension.swift in Sources */,
 				7AF4BC97270BDE8200C827A6 /* AccountBalanceModel.swift in Sources */,
+				7A005B32271E91F700FE95B6 /* LatestTransactionView.swift in Sources */,
 				7AF4BCA8270BDE8200C827A6 /* ErrorResponse.swift in Sources */,
 				7AF4BC87270BDE8200C827A6 /* AccountResource.swift in Sources */,
 				7AF4BCA3270BDE8200C827A6 /* TransactionGroupingEnum.swift in Sources */,

@@ -1,16 +1,16 @@
 import Cocoa
 
 final class TransactionTagsVC: NSViewController {
-  @IBOutlet weak var collectionView: NSCollectionView! {
-    didSet {
-      collectionView.dataSource = dataSource
-      collectionView.register(.tagItem, forItemWithIdentifier: .tagItem)
-      collectionView.collectionViewLayout = .tags
-    }
+  private typealias DataSource = NSCollectionViewDiffableDataSource<Section, TagViewModel>
+
+  private typealias Snapshot = NSDiffableDataSourceSnapshot<Section, TagViewModel>
+
+  private enum Section {
+    case main
   }
-  
+
   private var previousViewController: NSViewController
-  
+
   var transaction: TransactionResource {
     didSet {
       if transaction.relationships.tags.data.isEmpty {
@@ -20,42 +20,38 @@ final class TransactionTagsVC: NSViewController {
       }
     }
   }
-  
+
   var tags: [TagResource] {
     return transaction.relationships.tags.data.tagResources
   }
-  
-  private enum Section {
-    case main
-  }
-  
-  private typealias DataSource = NSCollectionViewDiffableDataSource<Section, TagViewModel>
-  
-  private typealias Snapshot = NSDiffableDataSourceSnapshot<Section, TagViewModel>
-  
+
   private lazy var dataSource = makeDataSource()
-  
+
   private lazy var toolbar = NSToolbar(self, identifier: .transactionTags)
-  
+
+  @IBOutlet weak var collectionView: NSCollectionView! {
+    didSet {
+      collectionView.dataSource = dataSource
+      collectionView.register(.tagItem, forItemWithIdentifier: .tagItem)
+      collectionView.collectionViewLayout = .tags
+    }
+  }
+
   init(_ previousViewController: NSViewController, transaction: TransactionResource) {
     self.previousViewController = previousViewController
     self.transaction = transaction
     super.init(nibName: "TransactionTags", bundle: nil)
   }
-  
-  deinit {
-    print("deinit")
-  }
-  
+
   required init?(coder: NSCoder) {
     fatalError("Not implemented")
   }
-  
+
   override func viewDidLoad() {
     super.viewDidLoad()
     applySnapshot(animate: false)
   }
-  
+
   override func viewWillAppear() {
     super.viewWillAppear()
     fetchTransaction()
@@ -64,23 +60,24 @@ final class TransactionTagsVC: NSViewController {
     appDelegate.refreshMenuItem.title = "Refresh Tags"
     appDelegate.refreshMenuItem.action = #selector(refreshTransaction)
   }
-  
+
   override func viewWillDisappear() {
     super.viewWillDisappear()
     guard let appDelegate = NSApp.delegate as? AppDelegate else { return }
     appDelegate.refreshMenuItem.title = "Refresh"
     appDelegate.refreshMenuItem.action = nil
   }
-  
-  @objc private func refreshTransaction() {
+
+  @objc
+  private func refreshTransaction() {
     fetchTransaction()
   }
-  
+
   private func configureWindow() {
     NSApp.mainWindow?.toolbar = toolbar
     NSApp.mainWindow?.title = "Tags"
   }
-  
+
   private func makeDataSource() -> DataSource {
     return DataSource(
       collectionView: collectionView,
@@ -91,16 +88,16 @@ final class TransactionTagsVC: NSViewController {
       }
     )
   }
-  
+
   private func applySnapshot(animate: Bool = true) {
     var snapshot = Snapshot()
-    
+
     snapshot.appendSections([.main])
     snapshot.appendItems(tags.tagViewModels, toSection: .main)
-    
+
     dataSource.apply(snapshot, animatingDifferences: animate)
   }
-  
+
   func fetchTransaction() {
     UpFacade.retrieveTransaction(for: transaction) { (result) in
       DispatchQueue.main.async {
@@ -113,9 +110,14 @@ final class TransactionTagsVC: NSViewController {
       }
     }
   }
-  
-  @objc private func goBack() {
+
+  @objc
+  private func goBack() {
     view.window?.contentViewController = .navigation(self, to: previousViewController)
+  }
+
+  deinit {
+    print("deinit")
   }
 }
 
@@ -130,11 +132,11 @@ extension TransactionTagsVC: NSToolbarDelegate {
       return nil
     }
   }
-  
+
   func toolbarDefaultItemIdentifiers(_ toolbar: NSToolbar) -> [NSToolbarItem.Identifier] {
     return [.backButton]
   }
-  
+
   func toolbarAllowedItemIdentifiers(_ toolbar: NSToolbar) -> [NSToolbarItem.Identifier] {
     return toolbarDefaultItemIdentifiers(toolbar)
   }

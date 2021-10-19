@@ -2,6 +2,44 @@ import Cocoa
 import Alamofire
 
 final class AddTagsTagSelectionVC: NSViewController {
+  typealias DataSource = NSCollectionViewDiffableDataSource<Section, TagViewModel>
+
+  typealias Snapshot = NSDiffableDataSourceSnapshot<Section, TagViewModel>
+
+  enum Section {
+    case main
+  }
+
+  private var previousViewController: NSViewController
+
+  private var transaction: TransactionResource
+
+  lazy var dataSource = makeDataSource()
+
+  private lazy var toolbar = NSToolbar(self, identifier: .selectTags)
+
+  private lazy var searchField = NSSearchField(self, type: .tags)
+
+  lazy var createTagsAlert = NSAlert.createTags(self)
+
+  lazy var createTagsViewController = CreateTagsVC(self)
+
+  private var noTags: Bool = false
+
+  private var tags = [TagResource]() {
+    didSet {
+      noTags = tags.isEmpty
+      applySnapshot()
+      searchField.placeholderString = tags.searchFieldPlaceholder
+    }
+  }
+
+  private var tagsError = String()
+
+  private var filteredTags: [TagResource] {
+    return tags.filtered(searchField: searchField)
+  }
+
   @IBOutlet weak var collectionView: NSCollectionView! {
     didSet {
       collectionView.dataSource = dataSource
@@ -10,64 +48,22 @@ final class AddTagsTagSelectionVC: NSViewController {
       collectionView.backgroundViewScrollsWithContent = true
     }
   }
-  
-  private var previousViewController: NSViewController
-  
-  private var transaction: TransactionResource
-  
-  enum Section {
-    case main
-  }
-  
-  typealias DataSource = NSCollectionViewDiffableDataSource<Section, TagViewModel>
-  
-  typealias Snapshot = NSDiffableDataSourceSnapshot<Section, TagViewModel>
-  
-  lazy var dataSource = makeDataSource()
-  
-  private lazy var toolbar = NSToolbar(self, identifier: .selectTags)
-  
-  private lazy var searchField = NSSearchField(self, type: .tags)
-  
-  lazy var createTagsAlert = NSAlert.createTags(self)
-  
-  lazy var createTagsViewController = CreateTagsVC(self)
-  
-  private var noTags: Bool = false
-  
-  private var tags = [TagResource]() {
-    didSet {
-      noTags = tags.isEmpty
-      applySnapshot()
-      searchField.placeholderString = tags.searchFieldPlaceholder
-    }
-  }
-  
-  private var tagsError = String()
-  
-  private var filteredTags: [TagResource] {
-    return tags.filtered(searchField: searchField)
-  }
-  
+
   init(_ previousViewController: NSViewController, transaction: TransactionResource) {
     self.previousViewController = previousViewController
     self.transaction = transaction
     super.init(nibName: "AddTagsTagSelection", bundle: nil)
   }
-  
-  deinit {
-    print("deinit")
-  }
-  
+
   required init?(coder: NSCoder) {
     fatalError("Not implemented")
   }
-  
+
   override func viewDidLoad() {
     super.viewDidLoad()
     applySnapshot(animate: false)
   }
-  
+
   override func viewWillAppear() {
     super.viewWillAppear()
     fetchTags()
@@ -76,23 +72,24 @@ final class AddTagsTagSelectionVC: NSViewController {
     appDelegate.refreshMenuItem.title = "Refresh Tags"
     appDelegate.refreshMenuItem.action = #selector(refreshTags)
   }
-  
+
   override func viewWillDisappear() {
     super.viewWillDisappear()
     guard let appDelegate = NSApp.delegate as? AppDelegate else { return }
     appDelegate.refreshMenuItem.title = "Refresh"
     appDelegate.refreshMenuItem.action = nil
   }
-  
-  @objc private func refreshTags() {
+
+  @objc
+  private func refreshTags() {
     fetchTags()
   }
-  
+
   private func configureWindow() {
     NSApp.mainWindow?.toolbar = toolbar
     NSApp.mainWindow?.title = "Select Tag"
   }
-  
+
   func makeDataSource() -> DataSource {
     return DataSource(
       collectionView: collectionView,
@@ -104,13 +101,13 @@ final class AddTagsTagSelectionVC: NSViewController {
       }
     )
   }
-  
+
   private func applySnapshot(animate: Bool = true) {
     var snapshot = Snapshot()
-    
+
     snapshot.appendSections([.main])
     snapshot.appendItems(filteredTags.tagViewModels, toSection: .main)
-    
+
     if snapshot.itemIdentifiers.isEmpty && tagsError.isEmpty {
       if tags.isEmpty && !noTags {
         collectionView.backgroundView = .loadingView(frame: collectionView.bounds, contentType: .tags)
@@ -126,10 +123,10 @@ final class AddTagsTagSelectionVC: NSViewController {
         }
       }
     }
-    
+
     dataSource.apply(snapshot, animatingDifferences: animate)
   }
-  
+
   private func fetchTags() {
     UpFacade.listTags { (result) in
       DispatchQueue.main.async {
@@ -142,30 +139,33 @@ final class AddTagsTagSelectionVC: NSViewController {
       }
     }
   }
-  
+
   private func display(_ tags: [TagResource]) {
     tagsError = .emptyString
     self.tags = tags
   }
-  
+
   private func display(_ error: AFError) {
     tagsError = error.errorDescription ?? error.localizedDescription
     tags.removeAll()
   }
-  
-  @objc private func goBack() {
+
+  @objc
+  private func goBack() {
     view.window?.contentViewController = .navigation(self, to: previousViewController)
   }
-  
-  @objc private func next() {
+
+  @objc
+  private func next() {
     let selectedTags = collectionView.selectionIndexPaths.map { (indexPath) in
       return filteredTags[indexPath.item]
     }
     let viewController = AddTagsConfirmationVC(self, transaction: transaction, tags: selectedTags)
     view.window?.contentViewController = .navigation(self, to: viewController)
   }
-  
-  @objc private func createTag() {
+
+  @objc
+  private func createTag() {
     switch createTagsAlert.runModal() {
     case .alertFirstButtonReturn:
       let tags = createTagsViewController.textFields.tagResources
@@ -176,6 +176,10 @@ final class AddTagsTagSelectionVC: NSViewController {
     }
     createTagsViewController = CreateTagsVC(self)
     createTagsAlert = NSAlert.createTags(self)
+  }
+
+  deinit {
+    print("deinit")
   }
 }
 
@@ -198,11 +202,11 @@ extension AddTagsTagSelectionVC: NSToolbarDelegate {
       return nil
     }
   }
-  
+
   func toolbarDefaultItemIdentifiers(_ toolbar: NSToolbar) -> [NSToolbarItem.Identifier] {
     return [.backButton, .createTag, .next, .flexibleSpace, .selectTagsSearch]
   }
-  
+
   func toolbarAllowedItemIdentifiers(_ toolbar: NSToolbar) -> [NSToolbarItem.Identifier] {
     return toolbarDefaultItemIdentifiers(toolbar)
   }
@@ -211,7 +215,8 @@ extension AddTagsTagSelectionVC: NSToolbarDelegate {
 // MARK: - NSToolbarItemValidation
 
 extension AddTagsTagSelectionVC: NSToolbarItemValidation {
-  @discardableResult func validateToolbarItem(_ item: NSToolbarItem) -> Bool {
+  @discardableResult
+  func validateToolbarItem(_ item: NSToolbarItem) -> Bool {
     switch item.itemIdentifier {
     case .createTag:
       if collectionView.selectionIndexPaths.isEmpty {

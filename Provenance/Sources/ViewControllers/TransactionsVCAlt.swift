@@ -5,69 +5,61 @@ import IGListKit
 
 final class TransactionsVCAlt: NSViewController {
   private lazy var searchField = NSSearchField(self, type: .transactions)
-  
+
   private var categorySegmentedControl: NSSegmentedControl {
     return .categories(menu: categoryMenu)
   }
-  
+
   private lazy var categoryToolbarItem = NSToolbarItem.categories(segmentedControl: categorySegmentedControl,
                                                                   menuFormRepresentation: categoryMenuFormRepresentation)
-  
+
   private lazy var settledOnlyToolbarItem = NSToolbarItem.settledOnlyButton(self,
                                                                             action: #selector(settledOnlyToolbarAction),
                                                                             menuFormRepresentation: settledOnlyMenuFormRepresentation)
-  
+
   private var categoryMenu: NSMenu {
     return .categoryMenu(self, filter: categoryFilter, action: #selector(categoryButtonAction(_:)))
   }
-  
+
   private var categoryMenuFormRepresentation: NSMenuItem {
     return .categoryMenuFormRepresentation(category: categoryFilter, submenu: categoryMenu)
   }
-  
+
   private var settledOnlyMenuFormRepresentation: NSMenuItem {
     return .settledOnlyMenuFormRepresentation(self, settledOnly: showSettledOnly, action: #selector(settledOnlyToolbarAction))
   }
-  
-  @IBOutlet weak var collectionView: NSCollectionView! {
-    didSet {
-      collectionView.register(.transactionItem, forItemWithIdentifier: .transactionItem)
-      collectionView.collectionViewLayout = .list
-      collectionView.backgroundViewScrollsWithContent = true
-    }
-  }
-  
+
   private lazy var toolbar = NSToolbar(self, identifier: .transactions)
-  
+
   private var apiKeyObserver: NSKeyValueObservation?
-  
+
   private var dateStyleObserver: NSKeyValueObservation?
-  
+
   private var settledOnlyObserver: NSKeyValueObservation?
-  
+
   private var noTransactions: Bool = false
-  
+
   private var transactionsError = String()
-  
+
   private var transactions = [TransactionResource]() {
     didSet {
       transactionsUpdates()
     }
   }
-  
+
   private var oldTransactionCellModels = [TransactionCellModel]()
-  
+
   private var filteredTransactions: [TransactionResource] {
     return preFilteredTransactions.filtered(searchField: searchField)
   }
-  
+
   private var preFilteredTransactions: [TransactionResource] {
     return transactions.filter { (transaction) in
       return (!showSettledOnly || transaction.attributes.status.isSettled) &&
       (categoryFilter == .all || categoryFilter.rawValue == transaction.relationships.category.data?.id)
     }
   }
-  
+
   private var categoryFilter: TransactionCategory = ProvenanceApp.userDefaults.appSelectedCategory {
     didSet {
       if ProvenanceApp.userDefaults.selectedCategory != categoryFilter.rawValue {
@@ -76,7 +68,7 @@ final class TransactionsVCAlt: NSViewController {
       filterUpdates()
     }
   }
-  
+
   private var showSettledOnly: Bool = ProvenanceApp.userDefaults.settledOnly {
     didSet {
       if ProvenanceApp.userDefaults.settledOnly != showSettledOnly {
@@ -85,26 +77,29 @@ final class TransactionsVCAlt: NSViewController {
       filterUpdates()
     }
   }
-  
+
+  @IBOutlet weak var collectionView: NSCollectionView! {
+    didSet {
+      collectionView.register(.transactionItem, forItemWithIdentifier: .transactionItem)
+      collectionView.collectionViewLayout = .list
+      collectionView.backgroundViewScrollsWithContent = true
+    }
+  }
+
   override init(nibName nibNameOrNil: NSNib.Name?, bundle nibBundleOrNil: Bundle?) {
     super.init(nibName: "TransactionsAlt", bundle: nil)
   }
-  
-  deinit {
-    removeObservers()
-    print("deinit")
-  }
-  
+
   required init?(coder: NSCoder) {
     fatalError("Not implemented")
   }
-  
+
   override func viewDidLoad() {
     super.viewDidLoad()
     configureObservers()
     applySnapshot(override: true)
   }
-  
+
   override func viewWillAppear() {
     super.viewWillAppear()
     fetchingTasks()
@@ -113,24 +108,18 @@ final class TransactionsVCAlt: NSViewController {
     appDelegate.refreshMenuItem.title = "Refresh Transactions"
     appDelegate.refreshMenuItem.action = #selector(refreshTransactions)
   }
-  
-//  override func viewWillDisappear() {
-//    super.viewWillDisappear()
-//    guard let appDelegate = NSApp.delegate as? AppDelegate else { return }
-//    appDelegate.refreshMenuItem.title = "Refresh"
-//    appDelegate.refreshMenuItem.action = nil
-//  }
-  
-  @objc private func refreshTransactions() {
+
+  @objc
+  private func refreshTransactions() {
     fetchTransactions()
   }
-  
+
   private func configureWindow() {
     AppDelegate.windowController?.window?.toolbar = toolbar
     AppDelegate.windowController?.window?.title = "Transactions"
     toolbar.selectedItemIdentifier = showSettledOnly ? .settledOnly : nil
   }
-  
+
   private func configureObservers() {
     apiKeyObserver = ProvenanceApp.userDefaults.observe(\.apiKey, options: .new) { [weak self] (_, _) in
       guard let weakSelf = self else { return }
@@ -145,7 +134,7 @@ final class TransactionsVCAlt: NSViewController {
       weakSelf.showSettledOnly = value
     }
   }
-  
+
   private func removeObservers() {
     apiKeyObserver?.invalidate()
     apiKeyObserver = nil
@@ -154,13 +143,13 @@ final class TransactionsVCAlt: NSViewController {
     settledOnlyObserver?.invalidate()
     settledOnlyObserver = nil
   }
-  
+
   private func transactionsUpdates() {
     noTransactions = transactions.isEmpty
     applySnapshot()
     searchField.placeholderString = preFilteredTransactions.searchFieldPlaceholder
   }
-  
+
   private func filterUpdates() {
     categoryToolbarItem.view = categorySegmentedControl
     categoryToolbarItem.image = categoryFilter == .all ? .trayFull : .trayFullFill
@@ -170,11 +159,11 @@ final class TransactionsVCAlt: NSViewController {
     searchField.placeholderString = preFilteredTransactions.searchFieldPlaceholder
     applySnapshot()
   }
-  
+
   private func fetchingTasks() {
     fetchTransactions()
   }
-  
+
   private func applySnapshot(override: Bool = false) {
     let result = ListDiffPaths(
       fromSection: 0,
@@ -183,7 +172,7 @@ final class TransactionsVCAlt: NSViewController {
       newArray: filteredTransactions.transactionCellModels,
       option: .equality
     ).forBatchUpdates()
-    
+
     if result.hasChanges || override || !transactionsError.isEmpty || noTransactions {
       if filteredTransactions.isEmpty && transactionsError.isEmpty {
         if transactions.isEmpty && !noTransactions {
@@ -200,7 +189,7 @@ final class TransactionsVCAlt: NSViewController {
           }
         }
       }
-      
+
       collectionView.animator().performBatchUpdates {
         collectionView.deleteItems(at: result.deletes.set)
         collectionView.insertItems(at: result.inserts.set)
@@ -210,7 +199,7 @@ final class TransactionsVCAlt: NSViewController {
       }
     }
   }
-  
+
   private func fetchTransactions() {
     UpFacade.listTransactions { (result) in
       DispatchQueue.main.async {
@@ -223,26 +212,33 @@ final class TransactionsVCAlt: NSViewController {
       }
     }
   }
-  
+
   private func display(_ transactions: [TransactionResource]) {
     transactionsError = .emptyString
     self.transactions = transactions
   }
-  
+
   private func display(_ error: AFError) {
     transactionsError = error.errorDescription ?? error.localizedDescription
     transactions.removeAll()
   }
-  
-  @objc private func settledOnlyToolbarAction() {
+
+  @objc
+  private func settledOnlyToolbarAction() {
     showSettledOnly.toggle()
     toolbar.selectedItemIdentifier = showSettledOnly ? .settledOnly : nil
   }
-  
-  @objc private func categoryButtonAction(_ sender: NSMenuItem) {
+
+  @objc
+  private func categoryButtonAction(_ sender: NSMenuItem) {
     if let value = TransactionCategory.allCases.first(where: { $0.description == sender.title }) {
       categoryFilter = value
     }
+  }
+
+  deinit {
+    removeObservers()
+    print("deinit")
   }
 }
 
@@ -263,15 +259,15 @@ extension TransactionsVCAlt: NSToolbarDelegate {
       return nil
     }
   }
-  
+
   func toolbarDefaultItemIdentifiers(_ toolbar: NSToolbar) -> [NSToolbarItem.Identifier] {
     return [.categoryFilter, .settledOnly, .flexibleSpace, .transactionsSearch]
   }
-  
+
   func toolbarSelectableItemIdentifiers(_ toolbar: NSToolbar) -> [NSToolbarItem.Identifier] {
     return [.settledOnly]
   }
-  
+
   func toolbarAllowedItemIdentifiers(_ toolbar: NSToolbar) -> [NSToolbarItem.Identifier] {
     return toolbarDefaultItemIdentifiers(toolbar)
   }
@@ -283,7 +279,7 @@ extension TransactionsVCAlt: NSCollectionViewDataSource {
   func collectionView(_ collectionView: NSCollectionView, numberOfItemsInSection section: Int) -> Int {
     return filteredTransactions.count
   }
-  
+
   func collectionView(_ collectionView: NSCollectionView, itemForRepresentedObjectAt indexPath: IndexPath) -> NSCollectionViewItem {
     guard let item = collectionView.makeItem(withIdentifier: .transactionItem, for: indexPath) as? TransactionItem else { fatalError() }
     item.transaction = filteredTransactions[indexPath.item].transactionViewModel

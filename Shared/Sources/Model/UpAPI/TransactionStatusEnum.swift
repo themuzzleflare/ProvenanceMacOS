@@ -14,7 +14,7 @@ extension TransactionStatusEnum {
       return true
     }
   }
-  
+
   var description: String {
     switch self {
     case .held:
@@ -23,7 +23,7 @@ extension TransactionStatusEnum {
       return "Settled"
     }
   }
-  
+
   var nsImage: NSImage {
     switch self {
     case .held:
@@ -32,7 +32,7 @@ extension TransactionStatusEnum {
       return .checkmarkCircle
     }
   }
-  
+
   var image: Image {
     switch self {
     case .held:
@@ -41,7 +41,7 @@ extension TransactionStatusEnum {
       return .checkmarkCircle
     }
   }
-  
+
   var nsColour: NSColor {
     switch self {
     case .held:
@@ -50,7 +50,7 @@ extension TransactionStatusEnum {
       return .green
     }
   }
-  
+
   var colour: Color {
     switch self {
     case .held:
@@ -59,7 +59,7 @@ extension TransactionStatusEnum {
       return .green
     }
   }
-  
+
   var statusEnum: StatusEnum {
     switch self {
     case .held:

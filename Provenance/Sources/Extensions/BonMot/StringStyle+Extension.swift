@@ -10,7 +10,7 @@ extension StringStyle {
       .alignment(.left)
     )
   }
-  
+
   static var transactionDescription: StringStyle {
     return StringStyle(
       .font(.circularStdBold(size: .labelFontSize)),
@@ -18,7 +18,7 @@ extension StringStyle {
       .alignment(.left)
     )
   }
-  
+
   static var transactionCreationDate: StringStyle {
     return StringStyle(
       .font(.circularStdBook(size: .smallSystemFontSize)),
@@ -26,7 +26,7 @@ extension StringStyle {
       .alignment(.left)
     )
   }
-  
+
   static var transactionAmount: StringStyle {
     return StringStyle(
       .font(.circularStdBook(size: .labelFontSize)),
@@ -34,7 +34,7 @@ extension StringStyle {
       .alignment(.right)
     )
   }
-  
+
   static var accountBalance: StringStyle {
     return StringStyle(
       .font(.circularStdBold(size: 32)),
@@ -42,7 +42,7 @@ extension StringStyle {
       .alignment(.center)
     )
   }
-  
+
   static var accountDisplayName: StringStyle {
     return StringStyle(
       .font(.circularStdBook(size: .labelFontSize)),
@@ -50,7 +50,7 @@ extension StringStyle {
       .alignment(.center)
     )
   }
-  
+
   static var categoryName: StringStyle {
     return StringStyle(
       .font(.circularStdBook(size: .labelFontSize)),
@@ -58,7 +58,7 @@ extension StringStyle {
       .alignment(.center)
     )
   }
-  
+
   static var aboutName: StringStyle {
     return StringStyle(
       .font(.circularStdBold(size: 32)),
@@ -66,7 +66,7 @@ extension StringStyle {
       .alignment(.center)
     )
   }
-  
+
   static var aboutDescription: StringStyle {
     return StringStyle(
       .font(.circularStdBook(size: .labelFontSize)),
@@ -74,7 +74,7 @@ extension StringStyle {
       .alignment(.left)
     )
   }
-  
+
   static var leftText: StringStyle {
     return StringStyle(
       .font(.circularStdMedium(size: .labelFontSize)),
@@ -82,7 +82,7 @@ extension StringStyle {
       .alignment(.left)
     )
   }
-  
+
   static var rightText: StringStyle {
     return StringStyle(
       .font(.circularStdBook(size: .labelFontSize)),
@@ -90,7 +90,7 @@ extension StringStyle {
       .alignment(.right)
     )
   }
-  
+
   static var bottomText: StringStyle {
     return StringStyle(
       .font(.circularStdBook(size: .smallSystemFontSize)),
@@ -98,7 +98,7 @@ extension StringStyle {
       .alignment(.left)
     )
   }
-  
+
   static var addingWidgetTitle: StringStyle {
     return StringStyle(
       .font(.circularStdBold(size: 23)),

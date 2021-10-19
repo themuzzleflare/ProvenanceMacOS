@@ -1,13 +1,6 @@
 import Cocoa
 
 final class AttributeItem: CollectionViewItem {
-  @IBOutlet weak var leftLabel: NSTextField!
-  @IBOutlet weak var rightLabel: NSTextField!
-  
-  @IBAction func copyAttribute(_ sender: NSMenuItem) {
-    NSPasteboard.general.setString(rightLabel.stringValue, forType: .string)
-  }
-  
   var attribute: DetailItem? {
     didSet {
       guard isViewLoaded, let attribute = attribute else { return }
@@ -16,15 +9,22 @@ final class AttributeItem: CollectionViewItem {
       rightLabel.font = attribute.valueFont
     }
   }
-  
-  deinit {
-    print("deinit AttributeItem")
+
+  @IBOutlet weak var leftLabel: NSTextField!
+  @IBOutlet weak var rightLabel: NSTextField!
+
+  @IBAction func copyAttribute(_ sender: NSMenuItem) {
+    NSPasteboard.general.setString(rightLabel.stringValue, forType: .string)
   }
-  
+
   override func updateSelectionHighlighting() {
     guard isViewLoaded else { return }
     super.updateSelectionHighlighting()
     leftLabel.textColor = showAsHighlighted ? .selectedControlTextColor : .labelColor
     rightLabel.textColor = showAsHighlighted ? .selectedControlTextColor : .secondaryLabelColor
+  }
+
+  deinit {
+    print("deinit AttributeItem")
   }
 }

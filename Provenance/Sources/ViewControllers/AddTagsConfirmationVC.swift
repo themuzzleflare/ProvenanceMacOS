@@ -1,6 +1,16 @@
 import Cocoa
 
 final class AddTagsConfirmationVC: NSViewController {
+  private var previousViewController: NSViewController
+
+  private var transaction: TransactionResource
+
+  private var tags: [TagResource]
+
+  private lazy var toolbar = NSToolbar(self, identifier: .confirmation)
+
+  private var dateStyleObserver: NSKeyValueObservation?
+
   @IBOutlet weak var collectionView: NSCollectionView! {
     didSet {
       collectionView.register(.tagItem, forItemWithIdentifier: .tagItem)
@@ -12,69 +22,56 @@ final class AddTagsConfirmationVC: NSViewController {
       collectionView.collectionViewLayout = .confirmation
     }
   }
-  
-  private var previousViewController: NSViewController
-  
-  private var transaction: TransactionResource
-  
-  private var tags: [TagResource]
-  
-  private lazy var toolbar = NSToolbar(self, identifier: .confirmation)
-  
-  private var dateStyleObserver: NSKeyValueObservation?
-  
+
   init(_ previousViewController: NSViewController, transaction: TransactionResource, tags: [TagResource]) {
     self.previousViewController = previousViewController
     self.transaction = transaction
     self.tags = tags
     super.init(nibName: "AddTagsConfirmation", bundle: nil)
   }
-  
+
   convenience init(_ previousViewController: NSViewController, transaction: TransactionResource, tag: TagResource) {
     self.init(previousViewController, transaction: transaction, tags: .singleTag(with: tag))
   }
-  
-  deinit {
-    removeObserver()
-    print("deinit")
-  }
-  
+
   required init?(coder: NSCoder) {
     fatalError("Not implemented")
   }
-  
+
   override func viewDidLoad() {
     super.viewDidLoad()
     configureObserver()
   }
-  
+
   override func viewWillAppear() {
     super.viewWillAppear()
     configureWindow()
   }
-  
+
   private func configureWindow() {
     NSApp.mainWindow?.toolbar = toolbar
     NSApp.mainWindow?.title = "Confirmation"
   }
-  
+
   private func configureObserver() {
     dateStyleObserver = ProvenanceApp.userDefaults.observe(\.dateStyle, options: .new) { [weak self] (_, _) in
       guard let weakSelf = self else { return }
       weakSelf.collectionView.reloadData()
     }
   }
-  
+
   private func removeObserver() {
     dateStyleObserver?.invalidate()
     dateStyleObserver = nil
   }
-  
-  @objc private func goBack() {
+
+  @objc
+  private func goBack() {
     view.window?.contentViewController = .navigation(self, to: previousViewController)
   }
-  
-  @objc private func confirm() {
+
+  @objc
+  private func confirm() {
     toolbar.removeItem(at: 1)
     toolbar.insertItem(withItemIdentifier: .loading, at: 1)
     DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [self] in
@@ -91,6 +88,11 @@ final class AddTagsConfirmationVC: NSViewController {
         }
       }
     }
+  }
+
+  deinit {
+    removeObserver()
+    print("deinit")
   }
 }
 
@@ -109,11 +111,11 @@ extension AddTagsConfirmationVC: NSToolbarDelegate {
       return nil
     }
   }
-  
+
   func toolbarDefaultItemIdentifiers(_ toolbar: NSToolbar) -> [NSToolbarItem.Identifier] {
     return [.backButton, .confirm]
   }
-  
+
   func toolbarAllowedItemIdentifiers(_ toolbar: NSToolbar) -> [NSToolbarItem.Identifier] {
     return [.backButton, .confirm, .loading]
   }
@@ -125,7 +127,7 @@ extension AddTagsConfirmationVC: NSCollectionViewDataSource {
   func numberOfSections(in collectionView: NSCollectionView) -> Int {
     return 3
   }
-  
+
   func collectionView(_ collectionView: NSCollectionView, numberOfItemsInSection section: Int) -> Int {
     switch section {
     case 0:
@@ -138,7 +140,7 @@ extension AddTagsConfirmationVC: NSCollectionViewDataSource {
       fatalError()
     }
   }
-  
+
   func collectionView(_ collectionView: NSCollectionView, viewForSupplementaryElementOfKind kind: NSCollectionView.SupplementaryElementKind, at indexPath: IndexPath) -> NSView {
     guard let view = collectionView.makeSupplementaryView(ofKind: kind, withIdentifier: .textSupplementaryView, for: indexPath) as? TextSupplementaryView else { fatalError() }
     switch indexPath.section {
@@ -155,7 +157,7 @@ extension AddTagsConfirmationVC: NSCollectionViewDataSource {
       fatalError()
     }
   }
-  
+
   func collectionView(_ collectionView: NSCollectionView, itemForRepresentedObjectAt indexPath: IndexPath) -> NSCollectionViewItem {
     let tag = tags[indexPath.item]
     switch indexPath.section {

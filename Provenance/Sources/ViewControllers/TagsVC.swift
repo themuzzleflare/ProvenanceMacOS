@@ -2,8 +2,38 @@ import Cocoa
 import Alamofire
 
 final class TagsVC: NSViewController {
+  private typealias DataSource = NSCollectionViewDiffableDataSource<Section, TagViewModel>
+
+  private typealias Snapshot = NSDiffableDataSourceSnapshot<Section, TagViewModel>
+
+  private enum Section {
+    case main
+  }
+
+  private lazy var dataSource = makeDataSource()
+
+  private lazy var toolbar = NSToolbar(self, identifier: .tags)
+
   private lazy var searchField = NSSearchField(self, type: .tags)
-  
+
+  private var apiKeyObserver: NSKeyValueObservation?
+
+  private var noTags: Bool = false
+
+  private var tags = [TagResource]() {
+    didSet {
+      noTags = tags.isEmpty
+      applySnapshot()
+      searchField.placeholderString = tags.searchFieldPlaceholder
+    }
+  }
+
+  private var tagsError = String()
+
+  private var filteredTags: [TagResource] {
+    return tags.filtered(searchField: searchField)
+  }
+
   @IBOutlet weak var collectionView: NSCollectionView! {
     didSet {
       collectionView.dataSource = dataSource
@@ -12,56 +42,21 @@ final class TagsVC: NSViewController {
       collectionView.backgroundViewScrollsWithContent = true
     }
   }
-  
-  private enum Section {
-    case main
-  }
-  
-  private typealias DataSource = NSCollectionViewDiffableDataSource<Section, TagViewModel>
-  
-  private typealias Snapshot = NSDiffableDataSourceSnapshot<Section, TagViewModel>
-  
-  private lazy var dataSource = makeDataSource()
-  
-  private lazy var toolbar = NSToolbar(self, identifier: .tags)
-  
-  private var apiKeyObserver: NSKeyValueObservation?
-  
-  private var noTags: Bool = false
-  
-  private var tags = [TagResource]() {
-    didSet {
-      noTags = tags.isEmpty
-      applySnapshot()
-      searchField.placeholderString = tags.searchFieldPlaceholder
-    }
-  }
-  
-  private var tagsError = String()
-  
-  private var filteredTags: [TagResource] {
-    return tags.filtered(searchField: searchField)
-  }
-  
+
   override init(nibName nibNameOrNil: NSNib.Name?, bundle nibBundleOrNil: Bundle?) {
     super.init(nibName: "Tags", bundle: nil)
   }
-  
-  deinit {
-    removeObserver()
-    print("deinit")
-  }
-  
+
   required init?(coder: NSCoder) {
     fatalError("Not implemented")
   }
-  
+
   override func viewDidLoad() {
     super.viewDidLoad()
     configureObserver()
     applySnapshot(animate: false)
   }
-  
+
   override func viewWillAppear() {
     super.viewWillAppear()
     fetchTags()
@@ -70,35 +65,29 @@ final class TagsVC: NSViewController {
     appDelegate.refreshMenuItem.title = "Refresh Tags"
     appDelegate.refreshMenuItem.action = #selector(refreshTags)
   }
-  
-//  override func viewWillDisappear() {
-//    super.viewWillDisappear()
-//    guard let appDelegate = NSApp.delegate as? AppDelegate else { return }
-//    appDelegate.refreshMenuItem.title = "Refresh"
-//    appDelegate.refreshMenuItem.action = nil
-//  }
-  
-  @objc private func refreshTags() {
+
+  @objc
+  private func refreshTags() {
     fetchTags()
   }
-  
+
   private func configureWindow() {
     NSApp.mainWindow?.toolbar = toolbar
     NSApp.mainWindow?.title = "Tags"
   }
-  
+
   private func configureObserver() {
     apiKeyObserver = ProvenanceApp.userDefaults.observe(\.apiKey, options: .new) { [weak self] (_, _) in
       guard let weakSelf = self else { return }
       weakSelf.fetchTags()
     }
   }
-  
+
   private func removeObserver() {
     apiKeyObserver?.invalidate()
     apiKeyObserver = nil
   }
-  
+
   private func makeDataSource() -> DataSource {
     return DataSource(
       collectionView: collectionView,
@@ -109,13 +98,13 @@ final class TagsVC: NSViewController {
       }
     )
   }
-  
+
   private func applySnapshot(animate: Bool = true) {
     var snapshot = Snapshot()
-    
+
     snapshot.appendSections([.main])
     snapshot.appendItems(filteredTags.tagViewModels, toSection: .main)
-    
+
     if snapshot.itemIdentifiers.isEmpty && tagsError.isEmpty {
       if tags.isEmpty && !noTags {
         collectionView.backgroundView = .loadingView(frame: collectionView.bounds, contentType: .tags)
@@ -131,10 +120,10 @@ final class TagsVC: NSViewController {
         }
       }
     }
-    
+
     dataSource.apply(snapshot, animatingDifferences: animate)
   }
-  
+
   private func fetchTags() {
     UpFacade.listTags { (result) in
       DispatchQueue.main.async {
@@ -147,20 +136,26 @@ final class TagsVC: NSViewController {
       }
     }
   }
-  
+
   private func display(_ tags: [TagResource]) {
     tagsError = .emptyString
     self.tags = tags
   }
-  
+
   private func display(_ error: AFError) {
     tagsError = error.errorDescription ?? error.localizedDescription
     tags.removeAll()
   }
-  
-  @objc private func addTags() {
+
+  @objc
+  private func addTags() {
     let viewController = AddTagsTransactionSelectionVC(parent ?? self, previousTitle: "Tags")
     view.window?.contentViewController = .navigation(parent ?? self, to: viewController)
+  }
+
+  deinit {
+    removeObserver()
+    print("deinit")
   }
 }
 
@@ -179,11 +174,11 @@ extension TagsVC: NSToolbarDelegate {
       return nil
     }
   }
-  
+
   func toolbarDefaultItemIdentifiers(_ toolbar: NSToolbar) -> [NSToolbarItem.Identifier] {
     return [.addTags, .flexibleSpace, .tagsSearch]
   }
-  
+
   func toolbarAllowedItemIdentifiers(_ toolbar: NSToolbar) -> [NSToolbarItem.Identifier] {
     return toolbarDefaultItemIdentifiers(toolbar)
   }
@@ -192,7 +187,8 @@ extension TagsVC: NSToolbarDelegate {
 // MARK: - NSToolbarItemValidation
 
 extension TagsVC: NSToolbarItemValidation {
-  @discardableResult func validateToolbarItem(_ item: NSToolbarItem) -> Bool {
+  @discardableResult
+  func validateToolbarItem(_ item: NSToolbarItem) -> Bool {
     switch item.itemIdentifier {
     case .addTags:
       if tagsError.isEmpty {

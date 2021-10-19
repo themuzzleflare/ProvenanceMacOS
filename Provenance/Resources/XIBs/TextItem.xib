@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="19162" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="19455" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="19162"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="19455"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="TextItem" customModule="Provenance" customModuleProvider="target"/>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
-        <customView id="Hz6-mo-xeY" customClass="CollectionItemView" customModule="Provenance" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="479" height="70"/>
+        <customView identifier="textItemView" id="Hz6-mo-xeY" customClass="CollectionItemView" customModule="Provenance" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="327" height="51"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WzW-F3-2t4">
-                    <rect key="frame" x="14" y="26" width="451" height="18"/>
+                    <rect key="frame" x="14" y="17" width="299" height="18"/>
                     <textFieldCell key="cell" allowsUndo="NO" alignment="left" title="Multiline Label" id="dXm-Li-JTf">
                         <font key="font" size="14" name="CircularStd-Book"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -27,7 +27,7 @@
                 <constraint firstItem="WzW-F3-2t4" firstAttribute="centerY" secondItem="Hz6-mo-xeY" secondAttribute="centerY" id="gIi-J1-9mo"/>
                 <constraint firstAttribute="trailing" secondItem="WzW-F3-2t4" secondAttribute="trailing" constant="16" id="n7d-ue-6nK"/>
             </constraints>
-            <point key="canvasLocation" x="138.5" y="36"/>
+            <point key="canvasLocation" x="62.5" y="26.5"/>
         </customView>
         <collectionViewItem nibName="TextItem" id="eMI-de-JSL" customClass="TextItem" customModule="Provenance" customModuleProvider="target">
             <connections>

@@ -5,7 +5,7 @@ extension CGFloat {
   static var labelFontSize: CGFloat {
     return NSFont.labelFontSize
   }
-  
+
   /// `NSFont.smallSystemFontSize`.
   static var smallSystemFontSize: CGFloat {
     return NSFont.smallSystemFontSize

@@ -9,7 +9,7 @@ extension TransactionColourEnum {
       return .greenColour
     }
   }
-  
+
   var colour: Color {
     switch self {
     case .primaryLabel, .unknown:

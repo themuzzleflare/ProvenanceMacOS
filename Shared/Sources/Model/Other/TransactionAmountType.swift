@@ -17,7 +17,7 @@ extension TransactionAmountType {
       return "Amount"
     }
   }
-  
+
   var colour: TransactionColourEnum {
     switch self {
     case .debit:

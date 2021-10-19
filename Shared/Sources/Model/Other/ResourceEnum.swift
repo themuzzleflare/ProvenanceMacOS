@@ -17,7 +17,7 @@ extension ResourceEnum {
       return categoryResource.attributes.name
     }
   }
-  
+
   var resourcEnumRaw: ResourceEnumRaw {
     switch self {
     case .account:

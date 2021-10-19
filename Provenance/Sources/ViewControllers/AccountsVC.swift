@@ -2,44 +2,20 @@ import Cocoa
 import Alamofire
 
 final class AccountsVC: NSViewController {
-  private lazy var searchField = NSSearchField(self, type: .accounts)
-  
-  @IBOutlet weak var collectionView: NSCollectionView! {
-    didSet {
-      collectionView.dataSource = dataSource
-      collectionView.register(.accountItem, forItemWithIdentifier: .accountItem)
-      collectionView.collectionViewLayout = .twoColumnGrid
-      collectionView.backgroundViewScrollsWithContent = true
-    }
-  }
-  
-  @IBOutlet weak var accountTypeSegmentedControl: NSSegmentedControl! {
-    didSet {
-      accountTypeSegmentedControl.selectSegment(withTag: accountFilter.rawValue)
-    }
-  }
-  
-  @IBAction func accountTypeAction(_ sender: NSSegmentedControl) {
-    if let value = AccountTypeOptionEnum(rawValue: sender.selectedSegment) {
-      accountFilter = value
-    }
-    if !searchField.stringValue.isEmpty {
-      applySnapshot()
-    }
-  }
-  
+  private typealias DataSource = NSCollectionViewDiffableDataSource<Section, AccountViewModel>
+
+  private typealias Snapshot = NSDiffableDataSourceSnapshot<Section, AccountViewModel>
+
   private enum Section {
     case main
   }
-  
-  private typealias DataSource = NSCollectionViewDiffableDataSource<Section, AccountViewModel>
-  
-  private typealias Snapshot = NSDiffableDataSourceSnapshot<Section, AccountViewModel>
-  
+
   private lazy var dataSource = makeDataSource()
-  
+
   private lazy var toolbar = NSToolbar(self, identifier: .accounts)
-  
+
+  private lazy var searchField = NSSearchField(self, type: .accounts)
+
   private var accountFilter: AccountTypeOptionEnum = ProvenanceApp.userDefaults.appAccountFilter {
     didSet {
       if ProvenanceApp.userDefaults.accountFilter != accountFilter.rawValue {
@@ -48,15 +24,18 @@ final class AccountsVC: NSViewController {
       if accountTypeSegmentedControl.selectedSegment != accountFilter.rawValue {
         accountTypeSegmentedControl.selectSegment(withTag: accountFilter.rawValue)
       }
+      if !searchField.stringValue.isEmpty {
+        applySnapshot()
+      }
     }
   }
-  
+
   private var apiKeyObserver: NSKeyValueObservation?
-  
+
   private var accountFilterObserver: NSKeyValueObservation?
-  
+
   private var noAccounts: Bool = false
-  
+
   private var accounts = [AccountResource]() {
     didSet {
       noAccounts = accounts.isEmpty
@@ -64,32 +43,42 @@ final class AccountsVC: NSViewController {
       searchField.placeholderString = accounts.searchFieldPlaceholder
     }
   }
-  
+
   private var accountsError = String()
-  
+
   private var filteredAccounts: [AccountResource] {
     return accounts.filtered(filter: accountFilter, searchField: searchField)
   }
-  
+
+  @IBOutlet weak var collectionView: NSCollectionView! {
+    didSet {
+      collectionView.dataSource = dataSource
+      collectionView.register(.accountItem, forItemWithIdentifier: .accountItem)
+      collectionView.collectionViewLayout = .twoColumnGrid
+      collectionView.backgroundViewScrollsWithContent = true
+    }
+  }
+
+  @IBOutlet weak var accountTypeSegmentedControl: NSSegmentedControl! {
+    didSet {
+      accountTypeSegmentedControl.selectSegment(withTag: accountFilter.rawValue)
+    }
+  }
+
   override init(nibName nibNameOrNil: NSNib.Name?, bundle nibBundleOrNil: Bundle?) {
     super.init(nibName: "Accounts", bundle: nil)
   }
-  
-  deinit {
-    removeObservers()
-    print("deinit")
-  }
-  
+
   required init?(coder: NSCoder) {
     fatalError("Not implemented")
   }
-  
+
   override func viewDidLoad() {
     super.viewDidLoad()
     configureObservers()
     applySnapshot(animate: false)
   }
-  
+
   override func viewWillAppear() {
     super.viewWillAppear()
     fetchAccounts()
@@ -98,23 +87,23 @@ final class AccountsVC: NSViewController {
     appDelegate.refreshMenuItem.title = "Refresh Accounts"
     appDelegate.refreshMenuItem.action = #selector(refreshAccounts)
   }
-  
-//  override func viewWillDisappear() {
-//    super.viewWillDisappear()
-//    guard let appDelegate = NSApp.delegate as? AppDelegate else { return }
-//    appDelegate.refreshMenuItem.title = "Refresh"
-//    appDelegate.refreshMenuItem.action = nil
-//  }
-  
-  @objc private func refreshAccounts() {
+
+  @IBAction func accountTypeAction(_ sender: NSSegmentedControl) {
+    if let value = AccountTypeOptionEnum(rawValue: sender.selectedSegment) {
+      accountFilter = value
+    }
+  }
+
+  @objc
+  private func refreshAccounts() {
     fetchAccounts()
   }
-  
+
   private func configureWindow() {
     NSApp.mainWindow?.toolbar = toolbar
     NSApp.mainWindow?.title = "Accounts"
   }
-  
+
   private func configureObservers() {
     apiKeyObserver = ProvenanceApp.userDefaults.observe(\.apiKey, options: .new) { [weak self] (_, _) in
       guard let weakSelf = self else { return }
@@ -125,14 +114,14 @@ final class AccountsVC: NSViewController {
       weakSelf.accountFilter = accountFilter
     }
   }
-  
+
   private func removeObservers() {
     apiKeyObserver?.invalidate()
     apiKeyObserver = nil
     accountFilterObserver?.invalidate()
     accountFilterObserver = nil
   }
-  
+
   private func makeDataSource() -> DataSource {
     return DataSource(
       collectionView: collectionView,
@@ -143,13 +132,13 @@ final class AccountsVC: NSViewController {
       }
     )
   }
-  
+
   private func applySnapshot(animate: Bool = true) {
     var snapshot = Snapshot()
-    
+
     snapshot.appendSections([.main])
     snapshot.appendItems(filteredAccounts.accountViewModels, toSection: .main)
-    
+
     if snapshot.itemIdentifiers.isEmpty && accountsError.isEmpty {
       if accounts.isEmpty && !noAccounts {
         collectionView.backgroundView = .loadingView(frame: collectionView.bounds, contentType: .accounts)
@@ -165,10 +154,10 @@ final class AccountsVC: NSViewController {
         }
       }
     }
-    
+
     dataSource.apply(snapshot, animatingDifferences: animate)
   }
-  
+
   private func fetchAccounts() {
     UpFacade.listAccounts { (result) in
       DispatchQueue.main.async {
@@ -181,15 +170,20 @@ final class AccountsVC: NSViewController {
       }
     }
   }
-  
+
   private func display(_ accounts: [AccountResource]) {
     accountsError = .emptyString
     self.accounts = accounts
   }
-  
+
   private func display(_ error: AFError) {
     accountsError = error.errorDescription ?? error.localizedDescription
     accounts.removeAll()
+  }
+
+  deinit {
+    removeObservers()
+    print("deinit")
   }
 }
 
@@ -204,11 +198,11 @@ extension AccountsVC: NSToolbarDelegate {
       return nil
     }
   }
-  
+
   func toolbarDefaultItemIdentifiers(_ toolbar: NSToolbar) -> [NSToolbarItem.Identifier] {
     return [.accountsSearch]
   }
-  
+
   func toolbarAllowedItemIdentifiers(_ toolbar: NSToolbar) -> [NSToolbarItem.Identifier] {
     return toolbarDefaultItemIdentifiers(toolbar)
   }
@@ -232,11 +226,11 @@ extension AccountsVC: NSSearchFieldDelegate {
   func controlTextDidChange(_ obj: Notification) {
     applySnapshot()
   }
-  
+
   func searchFieldDidStartSearching(_ sender: NSSearchField) {
     accountTypeSegmentedControl.isHidden = false
   }
-  
+
   func searchFieldDidEndSearching(_ sender: NSSearchField) {
     accountTypeSegmentedControl.isHidden = true
   }

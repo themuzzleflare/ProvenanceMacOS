@@ -5,26 +5,26 @@ class CollectionViewItem: NSCollectionViewItem {
     return (highlightState == .forSelection) ||
     (isSelected && highlightState != .forDeselection)
   }
-  
+
   override var highlightState: NSCollectionViewItem.HighlightState {
     didSet {
       updateSelectionHighlighting()
     }
   }
-  
+
   override var isSelected: Bool {
     didSet {
       updateSelectionHighlighting()
     }
   }
-  
+
   override func viewDidLoad() {
     super.viewDidLoad()
     view.wantsLayer = true
     view.layerContentsRedrawPolicy = .onSetNeedsDisplay
     view.layer?.borderWidth = 0.25
   }
-  
+
   func updateSelectionHighlighting() {
     guard isViewLoaded else { return }
     textField?.textColor = showAsHighlighted ? .selectedTextColor : .labelColor
@@ -47,7 +47,7 @@ extension CollectionViewItem: NSMenuDelegate {
   func menuWillOpen(_ menu: NSMenu) {
     highlightState = .asDropTarget
   }
-  
+
   func menuDidClose(_ menu: NSMenu) {
     highlightState = .forDeselection
   }

@@ -5,7 +5,7 @@ extension NSMenu {
     self.init(title: title)
     self.items = items
   }
-  
+
   static func categoryMenu(_ target: NSViewController, filter: TransactionCategory, action: Selector) -> NSMenu {
     return NSMenu(
       title: "Category",

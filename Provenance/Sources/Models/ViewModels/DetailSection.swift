@@ -8,17 +8,51 @@ struct DetailSection: Identifiable {
 // MARK: - Hashable
 
 extension DetailSection: Hashable {
-  func hash(into hasher: inout Hasher) {
-    hasher.combine(id)
-  }
-  
   static func == (lhs: DetailSection, rhs: DetailSection) -> Bool {
     lhs.id == rhs.id
+  }
+
+  func hash(into hasher: inout Hasher) {
+    hasher.combine(id)
   }
 }
 
 extension Array where Element == DetailSection {
-  static func transactionDetailSections(transaction: TransactionResource, account: AccountResource?, transferAccount: AccountResource?, parentCategory: CategoryResource?, category: CategoryResource?) -> [DetailSection] {
+  static var diagnosticsSections: [DetailSection] {
+    return [
+      DetailSection(
+        id: 1,
+        items: [
+          DetailItem(
+            id: "Version",
+            value: ProvenanceApp.userDefaults.appVersion
+          ),
+          DetailItem(
+            id: "Build",
+            value: ProvenanceApp.userDefaults.appBuild
+          )
+        ]
+      )
+    ]
+  }
+
+  var filtered: [DetailSection] {
+    return self.filter { (section) in
+      return !section.items.allSatisfy { (item) in
+        return item.value.isEmpty || (item.id == "Tags" && item.value == "0")
+      }
+    }.map { (section) in
+      return DetailSection(id: section.id, items: section.items.filter { (item) in
+        return !item.value.isEmpty
+      })
+    }
+  }
+
+  static func transactionDetailSections(transaction: TransactionResource,
+                                        account: AccountResource?,
+                                        transferAccount: AccountResource?,
+                                        parentCategory: CategoryResource?,
+                                        category: CategoryResource?) -> [DetailSection] {
     return [
       DetailSection(
         id: 1,
@@ -112,8 +146,9 @@ extension Array where Element == DetailSection {
       )
     ]
   }
-  
-  static func accountDetailSections(account: AccountResource, transaction: TransactionResource?) -> [DetailSection] {
+
+  static func accountDetailSections(account: AccountResource,
+                                    transaction: TransactionResource?) -> [DetailSection] {
     return [
       DetailSection(
         id: 1,
@@ -137,35 +172,5 @@ extension Array where Element == DetailSection {
         ]
       )
     ]
-  }
-  
-  static var diagnosticsSections: [DetailSection] {
-    return [
-      DetailSection(
-        id: 1,
-        items: [
-          DetailItem(
-            id: "Version",
-            value: ProvenanceApp.userDefaults.appVersion
-          ),
-          DetailItem(
-            id: "Build",
-            value: ProvenanceApp.userDefaults.appBuild
-          )
-        ]
-      )
-    ]
-  }
-  
-  var filtered: [DetailSection] {
-    return self.filter { (section) in
-      return !section.items.allSatisfy { (item) in
-        return item.value.isEmpty || (item.id == "Tags" && item.value == "0")
-      }
-    }.map { (section) in
-      return DetailSection(id: section.id, items: section.items.filter { (item) in
-        return !item.value.isEmpty
-      })
-    }
   }
 }

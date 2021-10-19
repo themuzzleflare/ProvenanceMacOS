@@ -1,13 +1,29 @@
 disabled_rules:
-  - identifier_name
   - cyclomatic_complexity
   - function_body_length
   - line_length
-  - closure_parameter_position
-  - file_length
-  - type_body_length
-  - force_cast
-  - trailing_whitespace
-  - force_try
+opt_in_rules:
+  - anonymous_argument_in_multiline_closure
+  - anyobject_protocol
+  - attributes
+  - capture_variable
+  - closure_body_length
+  - closure_end_indentation
+  - closure_spacing
+  - collection_alignment
+  - unused_import
+  - toggle_bool
+  - type_contents_order
+  - convenience_type
+  - contains_over_filter_count
+  - contains_over_first_not_nil
+  - contains_over_filter_is_empty
+  - contains_over_range_nil_comparison
+  - discarded_notification_center_observer
+  - discouraged_assert
+  - discouraged_none_name
+  - discouraged_object_literal
+  - discouraged_optional_boolean
+  - discouraged_optional_collection
 excluded:
   - Pods

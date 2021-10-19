@@ -2,7 +2,7 @@ import SwiftUI
 
 struct TransactionCellView: View {
   let transaction: LatestTransactionModel
-  
+
   var body: some View {
     HStack {
       VStack(alignment: .leading) {

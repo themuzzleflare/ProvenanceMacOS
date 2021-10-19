@@ -20,7 +20,7 @@ extension TabBarItem {
       return CategoriesVC()
     }
   }
-  
+
   var label: String {
     switch self {
     case .transactions:
@@ -33,7 +33,7 @@ extension TabBarItem {
       return "Categories"
     }
   }
-  
+
   var image: NSImage? {
     switch self {
     case .transactions:
@@ -46,7 +46,7 @@ extension TabBarItem {
       return .trayFull
     }
   }
-  
+
   var menuItem: NSMenuItem? {
     guard let applicationDelegate = NSApp.delegate as? AppDelegate else { return nil }
     switch self {
@@ -60,7 +60,7 @@ extension TabBarItem {
       return applicationDelegate.categoriesMenuItem
     }
   }
-  
+
   var tabViewItem: NSTabViewItem {
     return NSTabViewItem(
       identifier: self.rawValue,

@@ -9,7 +9,7 @@ extension NSAlert {
     self.messageText = messageText
     self.informativeText = informativeText
   }
-  
+
   static func createTags(_ target: AddTagsTagSelectionVC) -> NSAlert {
     let alert = NSAlert(
       alertStyle: .informational,
@@ -22,7 +22,7 @@ extension NSAlert {
     alert.addButton(withTitle: "Cancel")
     return alert
   }
-  
+
   static func tagsAddedSuccess(tags: [TagResource], transaction: TransactionResource) -> NSAlert {
     return NSAlert(
       alertStyle: .informational,
@@ -31,7 +31,7 @@ extension NSAlert {
       informativeText: "\(tags.joinedWithComma) \(tags.count == 1 ? "was" : "were") added to \(transaction.attributes.description)."
     )
   }
-  
+
   static func tagsAddedFailure(error: AFError) -> NSAlert {
     return NSAlert(
       alertStyle: .warning,

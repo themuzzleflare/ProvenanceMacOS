@@ -7,7 +7,7 @@ extension NSMenuItem {
     menuItem.state = category == filter ? .on : .off
     return menuItem
   }
-  
+
   static func settledOnlyMenuFormRepresentation(_ target: NSViewController, settledOnly: Bool, action: Selector) -> NSMenuItem {
     let menuItem = NSMenuItem(title: "Settled Only", action: action, keyEquivalent: .emptyString)
     menuItem.target = target
@@ -16,7 +16,7 @@ extension NSMenuItem {
     menuItem.onStateImage = .checkmarkCircleFill
     return menuItem
   }
-  
+
   static func categoryMenuFormRepresentation(category: TransactionCategory, submenu: NSMenu) -> NSMenuItem {
     let menuItem = NSMenuItem(title: "Category", action: nil, keyEquivalent: .emptyString)
     menuItem.state = category == .all ? .off : .on

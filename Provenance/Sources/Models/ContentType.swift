@@ -20,7 +20,7 @@ extension ContentType {
       return "Categories"
     }
   }
-  
+
   var singular: String {
     switch self {
     case .transactions:
@@ -33,7 +33,7 @@ extension ContentType {
       return "Category"
     }
   }
-  
+
   var noContentDescription: String {
     switch self {
     case .transactions:
@@ -46,7 +46,7 @@ extension ContentType {
       return "No Categories"
     }
   }
-  
+
   var loadingDescription: String {
     switch self {
     case .transactions:
@@ -59,7 +59,7 @@ extension ContentType {
       return "Loading Categories"
     }
   }
-  
+
   var searchPlaceholder: String {
     switch self {
     case .transactions:
@@ -72,7 +72,7 @@ extension ContentType {
       return "Search Categories"
     }
   }
-  
+
   func searchFieldPlaceholder(count: Int) -> String {
     return "Search \(count.description) \(count == 1 ? singular : plural)"
   }

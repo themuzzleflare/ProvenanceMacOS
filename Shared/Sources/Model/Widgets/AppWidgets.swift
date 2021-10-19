@@ -14,7 +14,7 @@ extension AppWidgets {
       return "latestTransactionWidget"
     }
   }
-  
+
   var name: String {
     switch self {
     case .accountBalance:
@@ -23,7 +23,7 @@ extension AppWidgets {
       return "Latest Transaction"
     }
   }
-  
+
   var description: String {
     switch self {
     case .accountBalance:

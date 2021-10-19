@@ -18,7 +18,7 @@ extension NSCollectionViewLayout {
     let layout = NSCollectionViewCompositionalLayout(section: section)
     return layout
   }
-  
+
   static var transactionDetail: NSCollectionViewLayout {
     let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
     let item = NSCollectionLayoutItem(layoutSize: itemSize)
@@ -29,7 +29,7 @@ extension NSCollectionViewLayout {
     let layout = NSCollectionViewCompositionalLayout(section: section)
     return layout
   }
-  
+
   static var confirmation: NSCollectionViewLayout {
     let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
                                           heightDimension: .fractionalHeight(1.0))
@@ -46,7 +46,7 @@ extension NSCollectionViewLayout {
     let layout = NSCollectionViewCompositionalLayout(section: section)
     return layout
   }
-  
+
   static var list: NSCollectionViewLayout {
     let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
                                           heightDimension: .fractionalHeight(1.0))
@@ -58,7 +58,7 @@ extension NSCollectionViewLayout {
     let layout = NSCollectionViewCompositionalLayout(section: section)
     return layout
   }
-  
+
   static var tags: NSCollectionViewLayout {
     let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
                                           heightDimension: .fractionalHeight(1.0))
@@ -70,7 +70,7 @@ extension NSCollectionViewLayout {
     let layout = NSCollectionViewCompositionalLayout(section: section)
     return layout
   }
-  
+
   static var twoColumnGrid: NSCollectionViewLayout {
     return NSCollectionViewCompositionalLayout { (_, _) in
       let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
@@ -86,7 +86,7 @@ extension NSCollectionViewLayout {
       return section
     }
   }
-  
+
   static var grid: NSCollectionViewLayout {
     let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.2),
                                           heightDimension: .fractionalHeight(1.0))

@@ -2,8 +2,42 @@ import Cocoa
 import Alamofire
 
 final class FilteredTransactionsVC: NSViewController {
+  private typealias DataSource = NSCollectionViewDiffableDataSource<Section, TransactionViewModel>
+
+  private typealias Snapshot = NSDiffableDataSourceSnapshot<Section, TransactionViewModel>
+
+  private enum Section {
+    case main
+  }
+
+  private var previousViewController: NSViewController
+
+  private var previousTitle: String
+
+  var resource: ResourceEnum
+
+  private lazy var dataSource = makeDataSource()
+
+  private lazy var toolbar = NSToolbar(self, identifier: .filteredTransactions)
+
   private lazy var searchField = NSSearchField(self, type: .transactions)
-  
+
+  private var dateStyleObserver: NSKeyValueObservation?
+
+  private var noTransactions: Bool = false
+
+  private var transactionsError = String()
+
+  private var transactions = [TransactionResource]() {
+    didSet {
+      transactionsUpdates()
+    }
+  }
+
+  var filteredTransactions: [TransactionResource] {
+    return transactions.filtered(searchField: searchField)
+  }
+
   @IBOutlet weak var collectionView: NSCollectionView! {
     didSet {
       collectionView.dataSource = dataSource
@@ -12,63 +46,24 @@ final class FilteredTransactionsVC: NSViewController {
       collectionView.backgroundViewScrollsWithContent = true
     }
   }
-  
-  private var previousViewController: NSViewController
-  
-  private var previousTitle: String
-  
-  var resource: ResourceEnum
-  
-  private enum Section {
-    case main
-  }
-  
-  private typealias DataSource = NSCollectionViewDiffableDataSource<Section, TransactionViewModel>
-  
-  private typealias Snapshot = NSDiffableDataSourceSnapshot<Section, TransactionViewModel>
-  
-  private lazy var dataSource = makeDataSource()
-  
-  private lazy var toolbar = NSToolbar(self, identifier: .filteredTransactions)
-  
-  private var dateStyleObserver: NSKeyValueObservation?
-  
-  private var noTransactions: Bool = false
-  
-  private var transactionsError = String()
-  
-  private var transactions = [TransactionResource]() {
-    didSet {
-      transactionsUpdates()
-    }
-  }
-  
-  var filteredTransactions: [TransactionResource] {
-    return transactions.filtered(searchField: searchField)
-  }
-  
+
   init(_ previousViewController: NSViewController, previousTitle: String, resource: ResourceEnum) {
     self.previousViewController = previousViewController
     self.previousTitle = previousTitle
     self.resource = resource
     super.init(nibName: "FilteredTransactions", bundle: nil)
   }
-  
-  deinit {
-    removeObserver()
-    print("deinit")
-  }
-  
+
   required init?(coder: NSCoder) {
     fatalError("Not implemented")
   }
-  
+
   override func viewDidLoad() {
     super.viewDidLoad()
     configureObserver()
     applySnapshot(animate: false)
   }
-  
+
   override func viewWillAppear() {
     super.viewWillAppear()
     fetchingTasks()
@@ -77,39 +72,41 @@ final class FilteredTransactionsVC: NSViewController {
     appDelegate.refreshMenuItem.title = "Refresh Transactions"
     appDelegate.refreshMenuItem.action = #selector(refreshTransactions)
   }
-  
+
   override func viewWillDisappear() {
     super.viewWillDisappear()
     guard let appDelegate = NSApp.delegate as? AppDelegate else { return }
     appDelegate.refreshMenuItem.title = "Refresh"
     appDelegate.refreshMenuItem.action = nil
   }
-  
-  @objc private func refreshTransactions() {
+
+  @objc
+  private func refreshTransactions() {
     fetchTransactions()
   }
-  
+
   private func configureWindow() {
     NSApp.mainWindow?.toolbar = toolbar
     NSApp.mainWindow?.title = resource.description
   }
-  
-  @objc private func goBack() {
+
+  @objc
+  private func goBack() {
     view.window?.contentViewController = .navigation(self, to: previousViewController)
   }
-  
+
   private func configureObserver() {
     dateStyleObserver = ProvenanceApp.userDefaults.observe(\.dateStyle, options: .new) { [weak self] (_, _) in
       guard let weakSelf = self else { return }
       weakSelf.applySnapshot()
     }
   }
-  
+
   private func removeObserver() {
     dateStyleObserver?.invalidate()
     dateStyleObserver = nil
   }
-  
+
   private func transactionsUpdates() {
     noTransactions = transactions.isEmpty
     switch resource {
@@ -120,11 +117,11 @@ final class FilteredTransactionsVC: NSViewController {
       searchField.placeholderString = filteredTransactions.searchFieldPlaceholder
     }
   }
-  
+
   func fetchingTasks() {
     fetchTransactions()
   }
-  
+
   private func makeDataSource() -> DataSource {
     return DataSource(
       collectionView: collectionView,
@@ -135,13 +132,13 @@ final class FilteredTransactionsVC: NSViewController {
       }
     )
   }
-  
+
   private func applySnapshot(animate: Bool = true) {
     var snapshot = Snapshot()
-    
+
     snapshot.appendSections([.main])
     snapshot.appendItems(filteredTransactions.transactionViewModels, toSection: .main)
-    
+
     if snapshot.itemIdentifiers.isEmpty && transactionsError.isEmpty {
       if transactions.isEmpty && !noTransactions {
         collectionView.backgroundView = .loadingView(frame: collectionView.bounds, contentType: .transactions)
@@ -157,10 +154,10 @@ final class FilteredTransactionsVC: NSViewController {
         }
       }
     }
-    
+
     dataSource.apply(snapshot, animatingDifferences: animate)
   }
-  
+
   func fetchTransactions() {
     UpFacade.listTransactions(filterBy: resource) { (result) in
       DispatchQueue.main.async {
@@ -173,15 +170,20 @@ final class FilteredTransactionsVC: NSViewController {
       }
     }
   }
-  
+
   private func display(_ transactions: [TransactionResource]) {
     transactionsError = .emptyString
     self.transactions = transactions
   }
-  
+
   private func display(_ error: AFError) {
     transactionsError = error.errorDescription ?? error.localizedDescription
     transactions.removeAll()
+  }
+
+  deinit {
+    removeObserver()
+    print("deinit")
   }
 }
 
@@ -198,11 +200,11 @@ extension FilteredTransactionsVC: NSToolbarDelegate {
       return nil
     }
   }
-  
+
   func toolbarDefaultItemIdentifiers(_ toolbar: NSToolbar) -> [NSToolbarItem.Identifier] {
     return [.backButton, .filteredTransactionsSearch]
   }
-  
+
   func toolbarAllowedItemIdentifiers(_ toolbar: NSToolbar) -> [NSToolbarItem.Identifier] {
     return toolbarDefaultItemIdentifiers(toolbar)
   }

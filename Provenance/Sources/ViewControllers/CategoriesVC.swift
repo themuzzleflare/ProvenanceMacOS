@@ -2,44 +2,20 @@ import Cocoa
 import Alamofire
 
 final class CategoriesVC: NSViewController {
-  private lazy var searchField = NSSearchField(self, type: .categories)
-  
-  @IBOutlet weak var collectionView: NSCollectionView! {
-    didSet {
-      collectionView.dataSource = dataSource
-      collectionView.register(.categoryItem, forItemWithIdentifier: .categoryItem)
-      collectionView.collectionViewLayout = .twoColumnGrid
-      collectionView.backgroundViewScrollsWithContent = true
-    }
-  }
-  
-  @IBOutlet weak var categoryTypeSegmentedControl: NSSegmentedControl! {
-    didSet {
-      categoryTypeSegmentedControl.selectSegment(withTag: categoryFilter.rawValue)
-    }
-  }
-  
-  @IBAction func categoryTypeAction(_ sender: NSSegmentedControl) {
-    if let value = CategoryTypeEnum(rawValue: sender.selectedSegment) {
-      categoryFilter = value
-    }
-    if !searchField.stringValue.isEmpty {
-      applySnapshot()
-    }
-  }
-  
+  private typealias DataSource = NSCollectionViewDiffableDataSource<Section, CategoryViewModel>
+
+  private typealias Snapshot = NSDiffableDataSourceSnapshot<Section, CategoryViewModel>
+
   private enum Section {
     case main
   }
-  
-  private typealias DataSource = NSCollectionViewDiffableDataSource<Section, CategoryViewModel>
-  
-  private typealias Snapshot = NSDiffableDataSourceSnapshot<Section, CategoryViewModel>
-  
+
   private lazy var dataSource = makeDataSource()
-  
+
   private lazy var toolbar = NSToolbar(self, identifier: .transactions)
-  
+
+  private lazy var searchField = NSSearchField(self, type: .categories)
+
   private var categoryFilter: CategoryTypeEnum = ProvenanceApp.userDefaults.appCategoryFilter {
     didSet {
       if ProvenanceApp.userDefaults.categoryFilter != categoryFilter.rawValue {
@@ -48,15 +24,18 @@ final class CategoriesVC: NSViewController {
       if categoryTypeSegmentedControl.selectedSegment != categoryFilter.rawValue {
         categoryTypeSegmentedControl.selectSegment(withTag: categoryFilter.rawValue)
       }
+      if !searchField.stringValue.isEmpty {
+        applySnapshot()
+      }
     }
   }
-  
+
   private var apiKeyObserver: NSKeyValueObservation?
-  
+
   private var categoryFilterObserver: NSKeyValueObservation?
-  
+
   private var noCategories: Bool = false
-  
+
   private var categories = [CategoryResource]() {
     didSet {
       noCategories = categories.isEmpty
@@ -64,32 +43,42 @@ final class CategoriesVC: NSViewController {
       searchField.placeholderString = categories.searchFieldPlaceholder
     }
   }
-  
+
   private var categoriesError = String()
-  
+
   private var filteredCategories: [CategoryResource] {
     return categories.filtered(filter: categoryFilter, searchField: searchField)
   }
-  
+
+  @IBOutlet weak var collectionView: NSCollectionView! {
+    didSet {
+      collectionView.dataSource = dataSource
+      collectionView.register(.categoryItem, forItemWithIdentifier: .categoryItem)
+      collectionView.collectionViewLayout = .twoColumnGrid
+      collectionView.backgroundViewScrollsWithContent = true
+    }
+  }
+
+  @IBOutlet weak var categoryTypeSegmentedControl: NSSegmentedControl! {
+    didSet {
+      categoryTypeSegmentedControl.selectSegment(withTag: categoryFilter.rawValue)
+    }
+  }
+
   override init(nibName nibNameOrNil: NSNib.Name?, bundle nibBundleOrNil: Bundle?) {
     super.init(nibName: "Categories", bundle: nil)
   }
-  
-  deinit {
-    removeObservers()
-    print("deinit")
-  }
-  
+
   required init?(coder: NSCoder) {
     fatalError("Not implemented")
   }
-  
+
   override func viewDidLoad() {
     super.viewDidLoad()
     configureObservers()
     applySnapshot(animate: false)
   }
-  
+
   override func viewWillAppear() {
     super.viewWillAppear()
     fetchCategories()
@@ -98,41 +87,46 @@ final class CategoriesVC: NSViewController {
     appDelegate.refreshMenuItem.title = "Refresh Categories"
     appDelegate.refreshMenuItem.action = #selector(refreshCategories)
   }
-  
-//  override func viewWillDisappear() {
-//    super.viewWillDisappear()
-//    guard let appDelegate = NSApp.delegate as? AppDelegate else { return }
-//    appDelegate.refreshMenuItem.title = "Refresh"
-//    appDelegate.refreshMenuItem.action = nil
-//  }
-  
-  @objc private func refreshCategories() {
+
+  @IBAction func categoryTypeAction(_ sender: NSSegmentedControl) {
+    if let value = CategoryTypeEnum(rawValue: sender.selectedSegment) {
+      categoryFilter = value
+    }
+  }
+
+  @objc
+  private func refreshCategories() {
     fetchCategories()
   }
-  
+
   private func configureWindow() {
     NSApp.mainWindow?.toolbar = toolbar
     NSApp.mainWindow?.title = "Categories"
   }
-  
+
   private func configureObservers() {
     apiKeyObserver = ProvenanceApp.userDefaults.observe(\.apiKey, options: .new) { [weak self] (_, _) in
       guard let weakSelf = self else { return }
       weakSelf.fetchCategories()
     }
     categoryFilterObserver = ProvenanceApp.userDefaults.observe(\.categoryFilter, options: .new) { [weak self] (_, change) in
-      guard let weakSelf = self, let value = change.newValue, let categoryFilter = CategoryTypeEnum(rawValue: value) else { return }
+      guard let weakSelf = self,
+            let value = change.newValue,
+            let categoryFilter = CategoryTypeEnum(rawValue: value)
+      else {
+        return
+      }
       weakSelf.categoryFilter = categoryFilter
     }
   }
-  
+
   private func removeObservers() {
     apiKeyObserver?.invalidate()
     apiKeyObserver = nil
     categoryFilterObserver?.invalidate()
     categoryFilterObserver = nil
   }
-  
+
   private func makeDataSource() -> DataSource {
     return DataSource(
       collectionView: collectionView,
@@ -143,13 +137,13 @@ final class CategoriesVC: NSViewController {
       }
     )
   }
-  
+
   private func applySnapshot(animate: Bool = true) {
     var snapshot = Snapshot()
-    
+
     snapshot.appendSections([.main])
     snapshot.appendItems(filteredCategories.categoryViewModels, toSection: .main)
-    
+
     if snapshot.itemIdentifiers.isEmpty && categoriesError.isEmpty {
       if categories.isEmpty && !noCategories {
         collectionView.backgroundView = .loadingView(frame: collectionView.bounds, contentType: .categories)
@@ -165,10 +159,10 @@ final class CategoriesVC: NSViewController {
         }
       }
     }
-    
+
     dataSource.apply(snapshot, animatingDifferences: animate)
   }
-  
+
   private func fetchCategories() {
     UpFacade.listCategories { (result) in
       DispatchQueue.main.async {
@@ -181,15 +175,20 @@ final class CategoriesVC: NSViewController {
       }
     }
   }
-  
+
   private func display(_ categories: [CategoryResource]) {
     categoriesError = .emptyString
     self.categories = categories
   }
-  
+
   private func display(_ error: AFError) {
     categoriesError = error.errorDescription ?? error.localizedDescription
     categories.removeAll()
+  }
+
+  deinit {
+    removeObservers()
+    print("deinit")
   }
 }
 
@@ -204,11 +203,11 @@ extension CategoriesVC: NSToolbarDelegate {
       return nil
     }
   }
-  
+
   func toolbarDefaultItemIdentifiers(_ toolbar: NSToolbar) -> [NSToolbarItem.Identifier] {
     return [.categoriesSearch]
   }
-  
+
   func toolbarAllowedItemIdentifiers(_ toolbar: NSToolbar) -> [NSToolbarItem.Identifier] {
     return toolbarDefaultItemIdentifiers(toolbar)
   }
@@ -232,11 +231,11 @@ extension CategoriesVC: NSSearchFieldDelegate {
   func controlTextDidChange(_ obj: Notification) {
     applySnapshot()
   }
-  
+
   func searchFieldDidStartSearching(_ sender: NSSearchField) {
     categoryTypeSegmentedControl.isHidden = false
   }
-  
+
   func searchFieldDidEndSearching(_ sender: NSSearchField) {
     categoryTypeSegmentedControl.isHidden = true
   }

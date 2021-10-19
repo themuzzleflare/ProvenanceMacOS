@@ -4,7 +4,7 @@ import Foundation
 enum AppDateStyle: Int, CaseIterable {
   /// Absolute.
   case absolute
-  
+
   /// Relative.
   case relative
 }
@@ -18,7 +18,7 @@ extension AppDateStyle {
       return "Relative"
     }
   }
-  
+
   var dateStyleEnum: DateStyleEnum {
     switch self {
     case .absolute:

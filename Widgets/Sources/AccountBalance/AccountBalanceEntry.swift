@@ -11,7 +11,7 @@ extension AccountBalanceEntry {
   static var placeholder: AccountBalanceEntry {
     return AccountBalanceEntry(date: Date(), account: .placeholder, error: nil)
   }
-  
+
   static var empty: AccountBalanceEntry {
     return AccountBalanceEntry(date: Date(), account: nil, error: nil)
   }

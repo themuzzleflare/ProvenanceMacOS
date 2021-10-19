@@ -8,11 +8,11 @@ struct SortedTransactionModel: Identifiable {
 // MARK: - Hashable
 
 extension SortedTransactionModel: Hashable {
-  func hash(into hasher: inout Hasher) {
-    hasher.combine(id)
-  }
-  
   static func == (lhs: SortedTransactionModel, rhs: SortedTransactionModel) -> Bool {
     lhs.id == rhs.id
+  }
+
+  func hash(into hasher: inout Hasher) {
+    hasher.combine(id)
   }
 }

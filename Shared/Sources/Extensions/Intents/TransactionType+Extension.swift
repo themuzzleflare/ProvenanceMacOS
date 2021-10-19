@@ -2,7 +2,10 @@ import Intents
 
 extension TransactionType {
   convenience init(transaction: TransactionResource) {
-    self.init(identifier: transaction.id, display: transaction.attributes.description, subtitle: [transaction.attributes.amount.valueShort, transaction.attributes.creationDate].joined(separator: ", "), image: nil)
+    self.init(identifier: transaction.id,
+              display: transaction.attributes.description,
+              subtitle: transaction.attributes.amount.valueShort,
+              image: nil)
     self.transactionDescription = transaction.attributes.description
     self.transactionCreationDate = transaction.attributes.creationDate
     self.transactionAmount = transaction.attributes.amount.valueShort

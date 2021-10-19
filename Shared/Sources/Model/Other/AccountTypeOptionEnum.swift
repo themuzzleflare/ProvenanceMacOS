@@ -14,7 +14,7 @@ extension AccountTypeOptionEnum {
       return "Saver"
     }
   }
-  
+
   var accountTypeEnum: AccountTypeEnum {
     switch self {
     case .transactional:
