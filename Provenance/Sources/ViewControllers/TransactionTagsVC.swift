@@ -60,6 +60,20 @@ final class TransactionTagsVC: NSViewController {
     super.viewWillAppear()
     fetchTransaction()
     configureWindow()
+    guard let appDelegate = NSApp.delegate as? AppDelegate else { return }
+    appDelegate.refreshMenuItem.title = "Refresh Tags"
+    appDelegate.refreshMenuItem.action = #selector(refreshTransaction)
+  }
+  
+  override func viewWillDisappear() {
+    super.viewWillDisappear()
+    guard let appDelegate = NSApp.delegate as? AppDelegate else { return }
+    appDelegate.refreshMenuItem.title = "Refresh"
+    appDelegate.refreshMenuItem.action = nil
+  }
+  
+  @objc private func refreshTransaction() {
+    fetchTransaction()
   }
   
   private func configureWindow() {

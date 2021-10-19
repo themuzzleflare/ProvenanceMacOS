@@ -153,12 +153,15 @@
 		7A7A3907270FF253008B3E37 /* AttributeItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A7A3905270FF253008B3E37 /* AttributeItem.swift */; };
 		7A7A3908270FF253008B3E37 /* AttributeItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7A7A3906270FF253008B3E37 /* AttributeItem.xib */; };
 		7A7A390E270FF6F0008B3E37 /* TransactionDetail.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7A7A390C270FF6F0008B3E37 /* TransactionDetail.xib */; };
+		7A8934E2271E345F00943014 /* TransactionsByAccountVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8934E0271E345F00943014 /* TransactionsByAccountVC.swift */; };
+		7A8934E3271E345F00943014 /* TransactionsByAccount.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7A8934E1271E345F00943014 /* TransactionsByAccount.xib */; };
 		7A8C12AE271CD5E800F6A633 /* AccountCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8C12AD271CD5E800F6A633 /* AccountCellModel.swift */; };
 		7A8C12B0271CD5F200F6A633 /* TagCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8C12AF271CD5F200F6A633 /* TagCellModel.swift */; };
 		7A8C12B2271CD5FC00F6A633 /* CategoryCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8C12B1271CD5FC00F6A633 /* CategoryCellModel.swift */; };
 		7A959F65270B9A6A00AC45F3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A959F64270B9A6A00AC45F3 /* AppDelegate.swift */; };
 		7A959F69270B9A6C00AC45F3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7A959F68270B9A6C00AC45F3 /* Assets.xcassets */; };
 		7A959F6C270B9A6C00AC45F3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7A959F6A270B9A6C00AC45F3 /* Main.storyboard */; };
+		7AA1B2FC271D60AF00B1805A /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 7AA1B2FB271D60AF00B1805A /* Credits.rtf */; };
 		7AB42D812713E68A0006110F /* NSToolbarItem+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB42D802713E68A0006110F /* NSToolbarItem+Extension.swift */; };
 		7AB42D832713EA880006110F /* NSToolbar+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB42D822713EA880006110F /* NSToolbar+Extension.swift */; };
 		7AB42D852713F2AF0006110F /* NSTabViewItem+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB42D842713F2AF0006110F /* NSTabViewItem+Extension.swift */; };
@@ -566,6 +569,8 @@
 		7A7A3905270FF253008B3E37 /* AttributeItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttributeItem.swift; sourceTree = "<group>"; };
 		7A7A3906270FF253008B3E37 /* AttributeItem.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AttributeItem.xib; sourceTree = "<group>"; };
 		7A7A390C270FF6F0008B3E37 /* TransactionDetail.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TransactionDetail.xib; sourceTree = "<group>"; };
+		7A8934E0271E345F00943014 /* TransactionsByAccountVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionsByAccountVC.swift; sourceTree = "<group>"; };
+		7A8934E1271E345F00943014 /* TransactionsByAccount.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TransactionsByAccount.xib; sourceTree = "<group>"; };
 		7A8C12AD271CD5E800F6A633 /* AccountCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountCellModel.swift; sourceTree = "<group>"; };
 		7A8C12AF271CD5F200F6A633 /* TagCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCellModel.swift; sourceTree = "<group>"; };
 		7A8C12B1271CD5FC00F6A633 /* CategoryCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCellModel.swift; sourceTree = "<group>"; };
@@ -576,6 +581,7 @@
 		7A959F6B270B9A6C00AC45F3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		7A959F6D270B9A6C00AC45F3 /* Provenance.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Provenance.entitlements; sourceTree = "<group>"; };
 		7A959F77270B9BDA00AC45F3 /* Shared.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Shared.xcconfig; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.xcconfig; };
+		7AA1B2FB271D60AF00B1805A /* Credits.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = Credits.rtf; sourceTree = "<group>"; };
 		7AB42D802713E68A0006110F /* NSToolbarItem+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSToolbarItem+Extension.swift"; sourceTree = "<group>"; };
 		7AB42D822713EA880006110F /* NSToolbar+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSToolbar+Extension.swift"; sourceTree = "<group>"; };
 		7AB42D842713F2AF0006110F /* NSTabViewItem+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSTabViewItem+Extension.swift"; sourceTree = "<group>"; };
@@ -711,6 +717,7 @@
 				7AD1839027178E89004C94B3 /* AddTagsTagSelectionVC.swift */,
 				7AD1839427178E9C004C94B3 /* AddTagsConfirmationVC.swift */,
 				7AE8FE3A2717CCC400D7443B /* CreateTagsVC.swift */,
+				7A8934E0271E345F00943014 /* TransactionsByAccountVC.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -819,6 +826,7 @@
 				7AE8FE2A2717ACB300D7443B /* TextItem.xib */,
 				7AE8FE3B2717CCC400D7443B /* CreateTags.xib */,
 				7A27E9422718FD500069FE05 /* TransactionTags.xib */,
+				7A8934E1271E345F00943014 /* TransactionsByAccount.xib */,
 			);
 			path = XIBs;
 			sourceTree = "<group>";
@@ -1103,6 +1111,7 @@
 				7A05EA07270BA6F5004C958F /* XIBs */,
 				7A959F6D270B9A6C00AC45F3 /* Provenance.entitlements */,
 				7A94DCE6270BF89100DA6FDF /* Info.plist */,
+				7AA1B2FB271D60AF00B1805A /* Credits.rtf */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -1321,7 +1330,6 @@
 				A230031EBE83CB1343DE20F1 /* [CP] Check Pods Manifest.lock */,
 				7AF4BC5C270BDA9C00C827A6 /* Sources */,
 				7AF4BC5D270BDA9C00C827A6 /* Frameworks */,
-				7AF4BC5E270BDA9C00C827A6 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -1386,6 +1394,7 @@
 				7A05E95C270BA0DB004C958F /* CircularStd-Book.otf in Resources */,
 				7A4F2112270FA53800C0AF8C /* AccountItem.xib in Resources */,
 				7A959F69270B9A6C00AC45F3 /* Assets.xcassets in Resources */,
+				7AA1B2FC271D60AF00B1805A /* Credits.rtf in Resources */,
 				7AD1839327178E89004C94B3 /* AddTagsTagSelection.xib in Resources */,
 				7AE8FE302717B2EA00D7443B /* TextSupplementaryView.xib in Resources */,
 				7AB42D8D2713FE570006110F /* Categories.xib in Resources */,
@@ -1406,6 +1415,7 @@
 				7AD1839727178E9C004C94B3 /* AddTagsConfirmation.xib in Resources */,
 				7A05E95A270BA0DB004C958F /* CircularStd-BookItalic.ttf in Resources */,
 				7A7A390E270FF6F0008B3E37 /* TransactionDetail.xib in Resources */,
+				7A8934E3271E345F00943014 /* TransactionsByAccount.xib in Resources */,
 				7A7A3908270FF253008B3E37 /* AttributeItem.xib in Resources */,
 				7AE8FE3D2717CCC400D7443B /* CreateTags.xib in Resources */,
 				7A0E6C28271ADA3700BD85CD /* TransactionsAlt.xib in Resources */,
@@ -1424,13 +1434,6 @@
 				7AF4BC74270BDD5200C827A6 /* Assets.xcassets in Resources */,
 				7AF4BC77270BDDBD00C827A6 /* CircularStd-BookItalic.ttf in Resources */,
 				7AF4BC78270BDDBD00C827A6 /* CircularStd-Book.otf in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		7AF4BC5E270BDA9C00C827A6 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1654,6 +1657,7 @@
 				7A05E9FE270BA324004C958F /* NSEdgeInsets+Extension.swift in Sources */,
 				7A05E9FB270BA324004C958F /* Color+Extension.swift in Sources */,
 				7A05E9FF270BA324004C958F /* NSString+Extension.swift in Sources */,
+				7A8934E2271E345F00943014 /* TransactionsByAccountVC.swift in Sources */,
 				7A7A3900270FF181008B3E37 /* DetailItem.swift in Sources */,
 				7A0D539B27123BFE00A024D6 /* NSUserInterfaceItemIdentifier+Extension.swift in Sources */,
 				7A05EA40270BD00B004C958F /* StringStyle+Extension.swift in Sources */,
@@ -2039,6 +2043,9 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.finance";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2021 Paul Tavitian";
+				INFOPLIST_KEY_NSMainStoryboardFile = Main;
+				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
@@ -2060,6 +2067,9 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.finance";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2021 Paul Tavitian";
+				INFOPLIST_KEY_NSMainStoryboardFile = Main;
+				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",

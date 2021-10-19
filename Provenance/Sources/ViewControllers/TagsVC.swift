@@ -66,6 +66,20 @@ final class TagsVC: NSViewController {
     super.viewWillAppear()
     fetchTags()
     configureWindow()
+    guard let appDelegate = NSApp.delegate as? AppDelegate else { return }
+    appDelegate.refreshMenuItem.title = "Refresh Tags"
+    appDelegate.refreshMenuItem.action = #selector(refreshTags)
+  }
+  
+//  override func viewWillDisappear() {
+//    super.viewWillDisappear()
+//    guard let appDelegate = NSApp.delegate as? AppDelegate else { return }
+//    appDelegate.refreshMenuItem.title = "Refresh"
+//    appDelegate.refreshMenuItem.action = nil
+//  }
+  
+  @objc private func refreshTags() {
+    fetchTags()
   }
   
   private func configureWindow() {

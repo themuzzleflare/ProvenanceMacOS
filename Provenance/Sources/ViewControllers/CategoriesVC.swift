@@ -94,6 +94,20 @@ final class CategoriesVC: NSViewController {
     super.viewWillAppear()
     fetchCategories()
     configureWindow()
+    guard let appDelegate = NSApp.delegate as? AppDelegate else { return }
+    appDelegate.refreshMenuItem.title = "Refresh Categories"
+    appDelegate.refreshMenuItem.action = #selector(refreshCategories)
+  }
+  
+//  override func viewWillDisappear() {
+//    super.viewWillDisappear()
+//    guard let appDelegate = NSApp.delegate as? AppDelegate else { return }
+//    appDelegate.refreshMenuItem.title = "Refresh"
+//    appDelegate.refreshMenuItem.action = nil
+//  }
+  
+  @objc private func refreshCategories() {
+    fetchCategories()
   }
   
   private func configureWindow() {

@@ -61,6 +61,10 @@ extension NSNib {
     return NSNib(nibNamed: "FilteredTransactions")!
   }
   
+  static var transactionsByAccount: NSNib {
+    return NSNib(nibNamed: "TransactionsByAccount")!
+  }
+  
   static var dateSupplementaryView: NSNib {
     return NSNib(nibNamed: "DateSupplementaryView")!
   }

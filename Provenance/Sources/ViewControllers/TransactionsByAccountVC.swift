@@ -1,9 +1,7 @@
 import Cocoa
 import Alamofire
 
-final class FilteredTransactionsVC: NSViewController {
-  private lazy var searchField = NSSearchField(self, type: .transactions)
-  
+final class TransactionsByAccountVC: NSViewController {
   @IBOutlet weak var collectionView: NSCollectionView! {
     didSet {
       collectionView.dataSource = dataSource
@@ -13,11 +11,7 @@ final class FilteredTransactionsVC: NSViewController {
     }
   }
   
-  private var previousViewController: NSViewController
-  
-  private var previousTitle: String
-  
-  var resource: ResourceEnum
+  private var account: AccountResource
   
   private enum Section {
     case main
@@ -30,6 +24,8 @@ final class FilteredTransactionsVC: NSViewController {
   private lazy var dataSource = makeDataSource()
   
   private lazy var toolbar = NSToolbar(self, identifier: .filteredTransactions)
+  
+  private lazy var searchField = NSSearchField(self, type: .transactions)
   
   private var dateStyleObserver: NSKeyValueObservation?
   
@@ -47,11 +43,9 @@ final class FilteredTransactionsVC: NSViewController {
     return transactions.filtered(searchField: searchField)
   }
   
-  init(_ previousViewController: NSViewController, previousTitle: String, resource: ResourceEnum) {
-    self.previousViewController = previousViewController
-    self.previousTitle = previousTitle
-    self.resource = resource
-    super.init(nibName: "FilteredTransactions", bundle: nil)
+  init(account: AccountResource) {
+    self.account = account
+    super.init(nibName: "TransactionsByAccount", bundle: nil)
   }
   
   deinit {
@@ -73,29 +67,11 @@ final class FilteredTransactionsVC: NSViewController {
     super.viewWillAppear()
     fetchingTasks()
     configureWindow()
-    guard let appDelegate = NSApp.delegate as? AppDelegate else { return }
-    appDelegate.refreshMenuItem.title = "Refresh Transactions"
-    appDelegate.refreshMenuItem.action = #selector(refreshTransactions)
-  }
-  
-  override func viewWillDisappear() {
-    super.viewWillDisappear()
-    guard let appDelegate = NSApp.delegate as? AppDelegate else { return }
-    appDelegate.refreshMenuItem.title = "Refresh"
-    appDelegate.refreshMenuItem.action = nil
-  }
-  
-  @objc private func refreshTransactions() {
-    fetchTransactions()
   }
   
   private func configureWindow() {
-    NSApp.mainWindow?.toolbar = toolbar
-    NSApp.mainWindow?.title = resource.description
-  }
-  
-  @objc private func goBack() {
-    view.window?.contentViewController = .navigation(self, to: previousViewController)
+    view.window?.toolbar = toolbar
+    view.window?.title = account.attributes.displayName
   }
   
   private func configureObserver() {
@@ -112,13 +88,8 @@ final class FilteredTransactionsVC: NSViewController {
   
   private func transactionsUpdates() {
     noTransactions = transactions.isEmpty
-    switch resource {
-    case .tag where transactions.isEmpty:
-      goBack()
-    default:
       applySnapshot()
       searchField.placeholderString = filteredTransactions.searchFieldPlaceholder
-    }
   }
   
   func fetchingTasks() {
@@ -162,7 +133,7 @@ final class FilteredTransactionsVC: NSViewController {
   }
   
   func fetchTransactions() {
-    UpFacade.listTransactions(filterBy: resource) { (result) in
+    UpFacade.listTransactions(filterBy: account) { (result) in
       DispatchQueue.main.async {
         switch result {
         case let .success(transactions):
@@ -187,11 +158,9 @@ final class FilteredTransactionsVC: NSViewController {
 
 // MARK: - NSToolbarDelegate
 
-extension FilteredTransactionsVC: NSToolbarDelegate {
+extension TransactionsByAccountVC: NSToolbarDelegate {
   func toolbar(_ toolbar: NSToolbar, itemForItemIdentifier itemIdentifier: NSToolbarItem.Identifier, willBeInsertedIntoToolbar flag: Bool) -> NSToolbarItem? {
     switch itemIdentifier {
-    case .backButton:
-      return .backButton(self, title: previousTitle, action: #selector(goBack))
     case .filteredTransactionsSearch:
       return NSSearchToolbarItem(itemIdentifier: itemIdentifier, searchField: searchField)
     default:
@@ -200,7 +169,7 @@ extension FilteredTransactionsVC: NSToolbarDelegate {
   }
   
   func toolbarDefaultItemIdentifiers(_ toolbar: NSToolbar) -> [NSToolbarItem.Identifier] {
-    return [.backButton, .filteredTransactionsSearch]
+    return [.filteredTransactionsSearch]
   }
   
   func toolbarAllowedItemIdentifiers(_ toolbar: NSToolbar) -> [NSToolbarItem.Identifier] {
@@ -208,21 +177,9 @@ extension FilteredTransactionsVC: NSToolbarDelegate {
   }
 }
 
-// MARK: - NSCollectionViewDelegate
-
-extension FilteredTransactionsVC: NSCollectionViewDelegate {
-  func collectionView(_ collectionView: NSCollectionView, didSelectItemsAt indexPaths: Set<IndexPath>) {
-    guard let indexPath = indexPaths.first else { return }
-    let transaction = filteredTransactions[indexPath.item]
-    let viewController = TransactionDetailVC(self, previousTitle: resource.description, transaction: transaction)
-    collectionView.deselectItems(at: indexPaths)
-    view.window?.contentViewController = .navigation(self, to: viewController)
-  }
-}
-
 // MARK: - NSSearchFieldDelegate
 
-extension FilteredTransactionsVC: NSSearchFieldDelegate {
+extension TransactionsByAccountVC: NSSearchFieldDelegate {
   func controlTextDidChange(_ obj: Notification) {
     applySnapshot()
   }

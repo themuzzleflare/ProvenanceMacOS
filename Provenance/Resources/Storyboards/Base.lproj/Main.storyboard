@@ -282,19 +282,27 @@
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="View" id="HyV-fh-RgO">
                                     <items>
-                                        <menuItem title="Show Toolbar" keyEquivalent="t" id="snW-S8-Cw5">
-                                            <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
-                                            <connections>
-                                                <action selector="toggleToolbarShown:" target="Ady-hI-5gd" id="BXY-wc-z0C"/>
-                                            </connections>
-                                        </menuItem>
-                                        <menuItem title="Customize Toolbar…" id="1UK-8n-QPP">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
-                                            <connections>
-                                                <action selector="runToolbarCustomizationPalette:" target="Ady-hI-5gd" id="pQI-g3-MTW"/>
-                                            </connections>
-                                        </menuItem>
+                                        <menuItem title="Refresh" keyEquivalent="r" identifier="refreshMenuItem" id="Fp1-c4-8W2"/>
                                         <menuItem isSeparatorItem="YES" id="hB3-LF-h0Y"/>
+                                        <menuItem title="Date Style" id="ogo-7L-yXt">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <menu key="submenu" title="Date Style" id="VNR-dD-QdL">
+                                                <items>
+                                                    <menuItem title="Absolute" id="o82-sV-p4r">
+                                                        <modifierMask key="keyEquivalentModifierMask"/>
+                                                        <connections>
+                                                            <action selector="absoluteAction:" target="Voe-Tx-rLC" id="ilN-uQ-2hJ"/>
+                                                        </connections>
+                                                    </menuItem>
+                                                    <menuItem title="Relative" id="8fq-PE-Hhu">
+                                                        <modifierMask key="keyEquivalentModifierMask"/>
+                                                        <connections>
+                                                            <action selector="relativeAction:" target="Voe-Tx-rLC" id="Mm2-QQ-uSV"/>
+                                                        </connections>
+                                                    </menuItem>
+                                                </items>
+                                            </menu>
+                                        </menuItem>
                                         <menuItem title="Tabs" identifier="tabsSubmenuItem" id="m0l-Uu-aRN">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <menu key="submenu" title="Tabs" id="r7I-hi-ofP">
@@ -307,12 +315,6 @@
                                             </menu>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="6QR-vi-TTf"/>
-                                        <menuItem title="Show Sidebar" keyEquivalent="s" id="kIP-vf-haE">
-                                            <modifierMask key="keyEquivalentModifierMask" control="YES" command="YES"/>
-                                            <connections>
-                                                <action selector="toggleSidebar:" target="Ady-hI-5gd" id="iwa-gc-5KM"/>
-                                            </connections>
-                                        </menuItem>
                                         <menuItem title="Enter Full Screen" keyEquivalent="f" id="4J7-dP-txa">
                                             <modifierMask key="keyEquivalentModifierMask" control="YES" command="YES"/>
                                             <connections>
@@ -349,15 +351,6 @@
                             </menuItem>
                             <menuItem title="Help" id="wpr-3q-Mcd">
                                 <modifierMask key="keyEquivalentModifierMask"/>
-                                <menu key="submenu" title="Help" systemMenu="help" id="F2S-fz-NVQ">
-                                    <items>
-                                        <menuItem title="Provenance Help" keyEquivalent="?" id="FKE-Sm-Kum">
-                                            <connections>
-                                                <action selector="showHelp:" target="Ady-hI-5gd" id="y7X-2Q-9no"/>
-                                            </connections>
-                                        </menuItem>
-                                    </items>
-                                </menu>
                             </menuItem>
                         </items>
                     </menu>
@@ -367,8 +360,11 @@
                 </application>
                 <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="Provenance" customModuleProvider="target">
                     <connections>
+                        <outlet property="absoluteDateStyleMenuItem" destination="o82-sV-p4r" id="ZNG-yH-kt1"/>
                         <outlet property="accountsMenuItem" destination="FXn-AO-udK" id="S4e-OO-tc1"/>
                         <outlet property="categoriesMenuItem" destination="112-lf-AXa" id="gtS-Q2-LRw"/>
+                        <outlet property="refreshMenuItem" destination="Fp1-c4-8W2" id="2OE-dD-ees"/>
+                        <outlet property="relativeDateStyleMenuItem" destination="8fq-PE-Hhu" id="HTD-wi-wkF"/>
                         <outlet property="tagsMenuItem" destination="uxL-et-mHu" id="RoO-gf-Dys"/>
                         <outlet property="transactionsMenuItem" destination="crr-Cu-3OU" id="U8Z-gS-7zs"/>
                     </connections>

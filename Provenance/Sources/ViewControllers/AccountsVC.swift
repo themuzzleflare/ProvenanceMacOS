@@ -94,6 +94,20 @@ final class AccountsVC: NSViewController {
     super.viewWillAppear()
     fetchAccounts()
     configureWindow()
+    guard let appDelegate = NSApp.delegate as? AppDelegate else { return }
+    appDelegate.refreshMenuItem.title = "Refresh Accounts"
+    appDelegate.refreshMenuItem.action = #selector(refreshAccounts)
+  }
+  
+//  override func viewWillDisappear() {
+//    super.viewWillDisappear()
+//    guard let appDelegate = NSApp.delegate as? AppDelegate else { return }
+//    appDelegate.refreshMenuItem.title = "Refresh"
+//    appDelegate.refreshMenuItem.action = nil
+//  }
+  
+  @objc private func refreshAccounts() {
+    fetchAccounts()
   }
   
   private func configureWindow() {

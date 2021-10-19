@@ -1,6 +1,8 @@
 import Foundation
 import SwiftDate
 
+typealias App = ProvenanceApp
+
 struct ProvenanceApp {
   static let userDefaults = UserDefaults.provenance
   

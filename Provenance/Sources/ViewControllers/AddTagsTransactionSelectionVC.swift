@@ -70,6 +70,20 @@ final class AddTagsTransactionSelectionVC: NSViewController {
     super.viewWillAppear()
     fetchingTasks()
     configureWindow()
+    guard let appDelegate = NSApp.delegate as? AppDelegate else { return }
+    appDelegate.refreshMenuItem.title = "Refresh Transactions"
+    appDelegate.refreshMenuItem.action = #selector(refreshTransactions)
+  }
+  
+  override func viewWillDisappear() {
+    super.viewWillDisappear()
+    guard let appDelegate = NSApp.delegate as? AppDelegate else { return }
+    appDelegate.refreshMenuItem.title = "Refresh"
+    appDelegate.refreshMenuItem.action = nil
+  }
+  
+  @objc private func refreshTransactions() {
+    fetchTransactions()
   }
   
   private func configureWindow() {
