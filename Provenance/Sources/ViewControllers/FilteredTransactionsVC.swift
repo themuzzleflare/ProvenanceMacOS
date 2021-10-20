@@ -70,6 +70,7 @@ final class FilteredTransactionsVC: NSViewController {
     configureWindow()
     guard let appDelegate = NSApp.delegate as? AppDelegate else { return }
     appDelegate.refreshMenuItem.title = "Refresh Transactions"
+    appDelegate.refreshMenuItem.target = self
     appDelegate.refreshMenuItem.action = #selector(refreshTransactions)
   }
 
@@ -86,8 +87,8 @@ final class FilteredTransactionsVC: NSViewController {
   }
 
   private func configureWindow() {
-    NSApp.mainWindow?.toolbar = toolbar
-    NSApp.mainWindow?.title = resource.description
+    AppDelegate.windowController?.window?.toolbar = toolbar
+    AppDelegate.windowController?.window?.title = resource.description
   }
 
   @objc
@@ -96,9 +97,8 @@ final class FilteredTransactionsVC: NSViewController {
   }
 
   private func configureObserver() {
-    dateStyleObserver = ProvenanceApp.userDefaults.observe(\.dateStyle, options: .new) { [weak self] (_, _) in
-      guard let weakSelf = self else { return }
-      weakSelf.applySnapshot()
+    dateStyleObserver = App.userDefaults.observe(\.dateStyle, options: .new) { [weak self] (_, _) in
+      self?.applySnapshot()
     }
   }
 

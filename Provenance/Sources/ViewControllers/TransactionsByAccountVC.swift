@@ -70,9 +70,8 @@ final class TransactionsByAccountVC: NSViewController {
   }
 
   private func configureObserver() {
-    dateStyleObserver = ProvenanceApp.userDefaults.observe(\.dateStyle, options: .new) { [weak self] (_, _) in
-      guard let weakSelf = self else { return }
-      weakSelf.applySnapshot()
+    dateStyleObserver = App.userDefaults.observe(\.dateStyle, options: .new) { [weak self] (_, _) in
+      self?.applySnapshot()
     }
   }
 

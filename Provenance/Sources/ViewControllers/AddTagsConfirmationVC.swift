@@ -49,14 +49,13 @@ final class AddTagsConfirmationVC: NSViewController {
   }
 
   private func configureWindow() {
-    NSApp.mainWindow?.toolbar = toolbar
-    NSApp.mainWindow?.title = "Confirmation"
+    AppDelegate.windowController?.window?.toolbar = toolbar
+    AppDelegate.windowController?.window?.title = "Confirmation"
   }
 
   private func configureObserver() {
-    dateStyleObserver = ProvenanceApp.userDefaults.observe(\.dateStyle, options: .new) { [weak self] (_, _) in
-      guard let weakSelf = self else { return }
-      weakSelf.collectionView.reloadData()
+    dateStyleObserver = App.userDefaults.observe(\.dateStyle, options: .new) { [weak self] (_, _) in
+      self?.collectionView.reloadData()
     }
   }
 

@@ -47,17 +47,30 @@ extension TabBarItem {
     }
   }
 
-  var menuItem: NSMenuItem? {
-    guard let applicationDelegate = NSApp.delegate as? AppDelegate else { return nil }
+  var selectedImage: NSImage? {
     switch self {
     case .transactions:
-      return applicationDelegate.transactionsMenuItem
+      return .dollarsignCircleFill
     case .accounts:
-      return applicationDelegate.accountsMenuItem
+      return .walletPassFill
     case .tags:
-      return applicationDelegate.tagsMenuItem
+      return .tagFill
     case .categories:
-      return applicationDelegate.categoriesMenuItem
+      return .trayFullFill
+    }
+  }
+
+  var menuItem: NSMenuItem? {
+    guard let appDelegate = NSApp.delegate as? AppDelegate else { return nil }
+    switch self {
+    case .transactions:
+      return appDelegate.transactionsMenuItem
+    case .accounts:
+      return appDelegate.accountsMenuItem
+    case .tags:
+      return appDelegate.tagsMenuItem
+    case .categories:
+      return appDelegate.categoriesMenuItem
     }
   }
 

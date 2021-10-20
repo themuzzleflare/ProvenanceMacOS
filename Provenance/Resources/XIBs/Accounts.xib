@@ -19,7 +19,7 @@
             <rect key="frame" x="0.0" y="0.0" width="480" height="501"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Zc8-DA-8Ta">
+                <segmentedControl hidden="YES" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Zc8-DA-8Ta">
                     <rect key="frame" x="136" y="458" width="209" height="24"/>
                     <segmentedCell key="cell" borderStyle="border" alignment="left" style="rounded" trackingMode="selectOne" id="dvb-cL-gTg">
                         <font key="font" metaFont="system"/>

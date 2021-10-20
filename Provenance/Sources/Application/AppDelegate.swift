@@ -7,6 +7,20 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
   private var dateStyleObserver: NSKeyValueObservation?
 
+  private lazy var dateStyle: AppDateStyle = App.userDefaults.appDateStyle {
+    didSet {
+      if App.userDefaults.dateStyle != dateStyle.rawValue {
+        App.userDefaults.dateStyle = dateStyle.rawValue
+      }
+      if oldValue.menuItem?.state != .off {
+        oldValue.menuItem?.state = .off
+      }
+      if dateStyle.menuItem?.state != .on {
+        dateStyle.menuItem?.state = .on
+      }
+    }
+  }
+
   @IBOutlet weak var refreshMenuItem: NSMenuItem!
   @IBOutlet weak var transactionsMenuItem: NSMenuItem!
   @IBOutlet weak var accountsMenuItem: NSMenuItem!
@@ -15,22 +29,22 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
   @IBOutlet weak var absoluteDateStyleMenuItem: NSMenuItem! {
     didSet {
-      absoluteDateStyleMenuItem.state = ProvenanceApp.userDefaults.appDateStyle == .absolute ? .on : .off
+      absoluteDateStyleMenuItem.state = dateStyle == .absolute ? .on : .off
     }
   }
 
   @IBOutlet weak var relativeDateStyleMenuItem: NSMenuItem! {
     didSet {
-      relativeDateStyleMenuItem.state = ProvenanceApp.userDefaults.appDateStyle == .relative ? .on : .off
+      relativeDateStyleMenuItem.state = dateStyle == .relative ? .on : .off
     }
   }
 
   @IBAction func absoluteAction(_ sender: NSMenuItem) {
-    ProvenanceApp.userDefaults.appDateStyle = .absolute
+    dateStyle = .absolute
   }
 
   @IBAction func relativeAction(_ sender: NSMenuItem) {
-    ProvenanceApp.userDefaults.appDateStyle = .relative
+    dateStyle = .relative
   }
 
   func applicationDidFinishLaunching(_ aNotification: Notification) {
@@ -68,19 +82,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   }
 
   private func configureObserver() {
-    dateStyleObserver = ProvenanceApp.userDefaults.observe(\.dateStyle, options: .new) { [weak self] (_, change) in
-      guard let weakSelf = self,
-            let value = change.newValue,
-            let dateStyleEnum = AppDateStyle(rawValue: value)
-      else { return }
-      switch dateStyleEnum {
-      case .absolute:
-        weakSelf.absoluteDateStyleMenuItem.state = .on
-        weakSelf.relativeDateStyleMenuItem.state = .off
-      case .relative:
-        weakSelf.absoluteDateStyleMenuItem.state = .off
-        weakSelf.relativeDateStyleMenuItem.state = .on
-      }
+    dateStyleObserver = App.userDefaults.observe(\.dateStyle, options: .new) { [weak self] (_, change) in
+      guard let value = change.newValue, let dateStyleEnum = AppDateStyle(rawValue: value) else { return }
+      self?.dateStyle = dateStyleEnum
     }
   }
 

@@ -63,6 +63,7 @@ final class TagsVC: NSViewController {
     configureWindow()
     guard let appDelegate = NSApp.delegate as? AppDelegate else { return }
     appDelegate.refreshMenuItem.title = "Refresh Tags"
+    appDelegate.refreshMenuItem.target = self
     appDelegate.refreshMenuItem.action = #selector(refreshTags)
   }
 
@@ -72,14 +73,13 @@ final class TagsVC: NSViewController {
   }
 
   private func configureWindow() {
-    NSApp.mainWindow?.toolbar = toolbar
-    NSApp.mainWindow?.title = "Tags"
+    AppDelegate.windowController?.window?.toolbar = toolbar
+    AppDelegate.windowController?.window?.title = "Tags"
   }
 
   private func configureObserver() {
-    apiKeyObserver = ProvenanceApp.userDefaults.observe(\.apiKey, options: .new) { [weak self] (_, _) in
-      guard let weakSelf = self else { return }
-      weakSelf.fetchTags()
+    apiKeyObserver = App.userDefaults.observe(\.apiKey, options: .new) { [weak self] (_, _) in
+      self?.fetchTags()
     }
   }
 

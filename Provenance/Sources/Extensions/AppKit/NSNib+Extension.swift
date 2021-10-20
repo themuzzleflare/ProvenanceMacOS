@@ -5,10 +5,6 @@ extension NSNib {
     return NSNib(nibNamed: "Transactions")!
   }
 
-  static var transactionsAlt: NSNib {
-    return NSNib(nibNamed: "TransactionsAlt")!
-  }
-
   static var accounts: NSNib {
     return NSNib(nibNamed: "Accounts")!
   }

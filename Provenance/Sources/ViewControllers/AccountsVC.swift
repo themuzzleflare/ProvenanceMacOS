@@ -85,6 +85,7 @@ final class AccountsVC: NSViewController {
     configureWindow()
     guard let appDelegate = NSApp.delegate as? AppDelegate else { return }
     appDelegate.refreshMenuItem.title = "Refresh Accounts"
+    appDelegate.refreshMenuItem.target = self
     appDelegate.refreshMenuItem.action = #selector(refreshAccounts)
   }
 
@@ -100,8 +101,8 @@ final class AccountsVC: NSViewController {
   }
 
   private func configureWindow() {
-    NSApp.mainWindow?.toolbar = toolbar
-    NSApp.mainWindow?.title = "Accounts"
+    AppDelegate.windowController?.window?.toolbar = toolbar
+    AppDelegate.windowController?.window?.title = "Accounts"
   }
 
   private func configureObservers() {

@@ -7,23 +7,15 @@ final class TransactionsVC: NSViewController {
 
   private typealias Snapshot = NSDiffableDataSourceSnapshot<SortedTransactionModel, TransactionViewModel>
 
-  private var categorySegmentedControl: NSSegmentedControl {
-    return .categories(menu: categoryMenu)
-  }
+  private lazy var categorySegmentedControl: NSSegmentedControl = .categories(filter: categoryFilter, menu: categoryMenu)
 
-  private var categoryMenu: NSMenu {
-    return .categoryMenu(self, filter: categoryFilter, action: #selector(categoryButtonAction(_:)))
-  }
+  private lazy var categoryMenu: NSMenu = .categoryMenu(self, filter: categoryFilter, action: #selector(categoryButtonAction(_:)))
 
-  private var categoryMenuFormRepresentation: NSMenuItem {
-    return .categoryMenuFormRepresentation(category: categoryFilter, submenu: categoryMenu)
-  }
+  private lazy var categoryMenuFormRepresentation: NSMenuItem = .categoryMenuFormRepresentation(category: categoryFilter, submenu: categoryMenu)
 
-  private var settledOnlyMenuFormRepresentation: NSMenuItem {
-    return .settledOnlyMenuFormRepresentation(self,
-                                              filter: settledOnlyFilter,
-                                              action: #selector(settledOnlyToolbarAction))
-  }
+  private lazy var settledOnlyMenuFormRepresentation: NSMenuItem = .settledOnlyMenuFormRepresentation(self,
+                                                                                                      filter: settledOnlyFilter,
+                                                                                                      action: #selector(settledOnlyToolbarAction))
 
   private lazy var dataSource = makeDataSource()
 
@@ -40,13 +32,24 @@ final class TransactionsVC: NSViewController {
 
   private lazy var categoryFilter: TransactionCategory = App.userDefaults.appSelectedCategory {
     didSet {
+      let previousItem = categoryMenu.item(withTitle: oldValue.description)
+      let currentItem = categoryMenu.item(withTitle: categoryFilter.description)
+
       if App.userDefaults.selectedCategory != categoryFilter.rawValue {
         App.userDefaults.selectedCategory = categoryFilter.rawValue
       }
-      categoryToolbarItem.view = categorySegmentedControl
-      categoryToolbarItem.menuFormRepresentation = categoryMenuFormRepresentation
+      if previousItem?.state != .off {
+        previousItem?.state = .off
+      }
+      if currentItem?.state != .on {
+        currentItem?.state = .on
+      }
       if (oldValue == .all && categoryFilter != .all) || (oldValue != .all && categoryFilter == .all) {
-        categoryToolbarItem.image = categoryFilter == .all ? .trayFull : .trayFullFill
+        let image: NSImage = categoryFilter == .all ? .trayFull : .trayFullFill
+        categorySegmentedControl.setImage(image, forSegment: 0)
+        categorySegmentedControl.setSelected(categoryFilter == .all ? false : true, forSegment: 0)
+        categoryToolbarItem.image = image
+        categoryMenuFormRepresentation.state = categoryFilter == .all ? .off : .on
       }
       filterUpdates()
     }
@@ -58,7 +61,6 @@ final class TransactionsVC: NSViewController {
         App.userDefaults.settledOnly = settledOnlyFilter
       }
       settledOnlyToolbarItem.image = settledOnlyFilter ? .checkmarkCircleFill.withSymbolConfiguration(.small) : .checkmarkCircle.withSymbolConfiguration(.small)
-      settledOnlyToolbarItem.menuFormRepresentation = settledOnlyMenuFormRepresentation
       toolbar.selectedItemIdentifier = settledOnlyFilter ? .settledOnly : nil
       filterUpdates()
     }
@@ -123,6 +125,7 @@ final class TransactionsVC: NSViewController {
     configureWindow()
     guard let appDelegate = NSApp.delegate as? AppDelegate else { return }
     appDelegate.refreshMenuItem.title = "Refresh Transactions"
+    appDelegate.refreshMenuItem.target = self
     appDelegate.refreshMenuItem.action = #selector(refreshTransactions)
   }
 

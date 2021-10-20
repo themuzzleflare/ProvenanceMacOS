@@ -87,6 +87,7 @@ final class TransactionDetailVC: NSViewController {
     configureWindow()
     guard let appDelegate = NSApp.delegate as? AppDelegate else { return }
     appDelegate.refreshMenuItem.title = "Refresh \(transaction.attributes.description)"
+    appDelegate.refreshMenuItem.target = self
     appDelegate.refreshMenuItem.action = #selector(refreshTransaction)
   }
 
@@ -103,8 +104,8 @@ final class TransactionDetailVC: NSViewController {
   }
 
   private func configureWindow() {
-    NSApp.mainWindow?.toolbar = toolbar
-    NSApp.mainWindow?.title = transaction.attributes.description
+    AppDelegate.windowController?.window?.toolbar = toolbar
+    AppDelegate.windowController?.window?.title = transaction.attributes.description
   }
 
   @objc
@@ -113,9 +114,8 @@ final class TransactionDetailVC: NSViewController {
   }
 
   private func configureObserver() {
-    dateStyleObserver = ProvenanceApp.userDefaults.observe(\.dateStyle, options: .new) { [weak self] (_, _) in
-      guard let weakSelf = self else { return }
-      weakSelf.applySnapshot()
+    dateStyleObserver = App.userDefaults.observe(\.dateStyle, options: .new) { [weak self] (_, _) in
+      self?.applySnapshot()
     }
   }
 

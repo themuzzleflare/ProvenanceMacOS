@@ -15,14 +15,14 @@
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="Provenance" systemMenu="apple" id="uQy-DD-JDr">
                                     <items>
-                                        <menuItem title="About Provenance" id="5kV-Vb-QxS">
+                                        <menuItem title="About Provenance" image="info.circle" catalog="system" id="5kV-Vb-QxS">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
                                                 <action selector="orderFrontStandardAboutPanel:" target="Ady-hI-5gd" id="Exp-CZ-Vem"/>
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="VOq-y0-SEH"/>
-                                        <menuItem title="Preferences…" keyEquivalent="," id="BOF-NM-1cW">
+                                        <menuItem title="Preferences…" image="gear" catalog="system" keyEquivalent="," id="BOF-NM-1cW">
                                             <connections>
                                                 <segue destination="B7j-VN-KOX" kind="show" identifier="showPreferences" id="gtT-zy-YBC"/>
                                             </connections>
@@ -282,19 +282,22 @@
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="View" id="HyV-fh-RgO">
                                     <items>
-                                        <menuItem title="Refresh" keyEquivalent="r" identifier="refreshMenuItem" id="Fp1-c4-8W2"/>
-                                        <menuItem isSeparatorItem="YES" id="hB3-LF-h0Y"/>
-                                        <menuItem title="Date Style" id="ogo-7L-yXt">
+                                        <menuItem title="Refresh" image="arrow.clockwise" catalog="system" keyEquivalent="r" id="Fp1-c4-8W2">
+                                            <string key="identifier" base64-UTF8="YES">
+cmVmcmVzaE1lbnUQSXRlbQ
+</string>
+                                        </menuItem>
+                                        <menuItem title="Date Style" image="calendar.badge.clock" catalog="system" identifier="dateStyleMenuItem" id="ogo-7L-yXt">
                                             <modifierMask key="keyEquivalentModifierMask"/>
-                                            <menu key="submenu" title="Date Style" id="VNR-dD-QdL">
+                                            <menu key="submenu" title="Date Style" identifier="dateStyleMenu" id="VNR-dD-QdL">
                                                 <items>
-                                                    <menuItem title="Absolute" id="o82-sV-p4r">
+                                                    <menuItem title="Absolute" identifier="absoluteDateStyleMenuItem" id="o82-sV-p4r">
                                                         <modifierMask key="keyEquivalentModifierMask"/>
                                                         <connections>
                                                             <action selector="absoluteAction:" target="Voe-Tx-rLC" id="ilN-uQ-2hJ"/>
                                                         </connections>
                                                     </menuItem>
-                                                    <menuItem title="Relative" id="8fq-PE-Hhu">
+                                                    <menuItem title="Relative" identifier="relativeDateStyleMenuItem" id="8fq-PE-Hhu">
                                                         <modifierMask key="keyEquivalentModifierMask"/>
                                                         <connections>
                                                             <action selector="relativeAction:" target="Voe-Tx-rLC" id="Mm2-QQ-uSV"/>
@@ -303,6 +306,7 @@
                                                 </items>
                                             </menu>
                                         </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="hB3-LF-h0Y"/>
                                         <menuItem title="Tabs" identifier="tabsSubmenuItem" id="m0l-Uu-aRN">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <menu key="submenu" title="Tabs" id="r7I-hi-ofP">
@@ -413,8 +417,12 @@
         </scene>
     </scenes>
     <resources>
+        <image name="arrow.clockwise" catalog="system" width="14" height="16"/>
+        <image name="calendar.badge.clock" catalog="system" width="17" height="15"/>
         <image name="dollarsign.circle" catalog="system" width="15" height="15"/>
         <image name="dollarsign.circle.fill" catalog="system" width="15" height="15"/>
+        <image name="gear" catalog="system" width="17" height="17"/>
+        <image name="info.circle" catalog="system" width="15" height="15"/>
         <image name="tag" catalog="system" width="17" height="17"/>
         <image name="tag.fill" catalog="system" width="17" height="17"/>
         <image name="tray.full" catalog="system" width="18" height="13"/>
