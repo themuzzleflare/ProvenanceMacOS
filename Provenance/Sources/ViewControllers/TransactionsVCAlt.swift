@@ -26,7 +26,7 @@ final class TransactionsVCAlt: NSViewController {
   }
 
   private var settledOnlyMenuFormRepresentation: NSMenuItem {
-    return .settledOnlyMenuFormRepresentation(self, settledOnly: showSettledOnly, action: #selector(settledOnlyToolbarAction))
+    return .settledOnlyMenuFormRepresentation(self, filter: showSettledOnly, action: #selector(settledOnlyToolbarAction))
   }
 
   private lazy var toolbar = NSToolbar(self, identifier: .transactions)

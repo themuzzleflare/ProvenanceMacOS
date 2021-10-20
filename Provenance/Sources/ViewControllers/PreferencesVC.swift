@@ -15,21 +15,21 @@ final class PreferencesVC: NSViewController {
     }
   }
 
-  @IBOutlet weak var dateStylePopupButton: NSPopUpButton! {
+  @IBOutlet weak var dateStyleButton: NSPopUpButton! {
     didSet {
-      dateStylePopupButton.selectItem(at: ProvenanceApp.userDefaults.dateStyle)
+      dateStyleButton.selectItem(at: ProvenanceApp.userDefaults.dateStyle)
     }
   }
 
-  @IBOutlet weak var accountFilter: NSPopUpButton! {
+  @IBOutlet weak var accountFilterButton: NSPopUpButton! {
     didSet {
-      accountFilter.selectItem(at: ProvenanceApp.userDefaults.accountFilter)
+      accountFilterButton.selectItem(at: ProvenanceApp.userDefaults.accountFilter)
     }
   }
 
-  @IBOutlet weak var categoryFilter: NSPopUpButton! {
+  @IBOutlet weak var categoryFilterButton: NSPopUpButton! {
     didSet {
-      categoryFilter.selectItem(at: ProvenanceApp.userDefaults.categoryFilter)
+      categoryFilterButton.selectItem(at: ProvenanceApp.userDefaults.categoryFilter)
     }
   }
 
@@ -61,15 +61,15 @@ final class PreferencesVC: NSViewController {
     }
     dateStyleObserver = ProvenanceApp.userDefaults.observe(\.dateStyle, options: .new) { [weak self] (_, change) in
       guard let weakSelf = self, let value = change.newValue else { return }
-      weakSelf.dateStylePopupButton.selectItem(at: value)
+      weakSelf.dateStyleButton.selectItem(at: value)
     }
     accountFilterObserver = ProvenanceApp.userDefaults.observe(\.accountFilter, options: .new) { [weak self] (_, change) in
       guard let weakSelf = self, let value = change.newValue else { return }
-      weakSelf.accountFilter.selectItem(at: value)
+      weakSelf.accountFilterButton.selectItem(at: value)
     }
     categoryFilterObserver = ProvenanceApp.userDefaults.observe(\.categoryFilter, options: .new) { [weak self] (_, change) in
       guard let weakSelf = self, let value = change.newValue else { return }
-      weakSelf.categoryFilter.selectItem(at: value)
+      weakSelf.categoryFilterButton.selectItem(at: value)
     }
   }
 

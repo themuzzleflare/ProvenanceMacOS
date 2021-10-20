@@ -2,7 +2,7 @@ import AppKit
 
 extension NSSegmentedControl {
   static func categories(menu: NSMenu) -> NSSegmentedControl {
-    let segmentedControl = NSSegmentedControl(images: [ProvenanceApp.userDefaults.appSelectedCategory == .all ? .trayFull : .trayFullFill],
+    let segmentedControl = NSSegmentedControl(images: [App.userDefaults.appSelectedCategory == .all ? .trayFull : .trayFullFill],
                                               trackingMode: .selectOne,
                                               target: nil,
                                               action: nil)

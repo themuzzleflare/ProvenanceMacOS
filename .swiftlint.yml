@@ -5,7 +5,9 @@ disabled_rules:
 opt_in_rules:
   - anonymous_argument_in_multiline_closure
   - anyobject_protocol
+  - array_init
   - attributes
+  - balanced_xctest_lifecycle
   - capture_variable
   - closure_body_length
   - closure_end_indentation
@@ -25,5 +27,8 @@ opt_in_rules:
   - discouraged_object_literal
   - discouraged_optional_boolean
   - discouraged_optional_collection
+  - unused_declaration
+  - unowned_variable_capture
+  - enum_case_associated_values_count
 excluded:
   - Pods

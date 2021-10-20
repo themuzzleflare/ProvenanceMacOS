@@ -7,18 +7,9 @@ final class TransactionsVC: NSViewController {
 
   private typealias Snapshot = NSDiffableDataSourceSnapshot<SortedTransactionModel, TransactionViewModel>
 
-  private lazy var searchField = NSSearchField(self, type: .transactions)
-
   private var categorySegmentedControl: NSSegmentedControl {
     return .categories(menu: categoryMenu)
   }
-
-  private lazy var categoryToolbarItem = NSToolbarItem.categories(segmentedControl: categorySegmentedControl,
-                                                                  menuFormRepresentation: categoryMenuFormRepresentation)
-
-  private lazy var settledOnlyToolbarItem = NSToolbarItem.settledOnlyButton(self,
-                                                                            action: #selector(settledOnlyToolbarAction),
-                                                                            menuFormRepresentation: settledOnlyMenuFormRepresentation)
 
   private var categoryMenu: NSMenu {
     return .categoryMenu(self, filter: categoryFilter, action: #selector(categoryButtonAction(_:)))
@@ -29,12 +20,49 @@ final class TransactionsVC: NSViewController {
   }
 
   private var settledOnlyMenuFormRepresentation: NSMenuItem {
-    return .settledOnlyMenuFormRepresentation(self, settledOnly: showSettledOnly, action: #selector(settledOnlyToolbarAction))
+    return .settledOnlyMenuFormRepresentation(self,
+                                              filter: settledOnlyFilter,
+                                              action: #selector(settledOnlyToolbarAction))
   }
 
   private lazy var dataSource = makeDataSource()
 
   private lazy var toolbar = NSToolbar(self, identifier: .transactions)
+
+  private lazy var categoryToolbarItem = NSToolbarItem.categories(segmentedControl: categorySegmentedControl,
+                                                                  menuFormRepresentation: categoryMenuFormRepresentation)
+
+  private lazy var settledOnlyToolbarItem = NSToolbarItem.settledOnlyButton(self,
+                                                                            action: #selector(settledOnlyToolbarAction),
+                                                                            menuFormRepresentation: settledOnlyMenuFormRepresentation)
+
+  private lazy var searchField = NSSearchField(self, type: .transactions)
+
+  private lazy var categoryFilter: TransactionCategory = App.userDefaults.appSelectedCategory {
+    didSet {
+      if App.userDefaults.selectedCategory != categoryFilter.rawValue {
+        App.userDefaults.selectedCategory = categoryFilter.rawValue
+      }
+      categoryToolbarItem.view = categorySegmentedControl
+      categoryToolbarItem.menuFormRepresentation = categoryMenuFormRepresentation
+      if (oldValue == .all && categoryFilter != .all) || (oldValue != .all && categoryFilter == .all) {
+        categoryToolbarItem.image = categoryFilter == .all ? .trayFull : .trayFullFill
+      }
+      filterUpdates()
+    }
+  }
+
+  private lazy var settledOnlyFilter: Bool = App.userDefaults.settledOnly {
+    didSet {
+      if App.userDefaults.settledOnly != settledOnlyFilter {
+        App.userDefaults.settledOnly = settledOnlyFilter
+      }
+      settledOnlyToolbarItem.image = settledOnlyFilter ? .checkmarkCircleFill.withSymbolConfiguration(.small) : .checkmarkCircle.withSymbolConfiguration(.small)
+      settledOnlyToolbarItem.menuFormRepresentation = settledOnlyMenuFormRepresentation
+      toolbar.selectedItemIdentifier = settledOnlyFilter ? .settledOnly : nil
+      filterUpdates()
+    }
+  }
 
   private var apiKeyObserver: NSKeyValueObservation?
 
@@ -58,26 +86,8 @@ final class TransactionsVC: NSViewController {
 
   private var preFilteredTransactions: [TransactionResource] {
     return transactions.filter { (transaction) in
-      return (!showSettledOnly || transaction.attributes.status.isSettled) &&
+      return (!settledOnlyFilter || transaction.attributes.status.isSettled) &&
       (categoryFilter == .all || categoryFilter.rawValue == transaction.relationships.category.data?.id)
-    }
-  }
-
-  private var categoryFilter: TransactionCategory = ProvenanceApp.userDefaults.appSelectedCategory {
-    didSet {
-      if ProvenanceApp.userDefaults.selectedCategory != categoryFilter.rawValue {
-        ProvenanceApp.userDefaults.selectedCategory = categoryFilter.rawValue
-      }
-      filterUpdates()
-    }
-  }
-
-  private var showSettledOnly: Bool = ProvenanceApp.userDefaults.settledOnly {
-    didSet {
-      if ProvenanceApp.userDefaults.settledOnly != showSettledOnly {
-        ProvenanceApp.userDefaults.settledOnly = showSettledOnly
-      }
-      filterUpdates()
     }
   }
 
@@ -124,21 +134,19 @@ final class TransactionsVC: NSViewController {
   private func configureWindow() {
     AppDelegate.windowController?.window?.toolbar = toolbar
     AppDelegate.windowController?.window?.title = "Transactions"
-    toolbar.selectedItemIdentifier = showSettledOnly ? .settledOnly : nil
+    toolbar.selectedItemIdentifier = settledOnlyFilter ? .settledOnly : nil
   }
 
   private func configureObservers() {
-    apiKeyObserver = ProvenanceApp.userDefaults.observe(\.apiKey, options: .new) { [weak self] (_, _) in
-      guard let weakSelf = self else { return }
-      weakSelf.fetchingTasks()
+    apiKeyObserver = App.userDefaults.observe(\.apiKey, options: .new) { [weak self] (_, _) in
+      self?.fetchingTasks()
     }
-    dateStyleObserver = ProvenanceApp.userDefaults.observe(\.dateStyle, options: .new) { [weak self] (_, _) in
-      guard let weakSelf = self else { return }
-      weakSelf.applySnapshot()
+    dateStyleObserver = App.userDefaults.observe(\.dateStyle, options: .new) { [weak self] (_, _) in
+      self?.applySnapshot()
     }
-    settledOnlyObserver = ProvenanceApp.userDefaults.observe(\.settledOnly, options: .new) { [weak self] (_, change) in
-      guard let weakSelf = self, let value = change.newValue else { return }
-      weakSelf.showSettledOnly = value
+    settledOnlyObserver = App.userDefaults.observe(\.settledOnly, options: .new) { [weak self] (_, change) in
+      guard let value = change.newValue else { return }
+      self?.settledOnlyFilter = value
     }
   }
 
@@ -158,11 +166,6 @@ final class TransactionsVC: NSViewController {
   }
 
   private func filterUpdates() {
-    categoryToolbarItem.view = categorySegmentedControl
-    categoryToolbarItem.image = categoryFilter == .all ? .trayFull : .trayFullFill
-    categoryToolbarItem.menuFormRepresentation = categoryMenuFormRepresentation
-    settledOnlyToolbarItem.image = showSettledOnly ? .checkmarkCircleFill.withSymbolConfiguration(.small) : .checkmarkCircle.withSymbolConfiguration(.small)
-    settledOnlyToolbarItem.menuFormRepresentation = settledOnlyMenuFormRepresentation
     searchField.placeholderString = preFilteredTransactions.searchFieldPlaceholder
     applySnapshot()
   }
@@ -237,13 +240,12 @@ final class TransactionsVC: NSViewController {
 
   @objc
   private func settledOnlyToolbarAction() {
-    showSettledOnly.toggle()
-    toolbar.selectedItemIdentifier = showSettledOnly ? .settledOnly : nil
+    settledOnlyFilter.toggle()
   }
 
   @objc
   private func categoryButtonAction(_ sender: NSMenuItem) {
-    if let value = TransactionCategory.allCases.first(where: { $0.description == sender.title }) {
+    if let value = sender.representedObject as? TransactionCategory {
       categoryFilter = value
     }
   }

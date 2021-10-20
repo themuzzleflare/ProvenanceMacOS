@@ -21,11 +21,6 @@ final class TagItem: CollectionViewItem {
     delegate.didDoubleClick(indexPath: indexPath)
   }
 
-  override func updateSelectionHighlighting() {
-    guard isViewLoaded else { return }
-    super.updateSelectionHighlighting()
-  }
-
   private func configureMenu() {
     guard view.menu?.item(withTitle: "Remove") == nil, collectionView?.delegate is TransactionTagsVC else { return }
     let menuItem = NSMenuItem(title: "Remove", action: #selector(removeTag), keyEquivalent: .emptyString)

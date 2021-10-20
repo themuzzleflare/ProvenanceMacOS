@@ -9,20 +9,20 @@ final class TabVC: NSTabViewController {
 
   override func viewWillAppear() {
     super.viewWillAppear()
-    guard let applicationDelegate = NSApp.delegate as? AppDelegate else { return }
-    applicationDelegate.transactionsMenuItem.action = #selector(transactions)
-    applicationDelegate.accountsMenuItem.action = #selector(accounts)
-    applicationDelegate.tagsMenuItem.action = #selector(tags)
-    applicationDelegate.categoriesMenuItem.action = #selector(categories)
+    guard let appDelegate = NSApp.delegate as? AppDelegate else { return }
+    appDelegate.transactionsMenuItem.action = #selector(transactions)
+    appDelegate.accountsMenuItem.action = #selector(accounts)
+    appDelegate.tagsMenuItem.action = #selector(tags)
+    appDelegate.categoriesMenuItem.action = #selector(categories)
   }
 
   override func viewWillDisappear() {
     super.viewWillDisappear()
-    guard let applicationDelegate = NSApp.delegate as? AppDelegate else { return }
-    applicationDelegate.transactionsMenuItem.action = nil
-    applicationDelegate.accountsMenuItem.action = nil
-    applicationDelegate.tagsMenuItem.action = nil
-    applicationDelegate.categoriesMenuItem.action = nil
+    guard let appDelegate = NSApp.delegate as? AppDelegate else { return }
+    appDelegate.transactionsMenuItem.action = nil
+    appDelegate.accountsMenuItem.action = nil
+    appDelegate.tagsMenuItem.action = nil
+    appDelegate.categoriesMenuItem.action = nil
   }
 
   override func tabView(_ tabView: NSTabView, willSelect tabViewItem: NSTabViewItem?) {
@@ -32,9 +32,7 @@ final class TabVC: NSTabViewController {
           let identifier = tabViewItem.identifier as? String,
           let previousTabBarItem = TabBarItem(rawValue: previousIdentifier),
           let tabBarItem = TabBarItem(rawValue: identifier)
-    else {
-      return
-    }
+    else { return }
     previousTabBarItem.menuItem?.state = .off
     tabBarItem.menuItem?.state = .on
     selectedTabViewItemIndex = tabView.indexOfTabViewItem(tabViewItem)

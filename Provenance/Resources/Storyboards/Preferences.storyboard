@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="yDD-OO-eVs">
     <dependencies>
-        <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="19455"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -267,10 +266,10 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="accountFilter" destination="7qe-AK-hmp" id="b5T-zy-jgp"/>
+                        <outlet property="accountFilterButton" destination="7qe-AK-hmp" id="b5T-zy-jgp"/>
                         <outlet property="apiKeyTextField" destination="J7r-hd-V4F" id="1zd-XV-Zv5"/>
-                        <outlet property="categoryFilter" destination="kiX-Hy-BWE" id="IKD-6B-KjF"/>
-                        <outlet property="dateStylePopupButton" destination="Vc9-74-KWL" id="LQh-e1-X6l"/>
+                        <outlet property="categoryFilterButton" destination="kiX-Hy-BWE" id="IKD-6B-KjF"/>
+                        <outlet property="dateStyleButton" destination="Vc9-74-KWL" id="LQh-e1-X6l"/>
                     </connections>
                 </viewController>
                 <customObject id="K2N-H3-Fzq" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>

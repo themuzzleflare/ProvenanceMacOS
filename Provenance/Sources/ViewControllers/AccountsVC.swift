@@ -16,10 +16,10 @@ final class AccountsVC: NSViewController {
 
   private lazy var searchField = NSSearchField(self, type: .accounts)
 
-  private var accountFilter: AccountTypeOptionEnum = ProvenanceApp.userDefaults.appAccountFilter {
+  private lazy var accountFilter: AccountTypeOptionEnum = App.userDefaults.appAccountFilter {
     didSet {
-      if ProvenanceApp.userDefaults.accountFilter != accountFilter.rawValue {
-        ProvenanceApp.userDefaults.accountFilter = accountFilter.rawValue
+      if App.userDefaults.accountFilter != accountFilter.rawValue {
+        App.userDefaults.accountFilter = accountFilter.rawValue
       }
       if accountTypeSegmentedControl.selectedSegment != accountFilter.rawValue {
         accountTypeSegmentedControl.selectSegment(withTag: accountFilter.rawValue)
@@ -105,13 +105,13 @@ final class AccountsVC: NSViewController {
   }
 
   private func configureObservers() {
-    apiKeyObserver = ProvenanceApp.userDefaults.observe(\.apiKey, options: .new) { [weak self] (_, _) in
-      guard let weakSelf = self else { return }
-      weakSelf.fetchAccounts()
+    apiKeyObserver = App.userDefaults.observe(\.apiKey, options: .new) { [weak self] (_, _) in
+      self?.fetchAccounts()
     }
-    accountFilterObserver = ProvenanceApp.userDefaults.observe(\.accountFilter, options: .new) { [weak self] (_, change) in
-      guard let weakSelf = self, let value = change.newValue, let accountFilter = AccountTypeOptionEnum(rawValue: value) else { return }
-      weakSelf.accountFilter = accountFilter
+    accountFilterObserver = App.userDefaults.observe(\.accountFilter, options: .new) { [weak self] (_, change) in
+      guard let value = change.newValue,
+            let accountTypeOptionEnum = AccountTypeOptionEnum(rawValue: value) else { return }
+      self?.accountFilter = accountTypeOptionEnum
     }
   }
 
