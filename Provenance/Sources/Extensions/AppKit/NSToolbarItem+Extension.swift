@@ -39,7 +39,7 @@ extension NSToolbarItem {
   static func settledOnlyButton(_ target: NSViewController, action: Selector, menuFormRepresentation: NSMenuItem) -> NSToolbarItem {
     let toolbarItem = NSToolbarItem(itemIdentifier: .settledOnly)
     toolbarItem.title = "Settled Only"
-    toolbarItem.image = ProvenanceApp.userDefaults.settledOnly ? .checkmarkCircleFill.withSymbolConfiguration(.small) : .checkmarkCircle.withSymbolConfiguration(.small)
+    toolbarItem.image = App.userDefaults.settledOnly ? .checkmarkCircleFill.withSymbolConfiguration(.small) : .checkmarkCircle.withSymbolConfiguration(.small)
     toolbarItem.toolTip = "Filter by settled transactions only."
     toolbarItem.target = target
     toolbarItem.action = action
@@ -51,7 +51,7 @@ extension NSToolbarItem {
     let toolbarItem = NSToolbarItem(itemIdentifier: .categoryFilter)
     toolbarItem.view = segmentedControl
     toolbarItem.label = "Category"
-    toolbarItem.image = ProvenanceApp.userDefaults.appSelectedCategory == .all ? .trayFull : .trayFullFill
+    toolbarItem.image = App.userDefaults.appSelectedCategory == .all ? .trayFull : .trayFullFill
     toolbarItem.toolTip = "Filter by the selected category."
     toolbarItem.menuFormRepresentation = menuFormRepresentation
     return toolbarItem

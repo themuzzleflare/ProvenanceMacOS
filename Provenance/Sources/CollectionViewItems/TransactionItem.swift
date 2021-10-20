@@ -58,7 +58,7 @@ final class TransactionItem: CollectionViewItem {
     alert.addButton(withTitle: "Cancel")
     switch alert.runModal() {
     case .alertFirstButtonReturn:
-      UpFacade.modifyTags(removing: tag, from: transaction) { (error) in
+      Up.modifyTags(removing: tag, from: transaction) { (error) in
         if let error = error {
           print(error.localizedDescription)
         } else {

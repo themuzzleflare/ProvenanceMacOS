@@ -161,7 +161,7 @@ final class CategoriesVC: NSViewController {
   }
 
   private func fetchCategories() {
-    UpFacade.listCategories { (result) in
+    Up.listCategories { (result) in
       DispatchQueue.main.async {
         switch result {
         case let .success(categories):

@@ -74,7 +74,7 @@ final class AddTagsConfirmationVC: NSViewController {
     toolbar.removeItem(at: 1)
     toolbar.insertItem(withItemIdentifier: .loading, at: 1)
     DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [self] in
-      UpFacade.modifyTags(adding: tags, to: transaction) { (error) in
+      Up.modifyTags(adding: tags, to: transaction) { (error) in
         DispatchQueue.main.async {
           if let error = error {
             let alert = NSAlert.tagsAddedFailure(error: error)
@@ -98,7 +98,9 @@ final class AddTagsConfirmationVC: NSViewController {
 // MARK: - NSToolbarDelegate
 
 extension AddTagsConfirmationVC: NSToolbarDelegate {
-  func toolbar(_ toolbar: NSToolbar, itemForItemIdentifier itemIdentifier: NSToolbarItem.Identifier, willBeInsertedIntoToolbar flag: Bool) -> NSToolbarItem? {
+  func toolbar(_ toolbar: NSToolbar,
+               itemForItemIdentifier itemIdentifier: NSToolbarItem.Identifier,
+               willBeInsertedIntoToolbar flag: Bool) -> NSToolbarItem? {
     switch itemIdentifier {
     case .backButton:
       return .backButton(self, title: .emptyString, action: #selector(goBack))
@@ -140,7 +142,9 @@ extension AddTagsConfirmationVC: NSCollectionViewDataSource {
     }
   }
 
-  func collectionView(_ collectionView: NSCollectionView, viewForSupplementaryElementOfKind kind: NSCollectionView.SupplementaryElementKind, at indexPath: IndexPath) -> NSView {
+  func collectionView(_ collectionView: NSCollectionView,
+                      viewForSupplementaryElementOfKind kind: NSCollectionView.SupplementaryElementKind,
+                      at indexPath: IndexPath) -> NSView {
     guard let view = collectionView.makeSupplementaryView(ofKind: kind, withIdentifier: .textSupplementaryView, for: indexPath) as? TextSupplementaryView else { fatalError() }
     switch indexPath.section {
     case 0:
@@ -157,7 +161,8 @@ extension AddTagsConfirmationVC: NSCollectionViewDataSource {
     }
   }
 
-  func collectionView(_ collectionView: NSCollectionView, itemForRepresentedObjectAt indexPath: IndexPath) -> NSCollectionViewItem {
+  func collectionView(_ collectionView: NSCollectionView,
+                      itemForRepresentedObjectAt indexPath: IndexPath) -> NSCollectionViewItem {
     let tag = tags[indexPath.item]
     switch indexPath.section {
     case 0:
@@ -170,7 +175,7 @@ extension AddTagsConfirmationVC: NSCollectionViewDataSource {
       return item
     case 2:
       guard let item = collectionView.makeItem(withIdentifier: .textItem, for: indexPath) as? TextItem else { fatalError() }
-      item.textField?.stringValue = "You are adding \(tags.joinedWithComma) to \(transaction.attributes.description), which was \(ProvenanceApp.userDefaults.appDateStyle == .absolute ? "created on" : "created") \(transaction.attributes.creationDate)."
+      item.textField?.stringValue = "You are adding \(tags.joinedWithComma) to \(transaction.attributes.description), which was \(App.userDefaults.appDateStyle == .absolute ? "created on" : "created") \(transaction.attributes.creationDate)."
       return item
     default:
       fatalError()

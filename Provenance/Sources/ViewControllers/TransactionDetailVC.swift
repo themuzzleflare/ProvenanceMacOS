@@ -125,7 +125,7 @@ final class TransactionDetailVC: NSViewController {
   }
 
   private func fetchingTasks() {
-    UpFacade.retrieveAccount(for: transaction.relationships.account.data.id) { (result) in
+    Up.retrieveAccount(for: transaction.relationships.account.data.id) { (result) in
       DispatchQueue.main.async {
         switch result {
         case let .success(account):
@@ -137,7 +137,7 @@ final class TransactionDetailVC: NSViewController {
     }
 
     if let tAccount = transaction.relationships.transferAccount.data {
-      UpFacade.retrieveAccount(for: tAccount.id) { (result) in
+      Up.retrieveAccount(for: tAccount.id) { (result) in
         DispatchQueue.main.async {
           switch result {
           case let .success(account):
@@ -150,7 +150,7 @@ final class TransactionDetailVC: NSViewController {
     }
 
     if let pCategory = transaction.relationships.parentCategory.data {
-      UpFacade.retrieveCategory(for: pCategory.id) { (result) in
+      Up.retrieveCategory(for: pCategory.id) { (result) in
         DispatchQueue.main.async {
           switch result {
           case let .success(category):
@@ -165,7 +165,7 @@ final class TransactionDetailVC: NSViewController {
     }
 
     if let category = transaction.relationships.category.data {
-      UpFacade.retrieveCategory(for: category.id) { (result) in
+      Up.retrieveCategory(for: category.id) { (result) in
         DispatchQueue.main.async {
           switch result {
           case let .success(category):
@@ -199,7 +199,7 @@ final class TransactionDetailVC: NSViewController {
   }
 
   private func fetchTransaction() {
-    UpFacade.retrieveTransaction(for: transaction) { (result) in
+    Up.retrieveTransaction(for: transaction) { (result) in
       DispatchQueue.main.async {
         switch result {
         case let .success(transaction):

@@ -146,7 +146,7 @@ final class AddTagsTransactionSelectionVC: NSViewController {
   }
 
   private func fetchTransactions() {
-    UpFacade.listTransactions { (result) in
+    Up.listTransactions { (result) in
       DispatchQueue.main.async {
         switch result {
         case let .success(transactions):

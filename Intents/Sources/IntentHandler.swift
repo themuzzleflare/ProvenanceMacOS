@@ -13,7 +13,7 @@ final class IntentHandler: INExtension {
 extension IntentHandler: AccountSelectionIntentHandling {
   func provideAccountOptionsCollection(for intent: AccountSelectionIntent,
                                        with completion: @escaping (INObjectCollection<AccountType>?, Error?) -> Void) {
-    UpFacade.listAccounts { (result) in
+    Up.listAccounts { (result) in
       switch result {
       case let .success(accounts):
         completion(accounts.accountTypes.collection, nil)
@@ -43,7 +43,7 @@ extension IntentHandler: ListTransactionsIntentHandling {
 
   func provideAccountOptionsCollection(for intent: ListTransactionsIntent,
                                        with completion: @escaping (INObjectCollection<AccountType>?, Error?) -> Void) {
-    UpFacade.listAccounts { (result) in
+    Up.listAccounts { (result) in
       switch result {
       case let .success(accounts):
         completion(accounts.accountTypes.collection, nil)
@@ -55,7 +55,7 @@ extension IntentHandler: ListTransactionsIntentHandling {
 
   func provideCategoryOptionsCollection(for intent: ListTransactionsIntent,
                                         with completion: @escaping (INObjectCollection<CategoryType>?, Error?) -> Void) {
-    UpFacade.listCategories { (result) in
+    Up.listCategories { (result) in
       switch result {
       case let .success(categories):
         completion(categories.categoryTypes.collection, nil)
@@ -67,7 +67,7 @@ extension IntentHandler: ListTransactionsIntentHandling {
 
   func provideTagOptionsCollection(for intent: ListTransactionsIntent,
                                    with completion: @escaping (INObjectCollection<NSString>?, Error?) -> Void) {
-    UpFacade.listTags { (result) in
+    Up.listTags { (result) in
       switch result {
       case let .success(tags):
         completion(tags.nsStringArray.collection, nil)
@@ -84,12 +84,12 @@ extension IntentHandler: ListTransactionsIntentHandling {
       .accept("application/json")
     ]
     var queryParameters: Parameters = [
-      UpFacade.ParamKeys.pageSize: "100"
+      Up.ParamKeys.pageSize: "100"
     ]
     if let apiKey = intent.apiKey, !apiKey.isEmpty {
       headers.add(.authorization(bearerToken: apiKey))
     } else {
-      headers.add(.authorization(bearerToken: ProvenanceApp.userDefaults.apiKey))
+      headers.add(.authorization(bearerToken: App.userDefaults.apiKey))
     }
     if let account = intent.account?.identifier {
       requestUrl = "https://api.up.com.au/api/v1/accounts/\(account)/transactions"
@@ -103,19 +103,19 @@ extension IntentHandler: ListTransactionsIntentHandling {
       return intent.until?.date?.toISO()
     }
     if let status = intent.status.transactionStatusEnum?.rawValue {
-      queryParameters.updateValue(status, forKey: UpFacade.ParamKeys.filterStatus)
+      queryParameters.updateValue(status, forKey: Up.ParamKeys.filterStatus)
     }
     if let since = filterSince {
-      queryParameters.updateValue(since, forKey: UpFacade.ParamKeys.filterSince)
+      queryParameters.updateValue(since, forKey: Up.ParamKeys.filterSince)
     }
     if let until = filterUntil {
-      queryParameters.updateValue(until, forKey: UpFacade.ParamKeys.filterUntil)
+      queryParameters.updateValue(until, forKey: Up.ParamKeys.filterUntil)
     }
     if let category = intent.category?.identifier {
-      queryParameters.updateValue(category, forKey: UpFacade.ParamKeys.filterCategory)
+      queryParameters.updateValue(category, forKey: Up.ParamKeys.filterCategory)
     }
     if let tag = intent.tag {
-      queryParameters.updateValue(tag, forKey: UpFacade.ParamKeys.filterTag)
+      queryParameters.updateValue(tag, forKey: Up.ParamKeys.filterTag)
     }
     AF.request(requestUrl, method: .get, parameters: queryParameters, headers: headers)
       .validate()
@@ -139,7 +139,7 @@ extension IntentHandler: ListTransactionsIntentHandling {
 extension IntentHandler: AddTagToTransactionIntentHandling {
   func provideTransactionOptionsCollection(for intent: AddTagToTransactionIntent,
                                            with completion: @escaping (INObjectCollection<TransactionType>?, Error?) -> Void) {
-    UpFacade.listTransactions { (result) in
+    Up.listTransactions { (result) in
       switch result {
       case let .success(transactions):
         completion(transactions.transactionTypes.collection, nil)
@@ -151,7 +151,7 @@ extension IntentHandler: AddTagToTransactionIntentHandling {
 
   func provideTagsOptionsCollection(for intent: AddTagToTransactionIntent,
                                     with completion: @escaping (INObjectCollection<NSString>?, Error?) -> Void) {
-    UpFacade.listTags { (result) in
+    Up.listTags { (result) in
       switch result {
       case let .success(tags):
         completion(tags.nsStringArray.collection, nil)
@@ -195,7 +195,7 @@ extension IntentHandler: AddTagToTransactionIntentHandling {
       completion(.failure(error: "No tags selected."))
       return
     }
-    UpFacade.modifyTags(adding: tags, to: transactionIdentifier) { (error) in
+    Up.modifyTags(adding: tags, to: transactionIdentifier) { (error) in
       if let error = error {
         completion(.failure(error: error.errorDescription ?? error.localizedDescription))
       } else {
@@ -210,7 +210,7 @@ extension IntentHandler: AddTagToTransactionIntentHandling {
 extension IntentHandler: RemoveTagFromTransactionIntentHandling {
   func provideTransactionOptionsCollection(for intent: RemoveTagFromTransactionIntent,
                                            with completion: @escaping (INObjectCollection<TransactionType>?, Error?) -> Void) {
-    UpFacade.listTransactions { (result) in
+    Up.listTransactions { (result) in
       switch result {
       case let .success(transactions):
         completion(transactions.transactionTypes.collection, nil)
@@ -226,7 +226,7 @@ extension IntentHandler: RemoveTagFromTransactionIntentHandling {
       completion(nil, nil)
       return
     }
-    UpFacade.retrieveTransaction(for: transaction) { (result) in
+    Up.retrieveTransaction(for: transaction) { (result) in
       switch result {
       case let .success(transaction):
         completion(transaction.tagsArray.collection, nil)
@@ -239,7 +239,7 @@ extension IntentHandler: RemoveTagFromTransactionIntentHandling {
   func resolveTransaction(for intent: RemoveTagFromTransactionIntent,
                           with completion: @escaping (RemoveTagFromTransactionTransactionResolutionResult) -> Void) {
     if let transactionType = intent.transaction, let transactionId = transactionType.identifier {
-      UpFacade.retrieveTransaction(for: transactionId) { (result) in
+      Up.retrieveTransaction(for: transactionId) { (result) in
         switch result {
         case let .success(transaction):
           if transaction.relationships.tags.data.isEmpty {
@@ -275,7 +275,7 @@ extension IntentHandler: RemoveTagFromTransactionIntentHandling {
       completion(.failure(error: "No tags selected."))
       return
     }
-    UpFacade.modifyTags(removing: tags, from: transactionIdentifier) { (error) in
+    Up.modifyTags(removing: tags, from: transactionIdentifier) { (error) in
       if let error = error {
         completion(.failure(error: error.errorDescription ?? error.localizedDescription))
       } else {

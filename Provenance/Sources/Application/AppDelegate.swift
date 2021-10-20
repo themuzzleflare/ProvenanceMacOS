@@ -21,7 +21,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
   }
 
+  var tabMenuItems: [NSMenuItem] {
+    return [transactionsMenuItem, accountsMenuItem, tagsMenuItem, categoriesMenuItem]
+  }
+
   @IBOutlet weak var refreshMenuItem: NSMenuItem!
+
   @IBOutlet weak var transactionsMenuItem: NSMenuItem!
   @IBOutlet weak var accountsMenuItem: NSMenuItem!
   @IBOutlet weak var tagsMenuItem: NSMenuItem!
@@ -60,7 +65,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   func application(_ application: NSApplication, open urls: [URL]) {
     guard let url = urls.first?.absoluteString else { return }
     let accountId = url.replacingOccurrences(of: "provenance://accounts/", with: "")
-    UpFacade.retrieveAccount(for: accountId) { (result) in
+    Up.retrieveAccount(for: accountId) { (result) in
       switch result {
       case let .success(account):
         let viewController = TransactionsByAccountVC(account: account)

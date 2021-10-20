@@ -275,7 +275,7 @@
                 </viewController>
                 <customObject id="K2N-H3-Fzq" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="678" y="89"/>
+            <point key="canvasLocation" x="648" y="80"/>
         </scene>
     </scenes>
 </document>

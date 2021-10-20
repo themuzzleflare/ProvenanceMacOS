@@ -127,7 +127,7 @@ final class TransactionsByAccountVC: NSViewController {
   }
 
   func fetchTransactions() {
-    UpFacade.listTransactions(filterBy: account) { (result) in
+    Up.listTransactions(filterBy: account) { (result) in
       DispatchQueue.main.async {
         switch result {
         case let .success(transactions):

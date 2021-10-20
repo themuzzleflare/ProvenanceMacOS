@@ -9,13 +9,13 @@ final class TransactionsVC: NSViewController {
 
   private lazy var categorySegmentedControl: NSSegmentedControl = .categories(filter: categoryFilter, menu: categoryMenu)
 
-  private lazy var categoryMenu: NSMenu = .categoryMenu(self, filter: categoryFilter, action: #selector(categoryButtonAction(_:)))
+  private lazy var categoryMenu: NSMenu = .categoryMenu(self, filter: categoryFilter, action: #selector(categoryAction(_:)))
 
   private lazy var categoryMenuFormRepresentation: NSMenuItem = .categoryMenuFormRepresentation(category: categoryFilter, submenu: categoryMenu)
 
   private lazy var settledOnlyMenuFormRepresentation: NSMenuItem = .settledOnlyMenuFormRepresentation(self,
                                                                                                       filter: settledOnlyFilter,
-                                                                                                      action: #selector(settledOnlyToolbarAction))
+                                                                                                      action: #selector(settledOnlyAction))
 
   private lazy var dataSource = makeDataSource()
 
@@ -25,7 +25,7 @@ final class TransactionsVC: NSViewController {
                                                                   menuFormRepresentation: categoryMenuFormRepresentation)
 
   private lazy var settledOnlyToolbarItem = NSToolbarItem.settledOnlyButton(self,
-                                                                            action: #selector(settledOnlyToolbarAction),
+                                                                            action: #selector(settledOnlyAction),
                                                                             menuFormRepresentation: settledOnlyMenuFormRepresentation)
 
   private lazy var searchField = NSSearchField(self, type: .transactions)
@@ -219,7 +219,7 @@ final class TransactionsVC: NSViewController {
   }
 
   private func fetchTransactions() {
-    UpFacade.listTransactions { (result) in
+    Up.listTransactions { (result) in
       DispatchQueue.main.async {
         switch result {
         case let .success(transactions):
@@ -242,12 +242,12 @@ final class TransactionsVC: NSViewController {
   }
 
   @objc
-  private func settledOnlyToolbarAction() {
+  private func settledOnlyAction() {
     settledOnlyFilter.toggle()
   }
 
   @objc
-  private func categoryButtonAction(_ sender: NSMenuItem) {
+  private func categoryAction(_ sender: NSMenuItem) {
     if let value = sender.representedObject as? TransactionCategory {
       categoryFilter = value
     }

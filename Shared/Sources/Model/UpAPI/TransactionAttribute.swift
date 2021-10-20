@@ -56,12 +56,12 @@ extension TransactionAttribute {
   }
 
   var creationDate: String {
-    return ProvenanceApp.formatDate(for: createdAt, dateStyle: ProvenanceApp.userDefaults.appDateStyle)
+    return App.formatDate(for: createdAt, dateStyle: App.userDefaults.appDateStyle)
   }
 
   var settlementDate: String? {
     if let settledAt = settledAt {
-      return ProvenanceApp.formatDate(for: settledAt, dateStyle: ProvenanceApp.userDefaults.appDateStyle)
+      return App.formatDate(for: settledAt, dateStyle: App.userDefaults.appDateStyle)
     } else {
       return nil
     }

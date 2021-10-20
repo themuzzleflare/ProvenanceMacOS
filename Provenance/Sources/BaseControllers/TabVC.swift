@@ -8,26 +8,20 @@ final class TabVC: NSTabViewController {
     tabViewItems.first?.image = .dollarsignCircleFill
   }
 
-  override func viewDidAppear() {
-    super.viewDidAppear()
+  override func viewWillAppear() {
+    super.viewWillAppear()
     guard let appDelegate = NSApp.delegate as? AppDelegate else { return }
-    appDelegate.transactionsMenuItem.target = self
-    appDelegate.accountsMenuItem.target = self
-    appDelegate.tagsMenuItem.target = self
-    appDelegate.categoriesMenuItem.target = self
+    appDelegate.tabMenuItems.forEach { $0.target = self }
     appDelegate.transactionsMenuItem.action = #selector(transactions)
     appDelegate.accountsMenuItem.action = #selector(accounts)
     appDelegate.tagsMenuItem.action = #selector(tags)
     appDelegate.categoriesMenuItem.action = #selector(categories)
   }
 
-  override func viewDidDisappear() {
-    super.viewDidDisappear()
+  override func viewWillDisappear() {
+    super.viewWillDisappear()
     guard let appDelegate = NSApp.delegate as? AppDelegate else { return }
-    appDelegate.transactionsMenuItem.action = nil
-    appDelegate.accountsMenuItem.action = nil
-    appDelegate.tagsMenuItem.action = nil
-    appDelegate.categoriesMenuItem.action = nil
+    appDelegate.tabMenuItems.forEach { $0.action = nil }
   }
 
   override func tabView(_ tabView: NSTabView, willSelect tabViewItem: NSTabViewItem?) {

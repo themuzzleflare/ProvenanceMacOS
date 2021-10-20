@@ -160,7 +160,7 @@ final class AccountsVC: NSViewController {
   }
 
   private func fetchAccounts() {
-    UpFacade.listAccounts { (result) in
+    Up.listAccounts { (result) in
       DispatchQueue.main.async {
         switch result {
         case let .success(accounts):

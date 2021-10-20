@@ -129,7 +129,7 @@ final class AddTagsTagSelectionVC: NSViewController {
   }
 
   private func fetchTags() {
-    UpFacade.listTags { (result) in
+    Up.listTags { (result) in
       DispatchQueue.main.async {
         switch result {
         case let .success(tags):

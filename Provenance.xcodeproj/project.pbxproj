@@ -847,9 +847,7 @@
 			children = (
 				7A0E6C29271ADBAA00BD85CD /* ListDiffable */,
 				7A5B8D57270E65EA00C132EE /* ViewModels */,
-				7A05EA3A270BCF3D004C958F /* ContentType.swift */,
-				7AD0C31C2712602F005F2F81 /* SortedTransactionCoreModel.swift */,
-				7AB42D902714028D0006110F /* TabBarItem.swift */,
+				7ADC6EF6271FE05700A7E8AE /* Other */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1139,6 +1137,16 @@
 			isa = PBXGroup;
 			children = (
 				7A452DDB271FABF000E04F41 /* AppDateStyle+Extension.swift */,
+			);
+			path = Other;
+			sourceTree = "<group>";
+		};
+		7ADC6EF6271FE05700A7E8AE /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				7A05EA3A270BCF3D004C958F /* ContentType.swift */,
+				7AD0C31C2712602F005F2F81 /* SortedTransactionCoreModel.swift */,
+				7AB42D902714028D0006110F /* TabBarItem.swift */,
 			);
 			path = Other;
 			sourceTree = "<group>";

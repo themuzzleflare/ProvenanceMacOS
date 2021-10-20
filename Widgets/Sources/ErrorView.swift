@@ -1,6 +1,6 @@
 import SwiftUI
-import Alamofire
 import WidgetKit
+import Alamofire
 
 struct ErrorView: View {
   let family: WidgetFamily

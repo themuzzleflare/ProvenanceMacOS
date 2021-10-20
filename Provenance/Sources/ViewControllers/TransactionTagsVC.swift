@@ -100,7 +100,7 @@ final class TransactionTagsVC: NSViewController {
   }
 
   func fetchTransaction() {
-    UpFacade.retrieveTransaction(for: transaction) { (result) in
+    Up.retrieveTransaction(for: transaction) { (result) in
       DispatchQueue.main.async {
         switch result {
         case let .success(transaction):

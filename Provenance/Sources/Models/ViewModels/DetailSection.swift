@@ -25,11 +25,11 @@ extension Array where Element == DetailSection {
         items: [
           DetailItem(
             id: "Version",
-            value: ProvenanceApp.userDefaults.appVersion
+            value: App.userDefaults.appVersion
           ),
           DetailItem(
             id: "Build",
-            value: ProvenanceApp.userDefaults.appBuild
+            value: App.userDefaults.appBuild
           )
         ]
       )

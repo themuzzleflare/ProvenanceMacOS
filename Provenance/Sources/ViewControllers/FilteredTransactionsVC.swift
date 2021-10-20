@@ -159,7 +159,7 @@ final class FilteredTransactionsVC: NSViewController {
   }
 
   func fetchTransactions() {
-    UpFacade.listTransactions(filterBy: resource) { (result) in
+    Up.listTransactions(filterBy: resource) { (result) in
       DispatchQueue.main.async {
         switch result {
         case let .success(transactions):

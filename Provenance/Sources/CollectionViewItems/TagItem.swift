@@ -31,7 +31,9 @@ final class TagItem: CollectionViewItem {
 
   @objc
   private func removeTag() {
-    guard let viewController = collectionView?.delegate as? TransactionTagsVC, let indexPath = collectionView?.indexPath(for: self) else { return }
+    guard let viewController = collectionView?.delegate as? TransactionTagsVC,
+          let indexPath = collectionView?.indexPath(for: self)
+    else { return }
     let tag = viewController.tags[indexPath.item]
     let transaction = viewController.transaction
     let alert = NSAlert(
@@ -44,7 +46,7 @@ final class TagItem: CollectionViewItem {
     alert.addButton(withTitle: "Cancel")
     switch alert.runModal() {
     case .alertFirstButtonReturn:
-      UpFacade.modifyTags(removing: tag, from: transaction) { (error) in
+      Up.modifyTags(removing: tag, from: transaction) { (error) in
         if let error = error {
           print(error.localizedDescription)
         } else {
