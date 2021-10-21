@@ -174,7 +174,7 @@ final class CategoriesVC: NSViewController {
   }
 
   private func display(_ categories: [CategoryResource]) {
-    categoriesError = .emptyString
+    categoriesError = ""
     self.categories = categories
   }
 
@@ -192,7 +192,9 @@ final class CategoriesVC: NSViewController {
 // MARK: - NSToolbarDelegate
 
 extension CategoriesVC: NSToolbarDelegate {
-  func toolbar(_ toolbar: NSToolbar, itemForItemIdentifier itemIdentifier: NSToolbarItem.Identifier, willBeInsertedIntoToolbar flag: Bool) -> NSToolbarItem? {
+  func toolbar(_ toolbar: NSToolbar,
+               itemForItemIdentifier itemIdentifier: NSToolbarItem.Identifier,
+               willBeInsertedIntoToolbar flag: Bool) -> NSToolbarItem? {
     switch itemIdentifier {
     case .categoriesSearch:
       return NSSearchToolbarItem(itemIdentifier: itemIdentifier, searchField: searchField)

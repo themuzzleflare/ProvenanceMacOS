@@ -38,7 +38,7 @@ final class TransactionItem: CollectionViewItem {
 
   private func configureMenu() {
     guard view.menu?.item(withTitle: "Remove") == nil, let viewController = collectionView?.delegate as? FilteredTransactionsVC, viewController.resource.resourcEnumRaw == .tag else { return }
-    let menuItem = NSMenuItem(title: "Remove", action: #selector(removeTransaction), keyEquivalent: .emptyString)
+    let menuItem = NSMenuItem(title: "Remove", action: #selector(removeTransaction), keyEquivalent: "")
     menuItem.image = .trash
     view.menu?.addItem(.separator())
     view.menu?.addItem(menuItem)

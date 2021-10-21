@@ -4,15 +4,16 @@ import WidgetKit
 struct LatestTransaction: Widget {
   var body: some WidgetConfiguration {
     IntentConfiguration(
-      kind: AppWidgets.latestTransaction.kind,
+      kind: Widgets.latestTransaction.kind,
       intent: DateStyleSelectionIntent.self,
-      provider: LatestTransactionProvider()
-    ) { (entry) in
-      LatestTransactionEntryView(entry: entry)
-    }
-    .configurationDisplayName(AppWidgets.latestTransaction.name)
-    .description(AppWidgets.latestTransaction.description)
-    .supportedFamilies([.systemSmall, .systemMedium])
+      provider: LatestTransactionProvider(),
+      content: { (entry) in
+        LatestTransactionEntryView(entry: entry)
+      }
+    )
+      .configurationDisplayName(Widgets.latestTransaction.name)
+      .description(Widgets.latestTransaction.description)
+      .supportedFamilies([.systemSmall, .systemMedium])
   }
 }
 

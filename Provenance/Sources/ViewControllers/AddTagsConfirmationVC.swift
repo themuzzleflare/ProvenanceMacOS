@@ -103,7 +103,7 @@ extension AddTagsConfirmationVC: NSToolbarDelegate {
                willBeInsertedIntoToolbar flag: Bool) -> NSToolbarItem? {
     switch itemIdentifier {
     case .backButton:
-      return .backButton(self, title: .emptyString, action: #selector(goBack))
+      return .backButton(self, title: "", action: #selector(goBack))
     case .confirm:
       return .confirm(self, action: #selector(confirm))
     case .loading:

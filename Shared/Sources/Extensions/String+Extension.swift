@@ -1,14 +1,6 @@
 import Intents
 
 extension String {
-  static var emptyString: String {
-    return ""
-  }
-
-  static var space: String {
-    return " "
-  }
-
   var integer: Int? {
     return Int(self)
   }

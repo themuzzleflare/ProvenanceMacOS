@@ -125,7 +125,9 @@ final class TransactionTagsVC: NSViewController {
 // MARK: - NSToolbarDelegate
 
 extension TransactionTagsVC: NSToolbarDelegate {
-  func toolbar(_ toolbar: NSToolbar, itemForItemIdentifier itemIdentifier: NSToolbarItem.Identifier, willBeInsertedIntoToolbar flag: Bool) -> NSToolbarItem? {
+  func toolbar(_ toolbar: NSToolbar,
+               itemForItemIdentifier itemIdentifier: NSToolbarItem.Identifier,
+               willBeInsertedIntoToolbar flag: Bool) -> NSToolbarItem? {
     switch itemIdentifier {
     case .backButton:
       return .backButton(self, title: transaction.attributes.description, action: #selector(goBack))

@@ -136,8 +136,8 @@ final class TransactionDetailVC: NSViewController {
       }
     }
 
-    if let tAccount = transaction.relationships.transferAccount.data {
-      Up.retrieveAccount(for: tAccount.id) { (result) in
+    if let transferAccount = transaction.relationships.transferAccount.data {
+      Up.retrieveAccount(for: transferAccount.id) { (result) in
         DispatchQueue.main.async {
           switch result {
           case let .success(account):
@@ -149,8 +149,8 @@ final class TransactionDetailVC: NSViewController {
       }
     }
 
-    if let pCategory = transaction.relationships.parentCategory.data {
-      Up.retrieveCategory(for: pCategory.id) { (result) in
+    if let parentCategory = transaction.relationships.parentCategory.data {
+      Up.retrieveCategory(for: parentCategory.id) { (result) in
         DispatchQueue.main.async {
           switch result {
           case let .success(category):
@@ -232,7 +232,9 @@ final class TransactionDetailVC: NSViewController {
 // MARK: - NSToolbarDelegate
 
 extension TransactionDetailVC: NSToolbarDelegate {
-  func toolbar(_ toolbar: NSToolbar, itemForItemIdentifier itemIdentifier: NSToolbarItem.Identifier, willBeInsertedIntoToolbar flag: Bool) -> NSToolbarItem? {
+  func toolbar(_ toolbar: NSToolbar,
+               itemForItemIdentifier itemIdentifier: NSToolbarItem.Identifier,
+               willBeInsertedIntoToolbar flag: Bool) -> NSToolbarItem? {
     switch itemIdentifier {
     case .backButton:
       return .backButton(self, title: previousTitle, action: #selector(goBack))

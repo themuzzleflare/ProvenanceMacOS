@@ -11,7 +11,7 @@ extension UserDefaults {
   /// The string of the "apiKey" key.
   @objc dynamic var apiKey: String {
     get {
-      return string(forKey: Keys.apiKey) ?? .emptyString
+      return string(forKey: Keys.apiKey) ?? ""
     }
     set {
       setValue(newValue, forKey: Keys.apiKey)
@@ -26,7 +26,7 @@ extension UserDefaults {
     }
     set {
       setValue(newValue, forKey: Keys.dateStyle)
-      WidgetCenter.shared.reloadTimelines(ofKind: AppWidgets.latestTransaction.kind)
+      WidgetCenter.shared.reloadTimelines(ofKind: Widgets.latestTransaction.kind)
     }
   }
 
@@ -72,7 +72,7 @@ extension UserDefaults {
 
   @objc dynamic var paginationCursor: String {
     get {
-      return string(forKey: Keys.paginationCursor) ?? .emptyString
+      return string(forKey: Keys.paginationCursor) ?? ""
     }
     set {
       setValue(newValue, forKey: Keys.paginationCursor)

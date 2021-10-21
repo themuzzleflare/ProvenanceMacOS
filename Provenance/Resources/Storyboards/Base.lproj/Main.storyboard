@@ -360,6 +360,7 @@ cmVmcmVzaE1lbnUQSXRlbQ
                     </menu>
                     <connections>
                         <outlet property="delegate" destination="Voe-Tx-rLC" id="PrD-fu-P6m"/>
+                        <outlet property="dockMenu" destination="r7I-hi-ofP" id="p4b-KM-Ipk"/>
                     </connections>
                 </application>
                 <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="Provenance" customModuleProvider="target">

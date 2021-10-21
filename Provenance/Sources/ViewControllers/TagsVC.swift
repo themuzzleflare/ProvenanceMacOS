@@ -138,7 +138,7 @@ final class TagsVC: NSViewController {
   }
 
   private func display(_ tags: [TagResource]) {
-    tagsError = .emptyString
+    tagsError = ""
     self.tags = tags
   }
 
@@ -162,7 +162,9 @@ final class TagsVC: NSViewController {
 // MARK: - NSToolbarDelegate
 
 extension TagsVC: NSToolbarDelegate {
-  func toolbar(_ toolbar: NSToolbar, itemForItemIdentifier itemIdentifier: NSToolbarItem.Identifier, willBeInsertedIntoToolbar flag: Bool) -> NSToolbarItem? {
+  func toolbar(_ toolbar: NSToolbar,
+               itemForItemIdentifier itemIdentifier: NSToolbarItem.Identifier,
+               willBeInsertedIntoToolbar flag: Bool) -> NSToolbarItem? {
     switch itemIdentifier {
     case .addTags:
       return .addTags(self, action: #selector(addTags))

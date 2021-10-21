@@ -173,7 +173,7 @@ final class AccountsVC: NSViewController {
   }
 
   private func display(_ accounts: [AccountResource]) {
-    accountsError = .emptyString
+    accountsError = ""
     self.accounts = accounts
   }
 
@@ -191,7 +191,9 @@ final class AccountsVC: NSViewController {
 // MARK: - NSToolbarDelegate
 
 extension AccountsVC: NSToolbarDelegate {
-  func toolbar(_ toolbar: NSToolbar, itemForItemIdentifier itemIdentifier: NSToolbarItem.Identifier, willBeInsertedIntoToolbar flag: Bool) -> NSToolbarItem? {
+  func toolbar(_ toolbar: NSToolbar,
+               itemForItemIdentifier itemIdentifier: NSToolbarItem.Identifier,
+               willBeInsertedIntoToolbar flag: Bool) -> NSToolbarItem? {
     switch itemIdentifier {
     case .accountsSearch:
       return NSSearchToolbarItem(itemIdentifier: itemIdentifier, searchField: searchField)

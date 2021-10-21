@@ -142,7 +142,7 @@ final class AddTagsTagSelectionVC: NSViewController {
   }
 
   private func display(_ tags: [TagResource]) {
-    tagsError = .emptyString
+    tagsError = ""
     self.tags = tags
   }
 
@@ -187,7 +187,9 @@ final class AddTagsTagSelectionVC: NSViewController {
 // MARK: - NSToolbarDelegate
 
 extension AddTagsTagSelectionVC: NSToolbarDelegate {
-  func toolbar(_ toolbar: NSToolbar, itemForItemIdentifier itemIdentifier: NSToolbarItem.Identifier, willBeInsertedIntoToolbar flag: Bool) -> NSToolbarItem? {
+  func toolbar(_ toolbar: NSToolbar,
+               itemForItemIdentifier itemIdentifier: NSToolbarItem.Identifier,
+               willBeInsertedIntoToolbar flag: Bool) -> NSToolbarItem? {
     switch itemIdentifier {
     case .backButton:
       return .backButton(self, title: transaction.attributes.description, action: #selector(goBack))

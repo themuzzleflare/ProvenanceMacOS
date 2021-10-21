@@ -57,7 +57,7 @@ enum UpFacade {
       .responseDecodable(of: Transaction.self) { (response) in
         switch response.result {
         case let .success(transactions):
-          App.userDefaults.paginationCursor = transactions.links.nextCursor ?? .emptyString
+          App.userDefaults.paginationCursor = transactions.links.nextCursor ?? ""
           completion(.success(transactions.data))
         case let .failure(error):
           completion(.failure(error))

@@ -14,7 +14,7 @@ final class CategoryItem: CollectionViewItem {
   }
 
   @IBAction func copyCategoryName(_ sender: NSMenuItem) {
-    NSPasteboard.general.setString(textField?.stringValue ?? .emptyString, forType: .string)
+    NSPasteboard.general.setString(textField?.stringValue ?? "", forType: .string)
   }
 
   deinit {

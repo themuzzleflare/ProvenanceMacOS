@@ -12,7 +12,7 @@ final class TagItem: CollectionViewItem {
   }
 
   @IBAction func copyTagName(_ sender: NSMenuItem) {
-    NSPasteboard.general.setString(textField?.stringValue ?? .emptyString, forType: .string)
+    NSPasteboard.general.setString(textField?.stringValue ?? "", forType: .string)
   }
 
   override func mouseDown(with event: NSEvent) {
@@ -23,7 +23,7 @@ final class TagItem: CollectionViewItem {
 
   private func configureMenu() {
     guard view.menu?.item(withTitle: "Remove") == nil, collectionView?.delegate is TransactionTagsVC else { return }
-    let menuItem = NSMenuItem(title: "Remove", action: #selector(removeTag), keyEquivalent: .emptyString)
+    let menuItem = NSMenuItem(title: "Remove", action: #selector(removeTag), keyEquivalent: "")
     menuItem.image = .trash
     view.menu?.addItem(.separator())
     view.menu?.addItem(menuItem)

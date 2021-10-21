@@ -140,7 +140,7 @@ final class TransactionsByAccountVC: NSViewController {
   }
 
   private func display(_ transactions: [TransactionResource]) {
-    transactionsError = .emptyString
+    transactionsError = ""
     self.transactions = transactions
   }
 
@@ -158,7 +158,9 @@ final class TransactionsByAccountVC: NSViewController {
 // MARK: - NSToolbarDelegate
 
 extension TransactionsByAccountVC: NSToolbarDelegate {
-  func toolbar(_ toolbar: NSToolbar, itemForItemIdentifier itemIdentifier: NSToolbarItem.Identifier, willBeInsertedIntoToolbar flag: Bool) -> NSToolbarItem? {
+  func toolbar(_ toolbar: NSToolbar,
+               itemForItemIdentifier itemIdentifier: NSToolbarItem.Identifier,
+               willBeInsertedIntoToolbar flag: Bool) -> NSToolbarItem? {
     switch itemIdentifier {
     case .filteredTransactionsSearch:
       return NSSearchToolbarItem(itemIdentifier: itemIdentifier, searchField: searchField)

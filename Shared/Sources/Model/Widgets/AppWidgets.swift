@@ -1,5 +1,7 @@
 import Foundation
 
+typealias Widgets = AppWidgets
+
 enum AppWidgets: Int {
   case accountBalance
   case latestTransaction

@@ -6,7 +6,7 @@ extension NSTextField {
   }
 
   func clear() {
-    self.stringValue = .emptyString
+    self.stringValue = ""
   }
 }
 

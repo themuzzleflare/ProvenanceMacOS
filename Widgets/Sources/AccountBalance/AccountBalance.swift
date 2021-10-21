@@ -4,15 +4,16 @@ import WidgetKit
 struct AccountBalance: Widget {
   var body: some WidgetConfiguration {
     IntentConfiguration(
-      kind: AppWidgets.accountBalance.kind,
+      kind: Widgets.accountBalance.kind,
       intent: AccountSelectionIntent.self,
-      provider: AccountBalanceProvider()
-    ) { (entry) in
-      AccountBalanceEntryView(entry: entry)
-    }
-    .configurationDisplayName(AppWidgets.accountBalance.name)
-    .description(AppWidgets.accountBalance.description)
-    .supportedFamilies([.systemSmall, .systemMedium])
+      provider: AccountBalanceProvider(),
+      content: { (entry) in
+        AccountBalanceEntryView(entry: entry)
+      }
+    )
+      .configurationDisplayName(Widgets.accountBalance.name)
+      .description(Widgets.accountBalance.description)
+      .supportedFamilies([.systemSmall, .systemMedium])
   }
 }
 

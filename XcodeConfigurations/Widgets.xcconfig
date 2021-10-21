@@ -1,6 +1,9 @@
 #include "Shared.xcconfig"
 
 PRODUCT_BUNDLE_IDENTIFIER = cloud.tavitian.provenance.widgets
+PRODUCT_NAME = Provenance Widgets
+PROVISIONING_PROFILE_SPECIFIER = Provenance Widgets macOS Development
+INFOPLIST_KEY_CFBundleDisplayName = Provenance Widgets
 INFOPLIST_FILE = Widgets/Resources/Info.plist
 CODE_SIGN_ENTITLEMENTS = Widgets/Resources/Widgets.entitlements
 ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor
