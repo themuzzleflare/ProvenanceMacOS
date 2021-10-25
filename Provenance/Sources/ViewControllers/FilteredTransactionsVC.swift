@@ -97,7 +97,7 @@ final class FilteredTransactionsVC: NSViewController {
   }
 
   private func configureObserver() {
-    dateStyleObserver = App.userDefaults.observe(\.dateStyle, options: .new) { [weak self] (_, _) in
+    dateStyleObserver = UserDefaults.provenance.observe(\.dateStyle, options: .new) { [weak self] (_, _) in
       self?.applySnapshot()
     }
   }
@@ -183,7 +183,7 @@ final class FilteredTransactionsVC: NSViewController {
 
   deinit {
     removeObserver()
-    print("deinit")
+    print("\(#function) \(String(describing: type(of: self)))")
   }
 }
 

@@ -2,11 +2,7 @@ import WidgetKit
 
 extension UserDefaults {
   /// A `UserDefaults` instance for the application group.
-  /// Observations should be made on a **stored variable** of this value.
-  /// Key-value observations on computed variables do not work.
-  static var provenance: UserDefaults {
-    return UserDefaults(suiteName: "JDL5FY6SCC.group.cloud.tavitian.provenance") ?? .standard
-  }
+  static let provenance = UserDefaults(suiteName: "JDL5FY6SCC.group.cloud.tavitian.provenance") ?? .standard
 
   /// The string of the "apiKey" key.
   @objc dynamic var apiKey: String {

@@ -9,10 +9,10 @@ final class PreferencesVC: NSViewController {
 
   private var categoryFilterObserver: NSKeyValueObservation?
 
-  private lazy var apiKey: String = App.userDefaults.apiKey {
+  private lazy var apiKey: String = UserDefaults.provenance.apiKey {
     didSet {
-      if App.userDefaults.apiKey != apiKey {
-        App.userDefaults.apiKey = apiKey
+      if UserDefaults.provenance.apiKey != apiKey {
+        UserDefaults.provenance.apiKey = apiKey
       }
       if apiKeyTextField.stringValue != apiKey {
         apiKeyTextField.stringValue = apiKey
@@ -20,10 +20,10 @@ final class PreferencesVC: NSViewController {
     }
   }
 
-  private lazy var dateStyle: AppDateStyle = App.userDefaults.appDateStyle {
+  private lazy var dateStyle: AppDateStyle = UserDefaults.provenance.appDateStyle {
     didSet {
-      if App.userDefaults.dateStyle != dateStyle.rawValue {
-        App.userDefaults.dateStyle = dateStyle.rawValue
+      if UserDefaults.provenance.dateStyle != dateStyle.rawValue {
+        UserDefaults.provenance.dateStyle = dateStyle.rawValue
       }
       if dateStyleButton.indexOfSelectedItem != dateStyle.rawValue {
         dateStyleButton.selectItem(at: dateStyle.rawValue)
@@ -31,10 +31,10 @@ final class PreferencesVC: NSViewController {
     }
   }
 
-  private lazy var accountFilter: AccountTypeOptionEnum = App.userDefaults.appAccountFilter {
+  private lazy var accountFilter: AccountTypeOptionEnum = UserDefaults.provenance.appAccountFilter {
     didSet {
-      if App.userDefaults.accountFilter != accountFilter.rawValue {
-        App.userDefaults.accountFilter = accountFilter.rawValue
+      if UserDefaults.provenance.accountFilter != accountFilter.rawValue {
+        UserDefaults.provenance.accountFilter = accountFilter.rawValue
       }
       if accountFilterButton.indexOfSelectedItem != accountFilter.rawValue {
         accountFilterButton.selectItem(at: accountFilter.rawValue)
@@ -42,10 +42,10 @@ final class PreferencesVC: NSViewController {
     }
   }
 
-  private lazy var categoryFilter: CategoryTypeEnum = App.userDefaults.appCategoryFilter {
+  private lazy var categoryFilter: CategoryTypeEnum = UserDefaults.provenance.appCategoryFilter {
     didSet {
-      if App.userDefaults.categoryFilter != categoryFilter.rawValue {
-        App.userDefaults.categoryFilter = categoryFilter.rawValue
+      if UserDefaults.provenance.categoryFilter != categoryFilter.rawValue {
+        UserDefaults.provenance.categoryFilter = categoryFilter.rawValue
       }
       if categoryFilterButton.indexOfSelectedItem != categoryFilter.rawValue {
         categoryFilterButton.selectItem(at: categoryFilter.rawValue)
@@ -105,19 +105,19 @@ final class PreferencesVC: NSViewController {
   }
 
   private func configureObservers() {
-    apiKeyObserver = App.userDefaults.observe(\.apiKey, options: .new) { [weak self] (_, change) in
+    apiKeyObserver = UserDefaults.provenance.observe(\.apiKey, options: .new) { [weak self] (_, change) in
       guard let value = change.newValue else { return }
       self?.apiKey = value
     }
-    dateStyleObserver = App.userDefaults.observe(\.dateStyle, options: .new) { [weak self] (_, change) in
+    dateStyleObserver = UserDefaults.provenance.observe(\.dateStyle, options: .new) { [weak self] (_, change) in
       guard let value = change.newValue, let dateStyleEnum = AppDateStyle(rawValue: value) else { return }
       self?.dateStyle = dateStyleEnum
     }
-    accountFilterObserver = App.userDefaults.observe(\.accountFilter, options: .new) { [weak self] (_, change) in
+    accountFilterObserver = UserDefaults.provenance.observe(\.accountFilter, options: .new) { [weak self] (_, change) in
       guard let value = change.newValue, let accountTypeEnum = AccountTypeOptionEnum(rawValue: value) else { return }
       self?.accountFilter = accountTypeEnum
     }
-    categoryFilterObserver = App.userDefaults.observe(\.categoryFilter, options: .new) { [weak self] (_, change) in
+    categoryFilterObserver = UserDefaults.provenance.observe(\.categoryFilter, options: .new) { [weak self] (_, change) in
       guard let value = change.newValue, let categoryTypeEnum = CategoryTypeEnum(rawValue: value) else { return }
       self?.categoryFilter = categoryTypeEnum
     }
@@ -136,6 +136,6 @@ final class PreferencesVC: NSViewController {
 
   deinit {
     removeObservers()
-    print("deinit")
+    print("\(#function) \(String(describing: type(of: self)))")
   }
 }

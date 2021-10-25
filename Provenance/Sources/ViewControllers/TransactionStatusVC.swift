@@ -14,6 +14,6 @@ final class TransactionStatusVC: NSViewController {
   }
 
   deinit {
-    print("deinit")
+    print("\(#function) \(String(describing: type(of: self)))")
   }
 }

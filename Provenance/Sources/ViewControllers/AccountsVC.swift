@@ -16,10 +16,10 @@ final class AccountsVC: NSViewController {
 
   private lazy var searchField = NSSearchField(self, type: .accounts)
 
-  private lazy var accountFilter: AccountTypeOptionEnum = App.userDefaults.appAccountFilter {
+  private lazy var accountFilter: AccountTypeOptionEnum = UserDefaults.provenance.appAccountFilter {
     didSet {
-      if App.userDefaults.accountFilter != accountFilter.rawValue {
-        App.userDefaults.accountFilter = accountFilter.rawValue
+      if UserDefaults.provenance.accountFilter != accountFilter.rawValue {
+        UserDefaults.provenance.accountFilter = accountFilter.rawValue
       }
       if accountTypeSegmentedControl.selectedSegment != accountFilter.rawValue {
         accountTypeSegmentedControl.selectSegment(withTag: accountFilter.rawValue)
@@ -106,10 +106,10 @@ final class AccountsVC: NSViewController {
   }
 
   private func configureObservers() {
-    apiKeyObserver = App.userDefaults.observe(\.apiKey, options: .new) { [weak self] (_, _) in
+    apiKeyObserver = UserDefaults.provenance.observe(\.apiKey, options: .new) { [weak self] (_, _) in
       self?.fetchAccounts()
     }
-    accountFilterObserver = App.userDefaults.observe(\.accountFilter, options: .new) { [weak self] (_, change) in
+    accountFilterObserver = UserDefaults.provenance.observe(\.accountFilter, options: .new) { [weak self] (_, change) in
       guard let value = change.newValue,
             let accountTypeOptionEnum = AccountTypeOptionEnum(rawValue: value) else { return }
       self?.accountFilter = accountTypeOptionEnum
@@ -184,7 +184,7 @@ final class AccountsVC: NSViewController {
 
   deinit {
     removeObservers()
-    print("deinit")
+    print("\(#function) \(String(describing: type(of: self)))")
   }
 }
 

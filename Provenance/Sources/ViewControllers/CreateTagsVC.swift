@@ -24,7 +24,7 @@ final class CreateTagsVC: NSViewController {
   }
 
   deinit {
-    print("deinit CreateTagsVC")
+    print("\(#function) \(String(describing: type(of: self)))")
   }
 }
 

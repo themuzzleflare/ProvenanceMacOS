@@ -2,10 +2,8 @@ import AppKit
 
 extension NSToolbarItem {
   static var loading: NSToolbarItem {
-    let toolbarItem = NSToolbarItem(itemIdentifier: .loading)
     let progressIndicator = NSProgressIndicator.loadingToolbarItemView
-    toolbarItem.view = progressIndicator
-    return toolbarItem
+    return NSToolbarItem(itemIdentifier: .loading, view: progressIndicator)
   }
 
   convenience init(itemIdentifier: NSToolbarItem.Identifier, view: NSView?) {
@@ -39,7 +37,7 @@ extension NSToolbarItem {
   static func settledOnlyButton(_ target: NSViewController, action: Selector, menuFormRepresentation: NSMenuItem) -> NSToolbarItem {
     let toolbarItem = NSToolbarItem(itemIdentifier: .settledOnly)
     toolbarItem.title = "Settled Only"
-    toolbarItem.image = App.userDefaults.settledOnly ? .checkmarkCircleFill.withSymbolConfiguration(.small) : .checkmarkCircle.withSymbolConfiguration(.small)
+    toolbarItem.image = UserDefaults.provenance.settledOnly ? .checkmarkCircleFill.withSymbolConfiguration(.small) : .checkmarkCircle.withSymbolConfiguration(.small)
     toolbarItem.toolTip = "Filter by settled transactions only."
     toolbarItem.target = target
     toolbarItem.action = action
@@ -48,10 +46,9 @@ extension NSToolbarItem {
   }
 
   static func categories(segmentedControl: NSSegmentedControl, menuFormRepresentation: NSMenuItem) -> NSToolbarItem {
-    let toolbarItem = NSToolbarItem(itemIdentifier: .categoryFilter)
-    toolbarItem.view = segmentedControl
+    let toolbarItem = NSToolbarItem(itemIdentifier: .categoryFilter, view: segmentedControl)
     toolbarItem.label = "Category"
-    toolbarItem.image = App.userDefaults.appSelectedCategory == .all ? .trayFull : .trayFullFill
+    toolbarItem.image = UserDefaults.provenance.appSelectedCategory == .all ? .trayFull : .trayFullFill
     toolbarItem.toolTip = "Filter by the selected category."
     toolbarItem.menuFormRepresentation = menuFormRepresentation
     return toolbarItem

@@ -7,6 +7,6 @@ final class TextItem: CollectionViewItem {
   }
 
   deinit {
-    print("deinit TextItem")
+    print("\(#function) \(String(describing: type(of: self)))")
   }
 }

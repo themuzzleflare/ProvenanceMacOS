@@ -78,7 +78,7 @@ final class TagsVC: NSViewController {
   }
 
   private func configureObserver() {
-    apiKeyObserver = App.userDefaults.observe(\.apiKey, options: .new) { [weak self] (_, _) in
+    apiKeyObserver = UserDefaults.provenance.observe(\.apiKey, options: .new) { [weak self] (_, _) in
       self?.fetchTags()
     }
   }
@@ -155,7 +155,7 @@ final class TagsVC: NSViewController {
 
   deinit {
     removeObserver()
-    print("deinit")
+    print("\(#function) \(String(describing: type(of: self)))")
   }
 }
 

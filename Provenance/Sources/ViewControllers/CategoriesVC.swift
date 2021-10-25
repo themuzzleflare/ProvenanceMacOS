@@ -16,10 +16,10 @@ final class CategoriesVC: NSViewController {
 
   private lazy var searchField = NSSearchField(self, type: .categories)
 
-  private lazy var categoryFilter: CategoryTypeEnum = App.userDefaults.appCategoryFilter {
+  private lazy var categoryFilter: CategoryTypeEnum = UserDefaults.provenance.appCategoryFilter {
     didSet {
-      if App.userDefaults.categoryFilter != categoryFilter.rawValue {
-        App.userDefaults.categoryFilter = categoryFilter.rawValue
+      if UserDefaults.provenance.categoryFilter != categoryFilter.rawValue {
+        UserDefaults.provenance.categoryFilter = categoryFilter.rawValue
       }
       if categoryTypeSegmentedControl.selectedSegment != categoryFilter.rawValue {
         categoryTypeSegmentedControl.selectSegment(withTag: categoryFilter.rawValue)
@@ -106,10 +106,10 @@ final class CategoriesVC: NSViewController {
   }
 
   private func configureObservers() {
-    apiKeyObserver = App.userDefaults.observe(\.apiKey, options: .new) { [weak self] (_, _) in
+    apiKeyObserver = UserDefaults.provenance.observe(\.apiKey, options: .new) { [weak self] (_, _) in
       self?.fetchCategories()
     }
-    categoryFilterObserver = App.userDefaults.observe(\.categoryFilter, options: .new) { [weak self] (_, change) in
+    categoryFilterObserver = UserDefaults.provenance.observe(\.categoryFilter, options: .new) { [weak self] (_, change) in
       guard let value = change.newValue,
             let categoryTypeEnum = CategoryTypeEnum(rawValue: value)
       else { return }
@@ -185,7 +185,7 @@ final class CategoriesVC: NSViewController {
 
   deinit {
     removeObservers()
-    print("deinit")
+    print("\(#function) \(String(describing: type(of: self)))")
   }
 }
 

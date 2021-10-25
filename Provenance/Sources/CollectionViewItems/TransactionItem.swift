@@ -71,6 +71,6 @@ final class TransactionItem: CollectionViewItem {
   }
 
   deinit {
-    print("deinit TransactionItem")
+    print("\(#function) \(String(describing: type(of: self)))")
   }
 }

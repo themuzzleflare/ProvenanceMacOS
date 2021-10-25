@@ -33,6 +33,6 @@ final class AccountItem: CollectionViewItem {
   }
 
   deinit {
-    print("deinit AccountItem")
+    print("\(#function) \(String(describing: type(of: self)))")
   }
 }

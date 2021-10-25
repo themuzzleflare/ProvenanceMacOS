@@ -59,6 +59,6 @@ final class TagItem: CollectionViewItem {
   }
 
   deinit {
-    print("deinit TagItem")
+    print("\(#function) \(String(describing: type(of: self)))")
   }
 }

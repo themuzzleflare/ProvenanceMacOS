@@ -35,7 +35,7 @@ extension NSMenuItem {
 }
 
 extension Array where Element: NSMenuItem {
-  static func categoryMenuItems(_ target: NSViewController,
+  static func categoryMenuItems(target: NSViewController,
                                 filter: TransactionCategory,
                                 action: Selector) -> [NSMenuItem] {
     return TransactionCategory.allCases.map { (category) in

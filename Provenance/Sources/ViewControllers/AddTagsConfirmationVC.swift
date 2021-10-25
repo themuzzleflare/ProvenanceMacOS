@@ -54,7 +54,7 @@ final class AddTagsConfirmationVC: NSViewController {
   }
 
   private func configureObserver() {
-    dateStyleObserver = App.userDefaults.observe(\.dateStyle, options: .new) { [weak self] (_, _) in
+    dateStyleObserver = UserDefaults.provenance.observe(\.dateStyle, options: .new) { [weak self] (_, _) in
       self?.collectionView.reloadData()
     }
   }
@@ -91,7 +91,7 @@ final class AddTagsConfirmationVC: NSViewController {
 
   deinit {
     removeObserver()
-    print("deinit")
+    print("\(#function) \(String(describing: type(of: self)))")
   }
 }
 
@@ -175,7 +175,7 @@ extension AddTagsConfirmationVC: NSCollectionViewDataSource {
       return item
     case 2:
       guard let item = collectionView.makeItem(withIdentifier: .textItem, for: indexPath) as? TextItem else { fatalError() }
-      item.textField?.stringValue = "You are adding \(tags.joinedWithComma) to \(transaction.attributes.description), which was \(App.userDefaults.appDateStyle == .absolute ? "created on" : "created") \(transaction.attributes.creationDate)."
+      item.textField?.stringValue = "You are adding \(tags.joinedWithComma) to \(transaction.attributes.description), which was \(UserDefaults.provenance.appDateStyle == .absolute ? "created on" : "created") \(transaction.attributes.creationDate)."
       return item
     default:
       fatalError()

@@ -7,10 +7,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
   private var dateStyleObserver: NSKeyValueObservation?
 
-  private lazy var dateStyle: AppDateStyle = App.userDefaults.appDateStyle {
+  private lazy var dateStyle: AppDateStyle = UserDefaults.provenance.appDateStyle {
     didSet {
-      if App.userDefaults.dateStyle != dateStyle.rawValue {
-        App.userDefaults.dateStyle = dateStyle.rawValue
+      if UserDefaults.provenance.dateStyle != dateStyle.rawValue {
+        UserDefaults.provenance.dateStyle = dateStyle.rawValue
       }
       if oldValue.menuItem?.state != .off {
         oldValue.menuItem?.state = .off
@@ -87,7 +87,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   }
 
   private func configureObserver() {
-    dateStyleObserver = App.userDefaults.observe(\.dateStyle, options: .new) { [weak self] (_, change) in
+    dateStyleObserver = UserDefaults.provenance.observe(\.dateStyle, options: .new) { [weak self] (_, change) in
       guard let value = change.newValue, let dateStyleEnum = AppDateStyle(rawValue: value) else { return }
       self?.dateStyle = dateStyleEnum
     }

@@ -18,6 +18,6 @@ final class CategoryItem: CollectionViewItem {
   }
 
   deinit {
-    print("deinit CategoryItem")
+    print("\(#function) \(String(describing: type(of: self)))")
   }
 }

@@ -13,7 +13,7 @@ struct AccountBalanceProvider: IntentTimelineProvider {
   }
 
   func getTimeline(for configuration: Intent, in context: Context, completion: @escaping (Timeline<Entry>) -> Void) {
-    guard let accountId = configuration.account?.identifier ?? App.userDefaults.selectedAccount else {
+    guard let accountId = configuration.account?.identifier ?? UserDefaults.provenance.selectedAccount else {
       let timeline = Timeline(entries: .singleEntry(with: .empty), policy: .atEnd)
       completion(timeline)
       return
@@ -21,7 +21,7 @@ struct AccountBalanceProvider: IntentTimelineProvider {
     Up.retrieveAccount(for: accountId) { (result) in
       switch result {
       case let .success(account):
-        App.userDefaults.selectedAccount = account.id
+        UserDefaults.provenance.selectedAccount = account.id
         let entry = Entry(date: Date(), account: account.accountBalanceModel, error: nil)
         let timeline = Timeline(entries: .singleEntry(with: entry), policy: .atEnd)
         completion(timeline)

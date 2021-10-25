@@ -16,6 +16,6 @@ struct AccountAttribute: Codable {
 
 extension AccountAttribute {
   var creationDate: String {
-    return App.formatDate(for: createdAt, dateStyle: App.userDefaults.appDateStyle)
+    return App.formatDate(for: createdAt, dateStyle: UserDefaults.provenance.appDateStyle)
   }
 }

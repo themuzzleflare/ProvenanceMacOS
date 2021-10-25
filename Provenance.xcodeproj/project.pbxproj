@@ -586,6 +586,7 @@
 		7A959F6D270B9A6C00AC45F3 /* Provenance.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Provenance.entitlements; sourceTree = "<group>"; };
 		7A959F77270B9BDA00AC45F3 /* Shared.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Shared.xcconfig; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.xcconfig; };
 		7AA1B2FB271D60AF00B1805A /* Credits.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = Credits.rtf; sourceTree = "<group>"; };
+		7AA813A4272682EC004A7CC1 /* ExportOptions.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = ExportOptions.plist; sourceTree = "<group>"; };
 		7AB42D802713E68A0006110F /* NSToolbarItem+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSToolbarItem+Extension.swift"; sourceTree = "<group>"; };
 		7AB42D822713EA880006110F /* NSToolbar+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSToolbar+Extension.swift"; sourceTree = "<group>"; };
 		7AB42D842713F2AF0006110F /* NSTabViewItem+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSTabViewItem+Extension.swift"; sourceTree = "<group>"; };
@@ -993,6 +994,7 @@
 			children = (
 				7AD70A53271A33F9009CC2D6 /* README.md */,
 				7AD70A54271A33F9009CC2D6 /* LICENSE */,
+				7AA813A4272682EC004A7CC1 /* ExportOptions.plist */,
 				7A959F73270B9B0E00AC45F3 /* XcodeConfigurations */,
 				7A959F7B270B9CF600AC45F3 /* Shared */,
 				7A959F63270B9A6A00AC45F3 /* Provenance */,

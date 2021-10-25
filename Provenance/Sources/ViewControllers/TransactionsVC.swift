@@ -30,13 +30,13 @@ final class TransactionsVC: NSViewController {
 
   private lazy var searchField = NSSearchField(self, type: .transactions)
 
-  private lazy var categoryFilter: TransactionCategory = App.userDefaults.appSelectedCategory {
+  private lazy var categoryFilter: TransactionCategory = UserDefaults.provenance.appSelectedCategory {
     didSet {
       let previousItem = categoryMenu.item(withTitle: oldValue.description)
       let currentItem = categoryMenu.item(withTitle: categoryFilter.description)
 
-      if App.userDefaults.selectedCategory != categoryFilter.rawValue {
-        App.userDefaults.selectedCategory = categoryFilter.rawValue
+      if UserDefaults.provenance.selectedCategory != categoryFilter.rawValue {
+        UserDefaults.provenance.selectedCategory = categoryFilter.rawValue
       }
       if previousItem?.state != .off {
         previousItem?.state = .off
@@ -55,10 +55,10 @@ final class TransactionsVC: NSViewController {
     }
   }
 
-  private lazy var settledOnlyFilter: Bool = App.userDefaults.settledOnly {
+  private lazy var settledOnlyFilter: Bool = UserDefaults.provenance.settledOnly {
     didSet {
-      if App.userDefaults.settledOnly != settledOnlyFilter {
-        App.userDefaults.settledOnly = settledOnlyFilter
+      if UserDefaults.provenance.settledOnly != settledOnlyFilter {
+        UserDefaults.provenance.settledOnly = settledOnlyFilter
       }
       settledOnlyToolbarItem.image = settledOnlyFilter ? .checkmarkCircleFill.withSymbolConfiguration(.small) : .checkmarkCircle.withSymbolConfiguration(.small)
       toolbar.selectedItemIdentifier = settledOnlyFilter ? .settledOnly : nil
@@ -141,13 +141,13 @@ final class TransactionsVC: NSViewController {
   }
 
   private func configureObservers() {
-    apiKeyObserver = App.userDefaults.observe(\.apiKey, options: .new) { [weak self] (_, _) in
+    apiKeyObserver = UserDefaults.provenance.observe(\.apiKey, options: .new) { [weak self] (_, _) in
       self?.fetchingTasks()
     }
-    dateStyleObserver = App.userDefaults.observe(\.dateStyle, options: .new) { [weak self] (_, _) in
+    dateStyleObserver = UserDefaults.provenance.observe(\.dateStyle, options: .new) { [weak self] (_, _) in
       self?.applySnapshot()
     }
-    settledOnlyObserver = App.userDefaults.observe(\.settledOnly, options: .new) { [weak self] (_, change) in
+    settledOnlyObserver = UserDefaults.provenance.observe(\.settledOnly, options: .new) { [weak self] (_, change) in
       guard let value = change.newValue else { return }
       self?.settledOnlyFilter = value
     }
@@ -255,7 +255,7 @@ final class TransactionsVC: NSViewController {
 
   deinit {
     removeObservers()
-    print("deinit")
+    print("\(#function) \(String(describing: type(of: self)))")
   }
 }
 

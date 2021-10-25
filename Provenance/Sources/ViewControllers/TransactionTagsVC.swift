@@ -118,7 +118,7 @@ final class TransactionTagsVC: NSViewController {
   }
 
   deinit {
-    print("deinit")
+    print("\(#function) \(String(describing: type(of: self)))")
   }
 }
 

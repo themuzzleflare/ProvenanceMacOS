@@ -25,6 +25,6 @@ final class AttributeItem: CollectionViewItem {
   }
 
   deinit {
-    print("deinit AttributeItem")
+    print("\(#function) \(String(describing: type(of: self)))")
   }
 }
