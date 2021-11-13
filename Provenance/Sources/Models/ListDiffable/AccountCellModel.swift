@@ -17,10 +17,6 @@ final class AccountCellModel {
     self.balance = balance
     self.displayName = displayName
   }
-
-  deinit {
-    print("deinit AccountCellModel")
-  }
 }
 
 // MARK: - ListDiffable

@@ -1,0 +1,36 @@
+PODS:
+  - Alamofire (5.4.4)
+  - BonMot (6.0.0)
+  - IGListKit/Diffing (3.4.0)
+  - SnapKit (5.0.1)
+  - SwiftDate (6.3.1)
+  - SwiftLint (0.45.0)
+
+DEPENDENCIES:
+  - Alamofire
+  - BonMot
+  - IGListKit/Diffing
+  - SnapKit
+  - SwiftDate
+  - SwiftLint
+
+SPEC REPOS:
+  trunk:
+    - Alamofire
+    - BonMot
+    - IGListKit
+    - SnapKit
+    - SwiftDate
+    - SwiftLint
+
+SPEC CHECKSUMS:
+  Alamofire: f3b09a368f1582ab751b3fff5460276e0d2cf5c9
+  BonMot: fb2b6a2209cb3149aca37b7131d49c051c04ae86
+  IGListKit: 7a5d788e9fb746bcd402baa8e8b24bc3bd2a5a07
+  SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
+  SwiftDate: 72d28954e8e1c6c1c0f917ccc8005e4f83c7d4b2
+  SwiftLint: e5c7f1fba68eccfc51509d5b2ce1699f5502e0c7
+
+PODFILE CHECKSUM: 81cd7b247cafb623db509c9cfe631e0ce1d095bd
+
+COCOAPODS: 1.11.2

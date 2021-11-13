@@ -1,5 +1,4 @@
 import Cocoa
-import Alamofire
 
 final class TransactionDetailVC: NSViewController {
   private typealias DataSource = NSCollectionViewDiffableDataSource<DetailSection, DetailItem>
@@ -204,8 +203,8 @@ final class TransactionDetailVC: NSViewController {
         switch result {
         case let .success(transaction):
           self.display(transaction)
-        case let .failure(error):
-          self.display(error)
+        case .failure:
+          break
         }
       }
     }
@@ -213,9 +212,6 @@ final class TransactionDetailVC: NSViewController {
 
   private func display(_ transaction: TransactionResource) {
     self.transaction = transaction
-  }
-
-  private func display(_ error: AFError) {
   }
 
   @objc

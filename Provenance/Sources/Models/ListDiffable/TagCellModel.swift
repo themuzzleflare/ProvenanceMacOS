@@ -11,10 +11,6 @@ final class TagCellModel {
   init(id: String) {
     self.id = id
   }
-
-  deinit {
-    print("deinit TagCellModel")
-  }
 }
 
 // MARK: - ListDiffable

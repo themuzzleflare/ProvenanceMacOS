@@ -14,10 +14,6 @@ final class CategoryCellModel {
     self.id = id
     self.name = name
   }
-
-  deinit {
-    print("deinit CategoryCellModel")
-  }
 }
 
 // MARK: - ListDiffable

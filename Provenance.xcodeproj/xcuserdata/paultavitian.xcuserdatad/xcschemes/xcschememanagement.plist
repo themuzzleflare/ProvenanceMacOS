@@ -7,12 +7,12 @@
 		<key>Provenance Intents.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>11</integer>
+			<integer>2</integer>
 		</dict>
 		<key>Provenance Widgets.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>10</integer>
+			<integer>1</integer>
 		</dict>
 		<key>Provenance WidgetsExtension.xcscheme_^#shared#^_</key>
 		<dict>
@@ -70,6 +70,16 @@
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
 		<key>7A959F60270B9A6A00AC45F3</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>7AF4BC47270BDA5600C827A6</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>7AF4BC5F270BDA9C00C827A6</key>
 		<dict>
 			<key>primary</key>
 			<true/>
