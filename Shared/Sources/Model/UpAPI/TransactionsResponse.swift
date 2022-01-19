@@ -1,6 +1,6 @@
 import Foundation
 
-struct Transaction: Codable {
+struct TransactionsResponse: Codable {
   /// The list of transactions returned in this response.
   var data: [TransactionResource]
 

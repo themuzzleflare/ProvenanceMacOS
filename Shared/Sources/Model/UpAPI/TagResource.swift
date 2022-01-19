@@ -7,7 +7,7 @@ struct TagResource: Codable, Identifiable {
   /// The label of the tag, which also acts as the tag’s unique identifier.
   var id: String
 
-  var relationships: TagRelationship?
+  var relationships: TagRelationships?
 }
 
 extension TagResource {

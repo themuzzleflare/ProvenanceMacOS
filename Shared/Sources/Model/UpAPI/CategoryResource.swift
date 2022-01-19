@@ -7,9 +7,9 @@ struct CategoryResource: Codable, Identifiable {
   /// The unique identifier for this category. This is a human-readable but URL-safe value.
   var id: String
 
-  var attributes: CategoryAttribute
+  var attributes: CategoryAttributes
 
-  var relationships: CategoryRelationship
+  var relationships: CategoryRelationships
 
   var links: SelfLink?
 }

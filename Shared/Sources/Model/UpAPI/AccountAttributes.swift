@@ -1,11 +1,14 @@
 import Foundation
 
-struct AccountAttribute: Codable {
+struct AccountAttributes: Codable {
   /// The name associated with the account in the Up application.
   var displayName: String
 
   /// The bank account type of this account.
   var accountType: AccountTypeEnum
+
+  /// The ownership structure for this account.
+  var ownershipType: OwnershipTypeEnum
 
   /// The available balance of the account, taking into account any amounts that are currently on hold.
   var balance: MoneyObject
@@ -14,8 +17,8 @@ struct AccountAttribute: Codable {
   var createdAt: String
 }
 
-extension AccountAttribute {
+extension AccountAttributes {
   var creationDate: String {
-    return App.formatDate(for: createdAt, dateStyle: UserDefaults.provenance.appDateStyle)
+    return Utils.formatDate(for: createdAt, dateStyle: UserDefaults.provenance.appDateStyle)
   }
 }

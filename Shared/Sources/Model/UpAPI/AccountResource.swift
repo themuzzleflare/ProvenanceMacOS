@@ -7,9 +7,9 @@ struct AccountResource: Codable, Identifiable {
   /// The unique identifier for this account.
   var id: String
 
-  var attributes: AccountAttribute
+  var attributes: AccountAttributes
 
-  var relationships: AccountRelationship
+  var relationships: AccountRelationships
 
   var links: SelfLink?
 }

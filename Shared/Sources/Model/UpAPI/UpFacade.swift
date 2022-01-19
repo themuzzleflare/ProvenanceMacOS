@@ -54,7 +54,7 @@ enum UpFacade {
 
     AF.request("https://api.up.com.au/api/v1/transactions", method: .get, parameters: parameters, headers: headers)
       .validate()
-      .responseDecodable(of: Transaction.self) { (response) in
+      .responseDecodable(of: TransactionsResponse.self) { (response) in
         switch response.result {
         case let .success(transactions):
           UserDefaults.provenance.paginationCursor = transactions.links.nextCursor ?? ""
@@ -90,7 +90,7 @@ enum UpFacade {
 
     AF.request("https://api.up.com.au/api/v1/transactions", method: .get, parameters: parameters, headers: headers)
       .validate()
-      .responseDecodable(of: Transaction.self) { (response) in
+      .responseDecodable(of: TransactionsResponse.self) { (response) in
         switch response.result {
         case let .success(transactions):
           if let nextCursor = transactions.links.nextCursor {
@@ -143,7 +143,7 @@ enum UpFacade {
 
     AF.request("https://api.up.com.au/api/v1/accounts/\(account.id)/transactions", method: .get, parameters: parameters, headers: headers)
       .validate()
-      .responseDecodable(of: Transaction.self) { (response) in
+      .responseDecodable(of: TransactionsResponse.self) { (response) in
         switch response.result {
         case let .success(transactions):
           completion(.success(transactions.data))
@@ -174,7 +174,7 @@ enum UpFacade {
 
     AF.request("https://api.up.com.au/api/v1/transactions", method: .get, parameters: parameters, headers: headers)
       .validate()
-      .responseDecodable(of: Transaction.self) { (response) in
+      .responseDecodable(of: TransactionsResponse.self) { (response) in
         switch response.result {
         case let .success(transactions):
           completion(.success(transactions.data))
@@ -205,7 +205,7 @@ enum UpFacade {
 
     AF.request("https://api.up.com.au/api/v1/transactions", method: .get, parameters: parameters, headers: headers)
       .validate()
-      .responseDecodable(of: Transaction.self) { (response) in
+      .responseDecodable(of: TransactionsResponse.self) { (response) in
         switch response.result {
         case let .success(transactions):
           completion(.success(transactions.data))
@@ -233,7 +233,7 @@ enum UpFacade {
 
     AF.request("https://api.up.com.au/api/v1/transactions", method: .get, parameters: parameters, headers: headers)
       .validate()
-      .responseDecodable(of: Transaction.self) { (response) in
+      .responseDecodable(of: TransactionsResponse.self) { (response) in
         switch response.result {
         case let .success(transactions):
           if let transaction = transactions.data.first {
@@ -267,7 +267,7 @@ enum UpFacade {
 
     AF.request("https://api.up.com.au/api/v1/accounts/\(account.id)/transactions", method: .get, parameters: parameters, headers: headers)
       .validate()
-      .responseDecodable(of: Transaction.self) { (response) in
+      .responseDecodable(of: TransactionsResponse.self) { (response) in
         switch response.result {
         case let .success(transactions):
           if let transaction = transactions.data.first {
@@ -297,7 +297,7 @@ enum UpFacade {
 
     AF.request("https://api.up.com.au/api/v1/transactions/\(transaction.id)", method: .get, headers: headers)
       .validate()
-      .responseDecodable(of: SingleTransaction.self) { (response) in
+      .responseDecodable(of: TransactionResponse.self) { (response) in
         switch response.result {
         case let .success(transaction):
           completion(.success(transaction.data))
@@ -323,7 +323,7 @@ enum UpFacade {
 
     AF.request("https://api.up.com.au/api/v1/transactions/\(transactionId)", method: .get, headers: headers)
       .validate()
-      .responseDecodable(of: SingleTransaction.self) { (response) in
+      .responseDecodable(of: TransactionResponse.self) { (response) in
         switch response.result {
         case let .success(transaction):
           completion(.success(transaction.data))
@@ -351,7 +351,7 @@ enum UpFacade {
 
     AF.request("https://api.up.com.au/api/v1/accounts", method: .get, parameters: parameters, headers: headers)
       .validate()
-      .responseDecodable(of: Account.self) { (response) in
+      .responseDecodable(of: AccountsResponse.self) { (response) in
         switch response.result {
         case let .success(accounts):
           completion(.success(accounts.data))
@@ -377,7 +377,7 @@ enum UpFacade {
 
     AF.request("https://api.up.com.au/api/v1/accounts/\(account.id)", method: .get, headers: headers)
       .validate()
-      .responseDecodable(of: SingleAccount.self) { (response) in
+      .responseDecodable(of: AccountResponse.self) { (response) in
         switch response.result {
         case let .success(account):
           completion(.success(account.data))
@@ -403,7 +403,7 @@ enum UpFacade {
 
     AF.request("https://api.up.com.au/api/v1/accounts/\(accountId)", method: .get, headers: headers)
       .validate()
-      .responseDecodable(of: SingleAccount.self) { (response) in
+      .responseDecodable(of: AccountResponse.self) { (response) in
         switch response.result {
         case let .success(account):
           completion(.success(account.data))
@@ -431,7 +431,7 @@ enum UpFacade {
 
     AF.request("https://api.up.com.au/api/v1/tags", method: .get, parameters: parameters, headers: headers)
       .validate()
-      .responseDecodable(of: Tag.self) { (response) in
+      .responseDecodable(of: TagsResponse.self) { (response) in
         switch response.result {
         case let .success(tags):
           completion(.success(tags.data))
@@ -587,7 +587,7 @@ enum UpFacade {
 
     AF.request("https://api.up.com.au/api/v1/categories", method: .get, headers: headers)
       .validate()
-      .responseDecodable(of: Category.self) { (response) in
+      .responseDecodable(of: CategoriesResponse.self) { (response) in
         switch response.result {
         case let .success(categories):
           completion(.success(categories.data))
@@ -613,7 +613,7 @@ enum UpFacade {
 
     AF.request("https://api.up.com.au/api/v1/categories/\(category.id)", method: .get, headers: headers)
       .validate()
-      .responseDecodable(of: SingleCategory.self) { (response) in
+      .responseDecodable(of: CategoryResponse.self) { (response) in
         switch response.result {
         case let .success(category):
           completion(.success(category.data))
@@ -639,7 +639,7 @@ enum UpFacade {
 
     AF.request("https://api.up.com.au/api/v1/categories/\(categoryId)", method: .get, headers: headers)
       .validate()
-      .responseDecodable(of: SingleCategory.self) { (response) in
+      .responseDecodable(of: CategoryResponse.self) { (response) in
         switch response.result {
         case let .success(category):
           completion(.success(category.data))

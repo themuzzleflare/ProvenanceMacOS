@@ -1,6 +1,6 @@
 import Foundation
 
-struct Category: Codable {
+struct CategoriesResponse: Codable {
   /// The list of categories returned in this response.
   var data: [CategoryResource]
 }

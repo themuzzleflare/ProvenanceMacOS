@@ -119,7 +119,7 @@ extension IntentHandler: ListTransactionsIntentHandling {
     }
     AF.request(requestUrl, method: .get, parameters: queryParameters, headers: headers)
       .validate()
-      .responseDecodable(of: Transaction.self) { (response) in
+      .responseDecodable(of: TransactionsResponse.self) { (response) in
         switch response.result {
         case let .success(transactions):
           if transactions.data.isEmpty {

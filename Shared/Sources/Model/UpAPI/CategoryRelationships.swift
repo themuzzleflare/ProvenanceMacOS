@@ -1,6 +1,6 @@
 import Foundation
 
-struct CategoryRelationship: Codable {
+struct CategoryRelationships: Codable {
   var parent: CategoryRelationshipParent
 
   var children: CategoryRelationshipChildren

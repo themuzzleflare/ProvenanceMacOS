@@ -1,6 +1,6 @@
 import Foundation
 
-struct TransactionRelationshipTag: Codable {
+struct TransactionRelationshipTags: Codable {
   var data: [RelationshipData]
 
   var links: SelfLink?

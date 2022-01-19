@@ -15,9 +15,9 @@ extension DateStyleEnum {
   func description(_ transaction: TransactionResource) -> String {
     switch self {
     case .absolute:
-      return App.formatDate(for: transaction.attributes.createdAt, dateStyle: .absolute)
+      return Utils.formatDate(for: transaction.attributes.createdAt, dateStyle: .absolute)
     case .relative:
-      return App.formatDate(for: transaction.attributes.createdAt, dateStyle: .relative)
+      return Utils.formatDate(for: transaction.attributes.createdAt, dateStyle: .relative)
     case .appDefault, .unknown:
       return transaction.attributes.creationDate
     }

@@ -1,6 +1,6 @@
 import Foundation
 
-struct SingleTransaction: Codable {
+struct TransactionResponse: Codable {
   /// The transaction returned in this response.
   var data: TransactionResource
 }

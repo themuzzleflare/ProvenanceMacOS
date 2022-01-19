@@ -1,5 +1,5 @@
 import Foundation
 
-struct TransactionsLinksObject: Codable {
+struct RelationshipTransactions: Codable {
   var links: RelatedLink?
 }

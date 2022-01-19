@@ -1,6 +1,6 @@
 import Foundation
 
-struct SingleAccount: Codable {
+struct AccountResponse: Codable {
   /// The account returned in this response.
   var data: AccountResource
 }
